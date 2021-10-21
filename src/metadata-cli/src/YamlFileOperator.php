@@ -18,37 +18,17 @@ use function Symfony\Component\String\u;
 
 final class YamlFileOperator implements FileOperatorInterface
 {
-    public const SOURCES = 'sources.yaml';
-
-    public const ALLOW_LIST = 'allow_list.yaml';
-
-    public const REST_ENDPOINTS = 'rest_endpoints.yaml';
-
-    public const QUERY_COLLECTION = 'query_collections.yaml';
-
-    public const REMOTE_SCHEMAS = 'remote_schemas.yaml';
-
-    public const VERSION = 'version.yaml';
-
-    public const INHERITED_ROLES = 'inherited_roles.yaml';
-
-    public const ACTIONS = 'actions.yaml';
-
-    public const CRON_TRIGGERS = 'cron_triggers.yaml';
-
-    public const CUSTOM_TYPES = 'custom_types.yaml';
-
     public const FIELDS_MAPPING = [
-        'version' => self::VERSION,
-        'sources' => self::SOURCES,
-        'allowlist' => self::ALLOW_LIST,
-        'remote_schemas' => self::REMOTE_SCHEMAS,
-        'actions' => self::ACTIONS,
-        'cron_triggers' => self::CRON_TRIGGERS,
-        'inherited_roles' => self::INHERITED_ROLES,
-        'query_collections' => self::QUERY_COLLECTION,
-        'rest_endpoints' => self::REST_ENDPOINTS,
-        'custom_types' => self::CUSTOM_TYPES,
+        'version' => 'version.yaml',
+        'sources' => 'sources.yaml',
+        'allowlist' => 'allow_list.yaml',
+        'remote_schemas' => 'remote_schemas.yaml',
+        'actions' => 'actions.yaml',
+        'cron_triggers' => 'cron_triggers.yaml',
+        'inherited_roles' => 'inherited_roles.yaml',
+        'query_collections' => 'query_collections.yaml',
+        'rest_endpoints' => 'rest_endpoints.yaml',
+        'custom_types' => 'custom_types.yaml',
     ];
 
     public function __construct(private Filesystem $filesystem)
