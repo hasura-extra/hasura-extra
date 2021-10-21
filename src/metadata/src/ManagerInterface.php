@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace Hasura\MetadataCli;
+namespace Hasura\Metadata;
 
 /**
  * This interface implement by classes to help you manage Hasura metadata.

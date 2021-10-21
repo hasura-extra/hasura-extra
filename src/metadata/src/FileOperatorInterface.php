@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace Hasura\MetadataCli;
+namespace Hasura\Metadata;
 
 /**
  * This interface implements by classes help to export/load metadata.

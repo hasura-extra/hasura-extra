@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace Hasura\MetadataCli;
+namespace Hasura\Metadata;
 
 use Hasura\ApiClient\Client;
 

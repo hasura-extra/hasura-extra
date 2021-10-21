@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace Hasura\MetadataCli;
+namespace Hasura\Metadata;
 
 final class EmptyMetadataException extends \RuntimeException implements ExceptionInterface
 {
