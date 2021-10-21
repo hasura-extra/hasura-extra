@@ -1,0 +1,15 @@
+{
+    "name": "hasura-extra/metadata-cli",
+    "autoload": {
+        "psr-4": {
+            "Hasura\\MetadataCli\\": "src"
+        }
+    },
+    "require": {
+        "php": ">=8.0",
+        "symfony/filesystem": "^5.0",
+        "symfony/string": "^5.0",
+        "symfony/yaml": "^5.0",
+        "hasura-extra/api-client": "^1.0"
+    }
+}
