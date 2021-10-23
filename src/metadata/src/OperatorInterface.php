@@ -13,18 +13,18 @@ namespace Hasura\Metadata;
 /**
  * This interface implements by classes help to export/load metadata.
  */
-interface FileOperatorInterface
+interface OperatorInterface
 {
     /**
      * @param array $metadata need to export to files.
-     * @param string $metadataPath to export.
+     * @param string $toPath store metadata files.
      * @param bool $force whether delete old metadata before export.
      */
-    public function export(array $metadata, string $metadataPath, bool $force = false): void;
+    public function export(array $metadata, string $toPath, bool $force = false): void;
 
     /**
-     * @param string $metadataPath store metadata files exported need to load.
+     * @param string $fromPath store metadata files need to load.
      * @return array metadata
      */
-    public function load(string $metadataPath): array;
+    public function load(string $fromPath): array;
 }

@@ -25,7 +25,7 @@ final class ClearMetadata extends BaseCommand
 
         $this->metadataManager->clear();
 
-        $this->io->section('Done!');
+        $this->io->writeln('Done!');
 
         return 0;
     }

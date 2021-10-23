@@ -14,7 +14,6 @@ use Hasura\Metadata\EmptyMetadataException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface;
 
 final class ApplyMetadata extends BaseCommand
@@ -46,28 +45,21 @@ final class ApplyMetadata extends BaseCommand
 
         try {
             $this->metadataManager->apply($input->getOption('allow-inconsistent'));
+
+            return 0;
         } catch (HttpExceptionInterface $exception) {
             $this->io->error($exception->getResponse()->getContent(false));
             $this->io->error('Please check your Hasura server configuration.');
-
-            return 1;
-        } catch (ParseException $exception) {
-            $this->io->error(sprintf('Can not parse metadata file: `%s`', $exception->getParsedFile()));
-            $this->io->error($exception->getMessage());
-
-            return 2;
-        } catch (EmptyMetadataException $exception) {
+        } catch (EmptyMetadataException) {
             if (!$input->getOption('allow-no-metadata')) {
                 $this->io->error('Not found metadata files.');
-
-                return 3;
+            } else {
+                $this->io->warning('No metadata files to apply.');
             }
-
-            $this->io->warning('No metadata files to apply.');
         }
 
-        $this->io->section('Done!');
+        $this->io->writeln('Done!');
 
-        return 0;
+        return 1;
     }
 }

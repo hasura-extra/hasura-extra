@@ -17,7 +17,7 @@ final class Manager implements ManagerInterface
     public function __construct(
         private Client $apiClient,
         private string $metadataPath,
-        private FileOperatorInterface $fileOperator,
+        private OperatorInterface $operator,
     ) {
     }
 
@@ -30,12 +30,12 @@ final class Manager implements ManagerInterface
         );
         $metadata = MetadataUtils::normalizeMetadata($data['metadata']);
 
-        $this->fileOperator->export($metadata, $this->metadataPath, $force);
+        $this->operator->export($metadata, $this->metadataPath, $force);
     }
 
     public function apply(bool $allowInconsistent = false): void
     {
-        $metadata = $this->fileOperator->load($this->metadataPath);
+        $metadata = $this->operator->load($this->metadataPath);
 
         if (empty($metadata)) {
             throw new EmptyMetadataException('Should not apply empty metadata.');

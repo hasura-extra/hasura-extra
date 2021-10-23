@@ -16,9 +16,9 @@ use Symfony\Component\Yaml\Yaml;
 
 use function Symfony\Component\String\u;
 
-final class YamlFileOperator implements FileOperatorInterface
+final class YamlOperator implements OperatorInterface
 {
-    public const FIELDS_MAPPING = [
+    public const METADATA_FIELDS_MAPPING = [
         'version' => 'version.yaml',
         'sources' => 'sources.yaml',
         'allowlist' => 'allow_list.yaml',
@@ -35,24 +35,24 @@ final class YamlFileOperator implements FileOperatorInterface
     {
     }
 
-    public function export(array $metadata, string $metadataPath, bool $force = false): void
+    public function export(array $metadata, string $toPath, bool $force = false): void
     {
-        $this->ensureMetadataPath($metadataPath);
+        $this->ensureMetadataPath($toPath);
 
         if ($force) {
-            $this->filesystem->remove($metadataPath);
-            $this->filesystem->mkdir($metadataPath);
+            $this->filesystem->remove($toPath);
+            $this->filesystem->mkdir($toPath);
         }
 
-        foreach (self::FIELDS_MAPPING as $field => $file) {
+        foreach (self::METADATA_FIELDS_MAPPING as $field => $file) {
             if (!isset($metadata[$field])) {
-                $this->filesystem->remove(sprintf('%s/%s', $metadataPath, $file));
+                $this->filesystem->remove(sprintf('%s/%s', $toPath, $file));
 
                 continue;
             }
 
             $exportMethod = u('export_' . $field)->camel()->toString();
-            $this->{$exportMethod}($metadata[$field], $metadataPath, $file);
+            $this->{$exportMethod}($metadata[$field], $toPath, $file);
         }
     }
 
@@ -250,14 +250,14 @@ final class YamlFileOperator implements FileOperatorInterface
         }
     }
 
-    public function load(string $metadataPath): array
+    public function load(string $fromPath): array
     {
-        $this->ensureMetadataPath($metadataPath);
+        $this->ensureMetadataPath($fromPath);
 
         $metadata = [];
 
-        foreach (self::FIELDS_MAPPING as $field => $file) {
-            $file = sprintf('%s/%s', $metadataPath, $file);
+        foreach (self::METADATA_FIELDS_MAPPING as $field => $file) {
+            $file = sprintf('%s/%s', $fromPath, $file);
 
             if (!$this->filesystem->exists($file)) {
                 continue;
