@@ -15,7 +15,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class GetInconsistentMetadata extends BaseCommand
 {
-    protected static $defaultName = 'hasura:metadata:get-inconsistent';
+    protected static $defaultName = 'get-inconsistent';
 
     protected static $defaultDescription = 'Get inconsistent Hasura metadata';
 

@@ -17,7 +17,7 @@ use Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface;
 
 final class ExportMetadata extends BaseCommand
 {
-    protected static $defaultName = 'hasura:metadata:export';
+    protected static $defaultName = 'export';
 
     protected static $defaultDescription = 'Export Hasura metadata';
 

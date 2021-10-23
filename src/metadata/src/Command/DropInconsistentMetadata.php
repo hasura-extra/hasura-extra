@@ -15,7 +15,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class DropInconsistentMetadata extends BaseCommand
 {
-    protected static $defaultName = 'hasura:metadata:drop-inconsistent';
+    protected static $defaultName = 'drop-inconsistent';
 
     protected static $defaultDescription = 'Drop inconsistent Hasura metadata';
 

@@ -15,7 +15,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class ClearMetadata extends BaseCommand
 {
-    protected static $defaultName = 'hasura:metadata:clear';
+    protected static $defaultName = 'clear';
 
     protected static $defaultDescription = 'Clear Hasura metadata';
 

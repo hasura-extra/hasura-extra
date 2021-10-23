@@ -18,7 +18,7 @@ use Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface;
 
 final class ApplyMetadata extends BaseCommand
 {
-    protected static $defaultName = 'hasura:metadata:apply';
+    protected static $defaultName = 'apply';
 
     protected static $defaultDescription = 'Apply Hasura metadata';
 

@@ -16,7 +16,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class ReloadMetadata extends BaseCommand
 {
-    protected static $defaultName = 'hasura:metadata:reload';
+    protected static $defaultName = 'reload';
 
     protected static $defaultDescription = 'Reload Hasura metadata';
 
