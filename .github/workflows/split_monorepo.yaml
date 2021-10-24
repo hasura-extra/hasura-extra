@@ -24,7 +24,7 @@ jobs:
       - uses: "ramsey/composer-install@v1"
 
       - id: output_data
-        run: echo "::set-output name=matrix::$(packages/monorepo-builder/bin/monorepo-builder packages-json --exclude-package easy-coding-standard --exclude-package monorepo-builder --exclude-package config-transformer)"
+        run: echo "::set-output name=matrix::$(vendor/bin/monorepo-builder packages-json)"
 
     # this step is needed, so the output gets to the next defined job
     outputs:
