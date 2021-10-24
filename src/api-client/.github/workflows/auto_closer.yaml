@@ -1,3 +1,5 @@
+# inspiration from https://github.com/symplify/easy-coding-standard/blob/main/.github/workflows/auto_closer.yaml
+
 name: Auto Closer PR
 
 on:
