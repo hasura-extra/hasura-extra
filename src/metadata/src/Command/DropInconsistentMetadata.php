@@ -25,7 +25,7 @@ final class DropInconsistentMetadata extends BaseCommand
 
         $this->metadataManager->dropInconsistentMetadata();
 
-        $this->io->writeln('Done!');
+        $this->io->success('Done!');
 
         return 0;
     }

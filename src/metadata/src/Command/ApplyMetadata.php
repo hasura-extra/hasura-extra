@@ -46,6 +46,8 @@ final class ApplyMetadata extends BaseCommand
         try {
             $this->metadataManager->apply($input->getOption('allow-inconsistent'));
 
+            $this->io->success('Done!');
+
             return 0;
         } catch (HttpExceptionInterface $exception) {
             $this->io->error($exception->getResponse()->getContent(false));
@@ -57,8 +59,6 @@ final class ApplyMetadata extends BaseCommand
                 $this->io->warning('No metadata files to apply.');
             }
         }
-
-        $this->io->writeln('Done!');
 
         return 1;
     }

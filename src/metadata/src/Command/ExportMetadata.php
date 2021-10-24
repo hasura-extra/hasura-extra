@@ -38,13 +38,15 @@ final class ExportMetadata extends BaseCommand
 
         try {
             $this->metadataManager->export($input->getOption('force'));
+
+            $this->io->success('Done!');
+
+            return 0;
         } catch (HttpExceptionInterface $exception) {
             $this->io->error($exception->getResponse()->getContent(false));
             $this->io->error('Please check your Hasura server configuration.');
         }
 
-        $output->writeln('Done!');
-
-        return 0;
+        return 1;
     }
 }

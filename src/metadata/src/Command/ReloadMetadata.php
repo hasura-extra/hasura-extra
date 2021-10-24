@@ -45,7 +45,7 @@ final class ReloadMetadata extends BaseCommand
             !$input->getOption('no-reload-sources')
         );
 
-        $this->io->writeln('Done!');
+        $this->io->section('Done!');
 
         return 0;
     }

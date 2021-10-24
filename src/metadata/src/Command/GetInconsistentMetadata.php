@@ -26,7 +26,7 @@ final class GetInconsistentMetadata extends BaseCommand
         $data = $this->metadataManager->getInconsistentMetadata();
 
         if (true === $data['is_consistent']) {
-            $this->io->section('Current metadata is consistent with database sources!');
+            $this->io->success('Current metadata is consistent with database sources!');
 
             return 0;
         }
