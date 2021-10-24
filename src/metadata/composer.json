@@ -1,5 +1,5 @@
 {
-    "name": "hasura-extra/metadata-cli",
+    "name": "hasura-extra/metadata",
     "autoload": {
         "psr-4": {
             "Hasura\\Metadata\\": "src"

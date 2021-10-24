@@ -26,6 +26,6 @@
     },
     "replace": {
         "hasura-extra/api-client": "self.version",
-        "hasura-extra/metadata-cli": "self.version"
+        "hasura-extra/metadata": "self.version"
     }
 }
