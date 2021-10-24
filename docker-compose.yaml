@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:13-alpine
+    environment:
+      POSTGRES_DB: hasura
+      POSTGRES_USER: hasura
+      POSTGRES_PASSWORD: hasura
+
+  hasura:
+    image: hasura/graphql-engine:v2.1.0-beta.1
+    restart: on-failure
+    environment:
+      HASURA_GRAPHQL_ADMIN_SECRET: 'test'
+      HASURA_GRAPHQL_EXPERIMENTAL_FEATURES: 'inherited_roles'
+      HASURA_GRAPHQL_ENABLE_REMOTE_SCHEMA_PERMISSIONS: 'true'
+      HASURA_GRAPHQL_DATABASE_URL: postgres://hasura:hasura@postgres/hasura
+      HASURA_GRAPHQL_DEV_MODE: 'true'
+      HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
+    ports:
+      - protocol: tcp
+        target: 8080
+        published: 8080
+    depends_on:
+      - postgres

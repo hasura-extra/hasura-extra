@@ -1,9 +1,9 @@
 {
     "name": "hasura-extra/api-client",
     "autoload": {
-      "psr-4": {
-        "Hasura\\ApiClient\\": "src"
-      }
+        "psr-4": {
+            "Hasura\\ApiClient\\": "src"
+        }
     },
     "require": {
         "php": ">=8.0",
