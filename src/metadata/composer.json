@@ -5,6 +5,11 @@
             "Hasura\\Metadata\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Hasura\\Metadata\\Tests\\": "tests"
+        }
+    },
     "bin": [
         "bin/hasura"
     ],

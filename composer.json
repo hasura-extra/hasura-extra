@@ -15,8 +15,13 @@
     "autoload": {
         "psr-4": {
             "Hasura\\ApiClient\\": "src/api-client/src",
-            "Hasura\\MetadataCli\\": "src/metadata-cli/src",
             "Hasura\\Metadata\\": "src/metadata/src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Hasura\\ApiClient\\Tests\\": "src/api-client/tests",
+            "Hasura\\Metadata\\Tests\\": "src/metadata/tests"
         }
     },
     "replace": {

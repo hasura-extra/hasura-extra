@@ -90,10 +90,10 @@ use Symfony\Component\Filesystem\Filesystem;
             }
         }
 
-        if (file_exists($file)) {
+        if (\file_exists($file)) {
             $config = require_once $file;
 
-            if (!is_array($config)) {
+            if (!\is_array($config)) {
                 throw new \LogicException(
                     sprintf('Config file: `%s` should return an array but got `%s`', $file, gettype($config))
                 );
@@ -119,6 +119,10 @@ use Symfony\Component\Filesystem\Filesystem;
             );
         }
 
-        return ['baseUri' => $baseUri, 'adminSecret' => $adminSecret, 'metadataPath' => $metadataPath];
+        return [
+            'baseUri' => $baseUri,
+            'adminSecret' => $adminSecret,
+            'metadataPath' => $metadataPath
+        ];
     }
 })->run();
