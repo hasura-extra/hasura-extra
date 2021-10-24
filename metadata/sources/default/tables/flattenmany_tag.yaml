@@ -1,0 +1,12 @@
+table:
+    schema: _flattenmany
+    name: tag
+array_relationships:
+    -
+        name: article_tags
+        using:
+            foreign_key_constraint_on:
+                column: tag_id
+                table:
+                    schema: _flattenmany
+                    name: article_tag

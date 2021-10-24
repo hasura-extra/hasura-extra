@@ -3,6 +3,8 @@ version: '3.8'
 services:
   postgres:
     image: postgres:13-alpine
+    volumes:
+      - ./docker/postgres/initdb.d:/docker-entrypoint-initdb.d
     environment:
       POSTGRES_DB: hasura
       POSTGRES_USER: hasura

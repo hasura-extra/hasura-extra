@@ -1,0 +1,8 @@
+- !include tables/attributes_chat.yaml
+- !include tables/attributes_user.yaml
+- !include tables/attributes_user_attributes.yaml
+- !include tables/flattenmany_article.yaml
+- !include tables/flattenmany_article_tag.yaml
+- !include tables/flattenmany_article_tags_view.yaml
+- !include tables/flattenmany_tag.yaml
+- !include tables/flattenmany_tag_articles_view.yaml
