@@ -19,7 +19,7 @@ final class MetadataApi extends AbstractApi
 
     public function query(string $type, array $args, int $version = null): array
     {
-        $payload = compact($type, $args);
+        $payload = compact('type', 'args');
 
         if (null !== $version) {
             $payload['version'] = $version;
