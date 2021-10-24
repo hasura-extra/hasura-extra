@@ -38,6 +38,11 @@ final class Client
         return new GraphqlApi($this->httpClient);
     }
 
+    public function relayGraphql(): RelayGraphqlApi
+    {
+        return new RelayGraphqlApi($this->httpClient);
+    }
+
     public function version(): VersionApi
     {
         return new VersionApi($this->httpClient);

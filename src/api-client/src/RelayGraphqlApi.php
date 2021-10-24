@@ -10,12 +10,12 @@ declare(strict_types=1);
 
 namespace Hasura\ApiClient;
 
-final class GraphqlApi extends AbstractApi
+final class RelayGraphqlApi extends AbstractApi
 {
     use GraphqlQueryTrait;
 
     protected function apiPath(): string
     {
-        return '/v1/graphql';
+        return '/v1beta1/relay';
     }
 }
