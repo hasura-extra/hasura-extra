@@ -1,0 +1,60 @@
+# inspiration from https://github.com/symplify/symplify/blob/main/.github/workflows/split_tests.yaml
+
+name: Split Tests
+
+on:
+  pull_request: ~
+
+env:
+  # see https://github.com/composer/composer/issues/9368#issuecomment-718112361
+  COMPOSER_ROOT_VERSION: "dev-main"
+
+jobs:
+  provide_packages_json:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.0
+          coverage: none
+
+      - uses: "ramsey/composer-install@v1"
+
+      - id: output_data
+        run: echo "::set-output name=matrix::$(vendor/bin/monorepo-builder packages-json --tests)"
+
+    outputs:
+      matrix: ${{ steps.output_data.outputs.matrix }}
+
+  split_tests:
+    needs: provide_packages_json
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        package: ${{ fromJson(needs.provide_packages_json.outputs.matrix )}}
+
+    name: Split Tests of ${{ matrix.package }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.0
+          coverage: none
+
+      - uses: "ramsey/composer-install@v1"
+
+      - run: vendor/bin/monorepo-builder localize-composer-paths src/${{ matrix.package }}/composer.json --ansi
+
+      - run: composer update --no-progress --ansi --working-dir src/${{ matrix.package }}
+
+      - run: make environment
+
+      - working-directory: src/${{ matrix.package }}
+        run: vendor/bin/phpunit
