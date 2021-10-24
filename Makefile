@@ -6,6 +6,10 @@ apply-metadata:
 export-metadata:
 	php ./src/metadata/bin/hasura export --force
 
+.PHONY: test-all
+test-all:
+	./vendor/bin/phpunit
+
 .PHONY: test-api-client
 test-api-client:
 	./vendor/bin/phpunit src/api-client

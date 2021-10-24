@@ -6,13 +6,9 @@
         <ini name="error_reporting" value="-1" />
     </php>
 
-    <testsuite name="all">
-        <directory>src/**/tests</directory>
-    </testsuite>
-
-    <coverage processUncoveredFiles="true">
-        <include>
-            <directory suffix=".php">src/*/src</directory>
-        </include>
-    </coverage>
+    <testsuites>
+        <testsuite name="api-client">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
 </phpunit>
