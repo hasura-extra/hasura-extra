@@ -27,5 +27,7 @@
     "replace": {
         "hasura-extra/api-client": "self.version",
         "hasura-extra/metadata": "self.version"
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

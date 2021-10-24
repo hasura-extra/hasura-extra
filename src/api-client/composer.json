@@ -1,5 +1,7 @@
 {
     "name": "hasura-extra/api-client",
+    "prefer-stable": true,
+    "minimum-stability": "dev",
     "type": "library",
     "autoload": {
         "psr-4": {
