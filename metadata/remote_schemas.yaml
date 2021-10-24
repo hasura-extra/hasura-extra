@@ -1,0 +1,7 @@
+-
+    name: countries
+    definition:
+        url: 'https://countries.trevorblades.com/graphql'
+        timeout_seconds: 60
+    comment: ''
+    permissions: !include remote_schemas/countries/permissions.yaml
