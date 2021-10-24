@@ -1,28 +1,28 @@
-English | [Tiếng Việt](./README-VI.md)
+[English](./README.md) | Tiếng Việt
 
 Hasura Api Client
 =================
 
-Library to help interact with Hasura [api](https://hasura.io/docs/latest/graphql/core/api-reference/index.html).
+Thư viện dùng để tương tác với Hasura [api](https://hasura.io/docs/latest/graphql/core/api-reference/index.html).
 
-Installation
+Cài đặt
 ------------
 
-Install via [Composer](https://getcomposer.org/):
+Cài đặt thông qua [Composer](https://getcomposer.org/):
 
 ```shell
 composer require hasura-extra/api-client
 ```
 
-Usages
+Cách sử dụng
 ------
 
-Create client and call api:
+Khởi tạo và gọi api:
 
 ```php
 <?php
 
-$client = new \Hasura\ApiClient\Client('Your Hasura base uri', 'Your Hasura admin secret (optional)');
+$client = new \Hasura\ApiClient\Client('Hasura base uri của bạn', 'Hasura admin secret của bạn (bỏ qua nếu không thiết lập)');
 
 // Get Hasura config
 $config = $client->config()->get();
@@ -36,7 +36,7 @@ $data = $client->graphql()->query('query { __typename }');
 // And more...
 ```
 
-Client method provides to interact with Hasura api:
+Các methods của client dùng để tương tác với Hasura api:
 
 Method            | Api reference
 -------------     | --------------------
