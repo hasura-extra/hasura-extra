@@ -1,8 +1,14 @@
 {
     "name": "hasura-extra/api-client",
+    "type": "library",
     "autoload": {
         "psr-4": {
             "Hasura\\ApiClient\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Hasura\\ApiClient\\Tests\\": "tests"
         }
     },
     "require": {
