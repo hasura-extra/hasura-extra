@@ -3,5 +3,5 @@
 return [
     'baseUri' => 'http://localhost:8080',
     'adminSecret' => 'test',
-    'metadataPath' => __DIR__ . '/metadata'
+    'metadataPath' => __DIR__ . '/hasura/metadata'
 ];
