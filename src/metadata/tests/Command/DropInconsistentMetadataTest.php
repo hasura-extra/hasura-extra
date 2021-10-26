@@ -31,10 +31,10 @@ final class DropInconsistentMetadataTest extends TestCase
 
     private function getCurrentTables(): array
     {
-        $data = $this->client->metadata()->query('export_metadata', [], 2);
+        $metadata = $this->getCurrentMetadata();
 
         return array_column(
-            array_column($data['metadata']['sources'][0]['tables'], 'table'),
+            array_column($metadata['sources'][0]['tables'], 'table'),
             'name'
         );
     }

@@ -54,14 +54,14 @@ final class ManagerTest extends TestCase
 
     public function testClearMetadata()
     {
-        $data = $this->client->metadata()->query('export_metadata', [], 2);
+        $metadata = $this->getCurrentMetadata();
 
-        $this->assertNotEmpty($data['metadata']['sources'][0]['tables']);
+        $this->assertNotEmpty($metadata['sources'][0]['tables']);
         $this->manager->clear();
 
-        $data = $this->client->metadata()->query('export_metadata', [], 2);
+        $metadata = $this->getCurrentMetadata();
 
-        $this->assertEmpty($data['metadata']['sources'][0]['tables']);
+        $this->assertEmpty($metadata['sources'][0]['tables']);
     }
 
     public function testGetInconsistent()

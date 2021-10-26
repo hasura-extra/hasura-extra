@@ -23,8 +23,8 @@ final class ClearMetadataTest extends TestCase
         $this->assertStringContainsString('Clearing...', $tester->getDisplay());
         $this->assertStringContainsString('Done!', $tester->getDisplay());
 
-        $data = $this->client->metadata()->query('export_metadata', [], 2);
+        $metadata = $this->getCurrentMetadata();
 
-        $this->assertEmpty($data['metadata']['sources'][0]['tables']);
+        $this->assertEmpty($metadata['sources'][0]['tables']);
     }
 }
