@@ -27,4 +27,6 @@ jobs:
 
       - run: make environment
 
+      - run: make apply-metadata
+
       - run: make test-all
