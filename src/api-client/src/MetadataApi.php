@@ -25,6 +25,8 @@ final class MetadataApi extends AbstractApi
             $payload['version'] = $version;
         }
 
-        return $this->request('POST', ['json' => $payload])->toArray();
+        return $this->request('POST', [
+            'json' => $payload,
+        ])->toArray();
     }
 }

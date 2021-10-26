@@ -45,7 +45,7 @@ final class Manager implements ManagerInterface
             'replace_metadata',
             [
                 'metadata' => $metadata,
-                'allow_inconsistent_metadata' => $allowInconsistent
+                'allow_inconsistent_metadata' => $allowInconsistent,
             ],
             2
         );
@@ -57,7 +57,7 @@ final class Manager implements ManagerInterface
             'reload_metadata',
             [
                 'reload_remote_schemas' => $reloadRemoteSchemas,
-                'reload_sources' => $reloadSources
+                'reload_sources' => $reloadSources,
             ]
         );
     }
