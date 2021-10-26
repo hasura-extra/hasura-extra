@@ -34,7 +34,9 @@ class TestCase extends PHPUnitTestCase
 
         $client = $this->client = new Client('http://localhost:8080', 'test');
         $this->manager = new Manager(
-            $client, self::METADATA_PATH, new YamlOperator(new Filesystem())
+            $client,
+            self::METADATA_PATH,
+            new YamlOperator(new Filesystem())
         );
 
         $this->backupMetadata = $this->getCurrentMetadata();
@@ -53,7 +55,7 @@ class TestCase extends PHPUnitTestCase
             'replace_metadata',
             [
                 'metadata' => $this->backupMetadata,
-                'allow_inconsistent_metadata' => false
+                'allow_inconsistent_metadata' => false,
             ],
             2
         );
@@ -69,7 +71,7 @@ class TestCase extends PHPUnitTestCase
         );
 
         return array_map(
-            fn(string $file) => rtrim((new Filesystem())->makePathRelative($file, $dir), '/'),
+            fn (string $file) => rtrim((new Filesystem())->makePathRelative($file, $dir), '/'),
             array_keys($files)
         );
     }
@@ -81,15 +83,15 @@ class TestCase extends PHPUnitTestCase
         $metadata['sources'][0]['tables'][] = [
             'table' => [
                 'schema' => 'public',
-                'name' => 'inconsistent_table'
-            ]
+                'name' => 'inconsistent_table',
+            ],
         ];
 
         $this->client->metadata()->query(
             'replace_metadata',
             [
                 'metadata' => $metadata,
-                'allow_inconsistent_metadata' => true
+                'allow_inconsistent_metadata' => true,
             ],
             2
         );

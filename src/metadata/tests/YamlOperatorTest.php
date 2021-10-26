@@ -58,7 +58,10 @@ final class YamlOperatorTest extends TestCase
 
         $this->client->metadata()->query(
             'replace_metadata',
-            ['metadata' => $metadataLoaded, 'allow_inconsistent_metadata' => false],
+            [
+                'metadata' => $metadataLoaded,
+                'allow_inconsistent_metadata' => false,
+            ],
             2
         );
     }

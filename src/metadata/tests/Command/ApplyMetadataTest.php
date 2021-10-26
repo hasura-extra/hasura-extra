@@ -24,7 +24,9 @@ final class ApplyMetadataTest extends TestCase
 
         // export yaml files
         $exporter = new CommandTester(new ExportMetadata($this->manager));
-        $exporter->execute(['--force' => true]);
+        $exporter->execute([
+            '--force' => true,
+        ]);
 
         // apply
         $tester = new CommandTester(new ApplyMetadata($this->manager));
@@ -45,7 +47,9 @@ final class ApplyMetadataTest extends TestCase
         $this->assertSame(1, $tester->getStatusCode());
         $this->assertStringContainsString('Not found metadata files.', $tester->getDisplay());
 
-        $tester->execute(['--allow-no-metadata' => true]);
+        $tester->execute([
+            '--allow-no-metadata' => true,
+        ]);
         $this->assertSame(0, $tester->getStatusCode());
         $this->assertStringContainsString('No metadata files to apply.', $tester->getDisplay());
     }
