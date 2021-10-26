@@ -22,8 +22,7 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Filesystem\Filesystem;
 
-(new class {
-
+(new class() {
     private ArgvInput $input;
 
     public function __construct()
@@ -122,7 +121,7 @@ use Symfony\Component\Filesystem\Filesystem;
         return [
             'baseUri' => $baseUri,
             'adminSecret' => $adminSecret,
-            'metadataPath' => $metadataPath
+            'metadataPath' => $metadataPath,
         ];
     }
 })->run();

@@ -23,6 +23,6 @@ final class RelayGraphqlApiTest extends TestCase
         $this->assertIsArray($data);
         $this->assertArrayHasKey('data', $data);
         $fields = $data['data']['__schema']['queryType']['fields'];
-        $this->assertTrue(in_array('node', array_column($fields, 'name')));
+        $this->assertTrue(in_array('node', array_column($fields, 'name'), true));
     }
 }

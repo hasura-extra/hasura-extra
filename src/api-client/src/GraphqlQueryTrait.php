@@ -18,13 +18,17 @@ trait GraphqlQueryTrait
 {
     final public function query(string $query, array $variables = null, bool $throwOnError = false): array
     {
-        $payload = ['query' => $query];
+        $payload = [
+            'query' => $query,
+        ];
 
         if (null !== $variables) {
             $payload['variables'] = $variables;
         }
 
-        $data = $this->request('POST', ['json' => $payload])->toArray();
+        $data = $this->request('POST', [
+            'json' => $payload,
+        ])->toArray();
 
         if (isset($data['errors']) && $throwOnError) {
             throw new GraphqlApiException($data['errors'], 'Graphql response data errors!');

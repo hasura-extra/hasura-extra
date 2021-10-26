@@ -30,7 +30,9 @@ final class GraphqlApiTest extends TestCase
     {
         $data = $this->client->graphql()->query(
             'query Test($include: Boolean!) { __typename @include(if: $include) }',
-            ['include' => true],
+            [
+                'include' => true,
+            ],
             true
         );
 
