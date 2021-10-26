@@ -1,0 +1,8 @@
+name: article_insert_obj_input
+fields:
+    -
+        name: title
+        type: String!
+    -
+        name: description
+        type: String!

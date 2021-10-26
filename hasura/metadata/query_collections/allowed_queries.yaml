@@ -1,0 +1,11 @@
+name: allowed-queries
+definition:
+    queries:
+        -
+            name: 'Get country codes'
+            query: |-
+                query MyQuery {
+                  countries {
+                    code
+                  }
+                }

@@ -10,3 +10,23 @@ array_relationships:
                 table:
                     schema: _flattenmany
                     name: article_tag
+event_triggers:
+    -
+        name: article_events
+        definition:
+            enable_manual: false
+            insert:
+                columns: '*'
+            delete:
+                columns: '*'
+            update:
+                columns:
+                    - author_name
+                    - id
+                    - title
+        retry_conf:
+            num_retries: 0
+            interval_sec: 10
+            timeout_sec: 60
+        request_transform: ~
+        webhook: 'https://httpbin.org/post'

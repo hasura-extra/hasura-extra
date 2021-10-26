@@ -56,5 +56,7 @@ jobs:
 
       - run: make environment
 
+      - run: make apply-metadata
+
       - working-directory: src/${{ matrix.package }}
         run: vendor/bin/phpunit
