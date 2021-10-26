@@ -1,0 +1,9 @@
+definition:
+    query:
+        collection_name: allowed-queries
+        query_name: 'Get country codes'
+url: countries
+methods:
+    - GET
+name: 'Get country codes'
+comment: ~

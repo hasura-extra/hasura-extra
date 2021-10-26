@@ -1,0 +1,2 @@
+input_objects: !include custom_types/input_objects.yaml
+objects: !include custom_types/objects.yaml

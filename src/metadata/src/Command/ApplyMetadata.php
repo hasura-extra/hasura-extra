@@ -57,6 +57,7 @@ final class ApplyMetadata extends BaseCommand
                 $this->io->error('Not found metadata files.');
             } else {
                 $this->io->warning('No metadata files to apply.');
+                return 0;
             }
         }
 
