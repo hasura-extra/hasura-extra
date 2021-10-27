@@ -65,7 +65,7 @@ final class YamlOperator implements OperatorInterface
             $collectionFile = sprintf('%s.yaml', $sourcePath);
 
             $this->exportItems(
-                $source['tables'],
+                $source['tables'] ?? [],
                 fn (array $table) => sprintf(
                     '%s_%s.yaml',
                     $this->snakeCase($table['table']['schema']),
@@ -149,7 +149,7 @@ final class YamlOperator implements OperatorInterface
             $collectionFile = sprintf('%s.yaml', $sourcePath);
 
             $this->exportItems(
-                $remoteSchema['permissions'],
+                $remoteSchema['permissions'] ?? [],
                 fn (array $permission) => sprintf('role_%s.yaml', $this->snakeCase($permission['role'])),
                 $collectionFile,
                 $sourcePath,
@@ -222,18 +222,20 @@ final class YamlOperator implements OperatorInterface
         $collectionFile = sprintf('%s/%s', $basePath, $collectionFile);
         $exported = [];
 
-        $this->filesystem->mkdir($itemsPath);
+        if (!empty($items)) {
+            $this->filesystem->mkdir($itemsPath);
 
-        foreach ($items as $item) {
-            $file = $itemNameGenerator($item);
-            $relativePath = rtrim($this->filesystem->makePathRelative($itemsPath, dirname($collectionFile)), '/');
-            $relativeFilePath = sprintf('%s/%s', $relativePath, $file);
-            $exported[] = $this->createIncludeTaggedValue($relativeFilePath);
+            foreach ($items as $item) {
+                $file = $itemNameGenerator($item);
+                $relativePath = rtrim($this->filesystem->makePathRelative($itemsPath, dirname($collectionFile)), '/');
+                $relativeFilePath = sprintf('%s/%s', $relativePath, $file);
+                $exported[] = $this->createIncludeTaggedValue($relativeFilePath);
 
-            $this->filesystem->dumpFile(
-                sprintf('%s/%s', $itemsPath, $file),
-                $this->yamlDump($item)
-            );
+                $this->filesystem->dumpFile(
+                    sprintf('%s/%s', $itemsPath, $file),
+                    $this->yamlDump($item)
+                );
+            }
         }
 
         $this->filesystem->dumpFile(

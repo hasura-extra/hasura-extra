@@ -1,5 +1,7 @@
 {
     "name": "hasura-extra/hasura-extra",
+    "license": "MIT",
+    "description": "Handle Hasura metadata & business logic in minutes.",
     "require": {
         "php": ">=8.0",
         "symfony/console": "^5.0",
