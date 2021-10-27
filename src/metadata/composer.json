@@ -1,5 +1,7 @@
 {
     "name": "hasura-extra/metadata",
+    "license": "MIT",
+    "description": "The library help to manage Hasura metadata.",
     "prefer-stable": true,
     "minimum-stability": "dev",
     "autoload": {

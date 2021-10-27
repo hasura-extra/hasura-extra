@@ -1,5 +1,7 @@
 {
     "name": "hasura-extra/api-client",
+    "license": "MIT",
+    "description": "The library provides an api client to interact with Hasura api.",
     "prefer-stable": true,
     "minimum-stability": "dev",
     "type": "library",

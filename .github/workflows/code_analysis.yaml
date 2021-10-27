@@ -1,0 +1,39 @@
+# inspiration from https://github.com/symplify/symplify/blob/main/.github/workflows/code_analysis.yaml
+
+name: Code Analysis
+
+on:
+  pull_request: ~
+
+env:
+  # see https://github.com/composer/composer/issues/9368#issuecomment-718112361
+  COMPOSER_ROOT_VERSION: "dev-main"
+
+jobs:
+  code_analysis:
+    name: ${{ matrix.actions.name }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php:
+          - 8.0
+        actions:
+          - name: Composer Validate
+            run: composer validate
+
+          - name: Binary File Run
+            run: |
+              # test run bin files
+              src/metadata/bin/hasura
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+
+      - uses: "ramsey/composer-install@v1"
+
+      - run: ${{ matrix.actions.run }}
