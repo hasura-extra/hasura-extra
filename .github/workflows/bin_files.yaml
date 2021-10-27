@@ -1,0 +1,10 @@
+name: Bin Files
+
+on:
+  pull_request: ~
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - run: src/metadata/bin/hasura
