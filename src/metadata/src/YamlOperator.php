@@ -246,7 +246,7 @@ final class YamlOperator implements OperatorInterface
 
     private function snakeCase(string $name): string
     {
-        return u($name)->lower()->snake()->toString();
+        return u($name)->snake()->toString();
     }
 
     private function yamlDump(mixed $data): string
