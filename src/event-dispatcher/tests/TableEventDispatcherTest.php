@@ -12,7 +12,7 @@ namespace Hasura\EventDispatcher\Tests;
 
 use Hasura\EventDispatcher\TableEvent;
 use Hasura\EventDispatcher\TableEventDispatcher;
-use Hasura\Metadata\Tests\TestCase;
+use PHPUnit\Framework\TestCase;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;

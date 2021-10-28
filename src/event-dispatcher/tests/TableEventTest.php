@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace Hasura\EventDispatcher\Tests;
 
 use Hasura\EventDispatcher\TableEvent;
-use Hasura\Metadata\Tests\TestCase;
+use PHPUnit\Framework\TestCase;
 
 final class TableEventTest extends TestCase
 {
