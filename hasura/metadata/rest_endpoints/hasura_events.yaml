@@ -1,0 +1,9 @@
+definition:
+    query:
+        collection_name: allowed-queries
+        query_name: 'Hasura Events'
+url: hasura_events
+methods:
+    - POST
+name: 'Hasura Events'
+comment: ~

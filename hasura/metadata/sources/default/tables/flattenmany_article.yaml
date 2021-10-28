@@ -14,19 +14,23 @@ event_triggers:
     -
         name: article_events
         definition:
-            enable_manual: false
+            enable_manual: true
             insert:
                 columns: '*'
             delete:
                 columns: '*'
             update:
                 columns:
-                    - author_name
                     - id
+                    - author_name
                     - title
         retry_conf:
             num_retries: 0
             interval_sec: 10
             timeout_sec: 60
         request_transform: ~
-        webhook: 'https://httpbin.org/post'
+        webhook: 'http://0.0.0.0:8080/api/rest/hasura_events'
+        headers:
+            -
+                value: test
+                name: x-hasura-admin-secret
