@@ -92,7 +92,7 @@ final class TableEventDispatcherTest extends TestCase
                 '{"id":"701a2d84-bc9d-4858-a649-f132f0ffa42d","event":{"op":"DELETE","data":{"new":null,"old":{"id":13,"title":"a","author_name":"test"}},"trace_context":{"span_id":"5155c27062327c40","trace_id":"e39f4a0647759246"},"session_variables":{"x-hasura-role":"admin"}},"table":{"name":"article","schema":"_flattenmany"},"trigger":{"name":"article_events"},"created_at":"2021-10-28T06:51:23.164244Z","delivery_info":{"max_retries":0,"current_retry":0}}',
                 false
             ],
-            'valid trigger payload' => [
+            'valid manual payload' => [
                 '{"id":"d169163a-94c6-4787-90af-b760aadc451f","event":{"op":"MANUAL","data":{"new":{"id":6,"title":"test 2","author_name":"Amie Sturman"},"old":null},"trace_context":{"span_id":"554495843c44d539","trace_id":"24d451e4fbce491a"},"session_variables":{"x-hasura-role":"admin"}},"table":{"name":"article","schema":"_flattenmany"},"trigger":{"name":"article_events"},"created_at":"2021-10-28T06:52:33.738982Z","delivery_info":{"max_retries":0,"current_retry":0}}',
                 false
             ],
