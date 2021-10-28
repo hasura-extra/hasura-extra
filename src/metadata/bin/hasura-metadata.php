@@ -118,7 +118,7 @@ use Symfony\Component\Filesystem\Filesystem;
 
         $baseUri = $config['baseUri'] ?? $_ENV['HASURA_BASE_URI'] ?? $_SERVER['HASURA_BASE_URI'] ?? null;
         $adminSecret = $config['adminSecret'] ?? $_ENV['HASURA_ADMIN_SECRET'] ?? $_SERVER['HASURA_ADMIN_SECRET'] ?? null;
-        $metadataPath = $config['metadataPath'] ?? $_ENV['HASURA_METADATA_PATH'] ?? $_SERVER['HASURA_METADATA_PATH'] ?? null;
+        $metadataPath = $config['metadata']['path'] ?? $_ENV['HASURA_METADATA_PATH'] ?? $_SERVER['HASURA_METADATA_PATH'] ?? null;
         $hintMessage = '(Use `init-config` command to generate config file).';
 
         if (null === $baseUri) {
