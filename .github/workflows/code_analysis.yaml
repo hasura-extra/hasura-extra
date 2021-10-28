@@ -25,7 +25,7 @@ jobs:
           - name: Binary File Run
             run: |
               # test run bin files
-              src/metadata/bin/hasura
+              src/metadata/bin/hasura-metadata
     steps:
       - uses: actions/checkout@v2
 

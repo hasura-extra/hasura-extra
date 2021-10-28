@@ -15,7 +15,7 @@
         }
     },
     "bin": [
-        "bin/hasura"
+        "bin/hasura-metadata"
     ],
     "require": {
         "php": ">=8.0",
