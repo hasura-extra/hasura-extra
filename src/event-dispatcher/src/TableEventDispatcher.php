@@ -13,7 +13,7 @@ namespace Hasura\EventDispatcher;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-final class TableEventDispatcher implements ServerRequestEventDispatcher
+final class TableEventDispatcher implements ServerRequestEventDispatcherInterface
 {
     public function __construct(private EventDispatcherInterface $dispatcher)
     {
