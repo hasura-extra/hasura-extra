@@ -5,11 +5,11 @@ environment:
 
 .PHONY: apply-metadata
 apply-metadata:
-	php ./src/metadata/bin/hasura apply
+	php ./src/metadata/bin/hasura-metadata apply
 
 .PHONY: export-metadata
 export-metadata:
-	php ./src/metadata/bin/hasura export --force
+	php ./src/metadata/bin/hasura-metadata export --force
 
 .PHONY: test-all
 test-all:
