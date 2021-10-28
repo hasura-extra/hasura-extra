@@ -4,6 +4,8 @@
     "description": "Handle Hasura metadata & business logic in minutes.",
     "require": {
         "php": ">=8.0",
+        "psr/event-dispatcher": "^1.0",
+        "psr/http-message": "^1.0",
         "symfony/console": "^5.0",
         "symfony/filesystem": "^5.0",
         "symfony/http-client": "^5.0",
@@ -18,17 +20,20 @@
     "autoload": {
         "psr-4": {
             "Hasura\\ApiClient\\": "src/api-client/src",
+            "Hasura\\EventDispatcher\\": "src/event-dispatcher/src",
             "Hasura\\Metadata\\": "src/metadata/src"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "Hasura\\ApiClient\\Tests\\": "src/api-client/tests",
+            "Hasura\\EventDispatcher\\Tests\\": "src/event-dispatcher/tests",
             "Hasura\\Metadata\\Tests\\": "src/metadata/tests"
         }
     },
     "replace": {
         "hasura-extra/api-client": "self.version",
+        "hasura-extra/event-dispatcher": "self.version",
         "hasura-extra/metadata": "self.version"
     },
     "minimum-stability": "dev",

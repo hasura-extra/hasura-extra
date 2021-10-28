@@ -22,3 +22,7 @@ test-api-client:
 .PHONY: test-metadata
 test-metadata:
 	./vendor/bin/phpunit src/metadata
+
+.PHONY: test-event-dispatcher
+test-event-dispatcher:
+	./vendor/bin/phpunit src/event-dispatcher
