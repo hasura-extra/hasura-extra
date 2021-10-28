@@ -9,3 +9,14 @@ definition:
                     code
                   }
                 }
+        -
+            name: 'Hasura Events'
+            query: |-
+                mutation hasura_events($id: ID!, $created_at: String!, $trigger: jsonb!, $table: jsonb!, $event: jsonb!, $delivery_info: jsonb!) {
+                  insert_hasura_events(objects: {payload: {id: $id, created_at: $created_at, trigger: $trigger, table: $table, event: $event, delivery_info: $delivery_info}}){
+                    affected_rows
+                    returning {
+                      id
+                    }
+                  }
+                }
