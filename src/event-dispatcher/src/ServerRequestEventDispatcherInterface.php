@@ -15,7 +15,7 @@ use Psr\Http\Message\ServerRequestInterface;
 /**
  * Implements by classes help to dispatch events triggered by Hasura via HTTP server request.
  */
-interface ServerRequestEventDispatcher
+interface ServerRequestEventDispatcherInterface
 {
     public function dispatch(ServerRequestInterface $request): void;
 }
