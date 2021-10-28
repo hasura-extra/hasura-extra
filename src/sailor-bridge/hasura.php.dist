@@ -2,10 +2,7 @@
 
 return [
     'baseUri' => 'http://localhost:8080',
-    'adminSecret' => 'test',
-    'metadata' => [
-        'path' => __DIR__ . '/hasura/metadata'
-    ],
+    'adminSecret' => null,
     'sailor' => [
         'executorNamespace' => 'App\\GraphqlExecutor',
         'targetPath' => __DIR__ . '/hasura/graphql_executor',

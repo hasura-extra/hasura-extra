@@ -17,10 +17,10 @@ final class EndpointConfig extends AbstractEndpointConfig
 {
     public function __construct(
         private SailorClientInterface $client,
-        private string $namespace,
+        private string $executorNamespace,
         private string $targetPath,
-        private string $graphqlSpecPath,
-        private string $graphqlSchemaPath
+        private string $querySpecPath,
+        private string $schemaPath
     ) {
     }
 
@@ -31,7 +31,7 @@ final class EndpointConfig extends AbstractEndpointConfig
 
     public function namespace(): string
     {
-        return $this->namespace;
+        return $this->executorNamespace;
     }
 
     public function targetPath(): string
@@ -41,11 +41,11 @@ final class EndpointConfig extends AbstractEndpointConfig
 
     public function searchPath(): string
     {
-        return $this->graphqlSpecPath;
+        return $this->querySpecPath;
     }
 
     public function schemaPath(): string
     {
-        return $this->graphqlSchemaPath;
+        return $this->schemaPath;
     }
 }
