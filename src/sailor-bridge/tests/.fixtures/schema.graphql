@@ -1,0 +1,3728 @@
+schema {
+  query: query_root
+  mutation: mutation_root
+  subscription: subscription_root
+}
+
+"""whether this query should be cached (Hasura Cloud only)"""
+directive @cached(
+  """measured in seconds"""
+  ttl: Int! = 60
+
+  """refresh the cache entry"""
+  refresh: Boolean! = false
+) on QUERY
+
+type Continent {
+  code: ID!
+  countries: [Country!]!
+  name: String!
+}
+
+input ContinentFilterInput {
+  code: StringQueryOperatorInput
+}
+
+type Country {
+  capital: String
+  code: ID!
+  continent: Continent!
+  currency: String
+  emoji: String!
+  emojiU: String!
+  languages: [Language!]!
+  name: String!
+  native: String!
+  phone: String!
+  states: [State!]!
+}
+
+input CountryFilterInput {
+  code: StringQueryOperatorInput
+  continent: StringQueryOperatorInput
+  currency: StringQueryOperatorInput
+}
+
+"""
+Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'.
+"""
+input Int_comparison_exp {
+  _eq: Int
+  _gt: Int
+  _gte: Int
+  _in: [Int!]
+  _is_null: Boolean
+  _lt: Int
+  _lte: Int
+  _neq: Int
+  _nin: [Int!]
+}
+
+type Language {
+  code: ID!
+  name: String
+  native: String
+  rtl: Boolean!
+}
+
+input LanguageFilterInput {
+  code: StringQueryOperatorInput
+}
+
+type State {
+  code: String
+  country: Country!
+  name: String!
+}
+
+input StringQueryOperatorInput {
+  eq: String
+  glob: String
+  in: [String]
+  ne: String
+  nin: [String]
+  regex: String
+}
+
+"""
+Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'.
+"""
+input String_comparison_exp {
+  _eq: String
+  _gt: String
+  _gte: String
+
+  """does the column match the given case-insensitive pattern"""
+  _ilike: String
+  _in: [String!]
+
+  """
+  does the column match the given POSIX regular expression, case insensitive
+  """
+  _iregex: String
+  _is_null: Boolean
+
+  """does the column match the given pattern"""
+  _like: String
+  _lt: String
+  _lte: String
+  _neq: String
+
+  """does the column NOT match the given case-insensitive pattern"""
+  _nilike: String
+  _nin: [String!]
+
+  """
+  does the column NOT match the given POSIX regular expression, case insensitive
+  """
+  _niregex: String
+
+  """does the column NOT match the given pattern"""
+  _nlike: String
+
+  """
+  does the column NOT match the given POSIX regular expression, case sensitive
+  """
+  _nregex: String
+
+  """does the column NOT match the given SQL regular expression"""
+  _nsimilar: String
+
+  """
+  does the column match the given POSIX regular expression, case sensitive
+  """
+  _regex: String
+
+  """does the column match the given SQL regular expression"""
+  _similar: String
+}
+
+"""
+columns and relationships of "_attributes.chat"
+"""
+type _attributes_chat {
+  created_at: timestamp!
+  id: Int!
+  message: String!
+  receiver_id: Int!
+  sender_id: Int!
+
+  """An object relationship"""
+  user: _attributes_user!
+
+  """An object relationship"""
+  userBySenderId: _attributes_user!
+}
+
+"""
+aggregated selection of "_attributes.chat"
+"""
+type _attributes_chat_aggregate {
+  aggregate: _attributes_chat_aggregate_fields
+  nodes: [_attributes_chat!]!
+}
+
+"""
+aggregate fields of "_attributes.chat"
+"""
+type _attributes_chat_aggregate_fields {
+  avg: _attributes_chat_avg_fields
+  count(columns: [_attributes_chat_select_column!], distinct: Boolean): Int!
+  max: _attributes_chat_max_fields
+  min: _attributes_chat_min_fields
+  stddev: _attributes_chat_stddev_fields
+  stddev_pop: _attributes_chat_stddev_pop_fields
+  stddev_samp: _attributes_chat_stddev_samp_fields
+  sum: _attributes_chat_sum_fields
+  var_pop: _attributes_chat_var_pop_fields
+  var_samp: _attributes_chat_var_samp_fields
+  variance: _attributes_chat_variance_fields
+}
+
+"""
+order by aggregate values of table "_attributes.chat"
+"""
+input _attributes_chat_aggregate_order_by {
+  avg: _attributes_chat_avg_order_by
+  count: order_by
+  max: _attributes_chat_max_order_by
+  min: _attributes_chat_min_order_by
+  stddev: _attributes_chat_stddev_order_by
+  stddev_pop: _attributes_chat_stddev_pop_order_by
+  stddev_samp: _attributes_chat_stddev_samp_order_by
+  sum: _attributes_chat_sum_order_by
+  var_pop: _attributes_chat_var_pop_order_by
+  var_samp: _attributes_chat_var_samp_order_by
+  variance: _attributes_chat_variance_order_by
+}
+
+"""
+input type for inserting array relation for remote table "_attributes.chat"
+"""
+input _attributes_chat_arr_rel_insert_input {
+  data: [_attributes_chat_insert_input!]!
+
+  """on conflict condition"""
+  on_conflict: _attributes_chat_on_conflict
+}
+
+"""aggregate avg on columns"""
+type _attributes_chat_avg_fields {
+  id: Float
+  receiver_id: Float
+  sender_id: Float
+}
+
+"""
+order by avg() on columns of table "_attributes.chat"
+"""
+input _attributes_chat_avg_order_by {
+  id: order_by
+  receiver_id: order_by
+  sender_id: order_by
+}
+
+"""
+Boolean expression to filter rows from the table "_attributes.chat". All fields are combined with a logical 'AND'.
+"""
+input _attributes_chat_bool_exp {
+  _and: [_attributes_chat_bool_exp!]
+  _not: _attributes_chat_bool_exp
+  _or: [_attributes_chat_bool_exp!]
+  created_at: timestamp_comparison_exp
+  id: Int_comparison_exp
+  message: String_comparison_exp
+  receiver_id: Int_comparison_exp
+  sender_id: Int_comparison_exp
+  user: _attributes_user_bool_exp
+  userBySenderId: _attributes_user_bool_exp
+}
+
+"""
+unique or primary key constraints on table "_attributes.chat"
+"""
+enum _attributes_chat_constraint {
+  """unique or primary key constraint"""
+  chat_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "_attributes.chat"
+"""
+input _attributes_chat_inc_input {
+  id: Int
+  receiver_id: Int
+  sender_id: Int
+}
+
+"""
+input type for inserting data into table "_attributes.chat"
+"""
+input _attributes_chat_insert_input {
+  created_at: timestamp
+  id: Int
+  message: String
+  receiver_id: Int
+  sender_id: Int
+  user: _attributes_user_obj_rel_insert_input
+  userBySenderId: _attributes_user_obj_rel_insert_input
+}
+
+"""aggregate max on columns"""
+type _attributes_chat_max_fields {
+  created_at: timestamp
+  id: Int
+  message: String
+  receiver_id: Int
+  sender_id: Int
+}
+
+"""
+order by max() on columns of table "_attributes.chat"
+"""
+input _attributes_chat_max_order_by {
+  created_at: order_by
+  id: order_by
+  message: order_by
+  receiver_id: order_by
+  sender_id: order_by
+}
+
+"""aggregate min on columns"""
+type _attributes_chat_min_fields {
+  created_at: timestamp
+  id: Int
+  message: String
+  receiver_id: Int
+  sender_id: Int
+}
+
+"""
+order by min() on columns of table "_attributes.chat"
+"""
+input _attributes_chat_min_order_by {
+  created_at: order_by
+  id: order_by
+  message: order_by
+  receiver_id: order_by
+  sender_id: order_by
+}
+
+"""
+response of any mutation on the table "_attributes.chat"
+"""
+type _attributes_chat_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [_attributes_chat!]!
+}
+
+"""
+on conflict condition type for table "_attributes.chat"
+"""
+input _attributes_chat_on_conflict {
+  constraint: _attributes_chat_constraint!
+  update_columns: [_attributes_chat_update_column!]! = []
+  where: _attributes_chat_bool_exp
+}
+
+"""Ordering options when selecting data from "_attributes.chat"."""
+input _attributes_chat_order_by {
+  created_at: order_by
+  id: order_by
+  message: order_by
+  receiver_id: order_by
+  sender_id: order_by
+  user: _attributes_user_order_by
+  userBySenderId: _attributes_user_order_by
+}
+
+"""primary key columns input for table: _attributes_chat"""
+input _attributes_chat_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "_attributes.chat"
+"""
+enum _attributes_chat_select_column {
+  """column name"""
+  created_at
+
+  """column name"""
+  id
+
+  """column name"""
+  message
+
+  """column name"""
+  receiver_id
+
+  """column name"""
+  sender_id
+}
+
+"""
+input type for updating data in table "_attributes.chat"
+"""
+input _attributes_chat_set_input {
+  created_at: timestamp
+  id: Int
+  message: String
+  receiver_id: Int
+  sender_id: Int
+}
+
+"""aggregate stddev on columns"""
+type _attributes_chat_stddev_fields {
+  id: Float
+  receiver_id: Float
+  sender_id: Float
+}
+
+"""
+order by stddev() on columns of table "_attributes.chat"
+"""
+input _attributes_chat_stddev_order_by {
+  id: order_by
+  receiver_id: order_by
+  sender_id: order_by
+}
+
+"""aggregate stddev_pop on columns"""
+type _attributes_chat_stddev_pop_fields {
+  id: Float
+  receiver_id: Float
+  sender_id: Float
+}
+
+"""
+order by stddev_pop() on columns of table "_attributes.chat"
+"""
+input _attributes_chat_stddev_pop_order_by {
+  id: order_by
+  receiver_id: order_by
+  sender_id: order_by
+}
+
+"""aggregate stddev_samp on columns"""
+type _attributes_chat_stddev_samp_fields {
+  id: Float
+  receiver_id: Float
+  sender_id: Float
+}
+
+"""
+order by stddev_samp() on columns of table "_attributes.chat"
+"""
+input _attributes_chat_stddev_samp_order_by {
+  id: order_by
+  receiver_id: order_by
+  sender_id: order_by
+}
+
+"""aggregate sum on columns"""
+type _attributes_chat_sum_fields {
+  id: Int
+  receiver_id: Int
+  sender_id: Int
+}
+
+"""
+order by sum() on columns of table "_attributes.chat"
+"""
+input _attributes_chat_sum_order_by {
+  id: order_by
+  receiver_id: order_by
+  sender_id: order_by
+}
+
+"""
+update columns of table "_attributes.chat"
+"""
+enum _attributes_chat_update_column {
+  """column name"""
+  created_at
+
+  """column name"""
+  id
+
+  """column name"""
+  message
+
+  """column name"""
+  receiver_id
+
+  """column name"""
+  sender_id
+}
+
+"""aggregate var_pop on columns"""
+type _attributes_chat_var_pop_fields {
+  id: Float
+  receiver_id: Float
+  sender_id: Float
+}
+
+"""
+order by var_pop() on columns of table "_attributes.chat"
+"""
+input _attributes_chat_var_pop_order_by {
+  id: order_by
+  receiver_id: order_by
+  sender_id: order_by
+}
+
+"""aggregate var_samp on columns"""
+type _attributes_chat_var_samp_fields {
+  id: Float
+  receiver_id: Float
+  sender_id: Float
+}
+
+"""
+order by var_samp() on columns of table "_attributes.chat"
+"""
+input _attributes_chat_var_samp_order_by {
+  id: order_by
+  receiver_id: order_by
+  sender_id: order_by
+}
+
+"""aggregate variance on columns"""
+type _attributes_chat_variance_fields {
+  id: Float
+  receiver_id: Float
+  sender_id: Float
+}
+
+"""
+order by variance() on columns of table "_attributes.chat"
+"""
+input _attributes_chat_variance_order_by {
+  id: order_by
+  receiver_id: order_by
+  sender_id: order_by
+}
+
+"""
+columns and relationships of "_attributes.user"
+"""
+type _attributes_user {
+  """An array relationship"""
+  chats(
+    """distinct select on columns"""
+    distinct_on: [_attributes_chat_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_attributes_chat_order_by!]
+
+    """filter the rows returned"""
+    where: _attributes_chat_bool_exp
+  ): [_attributes_chat!]!
+
+  """An array relationship"""
+  chatsBySenderId(
+    """distinct select on columns"""
+    distinct_on: [_attributes_chat_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_attributes_chat_order_by!]
+
+    """filter the rows returned"""
+    where: _attributes_chat_bool_exp
+  ): [_attributes_chat!]!
+
+  """An aggregate relationship"""
+  chatsBySenderId_aggregate(
+    """distinct select on columns"""
+    distinct_on: [_attributes_chat_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_attributes_chat_order_by!]
+
+    """filter the rows returned"""
+    where: _attributes_chat_bool_exp
+  ): _attributes_chat_aggregate!
+
+  """An aggregate relationship"""
+  chats_aggregate(
+    """distinct select on columns"""
+    distinct_on: [_attributes_chat_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_attributes_chat_order_by!]
+
+    """filter the rows returned"""
+    where: _attributes_chat_bool_exp
+  ): _attributes_chat_aggregate!
+  id: Int!
+  name: String!
+}
+
+"""
+aggregated selection of "_attributes.user"
+"""
+type _attributes_user_aggregate {
+  aggregate: _attributes_user_aggregate_fields
+  nodes: [_attributes_user!]!
+}
+
+"""
+aggregate fields of "_attributes.user"
+"""
+type _attributes_user_aggregate_fields {
+  avg: _attributes_user_avg_fields
+  count(columns: [_attributes_user_select_column!], distinct: Boolean): Int!
+  max: _attributes_user_max_fields
+  min: _attributes_user_min_fields
+  stddev: _attributes_user_stddev_fields
+  stddev_pop: _attributes_user_stddev_pop_fields
+  stddev_samp: _attributes_user_stddev_samp_fields
+  sum: _attributes_user_sum_fields
+  var_pop: _attributes_user_var_pop_fields
+  var_samp: _attributes_user_var_samp_fields
+  variance: _attributes_user_variance_fields
+}
+
+"""
+columns and relationships of "_attributes.user_attributes"
+"""
+type _attributes_user_attributes {
+  attribute(
+    """JSON select path"""
+    path: String
+  ): jsonb
+  id: Int!
+  sender_id: Int!
+}
+
+"""
+aggregated selection of "_attributes.user_attributes"
+"""
+type _attributes_user_attributes_aggregate {
+  aggregate: _attributes_user_attributes_aggregate_fields
+  nodes: [_attributes_user_attributes!]!
+}
+
+"""
+aggregate fields of "_attributes.user_attributes"
+"""
+type _attributes_user_attributes_aggregate_fields {
+  avg: _attributes_user_attributes_avg_fields
+  count(columns: [_attributes_user_attributes_select_column!], distinct: Boolean): Int!
+  max: _attributes_user_attributes_max_fields
+  min: _attributes_user_attributes_min_fields
+  stddev: _attributes_user_attributes_stddev_fields
+  stddev_pop: _attributes_user_attributes_stddev_pop_fields
+  stddev_samp: _attributes_user_attributes_stddev_samp_fields
+  sum: _attributes_user_attributes_sum_fields
+  var_pop: _attributes_user_attributes_var_pop_fields
+  var_samp: _attributes_user_attributes_var_samp_fields
+  variance: _attributes_user_attributes_variance_fields
+}
+
+"""append existing jsonb value of filtered columns with new jsonb value"""
+input _attributes_user_attributes_append_input {
+  attribute: jsonb
+}
+
+"""aggregate avg on columns"""
+type _attributes_user_attributes_avg_fields {
+  id: Float
+  sender_id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "_attributes.user_attributes".
+All fields are combined with a logical 'AND'.
+"""
+input _attributes_user_attributes_bool_exp {
+  _and: [_attributes_user_attributes_bool_exp!]
+  _not: _attributes_user_attributes_bool_exp
+  _or: [_attributes_user_attributes_bool_exp!]
+  attribute: jsonb_comparison_exp
+  id: Int_comparison_exp
+  sender_id: Int_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "_attributes.user_attributes"
+"""
+enum _attributes_user_attributes_constraint {
+  """unique or primary key constraint"""
+  user_attributes_pkey
+}
+
+"""
+delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+"""
+input _attributes_user_attributes_delete_at_path_input {
+  attribute: [String!]
+}
+
+"""
+delete the array element with specified index (negative integers count from the
+end). throws an error if top level container is not an array
+"""
+input _attributes_user_attributes_delete_elem_input {
+  attribute: Int
+}
+
+"""
+delete key/value pair or string element. key/value pairs are matched based on their key value
+"""
+input _attributes_user_attributes_delete_key_input {
+  attribute: String
+}
+
+"""
+input type for incrementing numeric columns in table "_attributes.user_attributes"
+"""
+input _attributes_user_attributes_inc_input {
+  id: Int
+  sender_id: Int
+}
+
+"""
+input type for inserting data into table "_attributes.user_attributes"
+"""
+input _attributes_user_attributes_insert_input {
+  attribute: jsonb
+  id: Int
+  sender_id: Int
+}
+
+"""aggregate max on columns"""
+type _attributes_user_attributes_max_fields {
+  id: Int
+  sender_id: Int
+}
+
+"""aggregate min on columns"""
+type _attributes_user_attributes_min_fields {
+  id: Int
+  sender_id: Int
+}
+
+"""
+response of any mutation on the table "_attributes.user_attributes"
+"""
+type _attributes_user_attributes_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [_attributes_user_attributes!]!
+}
+
+"""
+on conflict condition type for table "_attributes.user_attributes"
+"""
+input _attributes_user_attributes_on_conflict {
+  constraint: _attributes_user_attributes_constraint!
+  update_columns: [_attributes_user_attributes_update_column!]! = []
+  where: _attributes_user_attributes_bool_exp
+}
+
+"""
+Ordering options when selecting data from "_attributes.user_attributes".
+"""
+input _attributes_user_attributes_order_by {
+  attribute: order_by
+  id: order_by
+  sender_id: order_by
+}
+
+"""primary key columns input for table: _attributes_user_attributes"""
+input _attributes_user_attributes_pk_columns_input {
+  id: Int!
+}
+
+"""prepend existing jsonb value of filtered columns with new jsonb value"""
+input _attributes_user_attributes_prepend_input {
+  attribute: jsonb
+}
+
+"""
+select columns of table "_attributes.user_attributes"
+"""
+enum _attributes_user_attributes_select_column {
+  """column name"""
+  attribute
+
+  """column name"""
+  id
+
+  """column name"""
+  sender_id
+}
+
+"""
+input type for updating data in table "_attributes.user_attributes"
+"""
+input _attributes_user_attributes_set_input {
+  attribute: jsonb
+  id: Int
+  sender_id: Int
+}
+
+"""aggregate stddev on columns"""
+type _attributes_user_attributes_stddev_fields {
+  id: Float
+  sender_id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type _attributes_user_attributes_stddev_pop_fields {
+  id: Float
+  sender_id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type _attributes_user_attributes_stddev_samp_fields {
+  id: Float
+  sender_id: Float
+}
+
+"""aggregate sum on columns"""
+type _attributes_user_attributes_sum_fields {
+  id: Int
+  sender_id: Int
+}
+
+"""
+update columns of table "_attributes.user_attributes"
+"""
+enum _attributes_user_attributes_update_column {
+  """column name"""
+  attribute
+
+  """column name"""
+  id
+
+  """column name"""
+  sender_id
+}
+
+"""aggregate var_pop on columns"""
+type _attributes_user_attributes_var_pop_fields {
+  id: Float
+  sender_id: Float
+}
+
+"""aggregate var_samp on columns"""
+type _attributes_user_attributes_var_samp_fields {
+  id: Float
+  sender_id: Float
+}
+
+"""aggregate variance on columns"""
+type _attributes_user_attributes_variance_fields {
+  id: Float
+  sender_id: Float
+}
+
+"""aggregate avg on columns"""
+type _attributes_user_avg_fields {
+  id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "_attributes.user". All fields are combined with a logical 'AND'.
+"""
+input _attributes_user_bool_exp {
+  _and: [_attributes_user_bool_exp!]
+  _not: _attributes_user_bool_exp
+  _or: [_attributes_user_bool_exp!]
+  chats: _attributes_chat_bool_exp
+  chatsBySenderId: _attributes_chat_bool_exp
+  id: Int_comparison_exp
+  name: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "_attributes.user"
+"""
+enum _attributes_user_constraint {
+  """unique or primary key constraint"""
+  user_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "_attributes.user"
+"""
+input _attributes_user_inc_input {
+  id: Int
+}
+
+"""
+input type for inserting data into table "_attributes.user"
+"""
+input _attributes_user_insert_input {
+  chats: _attributes_chat_arr_rel_insert_input
+  chatsBySenderId: _attributes_chat_arr_rel_insert_input
+  id: Int
+  name: String
+}
+
+"""aggregate max on columns"""
+type _attributes_user_max_fields {
+  id: Int
+  name: String
+}
+
+"""aggregate min on columns"""
+type _attributes_user_min_fields {
+  id: Int
+  name: String
+}
+
+"""
+response of any mutation on the table "_attributes.user"
+"""
+type _attributes_user_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [_attributes_user!]!
+}
+
+"""
+input type for inserting object relation for remote table "_attributes.user"
+"""
+input _attributes_user_obj_rel_insert_input {
+  data: _attributes_user_insert_input!
+
+  """on conflict condition"""
+  on_conflict: _attributes_user_on_conflict
+}
+
+"""
+on conflict condition type for table "_attributes.user"
+"""
+input _attributes_user_on_conflict {
+  constraint: _attributes_user_constraint!
+  update_columns: [_attributes_user_update_column!]! = []
+  where: _attributes_user_bool_exp
+}
+
+"""Ordering options when selecting data from "_attributes.user"."""
+input _attributes_user_order_by {
+  chatsBySenderId_aggregate: _attributes_chat_aggregate_order_by
+  chats_aggregate: _attributes_chat_aggregate_order_by
+  id: order_by
+  name: order_by
+}
+
+"""primary key columns input for table: _attributes_user"""
+input _attributes_user_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "_attributes.user"
+"""
+enum _attributes_user_select_column {
+  """column name"""
+  id
+
+  """column name"""
+  name
+}
+
+"""
+input type for updating data in table "_attributes.user"
+"""
+input _attributes_user_set_input {
+  id: Int
+  name: String
+}
+
+"""aggregate stddev on columns"""
+type _attributes_user_stddev_fields {
+  id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type _attributes_user_stddev_pop_fields {
+  id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type _attributes_user_stddev_samp_fields {
+  id: Float
+}
+
+"""aggregate sum on columns"""
+type _attributes_user_sum_fields {
+  id: Int
+}
+
+"""
+update columns of table "_attributes.user"
+"""
+enum _attributes_user_update_column {
+  """column name"""
+  id
+
+  """column name"""
+  name
+}
+
+"""aggregate var_pop on columns"""
+type _attributes_user_var_pop_fields {
+  id: Float
+}
+
+"""aggregate var_samp on columns"""
+type _attributes_user_var_samp_fields {
+  id: Float
+}
+
+"""aggregate variance on columns"""
+type _attributes_user_variance_fields {
+  id: Float
+}
+
+"""
+columns and relationships of "_flattenmany.article"
+"""
+type _flattenmany_article {
+  """An array relationship"""
+  article_tags(
+    """distinct select on columns"""
+    distinct_on: [_flattenmany_article_tag_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_flattenmany_article_tag_order_by!]
+
+    """filter the rows returned"""
+    where: _flattenmany_article_tag_bool_exp
+  ): [_flattenmany_article_tag!]!
+
+  """An aggregate relationship"""
+  article_tags_aggregate(
+    """distinct select on columns"""
+    distinct_on: [_flattenmany_article_tag_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_flattenmany_article_tag_order_by!]
+
+    """filter the rows returned"""
+    where: _flattenmany_article_tag_bool_exp
+  ): _flattenmany_article_tag_aggregate!
+  author_name: String!
+  id: Int!
+  title: String!
+}
+
+"""
+aggregated selection of "_flattenmany.article"
+"""
+type _flattenmany_article_aggregate {
+  aggregate: _flattenmany_article_aggregate_fields
+  nodes: [_flattenmany_article!]!
+}
+
+"""
+aggregate fields of "_flattenmany.article"
+"""
+type _flattenmany_article_aggregate_fields {
+  avg: _flattenmany_article_avg_fields
+  count(columns: [_flattenmany_article_select_column!], distinct: Boolean): Int!
+  max: _flattenmany_article_max_fields
+  min: _flattenmany_article_min_fields
+  stddev: _flattenmany_article_stddev_fields
+  stddev_pop: _flattenmany_article_stddev_pop_fields
+  stddev_samp: _flattenmany_article_stddev_samp_fields
+  sum: _flattenmany_article_sum_fields
+  var_pop: _flattenmany_article_var_pop_fields
+  var_samp: _flattenmany_article_var_samp_fields
+  variance: _flattenmany_article_variance_fields
+}
+
+"""aggregate avg on columns"""
+type _flattenmany_article_avg_fields {
+  id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "_flattenmany.article". All fields are combined with a logical 'AND'.
+"""
+input _flattenmany_article_bool_exp {
+  _and: [_flattenmany_article_bool_exp!]
+  _not: _flattenmany_article_bool_exp
+  _or: [_flattenmany_article_bool_exp!]
+  article_tags: _flattenmany_article_tag_bool_exp
+  author_name: String_comparison_exp
+  id: Int_comparison_exp
+  title: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "_flattenmany.article"
+"""
+enum _flattenmany_article_constraint {
+  """unique or primary key constraint"""
+  article_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "_flattenmany.article"
+"""
+input _flattenmany_article_inc_input {
+  id: Int
+}
+
+"""
+input type for inserting data into table "_flattenmany.article"
+"""
+input _flattenmany_article_insert_input {
+  article_tags: _flattenmany_article_tag_arr_rel_insert_input
+  author_name: String
+  id: Int
+  title: String
+}
+
+"""aggregate max on columns"""
+type _flattenmany_article_max_fields {
+  author_name: String
+  id: Int
+  title: String
+}
+
+"""aggregate min on columns"""
+type _flattenmany_article_min_fields {
+  author_name: String
+  id: Int
+  title: String
+}
+
+"""
+response of any mutation on the table "_flattenmany.article"
+"""
+type _flattenmany_article_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [_flattenmany_article!]!
+}
+
+"""
+input type for inserting object relation for remote table "_flattenmany.article"
+"""
+input _flattenmany_article_obj_rel_insert_input {
+  data: _flattenmany_article_insert_input!
+
+  """on conflict condition"""
+  on_conflict: _flattenmany_article_on_conflict
+}
+
+"""
+on conflict condition type for table "_flattenmany.article"
+"""
+input _flattenmany_article_on_conflict {
+  constraint: _flattenmany_article_constraint!
+  update_columns: [_flattenmany_article_update_column!]! = []
+  where: _flattenmany_article_bool_exp
+}
+
+"""Ordering options when selecting data from "_flattenmany.article"."""
+input _flattenmany_article_order_by {
+  article_tags_aggregate: _flattenmany_article_tag_aggregate_order_by
+  author_name: order_by
+  id: order_by
+  title: order_by
+}
+
+"""primary key columns input for table: _flattenmany_article"""
+input _flattenmany_article_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "_flattenmany.article"
+"""
+enum _flattenmany_article_select_column {
+  """column name"""
+  author_name
+
+  """column name"""
+  id
+
+  """column name"""
+  title
+}
+
+"""
+input type for updating data in table "_flattenmany.article"
+"""
+input _flattenmany_article_set_input {
+  author_name: String
+  id: Int
+  title: String
+}
+
+"""aggregate stddev on columns"""
+type _flattenmany_article_stddev_fields {
+  id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type _flattenmany_article_stddev_pop_fields {
+  id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type _flattenmany_article_stddev_samp_fields {
+  id: Float
+}
+
+"""aggregate sum on columns"""
+type _flattenmany_article_sum_fields {
+  id: Int
+}
+
+"""
+columns and relationships of "_flattenmany.article_tag"
+"""
+type _flattenmany_article_tag {
+  """An object relationship"""
+  article: _flattenmany_article!
+  article_id: Int!
+  id: Int!
+
+  """An object relationship"""
+  tag: _flattenmany_tag!
+  tag_id: Int!
+}
+
+"""
+aggregated selection of "_flattenmany.article_tag"
+"""
+type _flattenmany_article_tag_aggregate {
+  aggregate: _flattenmany_article_tag_aggregate_fields
+  nodes: [_flattenmany_article_tag!]!
+}
+
+"""
+aggregate fields of "_flattenmany.article_tag"
+"""
+type _flattenmany_article_tag_aggregate_fields {
+  avg: _flattenmany_article_tag_avg_fields
+  count(columns: [_flattenmany_article_tag_select_column!], distinct: Boolean): Int!
+  max: _flattenmany_article_tag_max_fields
+  min: _flattenmany_article_tag_min_fields
+  stddev: _flattenmany_article_tag_stddev_fields
+  stddev_pop: _flattenmany_article_tag_stddev_pop_fields
+  stddev_samp: _flattenmany_article_tag_stddev_samp_fields
+  sum: _flattenmany_article_tag_sum_fields
+  var_pop: _flattenmany_article_tag_var_pop_fields
+  var_samp: _flattenmany_article_tag_var_samp_fields
+  variance: _flattenmany_article_tag_variance_fields
+}
+
+"""
+order by aggregate values of table "_flattenmany.article_tag"
+"""
+input _flattenmany_article_tag_aggregate_order_by {
+  avg: _flattenmany_article_tag_avg_order_by
+  count: order_by
+  max: _flattenmany_article_tag_max_order_by
+  min: _flattenmany_article_tag_min_order_by
+  stddev: _flattenmany_article_tag_stddev_order_by
+  stddev_pop: _flattenmany_article_tag_stddev_pop_order_by
+  stddev_samp: _flattenmany_article_tag_stddev_samp_order_by
+  sum: _flattenmany_article_tag_sum_order_by
+  var_pop: _flattenmany_article_tag_var_pop_order_by
+  var_samp: _flattenmany_article_tag_var_samp_order_by
+  variance: _flattenmany_article_tag_variance_order_by
+}
+
+"""
+input type for inserting array relation for remote table "_flattenmany.article_tag"
+"""
+input _flattenmany_article_tag_arr_rel_insert_input {
+  data: [_flattenmany_article_tag_insert_input!]!
+
+  """on conflict condition"""
+  on_conflict: _flattenmany_article_tag_on_conflict
+}
+
+"""aggregate avg on columns"""
+type _flattenmany_article_tag_avg_fields {
+  article_id: Float
+  id: Float
+  tag_id: Float
+}
+
+"""
+order by avg() on columns of table "_flattenmany.article_tag"
+"""
+input _flattenmany_article_tag_avg_order_by {
+  article_id: order_by
+  id: order_by
+  tag_id: order_by
+}
+
+"""
+Boolean expression to filter rows from the table "_flattenmany.article_tag". All fields are combined with a logical 'AND'.
+"""
+input _flattenmany_article_tag_bool_exp {
+  _and: [_flattenmany_article_tag_bool_exp!]
+  _not: _flattenmany_article_tag_bool_exp
+  _or: [_flattenmany_article_tag_bool_exp!]
+  article: _flattenmany_article_bool_exp
+  article_id: Int_comparison_exp
+  id: Int_comparison_exp
+  tag: _flattenmany_tag_bool_exp
+  tag_id: Int_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "_flattenmany.article_tag"
+"""
+enum _flattenmany_article_tag_constraint {
+  """unique or primary key constraint"""
+  article_tag_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "_flattenmany.article_tag"
+"""
+input _flattenmany_article_tag_inc_input {
+  article_id: Int
+  id: Int
+  tag_id: Int
+}
+
+"""
+input type for inserting data into table "_flattenmany.article_tag"
+"""
+input _flattenmany_article_tag_insert_input {
+  article: _flattenmany_article_obj_rel_insert_input
+  article_id: Int
+  id: Int
+  tag: _flattenmany_tag_obj_rel_insert_input
+  tag_id: Int
+}
+
+"""aggregate max on columns"""
+type _flattenmany_article_tag_max_fields {
+  article_id: Int
+  id: Int
+  tag_id: Int
+}
+
+"""
+order by max() on columns of table "_flattenmany.article_tag"
+"""
+input _flattenmany_article_tag_max_order_by {
+  article_id: order_by
+  id: order_by
+  tag_id: order_by
+}
+
+"""aggregate min on columns"""
+type _flattenmany_article_tag_min_fields {
+  article_id: Int
+  id: Int
+  tag_id: Int
+}
+
+"""
+order by min() on columns of table "_flattenmany.article_tag"
+"""
+input _flattenmany_article_tag_min_order_by {
+  article_id: order_by
+  id: order_by
+  tag_id: order_by
+}
+
+"""
+response of any mutation on the table "_flattenmany.article_tag"
+"""
+type _flattenmany_article_tag_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [_flattenmany_article_tag!]!
+}
+
+"""
+on conflict condition type for table "_flattenmany.article_tag"
+"""
+input _flattenmany_article_tag_on_conflict {
+  constraint: _flattenmany_article_tag_constraint!
+  update_columns: [_flattenmany_article_tag_update_column!]! = []
+  where: _flattenmany_article_tag_bool_exp
+}
+
+"""Ordering options when selecting data from "_flattenmany.article_tag"."""
+input _flattenmany_article_tag_order_by {
+  article: _flattenmany_article_order_by
+  article_id: order_by
+  id: order_by
+  tag: _flattenmany_tag_order_by
+  tag_id: order_by
+}
+
+"""primary key columns input for table: _flattenmany_article_tag"""
+input _flattenmany_article_tag_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "_flattenmany.article_tag"
+"""
+enum _flattenmany_article_tag_select_column {
+  """column name"""
+  article_id
+
+  """column name"""
+  id
+
+  """column name"""
+  tag_id
+}
+
+"""
+input type for updating data in table "_flattenmany.article_tag"
+"""
+input _flattenmany_article_tag_set_input {
+  article_id: Int
+  id: Int
+  tag_id: Int
+}
+
+"""aggregate stddev on columns"""
+type _flattenmany_article_tag_stddev_fields {
+  article_id: Float
+  id: Float
+  tag_id: Float
+}
+
+"""
+order by stddev() on columns of table "_flattenmany.article_tag"
+"""
+input _flattenmany_article_tag_stddev_order_by {
+  article_id: order_by
+  id: order_by
+  tag_id: order_by
+}
+
+"""aggregate stddev_pop on columns"""
+type _flattenmany_article_tag_stddev_pop_fields {
+  article_id: Float
+  id: Float
+  tag_id: Float
+}
+
+"""
+order by stddev_pop() on columns of table "_flattenmany.article_tag"
+"""
+input _flattenmany_article_tag_stddev_pop_order_by {
+  article_id: order_by
+  id: order_by
+  tag_id: order_by
+}
+
+"""aggregate stddev_samp on columns"""
+type _flattenmany_article_tag_stddev_samp_fields {
+  article_id: Float
+  id: Float
+  tag_id: Float
+}
+
+"""
+order by stddev_samp() on columns of table "_flattenmany.article_tag"
+"""
+input _flattenmany_article_tag_stddev_samp_order_by {
+  article_id: order_by
+  id: order_by
+  tag_id: order_by
+}
+
+"""aggregate sum on columns"""
+type _flattenmany_article_tag_sum_fields {
+  article_id: Int
+  id: Int
+  tag_id: Int
+}
+
+"""
+order by sum() on columns of table "_flattenmany.article_tag"
+"""
+input _flattenmany_article_tag_sum_order_by {
+  article_id: order_by
+  id: order_by
+  tag_id: order_by
+}
+
+"""
+update columns of table "_flattenmany.article_tag"
+"""
+enum _flattenmany_article_tag_update_column {
+  """column name"""
+  article_id
+
+  """column name"""
+  id
+
+  """column name"""
+  tag_id
+}
+
+"""aggregate var_pop on columns"""
+type _flattenmany_article_tag_var_pop_fields {
+  article_id: Float
+  id: Float
+  tag_id: Float
+}
+
+"""
+order by var_pop() on columns of table "_flattenmany.article_tag"
+"""
+input _flattenmany_article_tag_var_pop_order_by {
+  article_id: order_by
+  id: order_by
+  tag_id: order_by
+}
+
+"""aggregate var_samp on columns"""
+type _flattenmany_article_tag_var_samp_fields {
+  article_id: Float
+  id: Float
+  tag_id: Float
+}
+
+"""
+order by var_samp() on columns of table "_flattenmany.article_tag"
+"""
+input _flattenmany_article_tag_var_samp_order_by {
+  article_id: order_by
+  id: order_by
+  tag_id: order_by
+}
+
+"""aggregate variance on columns"""
+type _flattenmany_article_tag_variance_fields {
+  article_id: Float
+  id: Float
+  tag_id: Float
+}
+
+"""
+order by variance() on columns of table "_flattenmany.article_tag"
+"""
+input _flattenmany_article_tag_variance_order_by {
+  article_id: order_by
+  id: order_by
+  tag_id: order_by
+}
+
+"""
+columns and relationships of "_flattenmany.article_tags_view"
+"""
+type _flattenmany_article_tags_view {
+  article_id: Int
+  id: Int
+  name: String
+}
+
+"""
+aggregated selection of "_flattenmany.article_tags_view"
+"""
+type _flattenmany_article_tags_view_aggregate {
+  aggregate: _flattenmany_article_tags_view_aggregate_fields
+  nodes: [_flattenmany_article_tags_view!]!
+}
+
+"""
+aggregate fields of "_flattenmany.article_tags_view"
+"""
+type _flattenmany_article_tags_view_aggregate_fields {
+  avg: _flattenmany_article_tags_view_avg_fields
+  count(columns: [_flattenmany_article_tags_view_select_column!], distinct: Boolean): Int!
+  max: _flattenmany_article_tags_view_max_fields
+  min: _flattenmany_article_tags_view_min_fields
+  stddev: _flattenmany_article_tags_view_stddev_fields
+  stddev_pop: _flattenmany_article_tags_view_stddev_pop_fields
+  stddev_samp: _flattenmany_article_tags_view_stddev_samp_fields
+  sum: _flattenmany_article_tags_view_sum_fields
+  var_pop: _flattenmany_article_tags_view_var_pop_fields
+  var_samp: _flattenmany_article_tags_view_var_samp_fields
+  variance: _flattenmany_article_tags_view_variance_fields
+}
+
+"""aggregate avg on columns"""
+type _flattenmany_article_tags_view_avg_fields {
+  article_id: Float
+  id: Float
+}
+
+"""
+Boolean expression to filter rows from the table
+"_flattenmany.article_tags_view". All fields are combined with a logical 'AND'.
+"""
+input _flattenmany_article_tags_view_bool_exp {
+  _and: [_flattenmany_article_tags_view_bool_exp!]
+  _not: _flattenmany_article_tags_view_bool_exp
+  _or: [_flattenmany_article_tags_view_bool_exp!]
+  article_id: Int_comparison_exp
+  id: Int_comparison_exp
+  name: String_comparison_exp
+}
+
+"""aggregate max on columns"""
+type _flattenmany_article_tags_view_max_fields {
+  article_id: Int
+  id: Int
+  name: String
+}
+
+"""aggregate min on columns"""
+type _flattenmany_article_tags_view_min_fields {
+  article_id: Int
+  id: Int
+  name: String
+}
+
+"""
+Ordering options when selecting data from "_flattenmany.article_tags_view".
+"""
+input _flattenmany_article_tags_view_order_by {
+  article_id: order_by
+  id: order_by
+  name: order_by
+}
+
+"""
+select columns of table "_flattenmany.article_tags_view"
+"""
+enum _flattenmany_article_tags_view_select_column {
+  """column name"""
+  article_id
+
+  """column name"""
+  id
+
+  """column name"""
+  name
+}
+
+"""aggregate stddev on columns"""
+type _flattenmany_article_tags_view_stddev_fields {
+  article_id: Float
+  id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type _flattenmany_article_tags_view_stddev_pop_fields {
+  article_id: Float
+  id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type _flattenmany_article_tags_view_stddev_samp_fields {
+  article_id: Float
+  id: Float
+}
+
+"""aggregate sum on columns"""
+type _flattenmany_article_tags_view_sum_fields {
+  article_id: Int
+  id: Int
+}
+
+"""aggregate var_pop on columns"""
+type _flattenmany_article_tags_view_var_pop_fields {
+  article_id: Float
+  id: Float
+}
+
+"""aggregate var_samp on columns"""
+type _flattenmany_article_tags_view_var_samp_fields {
+  article_id: Float
+  id: Float
+}
+
+"""aggregate variance on columns"""
+type _flattenmany_article_tags_view_variance_fields {
+  article_id: Float
+  id: Float
+}
+
+"""
+update columns of table "_flattenmany.article"
+"""
+enum _flattenmany_article_update_column {
+  """column name"""
+  author_name
+
+  """column name"""
+  id
+
+  """column name"""
+  title
+}
+
+"""aggregate var_pop on columns"""
+type _flattenmany_article_var_pop_fields {
+  id: Float
+}
+
+"""aggregate var_samp on columns"""
+type _flattenmany_article_var_samp_fields {
+  id: Float
+}
+
+"""aggregate variance on columns"""
+type _flattenmany_article_variance_fields {
+  id: Float
+}
+
+"""
+columns and relationships of "_flattenmany.tag"
+"""
+type _flattenmany_tag {
+  """An array relationship"""
+  article_tags(
+    """distinct select on columns"""
+    distinct_on: [_flattenmany_article_tag_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_flattenmany_article_tag_order_by!]
+
+    """filter the rows returned"""
+    where: _flattenmany_article_tag_bool_exp
+  ): [_flattenmany_article_tag!]!
+
+  """An aggregate relationship"""
+  article_tags_aggregate(
+    """distinct select on columns"""
+    distinct_on: [_flattenmany_article_tag_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_flattenmany_article_tag_order_by!]
+
+    """filter the rows returned"""
+    where: _flattenmany_article_tag_bool_exp
+  ): _flattenmany_article_tag_aggregate!
+  id: Int!
+  name: String!
+}
+
+"""
+aggregated selection of "_flattenmany.tag"
+"""
+type _flattenmany_tag_aggregate {
+  aggregate: _flattenmany_tag_aggregate_fields
+  nodes: [_flattenmany_tag!]!
+}
+
+"""
+aggregate fields of "_flattenmany.tag"
+"""
+type _flattenmany_tag_aggregate_fields {
+  avg: _flattenmany_tag_avg_fields
+  count(columns: [_flattenmany_tag_select_column!], distinct: Boolean): Int!
+  max: _flattenmany_tag_max_fields
+  min: _flattenmany_tag_min_fields
+  stddev: _flattenmany_tag_stddev_fields
+  stddev_pop: _flattenmany_tag_stddev_pop_fields
+  stddev_samp: _flattenmany_tag_stddev_samp_fields
+  sum: _flattenmany_tag_sum_fields
+  var_pop: _flattenmany_tag_var_pop_fields
+  var_samp: _flattenmany_tag_var_samp_fields
+  variance: _flattenmany_tag_variance_fields
+}
+
+"""
+columns and relationships of "_flattenmany.tag_articles_view"
+"""
+type _flattenmany_tag_articles_view {
+  author_name: String
+  id: Int
+  tag_id: Int
+  title: String
+}
+
+"""
+aggregated selection of "_flattenmany.tag_articles_view"
+"""
+type _flattenmany_tag_articles_view_aggregate {
+  aggregate: _flattenmany_tag_articles_view_aggregate_fields
+  nodes: [_flattenmany_tag_articles_view!]!
+}
+
+"""
+aggregate fields of "_flattenmany.tag_articles_view"
+"""
+type _flattenmany_tag_articles_view_aggregate_fields {
+  avg: _flattenmany_tag_articles_view_avg_fields
+  count(columns: [_flattenmany_tag_articles_view_select_column!], distinct: Boolean): Int!
+  max: _flattenmany_tag_articles_view_max_fields
+  min: _flattenmany_tag_articles_view_min_fields
+  stddev: _flattenmany_tag_articles_view_stddev_fields
+  stddev_pop: _flattenmany_tag_articles_view_stddev_pop_fields
+  stddev_samp: _flattenmany_tag_articles_view_stddev_samp_fields
+  sum: _flattenmany_tag_articles_view_sum_fields
+  var_pop: _flattenmany_tag_articles_view_var_pop_fields
+  var_samp: _flattenmany_tag_articles_view_var_samp_fields
+  variance: _flattenmany_tag_articles_view_variance_fields
+}
+
+"""aggregate avg on columns"""
+type _flattenmany_tag_articles_view_avg_fields {
+  id: Float
+  tag_id: Float
+}
+
+"""
+Boolean expression to filter rows from the table
+"_flattenmany.tag_articles_view". All fields are combined with a logical 'AND'.
+"""
+input _flattenmany_tag_articles_view_bool_exp {
+  _and: [_flattenmany_tag_articles_view_bool_exp!]
+  _not: _flattenmany_tag_articles_view_bool_exp
+  _or: [_flattenmany_tag_articles_view_bool_exp!]
+  author_name: String_comparison_exp
+  id: Int_comparison_exp
+  tag_id: Int_comparison_exp
+  title: String_comparison_exp
+}
+
+"""aggregate max on columns"""
+type _flattenmany_tag_articles_view_max_fields {
+  author_name: String
+  id: Int
+  tag_id: Int
+  title: String
+}
+
+"""aggregate min on columns"""
+type _flattenmany_tag_articles_view_min_fields {
+  author_name: String
+  id: Int
+  tag_id: Int
+  title: String
+}
+
+"""
+Ordering options when selecting data from "_flattenmany.tag_articles_view".
+"""
+input _flattenmany_tag_articles_view_order_by {
+  author_name: order_by
+  id: order_by
+  tag_id: order_by
+  title: order_by
+}
+
+"""
+select columns of table "_flattenmany.tag_articles_view"
+"""
+enum _flattenmany_tag_articles_view_select_column {
+  """column name"""
+  author_name
+
+  """column name"""
+  id
+
+  """column name"""
+  tag_id
+
+  """column name"""
+  title
+}
+
+"""aggregate stddev on columns"""
+type _flattenmany_tag_articles_view_stddev_fields {
+  id: Float
+  tag_id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type _flattenmany_tag_articles_view_stddev_pop_fields {
+  id: Float
+  tag_id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type _flattenmany_tag_articles_view_stddev_samp_fields {
+  id: Float
+  tag_id: Float
+}
+
+"""aggregate sum on columns"""
+type _flattenmany_tag_articles_view_sum_fields {
+  id: Int
+  tag_id: Int
+}
+
+"""aggregate var_pop on columns"""
+type _flattenmany_tag_articles_view_var_pop_fields {
+  id: Float
+  tag_id: Float
+}
+
+"""aggregate var_samp on columns"""
+type _flattenmany_tag_articles_view_var_samp_fields {
+  id: Float
+  tag_id: Float
+}
+
+"""aggregate variance on columns"""
+type _flattenmany_tag_articles_view_variance_fields {
+  id: Float
+  tag_id: Float
+}
+
+"""aggregate avg on columns"""
+type _flattenmany_tag_avg_fields {
+  id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "_flattenmany.tag". All fields are combined with a logical 'AND'.
+"""
+input _flattenmany_tag_bool_exp {
+  _and: [_flattenmany_tag_bool_exp!]
+  _not: _flattenmany_tag_bool_exp
+  _or: [_flattenmany_tag_bool_exp!]
+  article_tags: _flattenmany_article_tag_bool_exp
+  id: Int_comparison_exp
+  name: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "_flattenmany.tag"
+"""
+enum _flattenmany_tag_constraint {
+  """unique or primary key constraint"""
+  tag_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "_flattenmany.tag"
+"""
+input _flattenmany_tag_inc_input {
+  id: Int
+}
+
+"""
+input type for inserting data into table "_flattenmany.tag"
+"""
+input _flattenmany_tag_insert_input {
+  article_tags: _flattenmany_article_tag_arr_rel_insert_input
+  id: Int
+  name: String
+}
+
+"""aggregate max on columns"""
+type _flattenmany_tag_max_fields {
+  id: Int
+  name: String
+}
+
+"""aggregate min on columns"""
+type _flattenmany_tag_min_fields {
+  id: Int
+  name: String
+}
+
+"""
+response of any mutation on the table "_flattenmany.tag"
+"""
+type _flattenmany_tag_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [_flattenmany_tag!]!
+}
+
+"""
+input type for inserting object relation for remote table "_flattenmany.tag"
+"""
+input _flattenmany_tag_obj_rel_insert_input {
+  data: _flattenmany_tag_insert_input!
+
+  """on conflict condition"""
+  on_conflict: _flattenmany_tag_on_conflict
+}
+
+"""
+on conflict condition type for table "_flattenmany.tag"
+"""
+input _flattenmany_tag_on_conflict {
+  constraint: _flattenmany_tag_constraint!
+  update_columns: [_flattenmany_tag_update_column!]! = []
+  where: _flattenmany_tag_bool_exp
+}
+
+"""Ordering options when selecting data from "_flattenmany.tag"."""
+input _flattenmany_tag_order_by {
+  article_tags_aggregate: _flattenmany_article_tag_aggregate_order_by
+  id: order_by
+  name: order_by
+}
+
+"""primary key columns input for table: _flattenmany_tag"""
+input _flattenmany_tag_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "_flattenmany.tag"
+"""
+enum _flattenmany_tag_select_column {
+  """column name"""
+  id
+
+  """column name"""
+  name
+}
+
+"""
+input type for updating data in table "_flattenmany.tag"
+"""
+input _flattenmany_tag_set_input {
+  id: Int
+  name: String
+}
+
+"""aggregate stddev on columns"""
+type _flattenmany_tag_stddev_fields {
+  id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type _flattenmany_tag_stddev_pop_fields {
+  id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type _flattenmany_tag_stddev_samp_fields {
+  id: Float
+}
+
+"""aggregate sum on columns"""
+type _flattenmany_tag_sum_fields {
+  id: Int
+}
+
+"""
+update columns of table "_flattenmany.tag"
+"""
+enum _flattenmany_tag_update_column {
+  """column name"""
+  id
+
+  """column name"""
+  name
+}
+
+"""aggregate var_pop on columns"""
+type _flattenmany_tag_var_pop_fields {
+  id: Float
+}
+
+"""aggregate var_samp on columns"""
+type _flattenmany_tag_var_samp_fields {
+  id: Float
+}
+
+"""aggregate variance on columns"""
+type _flattenmany_tag_variance_fields {
+  id: Float
+}
+
+input article_insert_obj_input {
+  description: String!
+  title: String!
+}
+
+type article_insert_output {
+  id: ID!
+}
+
+"""
+columns and relationships of "hasura_events"
+"""
+type hasura_events {
+  id: Int!
+  payload(
+    """JSON select path"""
+    path: String
+  ): jsonb!
+}
+
+"""
+aggregated selection of "hasura_events"
+"""
+type hasura_events_aggregate {
+  aggregate: hasura_events_aggregate_fields
+  nodes: [hasura_events!]!
+}
+
+"""
+aggregate fields of "hasura_events"
+"""
+type hasura_events_aggregate_fields {
+  avg: hasura_events_avg_fields
+  count(columns: [hasura_events_select_column!], distinct: Boolean): Int!
+  max: hasura_events_max_fields
+  min: hasura_events_min_fields
+  stddev: hasura_events_stddev_fields
+  stddev_pop: hasura_events_stddev_pop_fields
+  stddev_samp: hasura_events_stddev_samp_fields
+  sum: hasura_events_sum_fields
+  var_pop: hasura_events_var_pop_fields
+  var_samp: hasura_events_var_samp_fields
+  variance: hasura_events_variance_fields
+}
+
+"""append existing jsonb value of filtered columns with new jsonb value"""
+input hasura_events_append_input {
+  payload: jsonb
+}
+
+"""aggregate avg on columns"""
+type hasura_events_avg_fields {
+  id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "hasura_events". All fields are combined with a logical 'AND'.
+"""
+input hasura_events_bool_exp {
+  _and: [hasura_events_bool_exp!]
+  _not: hasura_events_bool_exp
+  _or: [hasura_events_bool_exp!]
+  id: Int_comparison_exp
+  payload: jsonb_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "hasura_events"
+"""
+enum hasura_events_constraint {
+  """unique or primary key constraint"""
+  hasura_events_pkey
+}
+
+"""
+delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+"""
+input hasura_events_delete_at_path_input {
+  payload: [String!]
+}
+
+"""
+delete the array element with specified index (negative integers count from the
+end). throws an error if top level container is not an array
+"""
+input hasura_events_delete_elem_input {
+  payload: Int
+}
+
+"""
+delete key/value pair or string element. key/value pairs are matched based on their key value
+"""
+input hasura_events_delete_key_input {
+  payload: String
+}
+
+"""
+input type for incrementing numeric columns in table "hasura_events"
+"""
+input hasura_events_inc_input {
+  id: Int
+}
+
+"""
+input type for inserting data into table "hasura_events"
+"""
+input hasura_events_insert_input {
+  id: Int
+  payload: jsonb
+}
+
+"""aggregate max on columns"""
+type hasura_events_max_fields {
+  id: Int
+}
+
+"""aggregate min on columns"""
+type hasura_events_min_fields {
+  id: Int
+}
+
+"""
+response of any mutation on the table "hasura_events"
+"""
+type hasura_events_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [hasura_events!]!
+}
+
+"""
+on conflict condition type for table "hasura_events"
+"""
+input hasura_events_on_conflict {
+  constraint: hasura_events_constraint!
+  update_columns: [hasura_events_update_column!]! = []
+  where: hasura_events_bool_exp
+}
+
+"""Ordering options when selecting data from "hasura_events"."""
+input hasura_events_order_by {
+  id: order_by
+  payload: order_by
+}
+
+"""primary key columns input for table: hasura_events"""
+input hasura_events_pk_columns_input {
+  id: Int!
+}
+
+"""prepend existing jsonb value of filtered columns with new jsonb value"""
+input hasura_events_prepend_input {
+  payload: jsonb
+}
+
+"""
+select columns of table "hasura_events"
+"""
+enum hasura_events_select_column {
+  """column name"""
+  id
+
+  """column name"""
+  payload
+}
+
+"""
+input type for updating data in table "hasura_events"
+"""
+input hasura_events_set_input {
+  id: Int
+  payload: jsonb
+}
+
+"""aggregate stddev on columns"""
+type hasura_events_stddev_fields {
+  id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type hasura_events_stddev_pop_fields {
+  id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type hasura_events_stddev_samp_fields {
+  id: Float
+}
+
+"""aggregate sum on columns"""
+type hasura_events_sum_fields {
+  id: Int
+}
+
+"""
+update columns of table "hasura_events"
+"""
+enum hasura_events_update_column {
+  """column name"""
+  id
+
+  """column name"""
+  payload
+}
+
+"""aggregate var_pop on columns"""
+type hasura_events_var_pop_fields {
+  id: Float
+}
+
+"""aggregate var_samp on columns"""
+type hasura_events_var_samp_fields {
+  id: Float
+}
+
+"""aggregate variance on columns"""
+type hasura_events_variance_fields {
+  id: Float
+}
+
+scalar jsonb
+
+"""
+Boolean expression to compare columns of type "jsonb". All fields are combined with logical 'AND'.
+"""
+input jsonb_comparison_exp {
+  """is the column contained in the given json value"""
+  _contained_in: jsonb
+
+  """does the column contain the given json value at the top level"""
+  _contains: jsonb
+  _eq: jsonb
+  _gt: jsonb
+  _gte: jsonb
+
+  """does the string exist as a top-level key in the column"""
+  _has_key: String
+
+  """do all of these strings exist as top-level keys in the column"""
+  _has_keys_all: [String!]
+
+  """do any of these strings exist as top-level keys in the column"""
+  _has_keys_any: [String!]
+  _in: [jsonb!]
+  _is_null: Boolean
+  _lt: jsonb
+  _lte: jsonb
+  _neq: jsonb
+  _nin: [jsonb!]
+}
+
+"""mutation root"""
+type mutation_root {
+  article_insert(obj: article_insert_obj_input!): article_insert_output
+
+  """
+  delete data from the table: "_attributes.chat"
+  """
+  delete__attributes_chat(
+    """filter the rows which have to be deleted"""
+    where: _attributes_chat_bool_exp!
+  ): _attributes_chat_mutation_response
+
+  """
+  delete single row from the table: "_attributes.chat"
+  """
+  delete__attributes_chat_by_pk(id: Int!): _attributes_chat
+
+  """
+  delete data from the table: "_attributes.user"
+  """
+  delete__attributes_user(
+    """filter the rows which have to be deleted"""
+    where: _attributes_user_bool_exp!
+  ): _attributes_user_mutation_response
+
+  """
+  delete data from the table: "_attributes.user_attributes"
+  """
+  delete__attributes_user_attributes(
+    """filter the rows which have to be deleted"""
+    where: _attributes_user_attributes_bool_exp!
+  ): _attributes_user_attributes_mutation_response
+
+  """
+  delete single row from the table: "_attributes.user_attributes"
+  """
+  delete__attributes_user_attributes_by_pk(id: Int!): _attributes_user_attributes
+
+  """
+  delete single row from the table: "_attributes.user"
+  """
+  delete__attributes_user_by_pk(id: Int!): _attributes_user
+
+  """
+  delete data from the table: "_flattenmany.article"
+  """
+  delete__flattenmany_article(
+    """filter the rows which have to be deleted"""
+    where: _flattenmany_article_bool_exp!
+  ): _flattenmany_article_mutation_response
+
+  """
+  delete single row from the table: "_flattenmany.article"
+  """
+  delete__flattenmany_article_by_pk(id: Int!): _flattenmany_article
+
+  """
+  delete data from the table: "_flattenmany.article_tag"
+  """
+  delete__flattenmany_article_tag(
+    """filter the rows which have to be deleted"""
+    where: _flattenmany_article_tag_bool_exp!
+  ): _flattenmany_article_tag_mutation_response
+
+  """
+  delete single row from the table: "_flattenmany.article_tag"
+  """
+  delete__flattenmany_article_tag_by_pk(id: Int!): _flattenmany_article_tag
+
+  """
+  delete data from the table: "_flattenmany.tag"
+  """
+  delete__flattenmany_tag(
+    """filter the rows which have to be deleted"""
+    where: _flattenmany_tag_bool_exp!
+  ): _flattenmany_tag_mutation_response
+
+  """
+  delete single row from the table: "_flattenmany.tag"
+  """
+  delete__flattenmany_tag_by_pk(id: Int!): _flattenmany_tag
+
+  """
+  delete data from the table: "hasura_events"
+  """
+  delete_hasura_events(
+    """filter the rows which have to be deleted"""
+    where: hasura_events_bool_exp!
+  ): hasura_events_mutation_response
+
+  """
+  delete single row from the table: "hasura_events"
+  """
+  delete_hasura_events_by_pk(id: Int!): hasura_events
+
+  """
+  insert data into the table: "_attributes.chat"
+  """
+  insert__attributes_chat(
+    """the rows to be inserted"""
+    objects: [_attributes_chat_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: _attributes_chat_on_conflict
+  ): _attributes_chat_mutation_response
+
+  """
+  insert a single row into the table: "_attributes.chat"
+  """
+  insert__attributes_chat_one(
+    """the row to be inserted"""
+    object: _attributes_chat_insert_input!
+
+    """on conflict condition"""
+    on_conflict: _attributes_chat_on_conflict
+  ): _attributes_chat
+
+  """
+  insert data into the table: "_attributes.user"
+  """
+  insert__attributes_user(
+    """the rows to be inserted"""
+    objects: [_attributes_user_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: _attributes_user_on_conflict
+  ): _attributes_user_mutation_response
+
+  """
+  insert data into the table: "_attributes.user_attributes"
+  """
+  insert__attributes_user_attributes(
+    """the rows to be inserted"""
+    objects: [_attributes_user_attributes_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: _attributes_user_attributes_on_conflict
+  ): _attributes_user_attributes_mutation_response
+
+  """
+  insert a single row into the table: "_attributes.user_attributes"
+  """
+  insert__attributes_user_attributes_one(
+    """the row to be inserted"""
+    object: _attributes_user_attributes_insert_input!
+
+    """on conflict condition"""
+    on_conflict: _attributes_user_attributes_on_conflict
+  ): _attributes_user_attributes
+
+  """
+  insert a single row into the table: "_attributes.user"
+  """
+  insert__attributes_user_one(
+    """the row to be inserted"""
+    object: _attributes_user_insert_input!
+
+    """on conflict condition"""
+    on_conflict: _attributes_user_on_conflict
+  ): _attributes_user
+
+  """
+  insert data into the table: "_flattenmany.article"
+  """
+  insert__flattenmany_article(
+    """the rows to be inserted"""
+    objects: [_flattenmany_article_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: _flattenmany_article_on_conflict
+  ): _flattenmany_article_mutation_response
+
+  """
+  insert a single row into the table: "_flattenmany.article"
+  """
+  insert__flattenmany_article_one(
+    """the row to be inserted"""
+    object: _flattenmany_article_insert_input!
+
+    """on conflict condition"""
+    on_conflict: _flattenmany_article_on_conflict
+  ): _flattenmany_article
+
+  """
+  insert data into the table: "_flattenmany.article_tag"
+  """
+  insert__flattenmany_article_tag(
+    """the rows to be inserted"""
+    objects: [_flattenmany_article_tag_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: _flattenmany_article_tag_on_conflict
+  ): _flattenmany_article_tag_mutation_response
+
+  """
+  insert a single row into the table: "_flattenmany.article_tag"
+  """
+  insert__flattenmany_article_tag_one(
+    """the row to be inserted"""
+    object: _flattenmany_article_tag_insert_input!
+
+    """on conflict condition"""
+    on_conflict: _flattenmany_article_tag_on_conflict
+  ): _flattenmany_article_tag
+
+  """
+  insert data into the table: "_flattenmany.tag"
+  """
+  insert__flattenmany_tag(
+    """the rows to be inserted"""
+    objects: [_flattenmany_tag_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: _flattenmany_tag_on_conflict
+  ): _flattenmany_tag_mutation_response
+
+  """
+  insert a single row into the table: "_flattenmany.tag"
+  """
+  insert__flattenmany_tag_one(
+    """the row to be inserted"""
+    object: _flattenmany_tag_insert_input!
+
+    """on conflict condition"""
+    on_conflict: _flattenmany_tag_on_conflict
+  ): _flattenmany_tag
+
+  """
+  insert data into the table: "hasura_events"
+  """
+  insert_hasura_events(
+    """the rows to be inserted"""
+    objects: [hasura_events_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: hasura_events_on_conflict
+  ): hasura_events_mutation_response
+
+  """
+  insert a single row into the table: "hasura_events"
+  """
+  insert_hasura_events_one(
+    """the row to be inserted"""
+    object: hasura_events_insert_input!
+
+    """on conflict condition"""
+    on_conflict: hasura_events_on_conflict
+  ): hasura_events
+
+  """
+  update data of the table: "_attributes.chat"
+  """
+  update__attributes_chat(
+    """
+    increments the numeric columns with given value of the filtered values
+    """
+    _inc: _attributes_chat_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: _attributes_chat_set_input
+
+    """filter the rows which have to be updated"""
+    where: _attributes_chat_bool_exp!
+  ): _attributes_chat_mutation_response
+
+  """
+  update single row of the table: "_attributes.chat"
+  """
+  update__attributes_chat_by_pk(
+    """
+    increments the numeric columns with given value of the filtered values
+    """
+    _inc: _attributes_chat_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: _attributes_chat_set_input
+    pk_columns: _attributes_chat_pk_columns_input!
+  ): _attributes_chat
+
+  """
+  update data of the table: "_attributes.user"
+  """
+  update__attributes_user(
+    """
+    increments the numeric columns with given value of the filtered values
+    """
+    _inc: _attributes_user_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: _attributes_user_set_input
+
+    """filter the rows which have to be updated"""
+    where: _attributes_user_bool_exp!
+  ): _attributes_user_mutation_response
+
+  """
+  update data of the table: "_attributes.user_attributes"
+  """
+  update__attributes_user_attributes(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: _attributes_user_attributes_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: _attributes_user_attributes_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from
+    the end). throws an error if top level container is not an array
+    """
+    _delete_elem: _attributes_user_attributes_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: _attributes_user_attributes_delete_key_input
+
+    """
+    increments the numeric columns with given value of the filtered values
+    """
+    _inc: _attributes_user_attributes_inc_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: _attributes_user_attributes_prepend_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: _attributes_user_attributes_set_input
+
+    """filter the rows which have to be updated"""
+    where: _attributes_user_attributes_bool_exp!
+  ): _attributes_user_attributes_mutation_response
+
+  """
+  update single row of the table: "_attributes.user_attributes"
+  """
+  update__attributes_user_attributes_by_pk(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: _attributes_user_attributes_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: _attributes_user_attributes_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from
+    the end). throws an error if top level container is not an array
+    """
+    _delete_elem: _attributes_user_attributes_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: _attributes_user_attributes_delete_key_input
+
+    """
+    increments the numeric columns with given value of the filtered values
+    """
+    _inc: _attributes_user_attributes_inc_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: _attributes_user_attributes_prepend_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: _attributes_user_attributes_set_input
+    pk_columns: _attributes_user_attributes_pk_columns_input!
+  ): _attributes_user_attributes
+
+  """
+  update single row of the table: "_attributes.user"
+  """
+  update__attributes_user_by_pk(
+    """
+    increments the numeric columns with given value of the filtered values
+    """
+    _inc: _attributes_user_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: _attributes_user_set_input
+    pk_columns: _attributes_user_pk_columns_input!
+  ): _attributes_user
+
+  """
+  update data of the table: "_flattenmany.article"
+  """
+  update__flattenmany_article(
+    """
+    increments the numeric columns with given value of the filtered values
+    """
+    _inc: _flattenmany_article_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: _flattenmany_article_set_input
+
+    """filter the rows which have to be updated"""
+    where: _flattenmany_article_bool_exp!
+  ): _flattenmany_article_mutation_response
+
+  """
+  update single row of the table: "_flattenmany.article"
+  """
+  update__flattenmany_article_by_pk(
+    """
+    increments the numeric columns with given value of the filtered values
+    """
+    _inc: _flattenmany_article_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: _flattenmany_article_set_input
+    pk_columns: _flattenmany_article_pk_columns_input!
+  ): _flattenmany_article
+
+  """
+  update data of the table: "_flattenmany.article_tag"
+  """
+  update__flattenmany_article_tag(
+    """
+    increments the numeric columns with given value of the filtered values
+    """
+    _inc: _flattenmany_article_tag_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: _flattenmany_article_tag_set_input
+
+    """filter the rows which have to be updated"""
+    where: _flattenmany_article_tag_bool_exp!
+  ): _flattenmany_article_tag_mutation_response
+
+  """
+  update single row of the table: "_flattenmany.article_tag"
+  """
+  update__flattenmany_article_tag_by_pk(
+    """
+    increments the numeric columns with given value of the filtered values
+    """
+    _inc: _flattenmany_article_tag_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: _flattenmany_article_tag_set_input
+    pk_columns: _flattenmany_article_tag_pk_columns_input!
+  ): _flattenmany_article_tag
+
+  """
+  update data of the table: "_flattenmany.tag"
+  """
+  update__flattenmany_tag(
+    """
+    increments the numeric columns with given value of the filtered values
+    """
+    _inc: _flattenmany_tag_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: _flattenmany_tag_set_input
+
+    """filter the rows which have to be updated"""
+    where: _flattenmany_tag_bool_exp!
+  ): _flattenmany_tag_mutation_response
+
+  """
+  update single row of the table: "_flattenmany.tag"
+  """
+  update__flattenmany_tag_by_pk(
+    """
+    increments the numeric columns with given value of the filtered values
+    """
+    _inc: _flattenmany_tag_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: _flattenmany_tag_set_input
+    pk_columns: _flattenmany_tag_pk_columns_input!
+  ): _flattenmany_tag
+
+  """
+  update data of the table: "hasura_events"
+  """
+  update_hasura_events(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: hasura_events_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: hasura_events_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from
+    the end). throws an error if top level container is not an array
+    """
+    _delete_elem: hasura_events_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: hasura_events_delete_key_input
+
+    """
+    increments the numeric columns with given value of the filtered values
+    """
+    _inc: hasura_events_inc_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: hasura_events_prepend_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: hasura_events_set_input
+
+    """filter the rows which have to be updated"""
+    where: hasura_events_bool_exp!
+  ): hasura_events_mutation_response
+
+  """
+  update single row of the table: "hasura_events"
+  """
+  update_hasura_events_by_pk(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: hasura_events_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: hasura_events_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from
+    the end). throws an error if top level container is not an array
+    """
+    _delete_elem: hasura_events_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: hasura_events_delete_key_input
+
+    """
+    increments the numeric columns with given value of the filtered values
+    """
+    _inc: hasura_events_inc_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: hasura_events_prepend_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: hasura_events_set_input
+    pk_columns: hasura_events_pk_columns_input!
+  ): hasura_events
+}
+
+"""column ordering options"""
+enum order_by {
+  """in ascending order, nulls last"""
+  asc
+
+  """in ascending order, nulls first"""
+  asc_nulls_first
+
+  """in ascending order, nulls last"""
+  asc_nulls_last
+
+  """in descending order, nulls first"""
+  desc
+
+  """in descending order, nulls first"""
+  desc_nulls_first
+
+  """in descending order, nulls last"""
+  desc_nulls_last
+}
+
+type query_root {
+  """
+  fetch data from the table: "_attributes.chat"
+  """
+  _attributes_chat(
+    """distinct select on columns"""
+    distinct_on: [_attributes_chat_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_attributes_chat_order_by!]
+
+    """filter the rows returned"""
+    where: _attributes_chat_bool_exp
+  ): [_attributes_chat!]!
+
+  """
+  fetch aggregated fields from the table: "_attributes.chat"
+  """
+  _attributes_chat_aggregate(
+    """distinct select on columns"""
+    distinct_on: [_attributes_chat_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_attributes_chat_order_by!]
+
+    """filter the rows returned"""
+    where: _attributes_chat_bool_exp
+  ): _attributes_chat_aggregate!
+
+  """
+  fetch data from the table: "_attributes.chat" using primary key columns
+  """
+  _attributes_chat_by_pk(id: Int!): _attributes_chat
+
+  """
+  fetch data from the table: "_attributes.user"
+  """
+  _attributes_user(
+    """distinct select on columns"""
+    distinct_on: [_attributes_user_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_attributes_user_order_by!]
+
+    """filter the rows returned"""
+    where: _attributes_user_bool_exp
+  ): [_attributes_user!]!
+
+  """
+  fetch aggregated fields from the table: "_attributes.user"
+  """
+  _attributes_user_aggregate(
+    """distinct select on columns"""
+    distinct_on: [_attributes_user_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_attributes_user_order_by!]
+
+    """filter the rows returned"""
+    where: _attributes_user_bool_exp
+  ): _attributes_user_aggregate!
+
+  """
+  fetch data from the table: "_attributes.user_attributes"
+  """
+  _attributes_user_attributes(
+    """distinct select on columns"""
+    distinct_on: [_attributes_user_attributes_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_attributes_user_attributes_order_by!]
+
+    """filter the rows returned"""
+    where: _attributes_user_attributes_bool_exp
+  ): [_attributes_user_attributes!]!
+
+  """
+  fetch aggregated fields from the table: "_attributes.user_attributes"
+  """
+  _attributes_user_attributes_aggregate(
+    """distinct select on columns"""
+    distinct_on: [_attributes_user_attributes_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_attributes_user_attributes_order_by!]
+
+    """filter the rows returned"""
+    where: _attributes_user_attributes_bool_exp
+  ): _attributes_user_attributes_aggregate!
+
+  """
+  fetch data from the table: "_attributes.user_attributes" using primary key columns
+  """
+  _attributes_user_attributes_by_pk(id: Int!): _attributes_user_attributes
+
+  """
+  fetch data from the table: "_attributes.user" using primary key columns
+  """
+  _attributes_user_by_pk(id: Int!): _attributes_user
+
+  """
+  fetch data from the table: "_flattenmany.article"
+  """
+  _flattenmany_article(
+    """distinct select on columns"""
+    distinct_on: [_flattenmany_article_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_flattenmany_article_order_by!]
+
+    """filter the rows returned"""
+    where: _flattenmany_article_bool_exp
+  ): [_flattenmany_article!]!
+
+  """
+  fetch aggregated fields from the table: "_flattenmany.article"
+  """
+  _flattenmany_article_aggregate(
+    """distinct select on columns"""
+    distinct_on: [_flattenmany_article_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_flattenmany_article_order_by!]
+
+    """filter the rows returned"""
+    where: _flattenmany_article_bool_exp
+  ): _flattenmany_article_aggregate!
+
+  """
+  fetch data from the table: "_flattenmany.article" using primary key columns
+  """
+  _flattenmany_article_by_pk(id: Int!): _flattenmany_article
+
+  """
+  fetch data from the table: "_flattenmany.article_tag"
+  """
+  _flattenmany_article_tag(
+    """distinct select on columns"""
+    distinct_on: [_flattenmany_article_tag_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_flattenmany_article_tag_order_by!]
+
+    """filter the rows returned"""
+    where: _flattenmany_article_tag_bool_exp
+  ): [_flattenmany_article_tag!]!
+
+  """
+  fetch aggregated fields from the table: "_flattenmany.article_tag"
+  """
+  _flattenmany_article_tag_aggregate(
+    """distinct select on columns"""
+    distinct_on: [_flattenmany_article_tag_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_flattenmany_article_tag_order_by!]
+
+    """filter the rows returned"""
+    where: _flattenmany_article_tag_bool_exp
+  ): _flattenmany_article_tag_aggregate!
+
+  """
+  fetch data from the table: "_flattenmany.article_tag" using primary key columns
+  """
+  _flattenmany_article_tag_by_pk(id: Int!): _flattenmany_article_tag
+
+  """
+  fetch data from the table: "_flattenmany.article_tags_view"
+  """
+  _flattenmany_article_tags_view(
+    """distinct select on columns"""
+    distinct_on: [_flattenmany_article_tags_view_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_flattenmany_article_tags_view_order_by!]
+
+    """filter the rows returned"""
+    where: _flattenmany_article_tags_view_bool_exp
+  ): [_flattenmany_article_tags_view!]!
+
+  """
+  fetch aggregated fields from the table: "_flattenmany.article_tags_view"
+  """
+  _flattenmany_article_tags_view_aggregate(
+    """distinct select on columns"""
+    distinct_on: [_flattenmany_article_tags_view_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_flattenmany_article_tags_view_order_by!]
+
+    """filter the rows returned"""
+    where: _flattenmany_article_tags_view_bool_exp
+  ): _flattenmany_article_tags_view_aggregate!
+
+  """
+  fetch data from the table: "_flattenmany.tag"
+  """
+  _flattenmany_tag(
+    """distinct select on columns"""
+    distinct_on: [_flattenmany_tag_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_flattenmany_tag_order_by!]
+
+    """filter the rows returned"""
+    where: _flattenmany_tag_bool_exp
+  ): [_flattenmany_tag!]!
+
+  """
+  fetch aggregated fields from the table: "_flattenmany.tag"
+  """
+  _flattenmany_tag_aggregate(
+    """distinct select on columns"""
+    distinct_on: [_flattenmany_tag_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_flattenmany_tag_order_by!]
+
+    """filter the rows returned"""
+    where: _flattenmany_tag_bool_exp
+  ): _flattenmany_tag_aggregate!
+
+  """
+  fetch data from the table: "_flattenmany.tag_articles_view"
+  """
+  _flattenmany_tag_articles_view(
+    """distinct select on columns"""
+    distinct_on: [_flattenmany_tag_articles_view_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_flattenmany_tag_articles_view_order_by!]
+
+    """filter the rows returned"""
+    where: _flattenmany_tag_articles_view_bool_exp
+  ): [_flattenmany_tag_articles_view!]!
+
+  """
+  fetch aggregated fields from the table: "_flattenmany.tag_articles_view"
+  """
+  _flattenmany_tag_articles_view_aggregate(
+    """distinct select on columns"""
+    distinct_on: [_flattenmany_tag_articles_view_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_flattenmany_tag_articles_view_order_by!]
+
+    """filter the rows returned"""
+    where: _flattenmany_tag_articles_view_bool_exp
+  ): _flattenmany_tag_articles_view_aggregate!
+
+  """
+  fetch data from the table: "_flattenmany.tag" using primary key columns
+  """
+  _flattenmany_tag_by_pk(id: Int!): _flattenmany_tag
+  continent(code: ID!): Continent
+  continents(filter: ContinentFilterInput): [Continent!]!
+  countries(filter: CountryFilterInput): [Country!]!
+  country(code: ID!): Country
+
+  """
+  fetch data from the table: "hasura_events"
+  """
+  hasura_events(
+    """distinct select on columns"""
+    distinct_on: [hasura_events_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [hasura_events_order_by!]
+
+    """filter the rows returned"""
+    where: hasura_events_bool_exp
+  ): [hasura_events!]!
+
+  """
+  fetch aggregated fields from the table: "hasura_events"
+  """
+  hasura_events_aggregate(
+    """distinct select on columns"""
+    distinct_on: [hasura_events_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [hasura_events_order_by!]
+
+    """filter the rows returned"""
+    where: hasura_events_bool_exp
+  ): hasura_events_aggregate!
+
+  """fetch data from the table: "hasura_events" using primary key columns"""
+  hasura_events_by_pk(id: Int!): hasura_events
+  language(code: ID!): Language
+  languages(filter: LanguageFilterInput): [Language!]!
+}
+
+type subscription_root {
+  """
+  fetch data from the table: "_attributes.chat"
+  """
+  _attributes_chat(
+    """distinct select on columns"""
+    distinct_on: [_attributes_chat_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_attributes_chat_order_by!]
+
+    """filter the rows returned"""
+    where: _attributes_chat_bool_exp
+  ): [_attributes_chat!]!
+
+  """
+  fetch aggregated fields from the table: "_attributes.chat"
+  """
+  _attributes_chat_aggregate(
+    """distinct select on columns"""
+    distinct_on: [_attributes_chat_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_attributes_chat_order_by!]
+
+    """filter the rows returned"""
+    where: _attributes_chat_bool_exp
+  ): _attributes_chat_aggregate!
+
+  """
+  fetch data from the table: "_attributes.chat" using primary key columns
+  """
+  _attributes_chat_by_pk(id: Int!): _attributes_chat
+
+  """
+  fetch data from the table: "_attributes.user"
+  """
+  _attributes_user(
+    """distinct select on columns"""
+    distinct_on: [_attributes_user_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_attributes_user_order_by!]
+
+    """filter the rows returned"""
+    where: _attributes_user_bool_exp
+  ): [_attributes_user!]!
+
+  """
+  fetch aggregated fields from the table: "_attributes.user"
+  """
+  _attributes_user_aggregate(
+    """distinct select on columns"""
+    distinct_on: [_attributes_user_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_attributes_user_order_by!]
+
+    """filter the rows returned"""
+    where: _attributes_user_bool_exp
+  ): _attributes_user_aggregate!
+
+  """
+  fetch data from the table: "_attributes.user_attributes"
+  """
+  _attributes_user_attributes(
+    """distinct select on columns"""
+    distinct_on: [_attributes_user_attributes_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_attributes_user_attributes_order_by!]
+
+    """filter the rows returned"""
+    where: _attributes_user_attributes_bool_exp
+  ): [_attributes_user_attributes!]!
+
+  """
+  fetch aggregated fields from the table: "_attributes.user_attributes"
+  """
+  _attributes_user_attributes_aggregate(
+    """distinct select on columns"""
+    distinct_on: [_attributes_user_attributes_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_attributes_user_attributes_order_by!]
+
+    """filter the rows returned"""
+    where: _attributes_user_attributes_bool_exp
+  ): _attributes_user_attributes_aggregate!
+
+  """
+  fetch data from the table: "_attributes.user_attributes" using primary key columns
+  """
+  _attributes_user_attributes_by_pk(id: Int!): _attributes_user_attributes
+
+  """
+  fetch data from the table: "_attributes.user" using primary key columns
+  """
+  _attributes_user_by_pk(id: Int!): _attributes_user
+
+  """
+  fetch data from the table: "_flattenmany.article"
+  """
+  _flattenmany_article(
+    """distinct select on columns"""
+    distinct_on: [_flattenmany_article_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_flattenmany_article_order_by!]
+
+    """filter the rows returned"""
+    where: _flattenmany_article_bool_exp
+  ): [_flattenmany_article!]!
+
+  """
+  fetch aggregated fields from the table: "_flattenmany.article"
+  """
+  _flattenmany_article_aggregate(
+    """distinct select on columns"""
+    distinct_on: [_flattenmany_article_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_flattenmany_article_order_by!]
+
+    """filter the rows returned"""
+    where: _flattenmany_article_bool_exp
+  ): _flattenmany_article_aggregate!
+
+  """
+  fetch data from the table: "_flattenmany.article" using primary key columns
+  """
+  _flattenmany_article_by_pk(id: Int!): _flattenmany_article
+
+  """
+  fetch data from the table: "_flattenmany.article_tag"
+  """
+  _flattenmany_article_tag(
+    """distinct select on columns"""
+    distinct_on: [_flattenmany_article_tag_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_flattenmany_article_tag_order_by!]
+
+    """filter the rows returned"""
+    where: _flattenmany_article_tag_bool_exp
+  ): [_flattenmany_article_tag!]!
+
+  """
+  fetch aggregated fields from the table: "_flattenmany.article_tag"
+  """
+  _flattenmany_article_tag_aggregate(
+    """distinct select on columns"""
+    distinct_on: [_flattenmany_article_tag_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_flattenmany_article_tag_order_by!]
+
+    """filter the rows returned"""
+    where: _flattenmany_article_tag_bool_exp
+  ): _flattenmany_article_tag_aggregate!
+
+  """
+  fetch data from the table: "_flattenmany.article_tag" using primary key columns
+  """
+  _flattenmany_article_tag_by_pk(id: Int!): _flattenmany_article_tag
+
+  """
+  fetch data from the table: "_flattenmany.article_tags_view"
+  """
+  _flattenmany_article_tags_view(
+    """distinct select on columns"""
+    distinct_on: [_flattenmany_article_tags_view_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_flattenmany_article_tags_view_order_by!]
+
+    """filter the rows returned"""
+    where: _flattenmany_article_tags_view_bool_exp
+  ): [_flattenmany_article_tags_view!]!
+
+  """
+  fetch aggregated fields from the table: "_flattenmany.article_tags_view"
+  """
+  _flattenmany_article_tags_view_aggregate(
+    """distinct select on columns"""
+    distinct_on: [_flattenmany_article_tags_view_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_flattenmany_article_tags_view_order_by!]
+
+    """filter the rows returned"""
+    where: _flattenmany_article_tags_view_bool_exp
+  ): _flattenmany_article_tags_view_aggregate!
+
+  """
+  fetch data from the table: "_flattenmany.tag"
+  """
+  _flattenmany_tag(
+    """distinct select on columns"""
+    distinct_on: [_flattenmany_tag_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_flattenmany_tag_order_by!]
+
+    """filter the rows returned"""
+    where: _flattenmany_tag_bool_exp
+  ): [_flattenmany_tag!]!
+
+  """
+  fetch aggregated fields from the table: "_flattenmany.tag"
+  """
+  _flattenmany_tag_aggregate(
+    """distinct select on columns"""
+    distinct_on: [_flattenmany_tag_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_flattenmany_tag_order_by!]
+
+    """filter the rows returned"""
+    where: _flattenmany_tag_bool_exp
+  ): _flattenmany_tag_aggregate!
+
+  """
+  fetch data from the table: "_flattenmany.tag_articles_view"
+  """
+  _flattenmany_tag_articles_view(
+    """distinct select on columns"""
+    distinct_on: [_flattenmany_tag_articles_view_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_flattenmany_tag_articles_view_order_by!]
+
+    """filter the rows returned"""
+    where: _flattenmany_tag_articles_view_bool_exp
+  ): [_flattenmany_tag_articles_view!]!
+
+  """
+  fetch aggregated fields from the table: "_flattenmany.tag_articles_view"
+  """
+  _flattenmany_tag_articles_view_aggregate(
+    """distinct select on columns"""
+    distinct_on: [_flattenmany_tag_articles_view_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [_flattenmany_tag_articles_view_order_by!]
+
+    """filter the rows returned"""
+    where: _flattenmany_tag_articles_view_bool_exp
+  ): _flattenmany_tag_articles_view_aggregate!
+
+  """
+  fetch data from the table: "_flattenmany.tag" using primary key columns
+  """
+  _flattenmany_tag_by_pk(id: Int!): _flattenmany_tag
+
+  """
+  fetch data from the table: "hasura_events"
+  """
+  hasura_events(
+    """distinct select on columns"""
+    distinct_on: [hasura_events_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [hasura_events_order_by!]
+
+    """filter the rows returned"""
+    where: hasura_events_bool_exp
+  ): [hasura_events!]!
+
+  """
+  fetch aggregated fields from the table: "hasura_events"
+  """
+  hasura_events_aggregate(
+    """distinct select on columns"""
+    distinct_on: [hasura_events_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [hasura_events_order_by!]
+
+    """filter the rows returned"""
+    where: hasura_events_bool_exp
+  ): hasura_events_aggregate!
+
+  """fetch data from the table: "hasura_events" using primary key columns"""
+  hasura_events_by_pk(id: Int!): hasura_events
+}
+
+scalar timestamp
+
+"""
+Boolean expression to compare columns of type "timestamp". All fields are combined with logical 'AND'.
+"""
+input timestamp_comparison_exp {
+  _eq: timestamp
+  _gt: timestamp
+  _gte: timestamp
+  _in: [timestamp!]
+  _is_null: Boolean
+  _lt: timestamp
+  _lte: timestamp
+  _neq: timestamp
+  _nin: [timestamp!]
+}

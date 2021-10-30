@@ -26,3 +26,7 @@ test-metadata:
 .PHONY: test-event-dispatcher
 test-event-dispatcher:
 	./vendor/bin/phpunit src/event-dispatcher
+
+.PHONY: test-sailor-bridge
+test-sailor-bridge:
+	./vendor/bin/phpunit src/sailor-bridge
