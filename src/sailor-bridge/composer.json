@@ -14,6 +14,9 @@
             "Hasura\\SailorBridge\\Tests\\": "tests"
         }
     },
+    "bin": [
+        "bin/hasura-sailor"
+    ],
     "require": {
         "php": ">=8.0",
         "spawnia/sailor": "^v0.10",
