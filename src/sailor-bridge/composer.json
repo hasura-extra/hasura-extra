@@ -1,0 +1,25 @@
+{
+    "name": "hasura-extra/sailor-bridge",
+    "license": "MIT",
+    "description": "Provide integration for Sailor graphql client with Hasura Extra packages.",
+    "prefer-stable": true,
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Hasura\\SailorBridge\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Hasura\\SailorBridge\\Tests\\": "tests"
+        }
+    },
+    "require": {
+        "php": ">=8.0",
+        "spawnia/sailor": "^v0.10",
+        "hasura-extra/api-client": "dev-main"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    }
+}
