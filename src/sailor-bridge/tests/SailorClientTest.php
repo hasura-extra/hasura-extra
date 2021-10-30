@@ -38,7 +38,9 @@ final class SailorClientTest extends PHPUnitTestCase
     {
         $response = $this->sailorClient->request(
             'query ($name: String!) { __type(name: $name) { name kind } }',
-            (object)['name' => 'mutation_root']
+            (object)[
+                'name' => 'mutation_root',
+            ]
         );
 
         $this->assertInstanceOf(Response::class, $response);

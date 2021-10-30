@@ -9,8 +9,8 @@
 declare(strict_types=1);
 
 use Hasura\ApiClient\Client;
-use Hasura\SailorBridge\Command\InitConfig;
 use Hasura\SailorBridge\Command\Codegen;
+use Hasura\SailorBridge\Command\InitConfig;
 use Hasura\SailorBridge\Command\Introspect;
 use Hasura\SailorBridge\EndpointConfig;
 use Hasura\SailorBridge\SailorClient;
@@ -72,7 +72,7 @@ use Symfony\Component\Filesystem\Filesystem;
         return [
             new Codegen(),
             new Introspect(),
-            new InitConfig($this->filesystem)
+            new InitConfig($this->filesystem),
         ];
     }
 

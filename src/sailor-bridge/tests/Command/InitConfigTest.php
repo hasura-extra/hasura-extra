@@ -42,7 +42,7 @@ final class InitConfigTest extends TestCase
         $tester = new CommandTester(new InitConfig($this->filesystem));
         $tester->execute([]);
 
-        $this->assertFileEquals(__DIR__.'/../../hasura.php.dist', $configFile);
+        $this->assertFileEquals(__DIR__ . '/../../hasura.php.dist', $configFile);
         $this->assertStringContainsString('"hasura.php" configuration file generated.', $tester->getDisplay());
 
         $tester->execute([]);
