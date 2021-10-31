@@ -26,20 +26,26 @@ final class RequestHandlerTest extends TestCase
     public function testHandleRequest(
         string $header,
         string $headerValue,
-        array $sessionVariables,
+        ?array $sessionVariables,
         bool $isUnauthorized,
         int $expectedHttpStatusCode,
         string $expectedContent
     ): void {
         $psr17Factory = new Psr17Factory();
-        $request = $psr17Factory->createServerRequest('POST', '/')->withHeader($header, $headerValue);
         $accessRoleDecider = $this->mockAccessRoleDecider('x-hasura-role', $isUnauthorized);
-        $sessionVariableEnhancer = $this->mockSessionVariableEnhancer($sessionVariables);
+
+        if (null !== $sessionVariables) {
+            $sessionVariableEnhancer = $this->mockSessionVariableEnhancer($sessionVariables);
+        } else {
+            $sessionVariableEnhancer = null;
+        }
+
+        $request = $psr17Factory->createServerRequest('POST', '/')->withHeader($header, $headerValue);
         $requestHandler = new RequestHandler(
             $accessRoleDecider,
-            $sessionVariableEnhancer,
             $psr17Factory,
-            $psr17Factory
+            $psr17Factory,
+            $sessionVariableEnhancer,
         );
         $response = $requestHandler->handle($request);
 
@@ -82,6 +88,14 @@ final class RequestHandlerTest extends TestCase
     public function mockDataProvider(): array
     {
         return [
+            [
+                'header' => 'x-hasura-role',
+                'headerValue' => 'admin',
+                'sessionVariables' => null,
+                'unauthorized' => false,
+                'expectedHttpStatusCode' => 200,
+                'expectedContent' => json_encode(['x-hasura-role' => 'admin'])
+            ],
             [
                 'header' => 'x-hasura-role',
                 'headerValue' => 'admin',
