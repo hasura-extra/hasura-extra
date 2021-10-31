@@ -30,3 +30,7 @@ test-event-dispatcher:
 .PHONY: test-sailor-bridge
 test-sailor-bridge:
 	./vendor/bin/phpunit src/sailor-bridge
+
+.PHONY: test-auth-hook
+test-auth-hook:
+	./vendor/bin/phpunit src/auth-hook
