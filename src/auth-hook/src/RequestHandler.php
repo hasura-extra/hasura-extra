@@ -20,9 +20,9 @@ final class RequestHandler implements RequestHandlerInterface
 {
     public function __construct(
         private AccessRoleDeciderInterface $roleDecider,
-        private SessionVariableEnhancerInterface $sessionVariableEnhancer,
         private ResponseFactoryInterface $responseFactory,
-        private StreamFactoryInterface $streamFactory
+        private StreamFactoryInterface $streamFactory,
+        private ?SessionVariableEnhancerInterface $sessionVariableEnhancer = null,
     ) {
     }
 
@@ -34,7 +34,13 @@ final class RequestHandler implements RequestHandlerInterface
             return $this->makeJsonResponse(['message' => $exception->getMessage()], 401);
         }
 
-        $sessionVariables = $this->sessionVariableEnhancer->enhance(['x-hasura-role' => $role]);
+        $sessionVariables = ['x-hasura-role' => $role];
+
+        if (null !== $this->sessionVariableEnhancer) {
+            $sessionVariables = $this->sessionVariableEnhancer->enhance($sessionVariables);
+        }
+
+        // Respect role decider
         $sessionVariables['x-hasura-role'] = $role;
 
         return $this->makeJsonResponse($sessionVariables);
