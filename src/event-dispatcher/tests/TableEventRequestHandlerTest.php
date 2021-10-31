@@ -11,13 +11,14 @@ declare(strict_types=1);
 namespace Hasura\EventDispatcher\Tests;
 
 use Hasura\EventDispatcher\TableEvent;
-use Hasura\EventDispatcher\TableEventDispatcher;
+use Hasura\EventDispatcher\TableEventRequestHandler;
+use Nyholm\Psr7\Factory\Psr17Factory;
 use PHPUnit\Framework\TestCase;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
 
-final class TableEventDispatcherTest extends TestCase
+final class TableEventRequestHandlerTest extends TestCase
 {
     /**
      * @dataProvider payloadDataProvider
@@ -30,8 +31,11 @@ final class TableEventDispatcherTest extends TestCase
 
         $psrServerRequest = $this->mockPsrServerRequest($payload);
         $psrEventDispatcher = $this->mockPsrEventDispatcher($payload, !$warning);
-        $eventDispatcher = new TableEventDispatcher($psrEventDispatcher);
-        $eventDispatcher->dispatch($psrServerRequest);
+        $requestHandler = new TableEventRequestHandler($psrEventDispatcher, new Psr17Factory());
+        $response = $requestHandler->handle($psrServerRequest);
+
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertSame('', $response->getBody()->getContents());
     }
 
     private function mockPsrServerRequest(string $payload): ServerRequestInterface

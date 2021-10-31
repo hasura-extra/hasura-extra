@@ -11,15 +11,20 @@ declare(strict_types=1);
 namespace Hasura\EventDispatcher;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
+use Psr\Http\Message\ResponseFactoryInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
-final class TableEventDispatcher implements ServerRequestEventDispatcherInterface
+final class TableEventRequestHandler implements RequestHandlerInterface
 {
-    public function __construct(private EventDispatcherInterface $dispatcher)
-    {
+    public function __construct(
+        private EventDispatcherInterface $dispatcher,
+        private ResponseFactoryInterface $responseFactory
+    ) {
     }
 
-    public function dispatch(ServerRequestInterface $request): void
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $jsonPayload = $request->getBody()->getContents();
         $payload = json_decode($jsonPayload, true);
@@ -33,5 +38,7 @@ final class TableEventDispatcher implements ServerRequestEventDispatcherInterfac
         );
 
         $this->dispatcher->dispatch($event);
+
+        return $this->responseFactory->createResponse();
     }
 }

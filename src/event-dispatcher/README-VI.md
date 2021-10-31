@@ -3,7 +3,7 @@
 Hasura Event Dispatcher
 =======================
 
-Thư viện dùng để dispatch events triggered bởi Hasura qua HTTP server request (webhook).
+[PSR-15](https://www.php-fig.org/psr/psr-15/) server request handle đảm nhiệm việc dispatch events triggered bởi Hasura thông qua [PSR-14](https://www.php-fig.org/psr/psr-14/) event dispatcher.
 
 Cài đặt
 ------------

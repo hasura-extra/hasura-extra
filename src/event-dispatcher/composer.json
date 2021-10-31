@@ -1,7 +1,7 @@
 {
     "name": "hasura-extra/event-dispatcher",
     "license": "MIT",
-    "description": "The library help to dispatch events triggered by Hasura.",
+    "description": "Support to dispatch events triggered by Hasura.",
     "prefer-stable": true,
     "minimum-stability": "dev",
     "autoload": {
@@ -17,9 +17,10 @@
     "require": {
         "php": ">=8.0",
         "psr/event-dispatcher": "^1.0",
-        "psr/http-message": "^1.0"
+        "psr/http-server-handler": "^1.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^9.5",
+        "nyholm/psr7": "^1.0"
     }
 }
