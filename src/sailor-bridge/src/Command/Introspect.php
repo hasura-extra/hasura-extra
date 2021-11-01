@@ -10,28 +10,36 @@ declare(strict_types=1);
 
 namespace Hasura\SailorBridge\Command;
 
-use Spawnia\Sailor\Console\IntrospectCommand;
+use Spawnia\Sailor\Configuration;
+use Spawnia\Sailor\Introspector;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-final class Introspect extends IntrospectCommand
+final class Introspect extends Command
 {
     protected static $defaultName = 'introspect';
 
     protected static $defaultDescription = 'Generate schema definition of Hasura via introspect query';
+
+    public function __construct(private string $endpoint = 'hasura')
+    {
+        parent::__construct();
+    }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $symfonyStyle = new SymfonyStyle($input, $output);
         $symfonyStyle->section('Introspecting...');
 
-        ob_start();
-        $statusCode = parent::execute($input, $output);
-        ob_end_clean();
+        $generator = new Introspector(
+            Configuration::endpoint($this->endpoint)
+        );
+        $generator->introspect();
 
         $symfonyStyle->success('Introspection successfully!');
 
-        return $statusCode;
+        return 0;
     }
 }
