@@ -11,13 +11,13 @@ declare(strict_types=1);
 namespace Hasura\SailorBridge\Command;
 
 use Spawnia\Sailor\Configuration;
-use Spawnia\Sailor\Console\IntrospectCommand;
 use Spawnia\Sailor\Introspector;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-final class Introspect extends IntrospectCommand
+final class Introspect extends Command
 {
     protected static $defaultName = 'introspect';
 
