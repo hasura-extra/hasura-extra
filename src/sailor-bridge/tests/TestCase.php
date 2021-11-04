@@ -21,7 +21,9 @@ class TestCase extends PHPTestCase
 {
     protected const CODEGEN_PATH = __DIR__ . '/.codegen';
 
-    protected const SCHEMA_PATH = __DIR__ . '/.fixtures/schema.graphql';
+    protected const SCHEMA_PATH = __DIR__ . '/Fixture/schema.graphql';
+
+    protected const QUERY_SPEC_PATH = __DIR__ . '/Fixture/query_spec';
 
     protected Filesystem $filesystem;
 
@@ -34,7 +36,7 @@ class TestCase extends PHPTestCase
             new SailorClient($apiClient),
             'App\GraphqlExecutor',
             self::CODEGEN_PATH,
-            __DIR__ . '/.fixtures/query_spec',
+            self::QUERY_SPEC_PATH,
             self::SCHEMA_PATH
         );
 
