@@ -1,4 +1,12 @@
 -
+    name: apache
+    definition:
+        url: 'http://apache/graphqlite-bridge.php'
+        timeout_seconds: 60
+        forward_client_headers: true
+    comment: ''
+    permissions: !include remote_schemas/apache/permissions.yaml
+-
     name: countries
     definition:
         url: 'https://countries.trevorblades.com/graphql'

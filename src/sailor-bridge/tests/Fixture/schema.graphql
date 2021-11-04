@@ -2441,6 +2441,12 @@ type mutation_root {
   delete_hasura_events_by_pk(id: Int!): hasura_events
 
   """
+  
+  
+  """
+  dummy: String!
+
+  """
   insert data into the table: "_attributes.chat"
   """
   insert__attributes_chat(
@@ -3051,6 +3057,12 @@ type query_root {
   _attributes_user_by_pk(id: Int!): _attributes_user
 
   """
+  
+  
+  """
+  _dummy: String!
+
+  """
   fetch data from the table: "_flattenmany.article"
   """
   _flattenmany_article(
@@ -3264,10 +3276,22 @@ type query_root {
   fetch data from the table: "_flattenmany.tag" using primary key columns
   """
   _flattenmany_tag_by_pk(id: Int!): _flattenmany_tag
+
+  """
+  
+  
+  """
+  allow: String!
   continent(code: ID!): Continent
   continents(filter: ContinentFilterInput): [Continent!]!
   countries(filter: CountryFilterInput): [Country!]!
   country(code: ID!): Country
+
+  """
+  
+  
+  """
+  dummy: String!
 
   """
   fetch data from the table: "hasura_events"
