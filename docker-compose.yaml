@@ -1,10 +1,19 @@
 version: '3.8'
 
 services:
+  apache:
+    image: php:8-apache
+    volumes:
+      - $PWD:/var/www
+    ports:
+      - protocol: tcp
+        target: 80
+        published: 80
+
   postgres:
     image: postgres:13-alpine
     volumes:
-      - ./docker/postgres/initdb.d:/docker-entrypoint-initdb.d
+      - $PWD/docker/postgres/initdb.d:/docker-entrypoint-initdb.d
     environment:
       POSTGRES_DB: hasura
       POSTGRES_USER: hasura
@@ -25,4 +34,5 @@ services:
         target: 8080
         published: 8080
     depends_on:
+      - apache
       - postgres

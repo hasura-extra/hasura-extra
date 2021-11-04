@@ -34,3 +34,7 @@ test-sailor-bridge:
 .PHONY: test-auth-hook
 test-auth-hook:
 	./vendor/bin/phpunit src/auth-hook
+
+.PHONY: test-graphqlite-bridge
+test-graphqlite-bridge:
+	./vendor/bin/phpunit src/graphqlite-bridge
