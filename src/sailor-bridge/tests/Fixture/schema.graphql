@@ -2101,6 +2101,9 @@ type article_insert_output {
   id: ID!
 }
 
+"""A GraphQL type that can contain date"""
+scalar date
+
 """
 columns and relationships of "hasura_events"
 """
@@ -2313,6 +2316,9 @@ type hasura_events_var_samp_fields {
 type hasura_events_variance_fields {
   id: Float
 }
+
+"""A GraphQL type that can contain json"""
+scalar json
 
 scalar jsonb
 
@@ -3337,6 +3343,50 @@ type query_root {
   hasura_events_by_pk(id: Int!): hasura_events
   language(code: ID!): Language
   languages(filter: LanguageFilterInput): [Language!]!
+
+  """
+  
+  
+  """
+  scalar(date: date = null, json: json = null, jsonb: jsonb = null, timestamptz: timestamptz = null, timetz: timetz = null, uuid: uuid = null): scalar_output
+}
+
+type scalar_output {
+  """
+  
+  
+  """
+  date: date
+
+  """
+  
+  
+  """
+  json: json
+
+  """
+  
+  
+  """
+  jsonb: jsonb
+
+  """
+  
+  
+  """
+  timestamptz: timestamptz
+
+  """
+  
+  
+  """
+  timetz: timetz
+
+  """
+  
+  
+  """
+  uuid: uuid
 }
 
 type subscription_root {
@@ -3750,3 +3800,12 @@ input timestamp_comparison_exp {
   _neq: timestamp
   _nin: [timestamp!]
 }
+
+"""A GraphQL type that can contain timestamptz"""
+scalar timestamptz
+
+"""A GraphQL type that can contain timetz"""
+scalar timetz
+
+"""A GraphQL type that can contain uuid"""
+scalar uuid

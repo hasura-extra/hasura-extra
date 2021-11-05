@@ -13,6 +13,7 @@ namespace Hasura\GraphQLiteBridge\Tests;
 use Hasura\GraphQLiteBridge\Field\AnnotationTracker;
 use Hasura\GraphQLiteBridge\Field\AnnotationTrackingMiddleware;
 use Hasura\GraphQLiteBridge\Field\AuthorizationMiddleware;
+use Hasura\GraphQLiteBridge\RootTypeMapperFactory;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Cache\Psr16Cache;
 use TheCodingMachine\GraphQLite\Containers\BasicAutoWiringContainer;
@@ -43,6 +44,8 @@ trait SchemaFactoryTrait
 
         $factory->addFieldMiddleware(new AnnotationTrackingMiddleware($annotationTracker));
         $factory->addFieldMiddleware(new AuthorizationMiddleware($authorizationService));
+
+        $factory->addRootTypeMapperFactory(new RootTypeMapperFactory());
 
         $factory->addTypeNamespace('Hasura\GraphQLiteBridge\Tests\Fixture');
 

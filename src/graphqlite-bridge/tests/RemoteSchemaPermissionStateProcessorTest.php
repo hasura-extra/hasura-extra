@@ -24,7 +24,7 @@ final class RemoteSchemaPermissionStateProcessorTest extends TestCase
 
         $processor = new RemoteSchemaPermissionStateProcessor(
             new RemoteSchema('test'),
-            $this->schemaFactory->createSchema(),
+            $this->schema,
             $this->client,
             $this->annotationTracker
         );
@@ -34,31 +34,31 @@ final class RemoteSchemaPermissionStateProcessorTest extends TestCase
 
     public function testCanSyncRolePermissions(): void
     {
-        $apacheRemoteSchema = $this->fetchApacheRemoteSchemaMetadata();
+        $remoteSchema = $this->fetchRemoteSchemaMetadata();
 
-        $this->assertSame('apache', $apacheRemoteSchema['name']);
-        $this->assertArrayNotHasKey('permissions', $apacheRemoteSchema);
+        $this->assertSame('graphqlite-bridge', $remoteSchema['name']);
+        $this->assertArrayNotHasKey('permissions', $remoteSchema);
 
         $processor = new RemoteSchemaPermissionStateProcessor(
-            new RemoteSchema('apache'),
-            $this->schemaFactory->createSchema(),
+            new RemoteSchema('graphqlite-bridge'),
+            $this->schema,
             $this->client,
             $this->annotationTracker
         );
         $processor->process();
 
-        $apacheRemoteSchema = $this->fetchApacheRemoteSchemaMetadata();
+        $remoteSchema = $this->fetchRemoteSchemaMetadata();
 
-        $this->assertSame('apache', $apacheRemoteSchema['name']);
-        $this->assertArrayHasKey('permissions', $apacheRemoteSchema);
+        $this->assertSame('graphqlite-bridge', $remoteSchema['name']);
+        $this->assertArrayHasKey('permissions', $remoteSchema);
 
-        $roles = array_column($apacheRemoteSchema['permissions'], 'role');
+        $roles = array_column($remoteSchema['permissions'], 'role');
 
         $this->assertContains('A', $roles);
         $this->assertContains('B', $roles);
         $this->assertContains('C', $roles);
 
-        $definitions = array_column($apacheRemoteSchema['permissions'], 'definition');
+        $definitions = array_column($remoteSchema['permissions'], 'definition');
         $roleDefinitions = array_combine($roles, $definitions);
 
         $this->assertStringContainsString(
@@ -87,10 +87,10 @@ SDL,
         );
     }
 
-    private function fetchApacheRemoteSchemaMetadata(): array
+    private function fetchRemoteSchemaMetadata(): array
     {
         $data = $this->client->metadata()->query('export_metadata', [], 2);
 
-        return $data['metadata']['remote_schemas'][0];
+        return $data['metadata']['remote_schemas'][1];
     }
 }

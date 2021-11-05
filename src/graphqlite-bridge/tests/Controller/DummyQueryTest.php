@@ -17,8 +17,7 @@ final class DummyQueryTest extends TestCase
 {
     public function testCanExecuteDummyQuery(): void
     {
-        $schema = $this->schemaFactory->createSchema();
-        $result = GraphQL::executeQuery($schema, 'query { _dummy }');
+        $result = GraphQL::executeQuery($this->schema, 'query { _dummy }');
 
         $this->assertSame('dummy', $result->data['_dummy']);
     }

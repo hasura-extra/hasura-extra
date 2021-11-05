@@ -11,6 +11,10 @@ apply-metadata:
 export-metadata:
 	php ./src/metadata/bin/hasura-metadata export --force
 
+.PHONY: sailor-introspect
+sailor-introspect:
+	php ./src/sailor-bridge/bin/hasura-sailor introspect
+
 .PHONY: test-all
 test-all:
 	./vendor/bin/phpunit

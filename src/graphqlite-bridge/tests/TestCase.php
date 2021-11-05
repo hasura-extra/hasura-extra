@@ -10,15 +10,16 @@ declare(strict_types=1);
 
 namespace Hasura\GraphQLiteBridge\Tests;
 
-use GraphQL\Utils\SchemaPrinter;
 use Hasura\ApiClient\Client;
 use Hasura\Metadata\MetadataUtils;
 use PHPUnit\Framework\TestCase as PHPUnitTestCase;
-use TheCodingMachine\GraphQLite\SchemaFactory;
+use TheCodingMachine\GraphQLite\Schema;
 
 class TestCase extends PHPUnitTestCase
 {
     use SchemaFactoryTrait;
+
+    protected Schema $schema;
 
     protected Client $client;
 
@@ -32,6 +33,7 @@ class TestCase extends PHPUnitTestCase
 
         $this->initSchemaFactory();
 
+        $this->schema = $this->schemaFactory->createSchema();
         $this->client = new Client('http://localhost:8080', 'test');
 
         if ($this->autoBackupAndRestoreMetadata) {

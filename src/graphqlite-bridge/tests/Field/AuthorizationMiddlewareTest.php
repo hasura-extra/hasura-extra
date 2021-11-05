@@ -18,9 +18,7 @@ final class AuthorizationMiddlewareTest extends TestCase
 {
     public function testUnauthorized(): void
     {
-        $schema = $this->schemaFactory->createSchema();
-
-        $result = GraphQL::executeQuery($schema, 'query { dummy }', contextValue: new Context());
+        $result = GraphQL::executeQuery($this->schema, 'query { dummy }', contextValue: new Context());
 
         $this->assertNotEmpty($result->errors);
         $this->assertCount(1, $result->errors);
@@ -33,9 +31,7 @@ final class AuthorizationMiddlewareTest extends TestCase
 
     public function testAuthorized(): void
     {
-        $schema = $this->schemaFactory->createSchema();
-
-        $result = GraphQL::executeQuery($schema, 'query { allow }', contextValue: new Context());
+        $result = GraphQL::executeQuery($this->schema, 'query { allow }', contextValue: new Context());
 
         $this->assertEmpty($result->errors);
         $this->assertArrayHasKey('allow', $result->data);

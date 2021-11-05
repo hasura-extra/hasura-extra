@@ -17,8 +17,7 @@ final class AnnotationTrackingMiddlewareTest extends TestCase
 {
     public function testTrack(): void
     {
-        $schema = $this->schemaFactory->createSchema();
-        $schema->assertValid(); // trigger annotation tracking middleware.
+        $this->schema->assertValid(); // trigger annotation tracking middleware.
 
         $this->assertNotEmpty($this->annotationTracker->getQueryFieldAnnotations(Roles::class));
         $this->assertNotEmpty($this->annotationTracker->getMutationFieldAnnotations(Roles::class));
