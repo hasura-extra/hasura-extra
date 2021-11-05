@@ -16,9 +16,6 @@ final class RemoteSchema implements RemoteSchemaInterface
     {
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;

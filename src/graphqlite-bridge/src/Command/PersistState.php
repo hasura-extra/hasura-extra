@@ -10,16 +10,15 @@ declare(strict_types=1);
 
 namespace Hasura\GraphQLiteBridge\Command;
 
-use Hasura\GraphQLiteBridge\RemoteSchemaInterface;
-use Hasura\GraphQLiteBridge\RemoteSchemaProcessorInterface;
+use Hasura\GraphQLiteBridge\StateProcessorInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-final class PersistRemoteSchema extends Command
+final class PersistState extends Command
 {
-    public function __construct(private RemoteSchemaInterface $remoteSchema, private iterable $processors)
+    public function __construct(private iterable $processors)
     {
         parent::__construct();
     }
@@ -29,17 +28,15 @@ final class PersistRemoteSchema extends Command
         $symfonyStyle = new SymfonyStyle($input, $output);
 
         $symfonyStyle->section(
-            sprintf('Persisting Hasura remote schema: %s...', $this->remoteSchema->getName())
+            sprintf('Persisting application state to Hasura...')
         );
 
         foreach ($this->processors as $processor) {
-            /** @var RemoteSchemaProcessorInterface $processor */
-            $processor->process($this->remoteSchema);
+            /** @var StateProcessorInterface $processor */
+            $processor->process();
         }
 
-        $symfonyStyle->success(
-            sprintf('Congratulation! Remote schema: %s\'s persisted!', $this->remoteSchema->getName())
-        );
+        $symfonyStyle->success('Congratulation! Application state persisted with Hasura!');
 
         return 0;
     }

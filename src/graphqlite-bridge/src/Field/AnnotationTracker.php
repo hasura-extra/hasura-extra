@@ -18,17 +18,13 @@ final class AnnotationTracker
 
     private array $mutationAnnotations = [];
 
-    public function trackQueryFieldAnnotation(object $annotation, string $field): void
+    public function trackQueryFieldAnnotation(MiddlewareAnnotationInterface $annotation, string $field): void
     {
-        $this->assertAnnotation($annotation);
-
         $this->queryAnnotations[$annotation::class][$field][] = $annotation;
     }
 
-    public function trackMutationFieldAnnotation(object $annotation, string $field)
+    public function trackMutationFieldAnnotation(MiddlewareAnnotationInterface $annotation, string $field)
     {
-        $this->assertAnnotation($annotation);
-
         $this->mutationAnnotations[$annotation::class][$field][] = $annotation;
     }
 
@@ -47,19 +43,6 @@ final class AnnotationTracker
             return $this->mutationAnnotations[$annotationClass] ?? [];
         } else {
             return $this->mutationAnnotations[$annotationClass][$field] ?? [];
-        }
-    }
-
-    private function assertAnnotation(object $annotation): void
-    {
-        if (!$annotation instanceof MiddlewareAnnotationInterface) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    '`%s` class should be class implements `%s`.',
-                    $annotation::class,
-                    MiddlewareAnnotationInterface::class
-                )
-            );
         }
     }
 }

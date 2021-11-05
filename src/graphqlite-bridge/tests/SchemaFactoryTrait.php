@@ -39,7 +39,7 @@ trait SchemaFactoryTrait
         $factory->setAuthorizationService($authorizationService);
 
         $factory->addControllerNamespace('Hasura\GraphQLiteBridge\Tests\Fixture');
-        $factory->addControllerNamespace('Hasura\GraphQLiteBridge\RemoteSchemaProcessor');
+        $factory->addControllerNamespace('Hasura\GraphQLiteBridge\Controller');
 
         $factory->addFieldMiddleware(new AnnotationTrackingMiddleware($annotationTracker));
         $factory->addFieldMiddleware(new AuthorizationMiddleware($authorizationService));

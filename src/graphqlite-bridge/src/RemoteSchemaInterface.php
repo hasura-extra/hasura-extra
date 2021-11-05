@@ -10,12 +10,12 @@ declare(strict_types=1);
 
 namespace Hasura\GraphQLiteBridge;
 
-/*
+/**
  * Represent for Hasura remote schema.
  */
 interface RemoteSchemaInterface
 {
-    /*
+    /**
      * Remote schema name.
      */
     public function getName(): string;
