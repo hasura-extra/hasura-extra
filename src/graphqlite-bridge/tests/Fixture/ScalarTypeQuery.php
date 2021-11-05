@@ -34,7 +34,7 @@ final class ScalarTypeQuery
     #[Field(name: 'timetz', outputType: 'timetz')]
     public ?\DateTimeInterface $timetz;
 
-    #[Field(name: 'uuid', outputType: 'uuid')]
+    #[Field(name: 'uuid')]
     public ?Uuid $uuid;
 
     #[Query(name: 'scalar', outputType: 'scalar_output')]
@@ -44,7 +44,7 @@ final class ScalarTypeQuery
         #[UseInputType(inputType: 'jsonb')] ?array $jsonb,
         #[UseInputType(inputType: 'timestamptz')] ?\DateTimeInterface $timestamptz,
         #[UseInputType(inputType: 'timetz')] ?\DateTimeInterface $timetz,
-        #[UseInputType(inputType: 'uuid')] ?Uuid $uuid,
+        ?Uuid $uuid,
     ): self {
         $this->date = $date;
         $this->json = $json;

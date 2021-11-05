@@ -13,6 +13,7 @@ namespace Hasura\GraphQLiteBridge;
 use GraphQL\Type\Definition\InputType;
 use GraphQL\Type\Definition\NamedType;
 use GraphQL\Type\Definition\OutputType;
+use GraphQL\Type\Definition\ScalarType;
 use Hasura\GraphQLiteBridge\ScalarType\Date;
 use Hasura\GraphQLiteBridge\ScalarType\Json;
 use Hasura\GraphQLiteBridge\ScalarType\Jsonb;
@@ -21,6 +22,7 @@ use Hasura\GraphQLiteBridge\ScalarType\Timetz;
 use Hasura\GraphQLiteBridge\ScalarType\Uuid;
 use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\Type;
+use phpDocumentor\Reflection\Types\Object_;
 use TheCodingMachine\GraphQLite\Mappers\Root\RootTypeMapperInterface;
 
 final class RootTypeMapper implements RootTypeMapperInterface
@@ -31,7 +33,17 @@ final class RootTypeMapper implements RootTypeMapperInterface
 
     public function toGraphQLOutputType(Type $type, ?OutputType $subType, $reflector, DocBlock $docBlockObj): OutputType
     {
-        return $this->next->toGraphQLOutputType($type, $subType, $reflector, $docBlockObj);
+        if (!$type instanceof Object_) {
+            return $this->next->toGraphQLOutputType($type, $subType, $reflector, $docBlockObj);
+        }
+
+        $scalarType = $this->getTypeByClass((string)$type->getFqsen());
+
+        if (null === $scalarType) {
+            return $this->next->toGraphQLOutputType($type, $subType, $reflector, $docBlockObj);
+        }
+
+        return $scalarType;
     }
 
     public function toGraphQLInputType(
@@ -41,7 +53,17 @@ final class RootTypeMapper implements RootTypeMapperInterface
         $reflector,
         DocBlock $docBlockObj
     ): InputType {
-        return $this->next->toGraphQLInputType($type, $subType, $argumentName, $reflector, $docBlockObj);
+        if (!$type instanceof Object_) {
+            return $this->next->toGraphQLInputType($type, $subType, $argumentName, $reflector, $docBlockObj);
+        }
+
+        $scalarType = $this->getTypeByClass((string)$type->getFqsen());
+
+        if (null === $scalarType) {
+            return $this->next->toGraphQLInputType($type, $subType, $argumentName, $reflector, $docBlockObj);
+        }
+
+        return $scalarType;
     }
 
     public function mapNameToType(string $typeName): NamedType
@@ -55,5 +77,14 @@ final class RootTypeMapper implements RootTypeMapperInterface
             Uuid::NAME => Uuid::getInstance(),
             default => $this->next->mapNameToType($typeName)
         };
+    }
+
+    protected function getTypeByClass(string $class): ?ScalarType
+    {
+        if (str_starts_with($class, '\Symfony\Component\Uid\Uuid')) {
+            return Uuid::getInstance();
+        }
+
+        return null;
     }
 }
