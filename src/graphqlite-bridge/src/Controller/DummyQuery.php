@@ -8,11 +8,11 @@
 
 declare(strict_types=1);
 
-namespace Hasura\GraphQLiteBridge\RemoteSchemaProcessor;
+namespace Hasura\GraphQLiteBridge\Controller;
 
 use TheCodingMachine\GraphQLite\Annotations\Query;
 
-final class PermissionDummyQuery
+final class DummyQuery
 {
     public const NAME = '_dummy';
 

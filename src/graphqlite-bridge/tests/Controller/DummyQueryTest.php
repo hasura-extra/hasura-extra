@@ -8,12 +8,12 @@
 
 declare(strict_types=1);
 
-namespace Hasura\GraphQLiteBridge\Tests\RemoteSchemaProcessor;
+namespace Hasura\GraphQLiteBridge\Tests\Controller;
 
 use GraphQL\GraphQL;
 use Hasura\GraphQLiteBridge\Tests\TestCase;
 
-final class PermissionDummyQueryTest extends TestCase
+final class DummyQueryTest extends TestCase
 {
     public function testCanExecuteDummyQuery(): void
     {

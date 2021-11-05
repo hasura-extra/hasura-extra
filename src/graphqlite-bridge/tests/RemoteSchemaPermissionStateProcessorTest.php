@@ -8,15 +8,29 @@
 
 declare(strict_types=1);
 
-namespace Hasura\GraphQLiteBridge\Tests\RemoteSchemaProcessor;
+namespace Hasura\GraphQLiteBridge\Tests;
 
 use Hasura\GraphQLiteBridge\RemoteSchema;
-use Hasura\GraphQLiteBridge\RemoteSchemaProcessor\PermissionProcessor;
-use Hasura\GraphQLiteBridge\Tests\TestCase;
+use Hasura\GraphQLiteBridge\RemoteSchemaPermissionStateProcessor;
 
-final class PermissionProcessorTest extends TestCase
+final class RemoteSchemaPermissionStateProcessorTest extends TestCase
 {
     protected bool $autoBackupAndRestoreMetadata = true;
+
+    public function testCanThrowErrorWhenRemoteSchemaDoesNotExist(): void
+    {
+        $this->expectException(\LogicException::class);
+        $this->expectExceptionMessage('You should be add `test` remote schema first!');
+
+        $processor = new RemoteSchemaPermissionStateProcessor(
+            new RemoteSchema('test'),
+            $this->schemaFactory->createSchema(),
+            $this->client,
+            $this->annotationTracker
+        );
+
+        $processor->process();
+    }
 
     public function testCanSyncRolePermissions(): void
     {
@@ -25,11 +39,13 @@ final class PermissionProcessorTest extends TestCase
         $this->assertSame('apache', $apacheRemoteSchema['name']);
         $this->assertArrayNotHasKey('permissions', $apacheRemoteSchema);
 
-        $schema = $this->schemaFactory->createSchema();
-        $schema->assertValid(); // collect roles of fields
-
-        $processor = new PermissionProcessor($schema, $this->client, $this->annotationTracker);
-        $processor->process(new RemoteSchema('apache'));
+        $processor = new RemoteSchemaPermissionStateProcessor(
+            new RemoteSchema('apache'),
+            $this->schemaFactory->createSchema(),
+            $this->client,
+            $this->annotationTracker
+        );
+        $processor->process();
 
         $apacheRemoteSchema = $this->fetchApacheRemoteSchemaMetadata();
 

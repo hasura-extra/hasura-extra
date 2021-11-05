@@ -24,13 +24,6 @@ final class AnnotationTrackerTest extends TestCase
         $this->assertContains($roles, $this->annotationTracker->getQueryFieldAnnotations(Roles::class, 'a'));
     }
 
-    public function testTrackInvalidQueryFieldAnnotation(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessageMatches('~class should be class implements~');
-        $this->annotationTracker->trackQueryFieldAnnotation(new \stdClass(), 'a');
-    }
-
     public function testTrackMutationFieldAnnotation(): void
     {
         $roles = new Roles('a', 'b');
@@ -38,12 +31,5 @@ final class AnnotationTrackerTest extends TestCase
 
         $this->assertArrayHasKey('a', $this->annotationTracker->getMutationFieldAnnotations(Roles::class));
         $this->assertContains($roles, $this->annotationTracker->getMutationFieldAnnotations(Roles::class, 'a'));
-    }
-
-    public function testTrackInvalidMutationFieldAnnotation(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessageMatches('~class should be class implements~');
-        $this->annotationTracker->trackMutationFieldAnnotation(new \stdClass(), 'a');
     }
 }

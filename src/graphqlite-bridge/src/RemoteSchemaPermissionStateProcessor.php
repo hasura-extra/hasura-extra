@@ -8,30 +8,33 @@
 
 declare(strict_types=1);
 
-namespace Hasura\GraphQLiteBridge\RemoteSchemaProcessor;
+namespace Hasura\GraphQLiteBridge;
 
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Schema;
 use GraphQL\Utils\SchemaPrinter;
 use Hasura\ApiClient\Client;
 use Hasura\GraphQLiteBridge\Attribute\Roles;
+use Hasura\GraphQLiteBridge\Controller\DummyQuery;
 use Hasura\GraphQLiteBridge\Field\AnnotationTracker;
-use Hasura\GraphQLiteBridge\RemoteSchemaInterface;
-use Hasura\GraphQLiteBridge\RemoteSchemaProcessorInterface;
 use Hasura\Metadata\MetadataUtils;
 
-final class PermissionProcessor implements RemoteSchemaProcessorInterface
+final class RemoteSchemaPermissionStateProcessor implements StateProcessorInterface
 {
     public function __construct(
+        private RemoteSchemaInterface $remoteSchema,
         private Schema $schema,
         private Client $client,
         private AnnotationTracker $annotationTracker,
-        private string $dummyQueryField = PermissionDummyQuery::NAME
+        private string $dummyQueryField = DummyQuery::NAME
     ) {
+        // eager loading all query/mutation fields.
+        $this->schema->assertValid();
     }
 
-    public function process(RemoteSchemaInterface $remoteSchema): void
+    public function process(): void
     {
+        $remoteSchema = $this->remoteSchema;
         $metadataApi = $this->client->metadata();
         $data = $metadataApi->query('export_metadata', [], 2);
         $metadata = MetadataUtils::normalizeMetadata($data['metadata']);
@@ -68,7 +71,6 @@ final class PermissionProcessor implements RemoteSchemaProcessorInterface
             2
         );
     }
-
 
     private function createRemoteSchemaPermissions(): array
     {
