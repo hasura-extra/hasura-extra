@@ -47,11 +47,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         with:
-          package-directory: 'src/${{ matrix.package }}'
-          repository-organization: 'hasura-extra'
-          repository-name: '${{ matrix.package }}'
-          user-name: "GitHub Action"
-          user-email: "action@github.com"
+          package_directory: 'src/${{ matrix.package }}'
+          repository_organization: 'hasura-extra'
+          repository_name: '${{ matrix.package }}'
+          user_name: "GitHub Action"
+          user_email: "action@github.com"
           branch: "main"
 
       - if: "startsWith(github.ref, 'refs/tags/')"
@@ -62,9 +62,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         with:
           tag: ${GITHUB_REF#refs/tags/}
-          package-directory: 'src/${{ matrix.package }}'
-          repository-organization: 'hasura-extra'
-          repository-name: '${{ matrix.package }}'
-          user-name: "GitHub Action"
-          user-email: "action@github.com"
+          package_directory: 'src/${{ matrix.package }}'
+          repository_organization: 'hasura-extra'
+          repository_name: '${{ matrix.package }}'
+          user_name: "GitHub Action"
+          user_email: "action@github.com"
           branch: "main"
