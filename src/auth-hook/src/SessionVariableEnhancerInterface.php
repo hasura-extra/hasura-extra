@@ -16,8 +16,8 @@ namespace Hasura\AuthHook;
 interface SessionVariableEnhancerInterface
 {
     /**
-     * @param array $sessionVariables current session variables of current request.
-     * @return array session variables of current request.
+     * @param array $sessionVariables of current request.
+     * @return array session variables enhanced will be use.
      */
     public function enhance(array $sessionVariables): array;
 }
