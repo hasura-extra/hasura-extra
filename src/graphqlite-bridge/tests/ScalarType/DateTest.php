@@ -19,18 +19,18 @@ final class DateTest extends TestCase
     {
         $result = GraphQL::executeQuery(
             $this->schema,
-            'query { scalar(date: "2021-11-05") { date } }'
+            'query { test_scalar(date: "2021-11-05") { date } }'
         )->toArray();
 
         $this->assertArrayNotHasKey('errors', $result);
-        $this->assertSame('2021-11-05', $result['data']['scalar']['date']);
+        $this->assertSame('2021-11-05', $result['data']['test_scalar']['date']);
     }
 
     public function testParseInvalidValue(): void
     {
         $result = GraphQL::executeQuery(
             $this->schema,
-            'query { scalar(date: "2021-11-0a") { date } }'
+            'query { test_scalar(date: "2021-11-0a") { date } }'
         )->toArray();
 
         $this->assertArrayHasKey('errors', $result);

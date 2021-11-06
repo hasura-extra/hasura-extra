@@ -37,14 +37,14 @@ final class ScalarTypeQuery
     #[Field(name: 'uuid')]
     public ?Uuid $uuid;
 
-    #[Query(name: 'scalar', outputType: 'scalar_output')]
+    #[Query(name: 'test_scalar', outputType: 'scalar_output')]
     public function __invoke(
-        #[UseInputType(inputType: 'date')] ?\DateTimeInterface $date,
-        #[UseInputType(inputType: 'json')] ?array $json,
-        #[UseInputType(inputType: 'jsonb')] ?array $jsonb,
-        #[UseInputType(inputType: 'timestamptz')] ?\DateTimeInterface $timestamptz,
-        #[UseInputType(inputType: 'timetz')] ?\DateTimeInterface $timetz,
-        ?Uuid $uuid,
+        #[UseInputType(inputType: 'date')] ?\DateTimeInterface $date = null,
+        #[UseInputType(inputType: 'json')] ?array $json = null,
+        #[UseInputType(inputType: 'jsonb')] ?array $jsonb = null,
+        #[UseInputType(inputType: 'timestamptz')] ?\DateTimeInterface $timestamptz = null,
+        #[UseInputType(inputType: 'timetz')] ?\DateTimeInterface $timetz = null,
+        ?Uuid $uuid = null,
     ): self {
         $this->date = $date;
         $this->json = $json;

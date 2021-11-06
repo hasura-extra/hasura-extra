@@ -19,18 +19,18 @@ final class UuidTest extends TestCase
     {
         $result = GraphQL::executeQuery(
             $this->schema,
-            'query { scalar(uuid: "12abb417-0b10-4fbd-84c1-4bf2ab5e63ec") { uuid } }'
+            'query { test_scalar(uuid: "12abb417-0b10-4fbd-84c1-4bf2ab5e63ec") { uuid } }'
         )->toArray();
 
         $this->assertArrayNotHasKey('errors', $result);
-        $this->assertSame('12abb417-0b10-4fbd-84c1-4bf2ab5e63ec', $result['data']['scalar']['uuid']);
+        $this->assertSame('12abb417-0b10-4fbd-84c1-4bf2ab5e63ec', $result['data']['test_scalar']['uuid']);
     }
 
     public function testParseInvalidValue(): void
     {
         $result = GraphQL::executeQuery(
             $this->schema,
-            'query { scalar(uuid: "") { uuid } }'
+            'query { test_scalar(uuid: "") { uuid } }'
         )->toArray();
 
         $this->assertArrayHasKey('errors', $result);

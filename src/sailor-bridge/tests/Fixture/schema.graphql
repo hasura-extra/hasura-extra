@@ -3288,6 +3288,12 @@ type query_root {
   
   """
   allow: String!
+
+  """
+  
+  
+  """
+  arg_naming(snake_case: String!, snake_case_2: Int!): json!
   continent(code: ID!): Continent
   continents(filter: ContinentFilterInput): [Continent!]!
   countries(filter: CountryFilterInput): [Country!]!
@@ -3348,7 +3354,7 @@ type query_root {
   
   
   """
-  scalar(date: date = null, json: json = null, jsonb: jsonb = null, timestamptz: timestamptz = null, timetz: timetz = null, uuid: uuid = null): scalar_output
+  test_scalar(date: date, json: json, jsonb: jsonb, timestamptz: timestamptz, timetz: timetz, uuid: uuid): scalar_output
 }
 
 type scalar_output {

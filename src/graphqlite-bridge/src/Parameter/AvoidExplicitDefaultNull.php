@@ -16,10 +16,16 @@ use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\WrappingType;
 use TheCodingMachine\GraphQLite\Parameters\InputTypeParameterInterface;
 
-final class AvoidExplicitDefaultNull implements InputTypeParameterInterface
+/**
+ * Help to solve an issue: https://github.com/hasura/graphql-engine/issues/7772
+ */
+final class AvoidExplicitDefaultNull implements InputTypeParameterInterface, WrappingParameterInterface
 {
-    public function __construct(private InputTypeParameterInterface $parameter)
+    use WrappingParameterTrait;
+
+    public function __construct(InputTypeParameterInterface $parameter)
     {
+        $this->parameter = $parameter;
     }
 
     public function resolve(?object $source, array $args, $context, ResolveInfo $info)
