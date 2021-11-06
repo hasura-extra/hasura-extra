@@ -27,6 +27,8 @@ final class ArgNamingMiddleware implements FieldMiddlewareInterface
         $parameters = $queryFieldDescriptor->getParameters();
 
         if (!empty($parameters)) {
+            $fieldDefArgs = array_column($fieldDef->args, null, 'name');
+
             foreach ($parameters as $parameter) {
                 if (!$parameter instanceof InputTypeParameterInterface) {
                     continue;
@@ -38,12 +40,7 @@ final class ArgNamingMiddleware implements FieldMiddlewareInterface
                     continue;
                 }
 
-                foreach ($fieldDef->args as $arg) {
-                    if ($arg->name === $parameter->getName()) {
-                        $arg->name = $parameter->getArgName();
-                        continue 2;
-                    }
-                }
+                $fieldDefArgs[$parameter->getName()]->name = $parameter->getArgName();
             }
         }
 
