@@ -1,7 +1,7 @@
 [English](./README.md) | Tiếng Việt
 
-Hasura Api Client
-=================
+Api Client
+==========
 
 Thư viện dùng để tương tác với Hasura [api](https://hasura.io/docs/latest/graphql/core/api-reference/index.html).
 

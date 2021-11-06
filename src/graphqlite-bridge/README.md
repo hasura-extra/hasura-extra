@@ -1,9 +1,9 @@
 English | [Tiếng Việt](./README-VI.md)
 
-Metadata
-========
+GraphQLite Bridge
+=================
 
-Library to help manage Hasura metadata and provide set of commands like [Hasura CLI](https://hasura.io/docs/latest/graphql/core/migrations/manage-metadata.html) but for PHP.
+Provide integration for [GraphQLite](https://graphqlite.thecodingmachine.io/) library with Hasura Extra packages.
 
 Installation
 ------------
@@ -11,7 +11,7 @@ Installation
 Install via [Composer](https://getcomposer.org/):
 
 ```shell
-composer require hasura-extra/metadata
+composer require hasura-extra/graphqlite-bridge
 ```
 
 Documentation

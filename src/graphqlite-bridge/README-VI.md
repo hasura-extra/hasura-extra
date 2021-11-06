@@ -1,9 +1,9 @@
 [English](./README.md) | Tiếng Việt
 
-Sailor Bridge
-=============
+GraphQLite Bridge
+=================
 
-Hổ trợ tích hợp [Sailor](https://github.com/spawnia/sailor) typesafe graphql client với các packages của Hasura Extra.
+Hổ trợ tích hợp [GraphQLite](https://graphqlite.thecodingmachine.io/) library với các packages của Hasura Extra.
 
 Cài đặt
 ------------
@@ -11,7 +11,7 @@ Cài đặt
 Cài đặt thông qua [Composer](https://getcomposer.org/):
 
 ```shell
-composer require hasura-extra/sailor-bridge
+composer require hasura-extra/graphqlite-bridge
 ```
 
 Tài liệu
