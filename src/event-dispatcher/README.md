@@ -1,7 +1,7 @@
 English | [Tiếng Việt](./README-VI.md)
 
-Hasura Event Dispatcher
-=======================
+Event Dispatcher
+================
 
 A [PSR-15](https://www.php-fig.org/psr/psr-15/) server request handle to help dispatch events triggered by Hasura via [PSR-14](https://www.php-fig.org/psr/psr-14/) event dispatcher.
 

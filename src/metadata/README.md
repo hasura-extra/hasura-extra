@@ -1,7 +1,7 @@
 English | [Tiếng Việt](./README-VI.md)
 
-Hasura Metadata
-=================
+Metadata
+========
 
 Library to help manage Hasura metadata and provide set of commands like [Hasura CLI](https://hasura.io/docs/latest/graphql/core/migrations/manage-metadata.html) but for PHP.
 

@@ -1,7 +1,7 @@
 English | [Tiếng Việt](./README-VI.md)
 
-Hasura Sailor Bridge
-====================
+Sailor Bridge
+=============
 
 Provide integration for [Sailor](https://github.com/spawnia/sailor) typesafe graphql client with Hasura Extra packages.
 
