@@ -19,13 +19,13 @@ final class JsonbTest extends TestCase
     {
         $result = GraphQL::executeQuery(
             $this->schema,
-            'query { scalar(jsonb: { a: 1, b: false, c: [1, 2, 3], d: "e", f: {} }) { jsonb } }'
+            'query { test_scalar(jsonb: { a: 1, b: false, c: [1, 2, 3], d: "e", f: {} }) { jsonb } }'
         )->toArray();
 
         $this->assertArrayNotHasKey('errors', $result);
         $this->assertSame(
             ['a' => 1, 'b' => false, 'c' => [1, 2, 3], 'd' => 'e', 'f' => []],
-            $result['data']['scalar']['jsonb']
+            $result['data']['test_scalar']['jsonb']
         );
     }
 
@@ -33,7 +33,7 @@ final class JsonbTest extends TestCase
     {
         $result = GraphQL::executeQuery(
             $this->schema,
-            'query { scalar(jsonb: true) { jsonb } }'
+            'query { test_scalar(jsonb: true) { jsonb } }'
         )->toArray();
 
         $this->assertArrayHasKey('errors', $result);

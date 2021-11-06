@@ -19,18 +19,18 @@ final class TimetzTest extends TestCase
     {
         $result = GraphQL::executeQuery(
             $this->schema,
-            'query { scalar(timetz: "08:17:55+0000") { timetz } }'
+            'query { test_scalar(timetz: "08:17:55+0000") { timetz } }'
         )->toArray();
 
         $this->assertArrayNotHasKey('errors', $result);
-        $this->assertSame('08:17:55+0000', $result['data']['scalar']['timetz']);
+        $this->assertSame('08:17:55+0000', $result['data']['test_scalar']['timetz']);
     }
 
     public function testParseInvalidValue(): void
     {
         $result = GraphQL::executeQuery(
             $this->schema,
-            'query { scalar(timetz: "2021-11-05T08:17:55+0000") { timetz } }'
+            'query { test_scalar(timetz: "2021-11-05T08:17:55+0000") { timetz } }'
         )->toArray();
 
         $this->assertArrayHasKey('errors', $result);

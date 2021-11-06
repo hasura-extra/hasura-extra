@@ -19,18 +19,18 @@ final class TimestamptzTest extends TestCase
     {
         $result = GraphQL::executeQuery(
             $this->schema,
-            'query { scalar(timestamptz: "2021-11-05T08:17:55+0000") { timestamptz } }'
+            'query { test_scalar(timestamptz: "2021-11-05T08:17:55+0000") { timestamptz } }'
         )->toArray();
 
         $this->assertArrayNotHasKey('errors', $result);
-        $this->assertSame('2021-11-05T08:17:55+0000', $result['data']['scalar']['timestamptz']);
+        $this->assertSame('2021-11-05T08:17:55+0000', $result['data']['test_scalar']['timestamptz']);
     }
 
     public function testParseInvalidValue(): void
     {
         $result = GraphQL::executeQuery(
             $this->schema,
-            'query { scalar(timestamptz: "2021-11-05T08:17:55") { timestamptz } }'
+            'query { test_scalar(timestamptz: "2021-11-05T08:17:55") { timestamptz } }'
         )->toArray();
 
         $this->assertArrayHasKey('errors', $result);

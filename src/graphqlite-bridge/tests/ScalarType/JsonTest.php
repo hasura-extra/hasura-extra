@@ -19,18 +19,18 @@ final class JsonTest extends TestCase
     {
         $result = GraphQL::executeQuery(
             $this->schema,
-            'query { scalar(json: [1, 2, 3]) { json } }'
+            'query { test_scalar(json: [1, 2, 3]) { json } }'
         )->toArray();
 
         $this->assertArrayNotHasKey('errors', $result);
-        $this->assertSame([1, 2, 3], $result['data']['scalar']['json']);
+        $this->assertSame([1, 2, 3], $result['data']['test_scalar']['json']);
     }
 
     public function testParseInvalidValue(): void
     {
         $result = GraphQL::executeQuery(
             $this->schema,
-            'query { scalar(json: "2021-11-01") { json } }'
+            'query { test_scalar(json: "2021-11-01") { json } }'
         )->toArray();
 
         $this->assertArrayHasKey('errors', $result);
