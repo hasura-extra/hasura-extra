@@ -10,9 +10,9 @@ declare(strict_types=1);
 
 namespace Hasura\GraphQLiteBridge\Tests;
 
-use Hasura\GraphQLiteBridge\NotExistRemoteSchemaException;
-use Hasura\GraphQLiteBridge\RemoteSchema;
 use Hasura\GraphQLiteBridge\RemoteSchemaPermissionStateProcessor;
+use Hasura\Metadata\NotExistRemoteSchemaException;
+use Hasura\Metadata\RemoteSchema;
 
 final class RemoteSchemaPermissionStateProcessorTest extends TestCase
 {

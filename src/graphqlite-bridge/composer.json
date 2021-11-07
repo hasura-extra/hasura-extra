@@ -22,7 +22,6 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5",
-        "symfony/console": "^5.0",
         "symfony/uid": "^5.0"
     }
 }

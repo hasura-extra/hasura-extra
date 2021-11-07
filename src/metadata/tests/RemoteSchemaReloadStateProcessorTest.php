@@ -8,11 +8,11 @@
 
 declare(strict_types=1);
 
-namespace Hasura\GraphQLiteBridge\Tests;
+namespace Hasura\Metadata\Tests;
 
-use Hasura\GraphQLiteBridge\NotExistRemoteSchemaException;
-use Hasura\GraphQLiteBridge\RemoteSchema;
-use Hasura\GraphQLiteBridge\RemoteSchemaReloadStateProcessor;
+use Hasura\Metadata\NotExistRemoteSchemaException;
+use Hasura\Metadata\RemoteSchema;
+use Hasura\Metadata\RemoteSchemaReloadStateProcessor;
 
 final class RemoteSchemaReloadStateProcessorTest extends TestCase
 {

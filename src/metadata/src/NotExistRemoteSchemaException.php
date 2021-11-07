@@ -8,11 +8,11 @@
 
 declare(strict_types=1);
 
-namespace Hasura\GraphQLiteBridge;
+namespace Hasura\Metadata;
 
 use Throwable;
 
-final class NotExistRemoteSchemaException extends RuntimeException
+final class NotExistRemoteSchemaException extends \RuntimeException implements ExceptionInterface
 {
     public function __construct(
         private string $remoteSchemaName,
