@@ -52,7 +52,10 @@ final class RemoteSchemaPermissionStateProcessor implements StateProcessorInterf
         }
 
         if (false === $updated) {
-            throw new \LogicException(sprintf('You should be add `%s` remote schema first!', $remoteSchema->getName()));
+            throw new NotExistRemoteSchemaException(
+                $remoteSchema->getName(),
+                sprintf('You should be add `%s` remote schema first!', $remoteSchema->getName())
+            );
         }
 
         $metadataApi->query(
