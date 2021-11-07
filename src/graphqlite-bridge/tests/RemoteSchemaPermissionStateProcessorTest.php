@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Hasura\GraphQLiteBridge\Tests;
 
+use Hasura\GraphQLiteBridge\NotExistRemoteSchemaException;
 use Hasura\GraphQLiteBridge\RemoteSchema;
 use Hasura\GraphQLiteBridge\RemoteSchemaPermissionStateProcessor;
 
@@ -19,7 +20,7 @@ final class RemoteSchemaPermissionStateProcessorTest extends TestCase
 
     public function testCanThrowErrorWhenRemoteSchemaDoesNotExist(): void
     {
-        $this->expectException(\LogicException::class);
+        $this->expectException(NotExistRemoteSchemaException::class);
         $this->expectExceptionMessage('You should be add `test` remote schema first!');
 
         $processor = new RemoteSchemaPermissionStateProcessor(
