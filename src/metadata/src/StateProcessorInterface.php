@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace Hasura\GraphQLiteBridge;
+namespace Hasura\Metadata;
 
 /**
  * This interface implements by classes will process (sync remote schema role permissions, inherited roles, etc...)

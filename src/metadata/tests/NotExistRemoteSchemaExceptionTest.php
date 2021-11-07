@@ -8,16 +8,15 @@
 
 declare(strict_types=1);
 
-namespace Hasura\GraphQLiteBridge\Tests;
+namespace Hasura\Metadata\Tests;
 
-use Hasura\GraphQLiteBridge\NotExistRemoteSchemaException;
-use Hasura\GraphQLiteBridge\RuntimeException;
+use Hasura\Metadata\NotExistRemoteSchemaException;
 
 final class NotExistRemoteSchemaExceptionTest extends TestCase
 {
     public function testConstructor(): void
     {
-        $previous = new RuntimeException();
+        $previous = new \RuntimeException();
         $exception = new NotExistRemoteSchemaException('0', '1', 2, $previous);
 
         $this->assertSame('0', $exception->getRemoteSchemaName());

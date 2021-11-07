@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace Hasura\GraphQLiteBridge;
+namespace Hasura\Metadata;
 
 final class RemoteSchema implements RemoteSchemaInterface
 {

@@ -18,6 +18,9 @@ use Hasura\GraphQLiteBridge\Attribute\Roles;
 use Hasura\GraphQLiteBridge\Controller\DummyQuery;
 use Hasura\GraphQLiteBridge\Field\AnnotationTracker;
 use Hasura\Metadata\MetadataUtils;
+use Hasura\Metadata\NotExistRemoteSchemaException;
+use Hasura\Metadata\RemoteSchemaInterface;
+use Hasura\Metadata\StateProcessorInterface;
 
 final class RemoteSchemaPermissionStateProcessor implements StateProcessorInterface
 {

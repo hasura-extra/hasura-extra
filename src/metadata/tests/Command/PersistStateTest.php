@@ -8,11 +8,11 @@
 
 declare(strict_types=1);
 
-namespace Hasura\GraphQLiteBridge\Tests\Command;
+namespace Hasura\Metadata\Tests\Command;
 
-use Hasura\GraphQLiteBridge\Command\PersistState;
-use Hasura\GraphQLiteBridge\StateProcessorInterface;
-use Hasura\GraphQLiteBridge\Tests\TestCase;
+use Hasura\Metadata\Command\PersistState;
+use Hasura\Metadata\StateProcessorInterface;
+use Hasura\Metadata\Tests\TestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 
 final class PersistStateTest extends TestCase

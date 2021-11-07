@@ -8,9 +8,9 @@
 
 declare(strict_types=1);
 
-namespace Hasura\GraphQLiteBridge\Tests;
+namespace Hasura\Metadata\Tests;
 
-use Hasura\GraphQLiteBridge\RemoteSchema;
+use Hasura\Metadata\RemoteSchema;
 
 class RemoteSchemaTest extends TestCase
 {
