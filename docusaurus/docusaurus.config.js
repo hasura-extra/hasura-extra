@@ -25,8 +25,7 @@ const config = {
         docs: {
           editCurrentVersion: true,
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          editUrl: 'https://github.com/hasura-extra/hasura-extra.github.io/edit/main/',
+          editUrl: 'https://github.com/hasura-extra/hasura-extra/edit/main/docusaurus/',
           routeBasePath: '/'
         },
         theme: {
