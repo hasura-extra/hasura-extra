@@ -22,6 +22,7 @@ jobs:
         env:
           USE_SSH: true
           GIT_USER: git
+        working-directory: docusaurus
         run: |
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Action"
