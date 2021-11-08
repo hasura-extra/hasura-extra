@@ -1,0 +1,44 @@
+name: Helm chart tests
+
+on:
+  pull_request: ~
+
+env:
+  CT_TARGET_BRANCH: main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up chart-testing
+        uses: helm/chart-testing-action@v2.1.0
+
+      - name: Run chart-testing (lint)
+        run: ct lint --check-version-increment=false
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up chart-testing
+        uses: helm/chart-testing-action@v2.1.0
+
+      - name: Create kind cluster
+        uses: helm/kind-action@v1.2.0
+
+      - name: Install Postgresql
+        run: |
+          helm install postgresql bitnami/postgresql \
+            --set postgresqlDatabase=hasura \
+            --set postgresqlUsername=hasura \
+            --set postgresqlPassword=hasura \
+            --wait \
+            --wait-for-jobs
+
+      - name: Run chart-testing (install)
+        run: ct install
