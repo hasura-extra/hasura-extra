@@ -1,0 +1,1 @@
+dbUrl: postgresql://postgres:hasura@postgresql.default.svc.cluster.local/hasura
