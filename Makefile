@@ -7,6 +7,14 @@ environment:
 apply-metadata:
 	php ./src/metadata/bin/hasura-metadata apply
 
+.PHONY: check-cs
+check-cs:
+	./vendor/bin/ecs check
+
+.PHONY: fix-cs
+fix-cs:
+	./vendor/bin/ecs check --fix
+
 .PHONY: export-metadata
 export-metadata:
 	php ./src/metadata/bin/hasura-metadata export --force
