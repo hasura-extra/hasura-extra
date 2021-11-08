@@ -10,7 +10,7 @@ keywords:
   - hasura-extra
 type: application
 version: 1.0.0
-appVersion: "v2.1.0-beta.1"
+appVersion: "v2.1.0-beta.2"
 maintainers:
   - name: vuongxuongminh
     email: vuongxuongminh@gmail.com
