@@ -23,7 +23,6 @@ data:
   HASURA_GRAPHQL_ENABLE_ALLOWLIST: {{ .Values.enableAllowlist | quote }}
   HASURA_GRAPHQL_INFER_FUNCTION_PERMISSIONS: {{ .Values.inferFunctionPermissions | quote }}
   HASURA_GRAPHQL_SCHEMA_SYNC_POLL_INTERVAL: {{ .Values.schemaSyncPollInterval | quote }}
-  HASURA_GRAPHQL_EXPERIMENTAL_FEATURES: {{ .Values.experimentalFeatures | quote }}
   HASURA_GRAPHQL_GRACEFUL_SHUTDOWN_TIMEOUT: {{ .Values.gracefulShutdownTimeout | quote }}
   HASURA_GRAPHQL_ENABLE_MAINTENANCE_MODE: {{ .Values.enableMaintainceMode | quote }}
   HASURA_GRAPHQL_CONNECTION_COMPRESSION: {{ .Values.connectionCompression | quote }}
