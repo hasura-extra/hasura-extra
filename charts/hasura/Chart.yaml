@@ -9,7 +9,7 @@ keywords:
   - graphql
   - hasura-extra
 type: application
-version: 2.1.0-Beta.1
+version: 1.0.0
 appVersion: "2.1.0-Beta.1"
 maintainers:
   - name: vuongxuongminh
