@@ -28,8 +28,5 @@ jobs:
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.2.1
-        with:
-          charts_repo_url: https://hasura-extra.github.io/helm-charts
         env:
-          CR_GIT_REPO: helm-charts
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
