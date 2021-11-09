@@ -10,15 +10,15 @@ A Helm chart to install Hasura graphql engine in a Kubernetes cluster.
 
 To install the chart with the release name `my-release`, run the following commands:
 
-helm repo add hasura-extra https://hasura-extra.hasura.io/helm-charts
-helm install my-release hasura-extra/hasura
+    helm repo add hasura-extra https://hasura-extra.hasura.io/helm-charts
+    helm install my-release hasura-extra/hasura
 
 ## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | adminInternalErrors | string | `nil` | Include the internal key in the errors extensions of the response for GraphQL requests with the admin role (if required). |
-| adminSecret | string | `"!ChangeMe!"` |  |
+| adminSecret | string | `"!ChangeMe!"` | Admin secret key, required to access this instance. This is mandatory when you use webhook or JWT. |
 | affinity | object | `{}` | [Affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity) configuration. See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#scheduling) for details. |
 | asyncActionsFetchInterval | string | `nil` | Interval in milliseconds to sleep before trying to fetch async actions again after a fetch returned no async actions from metadata storage. Value 0 implies completely disable fetching async actions from the storage. |
 | authHook | string | `nil` | URL of the authorization webhook required to authorize requests. See [auth webhooks docs](https://hasura.io/docs/latest/graphql/core/auth/authentication/webhook.html). |
