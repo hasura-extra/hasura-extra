@@ -106,8 +106,6 @@ tolerations: []
 # See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#scheduling) for details.
 affinity: {}
 
-# Hasura configuration
-
 # -- Admin secret key, required to access this instance. This is mandatory when you use webhook or JWT.
 adminSecret: '!ChangeMe!'
 
