@@ -10,7 +10,7 @@ A Helm chart to install Hasura graphql engine in a Kubernetes cluster.
 
 To install the chart with the release name `my-release`, run the following commands:
 
-    helm repo add hasura-extra https://hasura-extra.hasura.io/helm-charts
+    helm repo add hasura-extra https://hasura-extra.hasura.io/hasura-extra
     helm install my-release hasura-extra/hasura
 
 ## Values
