@@ -29,30 +29,30 @@ data:
   HASURA_GRAPHQL_WEBSOCKET_KEEPALIVE: {{ .Values.websocketKeepalive | quote }}
   HASURA_GRAPHQL_WEBSOCKET_CONNECTION_INIT_TIMEOUT: {{ .Values.websocketConnectionInitTimeout | quote }}
   HASURA_GRAPHQL_WS_READ_COOKIE: {{ .Values.wsReadCookie | quote }}
-  {{- if .Values.eventsFetchInterval }}
+{{- if .Values.eventsFetchInterval }}
   HASURA_GRAPHQL_EVENTS_FETCH_INTERVAL: {{ .Values.eventsFetchInterval | quote }}
-  {{- end }}
-  {{- if .Values.asyncActionsFetchInterval }}
+{{- end }}
+{{- if .Values.asyncActionsFetchInterval }}
   HASURA_GRAPHQL_ASYNC_ACTIONS_FETCH_INTERVAL: {{ .Values.asyncActionsFetchInterval | quote }}
-  {{- end }}
-  {{- if .Values.consoleAssetsDir }}
+{{- end }}
+{{- if .Values.consoleAssetsDir }}
   HASURA_GRAPHQL_CONSOLE_ASSETS_DIR: {{ .Values.consoleAssetsDir | quote }}
   {{- end }}
-  {{- if .Values.adminInternalErrors }}
+{{- if .Values.adminInternalErrors }}
   HASURA_GRAPHQL_ADMIN_INTERNAL_ERRORS: {{ .Values.adminInternalErrors | quote }}
   {{- end }}
-  {{- if .Values.corsDomain }}
+{{- if .Values.corsDomain }}
   HASURA_GRAPHQL_CORS_DOMAIN: {{ .Values.corsDomain | quote }}
-  {{- else }}
+{{- else }}
   HASURA_GRAPHQL_DISABLE_CORS: 'true'
-  {{- end }}
-  {{- if .Values.jwtSecret }}
+{{- end }}
+{{- if .Values.jwtSecret }}
   HASURA_GRAPHQL_JWT_SECRET: {{ .Values.jwtSecret | quote }}
   HASURA_GRAPHQL_UNAUTHORIZED_ROLE: {{ .Values.unauthorizedRole | quote }}
-  {{- else if .Values.authHook  }}
+{{- else if .Values.authHook  }}
   HASURA_GRAPHQL_AUTH_HOOK: {{ .Values.authHook | quote }}
   HASURA_GRAPHQL_AUTH_HOOK_MODE: {{ .Values.authHookMode | quote }}
-  {{- end }}
+{{- end }}
 {{- with .Values.extraEnvVarsCM }}
-  {{- toYaml . | nindent 2 }}
+  {{- tpl ( . | toYaml) $ | nindent 2 }}
 {{- end }}
