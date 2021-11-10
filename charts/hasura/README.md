@@ -1,6 +1,6 @@
 # Hasura Chart for Kubernetes
 
-![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v2.1.0-beta.2](https://img.shields.io/badge/AppVersion-v2.1.0--beta.2-informational?style=flat-square)
+![Version: 1.0.1](https://img.shields.io/badge/Version-1.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v2.1.0-beta.2](https://img.shields.io/badge/AppVersion-v2.1.0--beta.2-informational?style=flat-square)
 
 A Helm chart to install Hasura graphql engine in a Kubernetes cluster.
 
@@ -39,9 +39,8 @@ To install the chart with the release name `my-release`, run the following comma
 | eventsFetchBatchSize | int | `100` | Maximum number of events to be fetched from the DB in a single batch. |
 | eventsFetchInterval | string | `nil` | Interval in milliseconds to sleep before trying to fetch events again after a fetch returned no events from postgres |
 | eventsHttpPoolSize | int | `100` | Maximum number of concurrent http workers delivering events at any time. |
-| extraEnvVars | list | `[]` | Extra environment variables to be set on Hasura container. See [values.yaml](values.yaml). |
-| extraEnvVarsCM | string | `""` | extraEnvVarsCM ConfigMap with extra environment variables |
-| extraEnvVarsSecret | string | `""` | extraEnvVarsSecret Secret with extra environment variables |
+| extraEnvVarsCM | object | `{}` | extraEnvVarsCM append to ConfigMap with extra environment variables. See [values.yaml](values.yaml). |
+| extraEnvVarsSecret | object | `{}` | extraEnvVarsSecret append to Secret with extra environment variables. See [values.yaml](values.yaml). |
 | fullnameOverride | string | `""` | A name to substitute for the full names of resources. |
 | gracefulShutdownTimeout | int | `60` | Timeout (in seconds) to wait for the in-flight events (event triggers and scheduled triggers) and async actions to complete before the server shuts down completely. If the in-flight events are not completed within the timeout, those events are marked as pending. |
 | image.pullPolicy | string | `"IfNotPresent"` | [Image pull policy](https://kubernetes.io/docs/concepts/containers/images/#updating-images) for updating already existing images on a node. |
