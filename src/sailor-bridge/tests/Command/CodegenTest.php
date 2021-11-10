@@ -22,6 +22,6 @@ final class CodegenTest extends TestCase
         $tester->execute([]);
         $this->assertStringContainsString('Generating...', $tester->getDisplay());
         $this->assertStringContainsString('Generated successfully!', $tester->getDisplay());
-        $this->assertFileExists(self::CODEGEN_PATH . '/Article.php');
+        $this->assertFileExists(self::EXECUTOR_PATH . '/Article.php');
     }
 }

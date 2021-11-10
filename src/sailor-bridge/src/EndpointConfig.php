@@ -18,7 +18,7 @@ final class EndpointConfig extends AbstractEndpointConfig
     public function __construct(
         private SailorClientInterface $client,
         private string $executorNamespace,
-        private string $targetPath,
+        private string $executorPath,
         private string $querySpecPath,
         private string $schemaPath
     ) {
@@ -36,7 +36,7 @@ final class EndpointConfig extends AbstractEndpointConfig
 
     public function targetPath(): string
     {
-        return $this->targetPath;
+        return $this->executorPath;
     }
 
     public function searchPath(): string
