@@ -19,7 +19,7 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class TestCase extends PHPTestCase
 {
-    protected const CODEGEN_PATH = __DIR__ . '/.codegen';
+    protected const EXECUTOR_PATH = __DIR__ . '/.executor';
 
     protected const SCHEMA_PATH = __DIR__ . '/Fixture/schema.graphql';
 
@@ -35,7 +35,7 @@ class TestCase extends PHPTestCase
         $config = new EndpointConfig(
             new SailorClient($apiClient),
             'App\GraphqlExecutor',
-            self::CODEGEN_PATH,
+            self::EXECUTOR_PATH,
             self::QUERY_SPEC_PATH,
             self::SCHEMA_PATH
         );
@@ -43,13 +43,13 @@ class TestCase extends PHPTestCase
         Configuration::setEndpoint('hasura', $config);
 
         $this->filesystem = new Filesystem();
-        $this->filesystem->mkdir(self::CODEGEN_PATH);
+        $this->filesystem->mkdir(self::EXECUTOR_PATH);
     }
 
     protected function tearDown(): void
     {
         parent::tearDown();
 
-        $this->filesystem->remove(self::CODEGEN_PATH);
+        $this->filesystem->remove(self::EXECUTOR_PATH);
     }
 }
