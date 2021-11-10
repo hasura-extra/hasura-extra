@@ -9,11 +9,16 @@
         "psr/http-server-handler": "^1.0",
         "spawnia/sailor": "^v0.10",
         "symfony/console": "^5.0",
+        "symfony/event-dispatcher": "^5.0",
         "symfony/filesystem": "^5.0",
+        "symfony/framework-bundle": "^5.0",
         "symfony/http-client": "^5.0",
+        "symfony/psr7-pack": "^1.0",
+        "symfony/security-bundle": "^5.0",
         "symfony/string": "^5.0",
         "symfony/yaml": "^5.0",
-        "thecodingmachine/graphqlite": "^5.0"
+        "thecodingmachine/graphqlite": "^5.0",
+        "thecodingmachine/graphqlite-bundle": "^5.0"
     },
     "require-dev": {
         "nyholm/psr7": "^1.0",
@@ -26,6 +31,7 @@
         "psr-4": {
             "Hasura\\ApiClient\\": "src/api-client/src",
             "Hasura\\AuthHook\\": "src/auth-hook/src",
+            "Hasura\\Bundle\\": "src/hasura-bundle/src",
             "Hasura\\EventDispatcher\\": "src/event-dispatcher/src",
             "Hasura\\GraphQLiteBridge\\": "src/graphqlite-bridge/src",
             "Hasura\\Metadata\\": "src/metadata/src",
@@ -36,6 +42,7 @@
         "psr-4": {
             "Hasura\\ApiClient\\Tests\\": "src/api-client/tests",
             "Hasura\\AuthHook\\Tests\\": "src/auth-hook/tests",
+            "Hasura\\Bundle\\Tests\\": "src/hasura-bundle/tests",
             "Hasura\\EventDispatcher\\Tests\\": "src/event-dispatcher/tests",
             "Hasura\\GraphQLiteBridge\\Tests\\": "src/graphqlite-bridge/tests",
             "Hasura\\Metadata\\Tests\\": "src/metadata/tests",
@@ -47,6 +54,7 @@
         "hasura-extra/auth-hook": "self.version",
         "hasura-extra/event-dispatcher": "self.version",
         "hasura-extra/graphqlite-bridge": "self.version",
+        "hasura-extra/hasura-bundle": "self.version",
         "hasura-extra/metadata": "self.version",
         "hasura-extra/sailor-bridge": "self.version"
     },
