@@ -83,7 +83,7 @@ use Symfony\Component\Filesystem\Filesystem;
         $config = new EndpointConfig(
             new SailorClient($apiClient),
             $config['executorNamespace'],
-            $config['targetPath'],
+            $config['executorPath'],
             $config['querySpecPath'],
             $config['schemaPath']
         );
@@ -117,7 +117,7 @@ use Symfony\Component\Filesystem\Filesystem;
         $baseUri = $config['baseUri'] ?? $_ENV['HASURA_BASE_URI'] ?? $_SERVER['HASURA_BASE_URI'] ?? null;
         $adminSecret = $config['adminSecret'] ?? $_ENV['HASURA_ADMIN_SECRET'] ?? $_SERVER['HASURA_ADMIN_SECRET'] ?? null;
         $executorNamespace = $config['sailor']['executorNamespace'] ?? $_ENV['SAILOR_EXECUTOR_NAMESPACE'] ?? $_SERVER['SAILOR_EXECUTOR_NAMESPACE'] ?? null;
-        $targetPath = $config['sailor']['targetPath'] ?? $_ENV['SAILOR_TARGET_PATH'] ?? $_SERVER['SAILOR_TARGET_PATH'] ?? null;
+        $executorPath = $config['sailor']['executorPath'] ?? $_ENV['SAILOR_EXECUTOR_PATH'] ?? $_SERVER['SAILOR_EXECUTOR_PATH'] ?? null;
         $schemaPath = $config['sailor']['schemaPath'] ?? $_ENV['SAILOR_SCHEMA_PATH'] ?? $_SERVER['SAILOR_SCHEMA_PATH'] ?? null;
         $querySpecPath = $config['sailor']['querySpecPath'] ?? $_ENV['SAILOR_QUERY_SPEC_PATH'] ?? $_SERVER['SAILOR_QUERY_SPEC_PATH'] ?? null;
         $hintMessage = '(Use `init-config` command to generate config file).';
@@ -134,10 +134,10 @@ use Symfony\Component\Filesystem\Filesystem;
             exit(1);
         }
 
-        if (null === $targetPath) {
+        if (null === $executorPath) {
             $this->symfonyStyle->warning(
                 sprintf(
-                    'You should be config Sailor target path where to store codegen files via `%s` (sailor.targetPath) config file or `SAILOR_TARGET_PATH` env. %s',
+                    'You should be config Sailor executor path where to store codegen files via `%s` (sailor.executorPath) config file or `SAILOR_EXECUTOR_PATH` env. %s',
                     $file,
                     $hintMessage
                 )
@@ -176,7 +176,7 @@ use Symfony\Component\Filesystem\Filesystem;
             'executorNamespace',
             'querySpecPath',
             'schemaPath',
-            'targetPath'
+            'executorPath'
         );
     }
 })->run();

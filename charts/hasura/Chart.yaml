@@ -4,13 +4,13 @@ description: A Helm chart to install Hasura graphql engine in a Kubernetes clust
 home: https://hasura-extra.github.io/
 sources:
   - https://github.com/hasura/graphql-engine
-  - https://github.com/hasura-extra/hasura-extra/charts/hasura
+  - https://github.com/hasura-extra/hasura-extra/tree/charts/hasura
 keywords:
   - hasura
   - graphql
   - hasura-extra
 type: application
-version: 2.0.0
+version: 2.1.0
 appVersion: "v2.1.0-beta.2"
 maintainers:
   - name: vuongxuongminh

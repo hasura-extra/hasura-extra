@@ -8,7 +8,7 @@ return [
     ],
     'sailor' => [
         'executorNamespace' => 'App\\GraphqlExecutor',
-        'targetPath' => __DIR__ . '/hasura/graphql_executor',
+        'executorPath' => __DIR__ . '/hasura/graphql_executor',
         'querySpecPath' => __DIR__ . '/hasura/graphql',
         'schemaPath' => __DIR__ . '/hasura/schema.graphql'
     ]
