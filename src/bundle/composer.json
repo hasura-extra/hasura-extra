@@ -1,5 +1,5 @@
 {
-    "name": "hasura-extra/hasura-bundle",
+    "name": "hasura-extra/bundle",
     "license": "MIT",
     "description": "Symfony bundle to build modern web APIs with Hasura graphql engine.",
     "prefer-stable": true,

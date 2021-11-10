@@ -31,7 +31,7 @@
         "psr-4": {
             "Hasura\\ApiClient\\": "src/api-client/src",
             "Hasura\\AuthHook\\": "src/auth-hook/src",
-            "Hasura\\Bundle\\": "src/hasura-bundle/src",
+            "Hasura\\Bundle\\": "src/bundle/src",
             "Hasura\\EventDispatcher\\": "src/event-dispatcher/src",
             "Hasura\\GraphQLiteBridge\\": "src/graphqlite-bridge/src",
             "Hasura\\Metadata\\": "src/metadata/src",
@@ -42,7 +42,7 @@
         "psr-4": {
             "Hasura\\ApiClient\\Tests\\": "src/api-client/tests",
             "Hasura\\AuthHook\\Tests\\": "src/auth-hook/tests",
-            "Hasura\\Bundle\\Tests\\": "src/hasura-bundle/tests",
+            "Hasura\\Bundle\\Tests\\": "src/bundle/tests",
             "Hasura\\EventDispatcher\\Tests\\": "src/event-dispatcher/tests",
             "Hasura\\GraphQLiteBridge\\Tests\\": "src/graphqlite-bridge/tests",
             "Hasura\\Metadata\\Tests\\": "src/metadata/tests",
@@ -52,9 +52,9 @@
     "replace": {
         "hasura-extra/api-client": "self.version",
         "hasura-extra/auth-hook": "self.version",
+        "hasura-extra/bundle": "self.version",
         "hasura-extra/event-dispatcher": "self.version",
         "hasura-extra/graphqlite-bridge": "self.version",
-        "hasura-extra/hasura-bundle": "self.version",
         "hasura-extra/metadata": "self.version",
         "hasura-extra/sailor-bridge": "self.version"
     },

@@ -7,7 +7,7 @@
     </php>
 
     <testsuites>
-        <testsuite name="Hasura bundle">
+        <testsuite name="Bundle">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
