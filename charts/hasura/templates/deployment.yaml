@@ -13,15 +13,15 @@ spec:
       {{- include "hasura.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
       annotations:
         checksum/configmap: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
         checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+      {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.podLabels }}
       labels:
         {{- include "hasura.selectorLabels" . | nindent 8 }}
+      {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
     spec:
