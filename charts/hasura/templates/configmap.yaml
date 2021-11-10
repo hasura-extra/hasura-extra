@@ -49,9 +49,10 @@ data:
   {{- if .Values.jwtSecret }}
   HASURA_GRAPHQL_JWT_SECRET: {{ .Values.jwtSecret | quote }}
   HASURA_GRAPHQL_UNAUTHORIZED_ROLE: {{ .Values.unauthorizedRole | quote }}
-  {{- else }}
-    {{- if .Values.authHook }}
+  {{- else if .Values.authHook  }}
   HASURA_GRAPHQL_AUTH_HOOK: {{ .Values.authHook | quote }}
   HASURA_GRAPHQL_AUTH_HOOK_MODE: {{ .Values.authHookMode | quote }}
-    {{- end }}
   {{- end }}
+{{- with .Values.extraEnvVarsCM }}
+  {{- toYaml . | nindent 2 }}
+{{- end }}

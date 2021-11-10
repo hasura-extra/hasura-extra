@@ -109,18 +109,17 @@ tolerations: []
 # See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#scheduling) for details.
 affinity: {}
 
-# -- Extra environment variables to be set on Hasura container. See [values.yaml](values.yaml).
+# -- extraEnvVarsCM append to ConfigMap with extra environment variables. See [values.yaml](values.yaml).
 ## E.g:
-## extraEnvVars:
-##   - name: FOO
-##     value: BAR
-extraEnvVars: []
+## extraEnvVarsCM:
+##   ENV_STORE_IN_CONFIGMAP: value
+extraEnvVarsCM: {}
 
-# -- extraEnvVarsCM ConfigMap with extra environment variables
-extraEnvVarsCM: ""
-
-# -- extraEnvVarsSecret Secret with extra environment variables
-extraEnvVarsSecret: ""
+# -- extraEnvVarsSecret append to Secret with extra environment variables. See [values.yaml](values.yaml).
+## E.g:
+## extraEnvVarsSecret:
+##   ENV_STORE_IN_SECRET: value
+extraEnvVarsSecret: {}
 
 # -- Admin secret key, required to access this instance. This is mandatory when you use webhook or JWT.
 adminSecret: '!ChangeMe!'
