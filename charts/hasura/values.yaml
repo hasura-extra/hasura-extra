@@ -24,6 +24,9 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template.
   name: ""
 
+# -- Labels to be added to pods.
+podLabels: {}
+
 # -- Annotations to be added to pods.
 podAnnotations: {}
 
@@ -105,6 +108,20 @@ tolerations: []
 # -- [Affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity) configuration.
 # See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#scheduling) for details.
 affinity: {}
+
+# -- Extra environment variables to be set on Hasura container. See [values.yaml](values.yaml).
+## E.g:
+## extraEnvVars:
+##   - name: FOO
+##     value: BAR
+##
+extraEnvVars: []
+
+# -- extraEnvVarsCM ConfigMap with extra environment variables
+extraEnvVarsCM: ""
+
+# -- extraEnvVarsSecret Secret with extra environment variables
+extraEnvVarsSecret: ""
 
 # -- Admin secret key, required to access this instance. This is mandatory when you use webhook or JWT.
 adminSecret: '!ChangeMe!'
@@ -211,3 +228,4 @@ websocketKeepalive: 5
 
 # -- Used to set the connection initialisation timeout for graphql-ws clients. This is ignored for subscription-transport-ws (Apollo) clients.
 websocketConnectionInitTimeout: 3
+
