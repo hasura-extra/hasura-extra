@@ -39,6 +39,9 @@ To install the chart with the release name `my-release`, run the following comma
 | eventsFetchBatchSize | int | `100` | Maximum number of events to be fetched from the DB in a single batch. |
 | eventsFetchInterval | string | `nil` | Interval in milliseconds to sleep before trying to fetch events again after a fetch returned no events from postgres |
 | eventsHttpPoolSize | int | `100` | Maximum number of concurrent http workers delivering events at any time. |
+| extraEnvVars | list | `[]` | Extra environment variables to be set on Hasura container. See [values.yaml](values.yaml). |
+| extraEnvVarsCM | string | `""` | extraEnvVarsCM ConfigMap with extra environment variables |
+| extraEnvVarsSecret | string | `""` | extraEnvVarsSecret Secret with extra environment variables |
 | fullnameOverride | string | `""` | A name to substitute for the full names of resources. |
 | gracefulShutdownTimeout | int | `60` | Timeout (in seconds) to wait for the in-flight events (event triggers and scheduled triggers) and async actions to complete before the server shuts down completely. If the in-flight events are not completed within the timeout, those events are marked as pending. |
 | image.pullPolicy | string | `"IfNotPresent"` | [Image pull policy](https://kubernetes.io/docs/concepts/containers/images/#updating-images) for updating already existing images on a node. |
@@ -61,6 +64,7 @@ To install the chart with the release name `my-release`, run the following comma
 | nodeSelector | object | `{}` | [Node selector](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector) configuration. |
 | pgStripes | int | `1` | Number of stripes (distinct sub-pools) to maintain with Postgres. New connections will be taken from a particular stripe pseudo-randomly. |
 | podAnnotations | object | `{}` | Annotations to be added to pods. |
+| podLabels | object | `{}` | Labels to be added to pods. |
 | podSecurityContext | object | `{}` | Pod [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod). See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#security-context) for details. |
 | replicaCount | int | `1` | The number of replicas (pods) to launch |
 | resources | object | No requests or limits. | Container resource [requests and limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/). See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#resources) for details. |
