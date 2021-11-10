@@ -114,7 +114,6 @@ affinity: {}
 ## extraEnvVars:
 ##   - name: FOO
 ##     value: BAR
-##
 extraEnvVars: []
 
 # -- extraEnvVarsCM ConfigMap with extra environment variables
@@ -228,4 +227,3 @@ websocketKeepalive: 5
 
 # -- Used to set the connection initialisation timeout for graphql-ws clients. This is ignored for subscription-transport-ws (Apollo) clients.
 websocketConnectionInitTimeout: 3
-
