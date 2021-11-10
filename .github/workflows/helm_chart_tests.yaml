@@ -55,5 +55,4 @@ jobs:
             --wait-for-jobs
 
       - name: Run chart-testing (install)
-        if: steps.list-changed.outputs.changed == 'true'
         run: ct install
