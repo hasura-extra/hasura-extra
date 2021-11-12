@@ -28,7 +28,6 @@ event_triggers:
             num_retries: 0
             interval_sec: 10
             timeout_sec: 60
-        request_transform: ~
         webhook: 'http://0.0.0.0:8080/api/rest/hasura_events'
         headers:
             -
