@@ -45,6 +45,12 @@ final class AssertionMiddleware extends AssertParameterMiddleware
                 $refProperty = $refClass->getProperty('parameterName');
                 $refProperty->setAccessible(true);
                 $refProperty->setValue($parameter, $argNamingParameter->getArgName());
+
+                return new AssertionNaming(
+                    $argNamingParameter->getName(),
+                    $argNamingParameter->getArgName(),
+                    $parameter
+                );
             }
         }
 

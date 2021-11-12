@@ -14,8 +14,6 @@ use GraphQL\Type\Definition\ResolveInfo;
 
 trait ArgNamingParameterTrait
 {
-    use WrappingParameterTrait;
-
     private string $name;
 
     private string $argName;
