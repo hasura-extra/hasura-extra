@@ -10,16 +10,16 @@ declare(strict_types=1);
 
 namespace Hasura\Bundle\Controller;
 
-use Hasura\AuthHook\RequestHandler;
+use Psr\Http\Server\RequestHandlerInterface;
 use Symfony\Bridge\PsrHttpMessage\HttpFoundationFactoryInterface;
 use Symfony\Bridge\PsrHttpMessage\HttpMessageFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-final class AuthHook
+final class Psr15RequestHandler
 {
     public function __construct(
-        private RequestHandler $requestHandler,
+        private RequestHandlerInterface $requestHandler,
         private HttpMessageFactoryInterface $psrFactory,
         private HttpFoundationFactoryInterface $foundationFactory
     ) {

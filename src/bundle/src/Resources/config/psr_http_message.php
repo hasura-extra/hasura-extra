@@ -8,6 +8,7 @@
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use Hasura\Bundle\Controller\Psr15RequestHandler;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory;
 use Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory;
@@ -19,12 +20,22 @@ return static function (ContainerConfigurator $configurator) {
         ->set('hasura.psr_http_message.psr_http_factory', PsrHttpFactory::class)
             ->args(
                 [
-                    service('hasura.psr7.psr17_factory'),
-                    service('hasura.psr7.psr17_factory'),
-                    service('hasura.psr7.psr17_factory'),
-                    service('hasura.psr7.psr17_factory')
+                    service('hasura.psr_http_message.psr17_factory'),
+                    service('hasura.psr_http_message.psr17_factory'),
+                    service('hasura.psr_http_message.psr17_factory'),
+                    service('hasura.psr_http_message.psr17_factory')
                 ]
             )
         ->set('hasura.psr_http_message.http_foundation_factory', HttpFoundationFactory::class)
+        ->set('hasura.psr_http_message.psr15_request_handler_controller', Psr15RequestHandler::class)
+            ->public()
+            ->abstract()
+            ->args(
+                [
+                    abstract_arg('psr15 request handler'),
+                    service('hasura.psr_http_message.psr_http_factory'),
+                    service('hasura.psr_http_message.http_foundation_factory')
+                ]
+            )
     ;
 };

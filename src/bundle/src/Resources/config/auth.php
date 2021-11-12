@@ -10,8 +10,9 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Hasura\AuthHook\ChainSessionVariableEnhancer;
 use Hasura\AuthHook\RequestHandler;
+use Hasura\Bundle\Auth\RoleAnonymousVoter;
 use Hasura\Bundle\AuthHook\AccessRoleDecider;
-use Hasura\Bundle\Controller\AuthHook;
+use Hasura\Bundle\Controller\Psr15RequestHandler;
 
 return static function (ContainerConfigurator $configurator) {
     $configurator
@@ -19,8 +20,8 @@ return static function (ContainerConfigurator $configurator) {
         ->set('hasura.auth_hook.access_role_decider', AccessRoleDecider::class)
             ->args(
                 [
-                    param('hasura.auth_hook.anonymous_role'),
-                    param('hasura.auth_hook.default_role'),
+                    param('hasura.auth.anonymous_role'),
+                    param('hasura.auth.default_role'),
                     service('security.authorization_checker')
                 ]
             )
@@ -39,13 +40,15 @@ return static function (ContainerConfigurator $configurator) {
                     service('hasura.auth_hook.session_variable_enhancer')
                 ]
             )
-        ->set('hasura.auth_hook.controller', AuthHook::class)
+        ->set('hasura.auth_hook.controller', Psr15RequestHandler::class)
+            ->parent('hasura.psr_http_message.psr15_request_handler_controller')
+            ->arg('index_0', service('hasura.auth_hook.request_handler'))
+        ->set('hasura.auth.role_anonymous_voter', RoleAnonymousVoter::class)
             ->args(
                 [
-                    service('hasura.auth_hook.request_handler'),
-                    service('hasura.psr_http_message.psr_http_factory'),
-                    service('hasura.psr_http_message.http_foundation_factory')
+                    param('hasura.auth.anonymous_role')
                 ]
             )
+            ->tag('security.voter')
     ;
 };
