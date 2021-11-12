@@ -23,14 +23,23 @@ final class HasuraExtension extends Extension implements PrependExtensionInterfa
 {
     public function prepend(ContainerBuilder $container): void
     {
-        if (isset($container->getExtensions()['security'])) {
-            $container->prependExtensionConfig(
-                'security',
-                [
-                    'enable_authenticator_manager' => true
+        $container->prependExtensionConfig(
+            'security',
+            [
+                'enable_authenticator_manager' => true
+            ]
+        );
+
+        $container->prependExtensionConfig(
+            'graphqlite',
+            [
+                'namespace' => [
+                    'controllers' => [
+                        'Hasura\GraphQLiteBridge\Controller'
+                    ]
                 ]
-            );
-        }
+            ]
+        );
     }
 
     public function load(array $configs, ContainerBuilder $container)

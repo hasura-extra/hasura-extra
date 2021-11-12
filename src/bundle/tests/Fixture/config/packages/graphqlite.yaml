@@ -1,0 +1,7 @@
+graphqlite:
+  namespace:
+    controllers: Hasura\Bundle\Tests\Fixture\App\GraphQL
+    types: Hasura\Bundle\Tests\Fixture\App\GraphQL
+  security:
+    enable_login: 'off'
+    enable_me: 'off'

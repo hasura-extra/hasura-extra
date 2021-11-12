@@ -2,9 +2,12 @@ version: '3.8'
 
 services:
   apache:
-    image: php:8-apache
+    image: thecodingmachine/php:8.0-v4-apache
     volumes:
-      - $PWD:/var/www
+      - $PWD:/var/www/html:rw,cached
+    environment:
+      PHP_EXTENSION_PDO_PGSQL: 1
+      APACHE_DOCUMENT_ROOT: public/
     ports:
       - protocol: tcp
         target: 80

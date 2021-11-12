@@ -23,7 +23,6 @@ final class GraphQLitePass implements CompilerPassInterface
     {
         $schemaFactory = $container->getDefinition(SchemaFactory::class);
 
-        $schemaFactory->addMethodCall('addControllerNamespace', ['Hasura\GraphQLiteBridge\Controller']);
         $schemaFactory->addMethodCall(
             'addFieldMiddleware',
             [

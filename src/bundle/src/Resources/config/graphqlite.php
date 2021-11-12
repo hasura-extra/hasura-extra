@@ -15,6 +15,7 @@ use Hasura\Bundle\GraphQLite\ObjectAssertion\Executor;
 use Hasura\Bundle\GraphQLite\Parameter\ArgEntityMiddleware;
 use Hasura\Bundle\GraphQLite\Parameter\AssertionMiddleware;
 use Hasura\Bundle\GraphQLite\Parameter\ObjectAssertionMiddleware as ParameterObjectAssertionMiddleware;
+use Hasura\GraphQLiteBridge\Controller\DummyQuery;
 use Hasura\GraphQLiteBridge\Field\AnnotationTracker;
 use Hasura\GraphQLiteBridge\Field\AnnotationTrackingMiddleware;
 use Hasura\GraphQLiteBridge\Field\ArgNamingMiddleware as FieldArgNamingMiddleware;
@@ -28,6 +29,8 @@ use TheCodingMachine\GraphQLite\Schema;
 return static function (ContainerConfigurator $configurator) {
     $configurator
         ->services()
+        ->set('hasura.graphql.controller.dummy_query', DummyQuery::class)
+        ->alias(DummyQuery::class, 'hasura.graphql.controller.dummy_query')
         ->set('hasura.graphql.authorization_service', AuthorizationService::class)
             ->args(
                 [
