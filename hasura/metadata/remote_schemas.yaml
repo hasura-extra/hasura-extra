@@ -1,4 +1,22 @@
 -
+    name: bundle
+    definition:
+        url: 'http://apache/bundle.php/graphql'
+        timeout_seconds: 60
+        customization:
+            field_names:
+                -
+                    prefix: bundle_
+                    parent_type: Query
+                    mapping: {  }
+                -
+                    prefix: bundle_
+                    parent_type: Mutation
+                    mapping: {  }
+        forward_client_headers: true
+    comment: ''
+    permissions: !include remote_schemas/bundle/permissions.yaml
+-
     name: countries
     definition:
         url: 'https://countries.trevorblades.com/graphql'

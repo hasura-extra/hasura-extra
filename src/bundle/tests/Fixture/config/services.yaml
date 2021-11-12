@@ -1,0 +1,9 @@
+parameters:
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  Hasura\Bundle\Tests\Fixture\App\:
+    resource: '../src/*'

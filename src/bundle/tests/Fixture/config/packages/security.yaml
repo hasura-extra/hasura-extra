@@ -1,0 +1,18 @@
+security:
+  enable_authenticator_manager: true
+
+  providers:
+    memory:
+      memory:
+        users:
+          test: {password: test}
+
+  firewalls:
+    main:
+      provider: memory
+      stateless: true
+      http_basic:
+        realm: Secured Area
+
+  password_hashers:
+    Symfony\Component\Security\Core\User\InMemoryUser: plantext

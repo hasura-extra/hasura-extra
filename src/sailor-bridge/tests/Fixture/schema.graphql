@@ -2356,6 +2356,11 @@ type mutation_root {
   article_insert(obj: article_insert_obj_input!): article_insert_output
 
   """
+  A placeholder query used by thecodingmachine/graphqlite when there are no declared mutations.
+  """
+  bundle_dummyMutation: String
+
+  """
   delete data from the table: "_attributes.chat"
   """
   delete__attributes_chat(
@@ -3294,6 +3299,12 @@ type query_root {
   
   """
   arg_naming(snake_case: String!, snake_case_2: Int!): json!
+
+  """
+  
+  
+  """
+  bundle__dummy: String!
   continent(code: ID!): Continent
   continents(filter: ContinentFilterInput): [Continent!]!
   countries(filter: CountryFilterInput): [Country!]!

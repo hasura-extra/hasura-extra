@@ -1,0 +1,16 @@
+doctrine:
+    dbal:
+        url: 'postgres://hasura:hasura@localhost:5432/hasura'
+        server_version: 13
+        charset: utf8
+    orm:
+        auto_generate_proxy_classes: true
+        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        auto_mapping: true
+        mappings:
+            App:
+                is_bundle: false
+                type: attribute
+                dir: '%kernel.project_dir%/src/Entity'
+                prefix: 'Hasura\Bundle\Tests\Fixture\App\Entity'
+                alias: Hasura\Bundle\Tests\Fixture\App

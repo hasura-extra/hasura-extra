@@ -19,15 +19,15 @@ final class MetadataUtilsTest extends TestCase
         $data = $this->client->metadata()->query('export_metadata', [], 2);
         $metadata = $data['metadata'];
 
-        $this->assertSame('countries', $metadata['remote_schemas'][0]['name']);
-        $this->assertIsArray($metadata['remote_schemas'][0]['definition']['customization']['type_names']['mapping']);
-        $this->assertEmpty($metadata['remote_schemas'][0]['definition']['customization']['type_names']['mapping']);
+        $this->assertSame('countries', $metadata['remote_schemas'][1]['name']);
+        $this->assertIsArray($metadata['remote_schemas'][1]['definition']['customization']['type_names']['mapping']);
+        $this->assertEmpty($metadata['remote_schemas'][1]['definition']['customization']['type_names']['mapping']);
 
         $metadataNormalized = MetadataUtils::normalizeMetadata($metadata);
 
         $this->assertNotSame($metadataNormalized, $metadata);
         $this->assertIsObject(
-            $metadataNormalized['remote_schemas'][0]['definition']['customization']['type_names']['mapping']
+            $metadataNormalized['remote_schemas'][1]['definition']['customization']['type_names']['mapping']
         );
     }
 }

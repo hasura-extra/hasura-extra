@@ -92,6 +92,6 @@ SDL,
     {
         $data = $this->client->metadata()->query('export_metadata', [], 2);
 
-        return $data['metadata']['remote_schemas'][1];
+        return $data['metadata']['remote_schemas'][2];
     }
 }
