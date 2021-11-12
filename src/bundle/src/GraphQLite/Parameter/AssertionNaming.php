@@ -8,13 +8,17 @@
 
 declare(strict_types=1);
 
-namespace Hasura\GraphQLiteBridge\Parameter;
+namespace Hasura\Bundle\GraphQLite\Parameter;
 
 use GraphQL\Type\Definition\InputType;
 use GraphQL\Type\Definition\ResolveInfo;
-use TheCodingMachine\GraphQLite\Parameters\InputTypeParameterInterface;
+use Hasura\GraphQLiteBridge\Parameter\ArgNamingParameterInterface;
+use Hasura\GraphQLiteBridge\Parameter\ArgNamingParameterTrait;
+use Hasura\GraphQLiteBridge\Parameter\WrappingParameterInterface;
+use Hasura\GraphQLiteBridge\Parameter\WrappingParameterTrait;
+use TheCodingMachine\GraphQLite\Validator\Mappers\Parameters\ParameterValidator;
 
-final class ArgNaming implements ArgNamingParameterInterface, WrappingParameterInterface
+final class AssertionNaming implements ArgNamingParameterInterface, WrappingParameterInterface
 {
     use ArgNamingParameterTrait;
     use WrappingParameterTrait;
@@ -22,11 +26,16 @@ final class ArgNaming implements ArgNamingParameterInterface, WrappingParameterI
     public function __construct(
         string $name,
         string $argName,
-        InputTypeParameterInterface $parameter
+        ParameterValidator $parameter
     ) {
         $this->name = $name;
         $this->argName = $argName;
         $this->parameter = $parameter;
+    }
+
+    protected function doResolve(?object $source, array $args, $context, ResolveInfo $info)
+    {
+        return $this->parameter->resolve($source, $args, $context, $info);
     }
 
     public function getType(): InputType
@@ -42,10 +51,5 @@ final class ArgNaming implements ArgNamingParameterInterface, WrappingParameterI
     public function getDefaultValue()
     {
         return $this->parameter->getDefaultValue();
-    }
-
-    protected function doResolve(?object $source, array $args, $context, ResolveInfo $info)
-    {
-        return $this->parameter->resolve($source, $args, $context, $info);
     }
 }

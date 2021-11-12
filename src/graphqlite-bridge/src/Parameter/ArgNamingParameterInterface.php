@@ -13,11 +13,11 @@ namespace Hasura\GraphQLiteBridge\Parameter;
 use TheCodingMachine\GraphQLite\Parameters\InputTypeParameterInterface;
 
 /**
- * Input parameter wrapper will help to change argument name difference with controller argument name.
+ * Input parameter will help to change argument name difference with controller argument name.
  *
  * Note: Only use once arg naming, if use more than once, [[\TheCodingMachine\GraphQLite\GraphQLRuntimeException]] should be throw.
  */
-interface ArgNamingParameterInterface extends InputTypeParameterInterface, WrappingParameterInterface
+interface ArgNamingParameterInterface extends InputTypeParameterInterface
 {
     /**
      * @return string controller argument name.
