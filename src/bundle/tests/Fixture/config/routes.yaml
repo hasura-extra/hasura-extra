@@ -1,0 +1,2 @@
+hasura:
+  resource: '@HasuraBundle/Resources/config/routing/routes.php'

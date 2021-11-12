@@ -50,3 +50,7 @@ test-auth-hook:
 .PHONY: test-graphqlite-bridge
 test-graphqlite-bridge:
 	./vendor/bin/phpunit src/graphqlite-bridge
+
+.PHONY: test-bundle
+test-bundle:
+	./vendor/bin/phpunit src/bundle

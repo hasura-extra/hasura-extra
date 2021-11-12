@@ -14,13 +14,17 @@ services:
     image: postgres:13-alpine
     volumes:
       - $PWD/docker/postgres/initdb.d:/docker-entrypoint-initdb.d
+    ports:
+      - protocol: tcp
+        target: 5432
+        published: 5432
     environment:
       POSTGRES_DB: hasura
       POSTGRES_USER: hasura
       POSTGRES_PASSWORD: hasura
 
   hasura:
-    image: hasura/graphql-engine:v2.1.0-beta.1
+    image: hasura/graphql-engine:v2.1.0-beta.2
     restart: on-failure
     environment:
       HASURA_GRAPHQL_ADMIN_SECRET: 'test'

@@ -23,6 +23,7 @@
     "require-dev": {
         "nyholm/psr7": "^1.0",
         "phpunit/phpunit": "^9.5",
+        "symfony/orm-pack": "^2.1",
         "symfony/uid": "^5.0",
         "symplify/easy-coding-standard": "^9.4",
         "symplify/monorepo-builder": "^9.4"
@@ -43,6 +44,7 @@
             "Hasura\\ApiClient\\Tests\\": "src/api-client/tests",
             "Hasura\\AuthHook\\Tests\\": "src/auth-hook/tests",
             "Hasura\\Bundle\\Tests\\": "src/bundle/tests",
+            "Hasura\\Bundle\\Tests\\Fixture\\App\\": "src/bundle/tests/Fixture/src",
             "Hasura\\EventDispatcher\\Tests\\": "src/event-dispatcher/tests",
             "Hasura\\GraphQLiteBridge\\Tests\\": "src/graphqlite-bridge/tests",
             "Hasura\\Metadata\\Tests\\": "src/metadata/tests",
