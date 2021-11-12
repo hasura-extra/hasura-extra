@@ -18,7 +18,7 @@ use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use TheCodingMachine\GraphQLite\Annotations\Field;
-use TheCodingMachine\Graphqlite\Validator\ValidationFailedException;
+use TheCodingMachine\GraphQLite\Validator\ValidationFailedException;
 
 final class Executor
 {
