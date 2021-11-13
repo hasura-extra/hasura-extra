@@ -38,6 +38,8 @@ interface ManagerInterface
 
     /**
      * Return an array inconsistent metadata information.
+     *
+     * @link https://hasura.io/docs/latest/graphql/core/api-reference/metadata-api/manage-metadata.html#get-inconsistent-metadata
      */
     public function getInconsistentMetadata(): array;
 

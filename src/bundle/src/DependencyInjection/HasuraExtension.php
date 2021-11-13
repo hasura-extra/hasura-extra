@@ -117,7 +117,6 @@ final class HasuraExtension extends Extension implements PrependExtensionInterfa
     {
         if (null === $config['remote_schema_name']) {
             $container->removeDefinition('hasura.metadata.remote_schema');
-            $container->removeDefinition('hasura.metadata.remote_schema_reload_state_processor');
             $container->removeDefinition('hasura.graphql.remote_schema_permission_state_processor');
 
             return;

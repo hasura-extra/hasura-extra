@@ -16,10 +16,11 @@ final class NotExistRemoteSchemaException extends \RuntimeException implements E
 {
     public function __construct(
         private string $remoteSchemaName,
-        $message = "",
         $code = 0,
         Throwable $previous = null
     ) {
+        $message = sprintf('Remote schema: `%s` not exist, Did you forget to add it?', $this->remoteSchemaName);
+
         parent::__construct($message, $code, $previous);
     }
 

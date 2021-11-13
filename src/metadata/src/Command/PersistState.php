@@ -15,6 +15,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 
 final class PersistState extends Command
 {
@@ -31,9 +32,17 @@ final class PersistState extends Command
             sprintf('Persisting application state to Hasura...')
         );
 
-        foreach ($this->processors as $processor) {
-            /** @var StateProcessorInterface $processor */
-            $processor->process();
+        try {
+            foreach ($this->processors as $processor) {
+                /** @var StateProcessorInterface $processor */
+                $processor->process();
+            }
+        } catch (ClientExceptionInterface $clientException) {
+            $content = $clientException->getResponse()->getContent(false);
+
+            $symfonyStyle->error($content);
+
+            return 1;
         }
 
         $symfonyStyle->success('Congratulation! Application state persisted with Hasura!');

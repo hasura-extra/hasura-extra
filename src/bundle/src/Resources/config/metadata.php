@@ -8,6 +8,7 @@
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use Hasura\Bundle\Metadata\InheritedRolesStateProcessor;
 use Hasura\Metadata\Command\ApplyMetadata;
 use Hasura\Metadata\Command\BaseCommand;
 use Hasura\Metadata\Command\ClearMetadata;
@@ -17,8 +18,8 @@ use Hasura\Metadata\Command\GetInconsistentMetadata;
 use Hasura\Metadata\Command\PersistState;
 use Hasura\Metadata\Command\ReloadMetadata;
 use Hasura\Metadata\Manager;
+use Hasura\Metadata\ReloadStateProcessor;
 use Hasura\Metadata\RemoteSchema;
-use Hasura\Metadata\RemoteSchemaReloadStateProcessor;
 use Hasura\Metadata\YamlOperator;
 
 return static function (ContainerConfigurator $configurator) {
@@ -30,14 +31,22 @@ return static function (ContainerConfigurator $configurator) {
                     abstract_arg('remote schema name')
                 ]
             )
-        ->set('hasura.metadata.remote_schema_reload_state_processor', RemoteSchemaReloadStateProcessor::class)
+        ->set('hasura.metadata.inherited_roles_state_processor', InheritedRolesStateProcessor::class)
             ->args(
                 [
-                    service('hasura.metadata.remote_schema'),
+                    service('hasura.api_client.client'),
+                    param('security.role_hierarchy.roles'),
+                    service('hasura.metadata.remote_schema')->nullOnInvalid()
+                ]
+            )
+            ->tag('hasura.metadata.state_processor', ['priority' => 6])
+        ->set('hasura.metadata.reload_state_processor', ReloadStateProcessor::class)
+            ->args(
+                [
                     service('hasura.api_client.client')
                 ]
             )
-            ->tag('hasura.metadata.state_processor')
+            ->tag('hasura.metadata.state_processor', ['priority' => 2048])
         ->set('hasura.metadata.yaml_operator', YamlOperator::class)
             ->args(
                 [
