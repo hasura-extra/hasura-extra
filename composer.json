@@ -23,11 +23,12 @@
     "require-dev": {
         "nyholm/psr7": "^1.0",
         "phpunit/phpunit": "^9.5",
+        "symfony/dotenv": "^5.0",
         "symfony/orm-pack": "^2.1",
+        "symfony/test-pack": "^1.0",
         "symfony/uid": "^5.0",
         "symplify/easy-coding-standard": "^9.4",
-        "symplify/monorepo-builder": "^9.4",
-        "symfony/dotenv": "^5.0"
+        "symplify/monorepo-builder": "^9.4"
     },
     "autoload": {
         "psr-4": {

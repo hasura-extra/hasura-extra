@@ -18,6 +18,8 @@
     "require": {
         "php": ">=8.0",
         "hasura-extra/auth-hook": "dev-main",
+        "hasura-extra/api-client": "dev-main",
+        "hasura-extra/metadata": "dev-main",
         "hasura-extra/event-dispatcher": "dev-main",
         "hasura-extra/graphqlite-bridge": "dev-main",
         "hasura-extra/sailor-bridge": "dev-main",
@@ -29,6 +31,8 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5",
-        "symfony/orm-pack": "^2.1"
+        "symfony/orm-pack": "^2.1",
+        "symfony/test-pack": "^1.0",
+        "symfony/uid": "^5.0"
     }
 }
