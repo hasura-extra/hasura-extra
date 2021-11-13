@@ -20,7 +20,7 @@ final class NotExistRemoteSchemaExceptionTest extends TestCase
         $exception = new NotExistRemoteSchemaException('0', 1,  $previous);
 
         $this->assertSame('0', $exception->getRemoteSchemaName());
-        $this->assertSame('Remote schema name: `0` not exist, Did you forget to add it?', $exception->getMessage());
+        $this->assertSame('Remote schema: `0` not exist, Did you forget to add it?', $exception->getMessage());
         $this->assertSame(1, $exception->getCode());
         $this->assertSame($previous, $exception->getPrevious());
     }

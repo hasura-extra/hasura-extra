@@ -38,7 +38,7 @@ final class RemoteSchemaPermissionStateProcessor implements StateProcessorInterf
     public function process(): void
     {
         $remoteSchema = $this->remoteSchema;
-        $data = $this->client->query('export_metadata', [], 2);
+        $data = $this->client->metadata()->query('export_metadata', [], 2);
         $metadata = MetadataUtils::normalizeMetadata($data['metadata']);
         $metadata['remote_schemas'] ??= [];
 
@@ -57,7 +57,7 @@ final class RemoteSchemaPermissionStateProcessor implements StateProcessorInterf
             throw new NotExistRemoteSchemaException($remoteSchema->getName());
         }
 
-        $this->client->query(
+        $this->client->metadata()->query(
             'replace_metadata',
             [
                 'metadata' => $metadata,

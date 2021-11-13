@@ -10,28 +10,11 @@ declare(strict_types=1);
 
 namespace Hasura\Bundle\Tests\Integration\GraphQLite;
 
-use Symfony\Bundle\FrameworkBundle\KernelBrowser;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Hasura\Bundle\Tests\Integration\WebTestCase;
 
 abstract class TestCase extends WebTestCase
 {
-    protected ?KernelBrowser $client;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->client = self::createClient();
-    }
-
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        $this->client = null;
-    }
-
-    protected function execute($query, array $variables = null): void
+    protected function execute($query, array $variables = null, array $server = []): void
     {
         $data = [
             'query' => $query
@@ -44,15 +27,13 @@ abstract class TestCase extends WebTestCase
         $this->client->request(
             'POST',
             '/graphql',
-            server: [
-                'CONTENT_TYPE' => 'application/json'
-            ],
+            server: array_merge(
+                [
+                    'CONTENT_TYPE' => 'application/json'
+                ],
+                $server
+            ),
             content: json_encode($data)
         );
-    }
-
-    protected function responseData(): array
-    {
-        return json_decode($this->client->getResponse()->getContent(), true);
     }
 }

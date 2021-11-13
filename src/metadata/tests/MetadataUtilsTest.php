@@ -18,16 +18,19 @@ final class MetadataUtilsTest extends TestCase
     {
         $data = $this->client->metadata()->query('export_metadata', [], 2);
         $metadata = $data['metadata'];
+        $remoteSchemas = array_column($metadata['remote_schemas'], null, 'name');
 
-        $this->assertSame('countries', $metadata['remote_schemas'][1]['name']);
-        $this->assertIsArray($metadata['remote_schemas'][1]['definition']['customization']['type_names']['mapping']);
-        $this->assertEmpty($metadata['remote_schemas'][1]['definition']['customization']['type_names']['mapping']);
+        $this->assertArrayHasKey('countries', $remoteSchemas);
+        $this->assertIsArray($remoteSchemas['countries']['definition']['customization']['type_names']['mapping']);
+        $this->assertEmpty($remoteSchemas['countries']['definition']['customization']['type_names']['mapping']);
 
         $metadataNormalized = MetadataUtils::normalizeMetadata($metadata);
+        $remoteSchemas = array_column($metadataNormalized['remote_schemas'], null, 'name');
 
+        $this->assertArrayHasKey('countries', $remoteSchemas);
         $this->assertNotSame($metadataNormalized, $metadata);
         $this->assertIsObject(
-            $metadataNormalized['remote_schemas'][1]['definition']['customization']['type_names']['mapping']
+            $remoteSchemas['countries']['definition']['customization']['type_names']['mapping']
         );
     }
 }

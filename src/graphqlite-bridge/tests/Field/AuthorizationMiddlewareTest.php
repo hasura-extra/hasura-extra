@@ -24,8 +24,8 @@ final class AuthorizationMiddlewareTest extends TestCase
         $this->assertCount(1, $result->errors);
 
         $this->assertSame(
-            'Your current role not have permission to access this field',
-            $result->errors[0]->getMessage()
+            'security',
+            $result->errors[0]->getCategory()
         );
     }
 

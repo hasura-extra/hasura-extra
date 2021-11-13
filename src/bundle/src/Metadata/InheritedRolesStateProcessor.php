@@ -48,7 +48,7 @@ final class InheritedRolesStateProcessor implements StateProcessorInterface
                 }
 
                 // auto add missing role via remote schema permissions
-                $this->addDummyRemoteSchemaPermission($role, $metadata);
+                $this->addDummyRemoteSchemaPermissions($diff, $metadata);
             }
 
             $items[] = [
@@ -69,21 +69,30 @@ final class InheritedRolesStateProcessor implements StateProcessorInterface
         );
     }
 
-    private function addDummyRemoteSchemaPermission(string $role, array &$metadata): void
+    private function addDummyRemoteSchemaPermissions(array $roleSet, array &$metadata): void
     {
-        $remoteSchemas = $metadata['remote_schemas'] ?? [];
         $added = false;
+        $remoteSchemas = $metadata['remote_schemas'] ?? [];
+        $permissionsAppend = array_map(
+            fn(string $role) => [
+                'role' => $role,
+                'definition' => [
+                    'schema' => sprintf(
+                        'schema { query: Query } type Query { %s: String! }',
+                        DummyQuery::NAME
+                    )
+                ]
+            ],
+            $roleSet
+        );
 
         foreach ($remoteSchemas as &$remoteSchema) {
             if ($remoteSchema['name'] === $this->remoteSchema->getName()) {
                 $added = true;
-                $remoteSchema['permissions'][] = [
-                    'role' => $role,
-                    'definition' => sprintf(
-                        'schema { query: Query } type Query { %s: String! }',
-                        DummyQuery::NAME
-                    )
-                ];
+                $remoteSchema['permissions'] = array_merge(
+                    $remoteSchema['permissions'] ?? [],
+                    $permissionsAppend
+                );
 
                 break;
             }
