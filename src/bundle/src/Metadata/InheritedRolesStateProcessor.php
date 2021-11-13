@@ -42,7 +42,7 @@ final class InheritedRolesStateProcessor implements StateProcessorInterface
                         sprintf(
                             'Can not create inherited role: `%s`, missing child roles: [%s]',
                             $role,
-                            implode(', ', $set)
+                            implode(', ', $diff)
                         )
                     );
                 }
