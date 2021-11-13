@@ -7,8 +7,8 @@ CREATE TABLE public.account
 );
 
 INSERT INTO public.account ("name", "email") VALUES
-('Test 1', 'email1@example'),
-('Test 2', 'email2@example'),
-('Test 3', 'email3@example'),
-('Test 4', 'email4@example'),
-('Test 5', 'email5@example');
+('Test 1', 'email1@example.org'),
+('Test 2', 'email2@example.org'),
+('Test 3', 'email3@example.org'),
+('Test 4', 'email4@example.org'),
+('Test 5', 'email5@example.org');

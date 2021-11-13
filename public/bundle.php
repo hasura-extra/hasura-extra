@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 new class {
     public function __construct()
     {
-        (new Dotenv)->bootEnv(__DIR__.'/../src/bundle/tests/Fixture/.env');
+        (new Dotenv)->bootEnv(__DIR__.'/.env');
 
         $kernel = new TestKernel('test', 1);
         $request = Request::createFromGlobals();

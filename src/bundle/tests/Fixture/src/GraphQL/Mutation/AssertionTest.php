@@ -22,8 +22,9 @@ final class AssertionTest
      */
     #[ArgNaming(for: 'email', name: 'email_naming')]
     #[Mutation(name: 'assertion_test')]
-    public function __invoke(string $email): string
-    {
-        return 'test';
+    public function __invoke(
+        string $email
+    ): string {
+        return 'assertion: ' . $email;
     }
 }

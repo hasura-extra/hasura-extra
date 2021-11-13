@@ -20,6 +20,6 @@ final class ArgNamingTest
     public function __invoke(
         string $camelCase
     ): string {
-        return 'dummy';
+        return 'input: ' . $camelCase;
     }
 }

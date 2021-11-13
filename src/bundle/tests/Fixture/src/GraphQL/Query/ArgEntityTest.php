@@ -16,10 +16,21 @@ use TheCodingMachine\GraphQLite\Annotations\Query;
 
 final class ArgEntityTest
 {
-    #[Query(name: 'arg_entity_test')]
-    #[ArgEntity(for: 'events')]
-    public function __invoke(Account $events): string
-    {
-        return $events->getName();
+    #[Query(name: 'arg_entity_combine_test', outputType: 'json!')]
+    #[ArgEntity(for: 'account')]
+    #[ArgEntity(for: 'accountEmail', argName: 'email', fieldName: 'email', inputType: 'String!')]
+    public function combine(
+        Account $account,
+        Account $accountEmail
+    ): array {
+        return [$account->getId(), $accountEmail->getEmail()];
+    }
+
+    #[Query(name: 'arg_entity_n_plus_one_test')]
+    #[ArgEntity(for: 'account')]
+    public function nPlusOne(
+        Account $account
+    ): int {
+        return $account->getId();
     }
 }

@@ -11,8 +11,10 @@ declare(strict_types=1);
 namespace Hasura\Bundle\Tests\Fixture\App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity]
+#[UniqueEntity(fields: 'email')]
 class Account
 {
     #[ORM\Id]
