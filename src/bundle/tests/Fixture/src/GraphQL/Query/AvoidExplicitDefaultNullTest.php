@@ -12,9 +12,9 @@ namespace Hasura\Bundle\Tests\Fixture\App\GraphQL\Query;
 
 use TheCodingMachine\GraphQLite\Annotations\Query;
 
-final class AvoidExplicitNullTest
+final class AvoidExplicitDefaultNullTest
 {
-    #[Query(name: 'avoid_explicit_null_test')]
+    #[Query(name: 'avoid_explicit_default_null_test')]
     public function __invoke(?string $arg = null): string
     {
         return 'test';
