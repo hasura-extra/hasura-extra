@@ -8,10 +8,11 @@
 
 declare(strict_types=1);
 
-namespace Hasura\Bundle\Metadata;
+namespace Hasura\Bundle;
 
-use Hasura\Bundle\ExceptionInterface;
-
-final class ChildRoleMissingException extends \RuntimeException implements ExceptionInterface
+/**
+ * Interface to mark all exceptions throw by this bundle.
+ */
+interface ExceptionInterface extends \Throwable
 {
 }
