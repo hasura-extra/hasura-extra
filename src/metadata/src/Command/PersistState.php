@@ -19,6 +19,10 @@ use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 
 final class PersistState extends Command
 {
+    protected static $defaultName = 'persist-state';
+
+    protected static $defaultDescription = 'Persist application state with Hasura.';
+
     public function __construct(private iterable $processors)
     {
         parent::__construct();
