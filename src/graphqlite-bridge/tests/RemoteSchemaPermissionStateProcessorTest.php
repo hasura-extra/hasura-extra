@@ -21,7 +21,7 @@ final class RemoteSchemaPermissionStateProcessorTest extends TestCase
     public function testCanThrowErrorWhenRemoteSchemaDoesNotExist(): void
     {
         $this->expectException(NotExistRemoteSchemaException::class);
-        $this->expectExceptionMessage('You should be add `test` remote schema first!');
+        $this->expectExceptionMessage('Remote schema: `test` not exist, Did you forget to add it?');
 
         $processor = new RemoteSchemaPermissionStateProcessor(
             new RemoteSchema('test'),
@@ -50,7 +50,6 @@ final class RemoteSchemaPermissionStateProcessorTest extends TestCase
 
         $remoteSchema = $this->fetchRemoteSchemaMetadata();
 
-        $this->assertSame('graphqlite-bridge', $remoteSchema['name']);
         $this->assertArrayHasKey('permissions', $remoteSchema);
 
         $roles = array_column($remoteSchema['permissions'], 'role');
@@ -91,7 +90,8 @@ SDL,
     private function fetchRemoteSchemaMetadata(): array
     {
         $data = $this->client->metadata()->query('export_metadata', [], 2);
+        $remoteSchemas = array_column($data['metadata']['remote_schemas'], null, 'name');
 
-        return $data['metadata']['remote_schemas'][2];
+        return $remoteSchemas['graphqlite-bridge'];
     }
 }

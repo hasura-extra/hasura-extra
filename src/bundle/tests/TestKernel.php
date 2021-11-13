@@ -24,6 +24,7 @@ final class TestKernel extends Kernel implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         $container->getDefinition('doctrine.dbal.logger.profiling.default')->setPublic(true);
+        $container->getDefinition('hasura.api_client.client')->setPublic(true);
     }
 
     protected function configureContainer(ContainerConfigurator $container): void

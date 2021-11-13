@@ -17,11 +17,11 @@ final class NotExistRemoteSchemaExceptionTest extends TestCase
     public function testConstructor(): void
     {
         $previous = new \RuntimeException();
-        $exception = new NotExistRemoteSchemaException('0', '1', 2, $previous);
+        $exception = new NotExistRemoteSchemaException('0', 1,  $previous);
 
         $this->assertSame('0', $exception->getRemoteSchemaName());
-        $this->assertSame('1', $exception->getMessage());
-        $this->assertSame(2, $exception->getCode());
+        $this->assertSame('Remote schema: `0` not exist, Did you forget to add it?', $exception->getMessage());
+        $this->assertSame(1, $exception->getCode());
         $this->assertSame($previous, $exception->getPrevious());
     }
 }

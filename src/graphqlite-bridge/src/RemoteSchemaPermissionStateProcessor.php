@@ -38,8 +38,7 @@ final class RemoteSchemaPermissionStateProcessor implements StateProcessorInterf
     public function process(): void
     {
         $remoteSchema = $this->remoteSchema;
-        $metadataApi = $this->client->metadata();
-        $data = $metadataApi->query('export_metadata', [], 2);
+        $data = $this->client->metadata()->query('export_metadata', [], 2);
         $metadata = MetadataUtils::normalizeMetadata($data['metadata']);
         $metadata['remote_schemas'] ??= [];
 
@@ -55,20 +54,10 @@ final class RemoteSchemaPermissionStateProcessor implements StateProcessorInterf
         }
 
         if (false === $updated) {
-            throw new NotExistRemoteSchemaException(
-                $remoteSchema->getName(),
-                sprintf('You should be add `%s` remote schema first!', $remoteSchema->getName())
-            );
+            throw new NotExistRemoteSchemaException($remoteSchema->getName());
         }
 
-        $metadataApi->query(
-            'reload_metadata',
-            [
-                'reload_remote_schemas' => true,
-                'reload_sources' => true
-            ]
-        );
-        $metadataApi->query(
+        $this->client->metadata()->query(
             'replace_metadata',
             [
                 'metadata' => $metadata,

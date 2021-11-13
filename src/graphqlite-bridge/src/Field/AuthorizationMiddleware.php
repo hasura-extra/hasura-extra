@@ -55,7 +55,7 @@ final class AuthorizationMiddleware implements FieldMiddlewareInterface
             }
 
             if ($isUnauthorized) {
-                throw new MissingAuthorizationException('Your current role not have permission to access this field');
+                throw MissingAuthorizationException::forbidden();
             }
 
             return call_user_func($resolver, ...$args);

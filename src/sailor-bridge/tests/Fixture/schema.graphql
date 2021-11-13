@@ -3365,6 +3365,12 @@ type query_root {
   
   
   """
+  bundle_roles_test: String!
+
+  """
+  
+  
+  """
   bundle_root_type_mapper_test(date: date, json: json, jsonb: jsonb, timestamptz: timestamptz, timetz: timetz, uuid: uuid): json
 
   """

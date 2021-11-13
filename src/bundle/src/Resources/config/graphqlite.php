@@ -103,6 +103,6 @@ return static function (ContainerConfigurator $configurator) {
                     service('hasura.graphql.field.annotation_tracker')
                 ]
             )
-            ->tag('hasura.metadata.state_processor')
+            ->tag('hasura.metadata.state_processor', ['priority' => 8])
     ;
 };
