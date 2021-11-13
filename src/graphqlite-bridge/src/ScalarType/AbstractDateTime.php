@@ -14,7 +14,6 @@ use GraphQL\Error\Error;
 use GraphQL\Error\InvariantViolation;
 use GraphQL\Language\AST\StringValueNode;
 use GraphQL\Utils\Utils;
-use TheCodingMachine\GraphQLite\GraphQLRuntimeException;
 
 abstract class AbstractDateTime extends AbstractScalar
 {
@@ -37,11 +36,19 @@ abstract class AbstractDateTime extends AbstractScalar
             return $value;
         }
 
-        $dateTime = \DateTimeImmutable::createFromFormat($this->getFormat(), $value);
+        try {
+            $dateTime = \DateTimeImmutable::createFromFormat($this->getFormat(), $value);
+        } catch (\Throwable) {
+            $dateTime = false;
+        }
 
-        if (false === $dateTime) {
+        if (!$dateTime instanceof \DateTimeImmutable) {
             throw new Error(
-                sprintf('Fail to parse `%s` to an instance of %s', Utils::printSafe($value), \DateTimeInterface::class)
+                sprintf(
+                    'Cannot represent following value as %s: %s',
+                    static::NAME,
+                    Utils::printSafe($value),
+                )
             );
         }
 
@@ -50,14 +57,10 @@ abstract class AbstractDateTime extends AbstractScalar
 
     final public function parseLiteral($valueNode, ?array $variables = null)
     {
-        if ($valueNode instanceof StringValueNode) {
-            try {
-                return $this->parseValue($valueNode->value);
-            } catch (\Throwable) {
-            }
+        if (!$valueNode instanceof StringValueNode) {
+            throw new Error('Query error: Can only parse strings got: ' . $valueNode->kind, [$valueNode]);
         }
 
-        // Intentionally without message, as all information already in wrapped Exception
-        throw new GraphQLRuntimeException();
+        return $valueNode->value;
     }
 }

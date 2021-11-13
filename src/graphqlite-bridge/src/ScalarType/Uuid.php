@@ -15,7 +15,6 @@ use GraphQL\Error\InvariantViolation;
 use GraphQL\Language\AST\StringValueNode;
 use GraphQL\Utils\Utils;
 use Symfony\Component\Uid\Uuid as SymfonyUuid;
-use TheCodingMachine\GraphQLite\GraphQLRuntimeException;
 
 final class Uuid extends AbstractScalar
 {
@@ -51,21 +50,21 @@ final class Uuid extends AbstractScalar
             return SymfonyUuid::fromString($value);
         } catch (\Throwable) {
             throw new Error(
-                sprintf('Fail to parse `%s` to an instance of %s', Utils::printSafe($value), SymfonyUuid::class)
+                sprintf(
+                    'Cannot represent following value as %s: %s',
+                    self::NAME,
+                    Utils::printSafe($value),
+                )
             );
         }
     }
 
     public function parseLiteral($valueNode, ?array $variables = null)
     {
-        if ($valueNode instanceof StringValueNode) {
-            try {
-                return $this->parseValue($valueNode->value);
-            } catch (\Throwable) {
-            }
+        if (!$valueNode instanceof StringValueNode) {
+            throw new Error('Query error: Can only parse strings got: ' . $valueNode->kind, [$valueNode]);
         }
 
-        // Intentionally without message, as all information already in wrapped Exception
-        throw new GraphQLRuntimeException();
+        return $valueNode->value;
     }
 }
