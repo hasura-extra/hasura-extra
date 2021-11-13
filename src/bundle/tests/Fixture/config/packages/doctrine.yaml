@@ -1,6 +1,6 @@
 doctrine:
     dbal:
-        url: 'postgres://hasura:hasura@localhost:5432/hasura'
+        url: '%env(DATABASE_URL)%'
         server_version: 13
         charset: utf8
     orm:

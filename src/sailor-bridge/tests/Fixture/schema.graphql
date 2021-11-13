@@ -2317,6 +2317,12 @@ type hasura_events_variance_fields {
   id: Float
 }
 
+input input_object_assertion {
+  email_field: String!
+  sub: sub_input_object_assertion!
+  text_field: String!
+}
+
 """A GraphQL type that can contain json"""
 scalar json
 
@@ -2356,9 +2362,34 @@ type mutation_root {
   article_insert(obj: article_insert_obj_input!): article_insert_output
 
   """
-  A placeholder query used by thecodingmachine/graphqlite when there are no declared mutations.
+  
+  
   """
-  bundle_dummyMutation: String
+  bundle_assertion_test(email_naming: String!): String!
+
+  """
+  
+  
+  """
+  bundle_object_assertion_after_test(id: ID!, new_email: String): String!
+
+  """
+  
+  
+  """
+  bundle_object_assertion_before_test(object_input: input_object_assertion!): json!
+
+  """
+  
+  
+  """
+  bundle_test: String!
+
+  """
+  
+  
+  """
+  bundle_transactional_test(id: ID!, throw_exception: Boolean = false): transactional_output!
 
   """
   delete data from the table: "_attributes.chat"
@@ -3305,6 +3336,42 @@ type query_root {
   
   """
   bundle__dummy: String!
+
+  """
+  
+  
+  """
+  bundle_arg_entity_combine_test(email: String!, id: ID!): json!
+
+  """
+  
+  
+  """
+  bundle_arg_entity_n_plus_one_test(id: ID!): Int!
+
+  """
+  
+  
+  """
+  bundle_arg_naming_tests(snake_case: String!): String!
+
+  """
+  
+  
+  """
+  bundle_avoid_explicit_default_null_test(arg: String): String!
+
+  """
+  
+  
+  """
+  bundle_root_type_mapper_test(date: date, json: json, jsonb: jsonb, timestamptz: timestamptz, timetz: timetz, uuid: uuid): json
+
+  """
+  
+  
+  """
+  bundle_test: String!
   continent(code: ID!): Continent
   continents(filter: ContinentFilterInput): [Continent!]!
   countries(filter: CountryFilterInput): [Country!]!
@@ -3404,6 +3471,10 @@ type scalar_output {
   
   """
   uuid: uuid
+}
+
+input sub_input_object_assertion {
+  sub_text_field: String!
 }
 
 type subscription_root {
@@ -3823,6 +3894,10 @@ scalar timestamptz
 
 """A GraphQL type that can contain timetz"""
 scalar timetz
+
+type transactional_output {
+  name: String
+}
 
 """A GraphQL type that can contain uuid"""
 scalar uuid

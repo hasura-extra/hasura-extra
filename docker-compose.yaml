@@ -6,6 +6,7 @@ services:
     volumes:
       - $PWD:/var/www/html:rw,cached
     environment:
+      DATABASE_URL: postgres://hasura:hasura@postgres/hasura
       PHP_EXTENSION_PDO_PGSQL: 1
       APACHE_DOCUMENT_ROOT: public/
     ports:
@@ -31,7 +32,6 @@ services:
     restart: on-failure
     environment:
       HASURA_GRAPHQL_ADMIN_SECRET: 'test'
-      HASURA_GRAPHQL_EXPERIMENTAL_FEATURES: 'inherited_roles'
       HASURA_GRAPHQL_ENABLE_REMOTE_SCHEMA_PERMISSIONS: 'true'
       HASURA_GRAPHQL_DATABASE_URL: postgres://hasura:hasura@postgres/hasura
       HASURA_GRAPHQL_DEV_MODE: 'true'

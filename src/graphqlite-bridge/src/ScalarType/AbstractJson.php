@@ -22,7 +22,6 @@ use GraphQL\Language\AST\ObjectValueNode;
 use GraphQL\Language\AST\StringValueNode;
 use GraphQL\Language\AST\VariableNode;
 use GraphQL\Utils\Utils;
-use TheCodingMachine\GraphQLite\GraphQLRuntimeException;
 
 abstract class AbstractJson extends AbstractScalar
 {
@@ -41,24 +40,26 @@ abstract class AbstractJson extends AbstractScalar
 
     public function parseValue($value)
     {
-        if (is_array($value)) {
-            return $value;
+        if (!is_array($value)) {
+            throw new Error(
+                sprintf(
+                    'Cannot represent following value as %s: %s',
+                    static::NAME,
+                    Utils::printSafe($value)
+                )
+            );
         }
 
-        throw new Error(sprintf('Cannot represent following value as %s: %s', static::NAME, Utils::printSafe($value)));
+        return $value;
     }
 
     public function parseLiteral($valueNode, ?array $variables = null)
     {
-        if ($valueNode instanceof ListValueNode || $valueNode instanceof ObjectValueNode) {
-            try {
-                return $this->parseValue($this->parseJsonValueNode($valueNode, $variables));
-            } catch (\Throwable) {
-            }
+        if (!$valueNode instanceof ListValueNode && !$valueNode instanceof ObjectValueNode) {
+            throw new Error('Query error: Can only parse list or object got: ' . $valueNode->kind, [$valueNode]);
         }
 
-        // Intentionally without message, as all information already in wrapped Exception
-        throw new GraphQLRuntimeException();
+        return $this->parseJsonValueNode($valueNode, $variables);
     }
 
     private function parseJsonValueNode(Node $node, ?array $variables = null): mixed
@@ -72,11 +73,11 @@ abstract class AbstractJson extends AbstractScalar
         }
 
         if ($node instanceof IntValueNode) {
-            return (int) $node->value;
+            return (int)$node->value;
         }
 
         if ($node instanceof FloatValueNode) {
-            return (float) $node->value;
+            return (float)$node->value;
         }
 
         if ($node instanceof NullValueNode) {
@@ -85,7 +86,7 @@ abstract class AbstractJson extends AbstractScalar
 
         if ($node instanceof ListValueNode) {
             return array_map(
-                fn ($value) => $this->parseJsonValueNode($value, $variables),
+                fn($value) => $this->parseJsonValueNode($value, $variables),
                 iterator_to_array($node->values->getIterator())
             );
         }

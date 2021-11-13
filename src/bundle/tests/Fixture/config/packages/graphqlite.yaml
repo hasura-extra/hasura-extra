@@ -2,6 +2,9 @@ graphqlite:
   namespace:
     controllers: Hasura\Bundle\Tests\Fixture\App\GraphQL
     types: Hasura\Bundle\Tests\Fixture\App\GraphQL
+  debug:
+    INCLUDE_DEBUG_MESSAGE: true
+    INCLUDE_TRACE: true
   security:
     enable_login: 'off'
     enable_me: 'off'
