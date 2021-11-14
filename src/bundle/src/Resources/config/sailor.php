@@ -22,6 +22,7 @@ return static function (ContainerConfigurator $configurator) {
                     service('hasura.api_client.client')
                 ]
             )
+
         ->set('hasura.sailor.endpoint_config', EndpointConfig::class)
             ->public()
             ->args(
@@ -33,8 +34,10 @@ return static function (ContainerConfigurator $configurator) {
                     param('hasura.sailor.schema_path')
                 ]
             )
+
         ->set('hasura.sailor.introspect_command', Introspect::class)
             ->tag('console.command', ['command' => 'hasura:sailor:introspect'])
+
         ->set('hasura.sailor.codegen_command', Codegen::class)
             ->tag('console.command', ['command' => 'hasura:sailor:codegen'])
     ;

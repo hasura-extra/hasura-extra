@@ -26,12 +26,14 @@ return static function (ContainerConfigurator $configurator) {
                     service('security.authorization_checker')
                 ]
             )
+
         ->set('hasura.auth_hook.session_variable_enhancer', ChainSessionVariableEnhancer::class)
             ->args(
                 [
                     tagged_iterator('hasura.auth_hook.session_variable_enhancer')
                 ]
             )
+
         ->set('hasura.auth_hook.request_handler', RequestHandler::class)
             ->args(
                 [
@@ -41,9 +43,11 @@ return static function (ContainerConfigurator $configurator) {
                     service('hasura.auth_hook.session_variable_enhancer')
                 ]
             )
+
         ->set('hasura.auth_hook.controller', Psr15RequestHandler::class)
             ->parent('hasura.psr_http_message.psr15_request_handler_controller')
             ->arg('index_0', service('hasura.auth_hook.request_handler'))
+
         ->set('hasura.auth.role_anonymous_voter', RoleAnonymousVoter::class)
             ->args(
                 [
