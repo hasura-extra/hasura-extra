@@ -22,7 +22,11 @@ final class SailorClient implements SailorClientInterface
 
     public function request(string $query, \stdClass $variables = null): Response
     {
-        $data = $this->client->graphql()->query($query, $variables ? get_object_vars($variables) : null);
+        if (null !== $variables) {
+            $variables = get_object_vars($variables) ?: null;
+        }
+
+        $data = $this->client->graphql()->query($query, $variables);
 
         return Response::fromJson(json_encode($data));
     }
