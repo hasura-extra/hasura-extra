@@ -25,7 +25,7 @@ sailor-introspect:
 
 .PHONY: test-all
 test-all:
-	./vendor/bin/phpunit
+	./vendor/bin/phpunit --coverage-clover build/logs/phpunit/clover.xml --log-junit build/logs/phpunit/junit.xml
 
 .PHONY: test-api-client
 test-api-client:
