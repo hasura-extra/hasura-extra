@@ -22,7 +22,10 @@ final class AuthHookTest extends WebTestCase
 
         $data = $this->responseData();
 
+        $this->assertArrayHasKey('x-hasura-role', $data);
+        $this->assertArrayHasKey('x-hasura-test', $data);
         $this->assertSame('ROLE_ANONYMOUS', $data['x-hasura-role']);
+        $this->assertSame('test', $data['x-hasura-test']);
     }
 
     public function testDefaultRole(): void
@@ -39,7 +42,10 @@ final class AuthHookTest extends WebTestCase
 
         $data = $this->responseData();
 
+        $this->assertArrayHasKey('x-hasura-role', $data);
+        $this->assertArrayHasKey('x-hasura-test', $data);
         $this->assertSame('ROLE_USER', $data['x-hasura-role']);
+        $this->assertSame('test', $data['x-hasura-test']);
     }
 
     public function testRequestedRole(): void
@@ -57,6 +63,9 @@ final class AuthHookTest extends WebTestCase
 
         $data = $this->responseData();
 
+        $this->assertArrayHasKey('x-hasura-role', $data);
+        $this->assertArrayHasKey('x-hasura-test', $data);
         $this->assertSame('ROLE_TESTER', $data['x-hasura-role']);
+        $this->assertSame('test', $data['x-hasura-test']);
     }
 }

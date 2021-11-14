@@ -7,6 +7,7 @@ services:
       - $PWD:/var/www/html:rw,cached
     environment:
       DATABASE_URL: postgres://hasura:hasura@postgres/hasura
+      HASURA_BASE_URI: http://hasura:8080
       PHP_EXTENSION_PDO_PGSQL: 1
       APACHE_DOCUMENT_ROOT: public/
     ports:

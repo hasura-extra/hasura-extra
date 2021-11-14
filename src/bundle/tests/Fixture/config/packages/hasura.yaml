@@ -1,6 +1,6 @@
 hasura:
   remote_schema_name: bundle
-  base_uri: http://localhost:8080
+  base_uri: '%env(HASURA_BASE_URI)%'
   admin_secret: test
   metadata:
     path: '%kernel.project_dir%/hasura/metadata'
