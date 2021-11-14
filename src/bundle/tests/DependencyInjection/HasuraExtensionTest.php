@@ -59,6 +59,7 @@ final class HasuraExtensionTest extends TestCase
         $this->assertTrue($container->has('hasura.event_dispatcher.table_event_request_handler'));
         $this->assertTrue($container->has('hasura.event_dispatcher.table_event_request_handler_controller'));
 
+        $this->assertTrue($container->has('hasura.graphql.aggregate_query_provider_factory'));
         $this->assertTrue($container->has('hasura.graphql.object_assertion.executor'));
         $this->assertTrue($container->has('hasura.graphql.parameter.assertion_middleware'));
         $this->assertTrue($container->has('hasura.graphql.parameter.arg_entity_middleware'));
@@ -109,19 +110,6 @@ final class HasuraExtensionTest extends TestCase
                 ]
             ],
             $container->getExtensionConfig('security')
-        );
-
-        $this->assertSame(
-            [
-                [
-                    'namespace' => [
-                        'controllers' => [
-                            'Hasura\GraphQLiteBridge\Controller'
-                        ]
-                    ]
-                ]
-            ],
-            $container->getExtensionConfig('graphqlite')
         );
     }
 }
