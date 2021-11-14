@@ -24,13 +24,14 @@ use Hasura\GraphQLiteBridge\Parameter\ArgNamingMiddleware as ParameterArgNamingM
 use Hasura\GraphQLiteBridge\Parameter\AvoidExplicitDefaultNullMiddleware;
 use Hasura\GraphQLiteBridge\RemoteSchemaPermissionStateProcessor;
 use Hasura\GraphQLiteBridge\RootTypeMapperFactory;
+use TheCodingMachine\GraphQLite\AggregateControllerQueryProviderFactory;
 use TheCodingMachine\GraphQLite\Schema;
 
 return static function (ContainerConfigurator $configurator) {
     $configurator
         ->services()
         ->set('hasura.graphql.controller.dummy_query', DummyQuery::class)
-        ->alias(DummyQuery::class, 'hasura.graphql.controller.dummy_query')
+            ->public()
 
         ->set('hasura.graphql.authorization_service', AuthorizationService::class)
             ->args(
@@ -119,5 +120,20 @@ return static function (ContainerConfigurator $configurator) {
                 ]
             )
             ->tag('hasura.metadata.state_processor', ['priority' => 8])
+
+        ->set('hasura.graphql.aggregate_query_provider_factory', AggregateControllerQueryProviderFactory::class)
+            ->args(
+                [
+                    [
+                        DummyQuery::class
+                    ],
+                    service_locator(
+                        [
+                            DummyQuery::class => service('hasura.graphql.controller.dummy_query')
+                        ]
+                    )
+                ]
+            )
+            ->tag('graphql.queryprovider_factory')
     ;
 };
