@@ -31,6 +31,63 @@ return static function (ContainerConfigurator $configurator) {
                     abstract_arg('remote schema name')
                 ]
             )
+
+        ->set('hasura.metadata.yaml_operator', YamlOperator::class)
+            ->args(
+                [
+                    service('filesystem')
+                ]
+            )
+
+        ->set('hasura.metadata.manager', Manager::class)
+            ->args(
+                [
+                    service('hasura.api_client.client'),
+                    param('hasura.metadata.path'),
+                    service('hasura.metadata.yaml_operator')
+                ]
+            )
+
+        ->set('hasura.metadata.command', BaseCommand::class)
+            ->abstract()
+            ->args(
+                [
+                    service('hasura.metadata.manager')
+                ]
+            )
+
+        ->set('hasura.metadata.apply_command', ApplyMetadata::class)
+            ->parent('hasura.metadata.command')
+            ->tag('console.command', ['command' => 'hasura:metadata:apply'])
+
+        ->set('hasura.metadata.clear_command', ClearMetadata::class)
+            ->parent('hasura.metadata.command')
+            ->tag('console.command', ['command' => 'hasura:metadata:clear'])
+
+        ->set('hasura.metadata.drop_inconsistent_command', DropInconsistentMetadata::class)
+            ->parent('hasura.metadata.command')
+            ->tag('console.command', ['command' => 'hasura:metadata:drop-inconsistent'])
+
+        ->set('hasura.metadata.export_command', ExportMetadata::class)
+            ->parent('hasura.metadata.command')
+            ->tag('console.command', ['command' => 'hasura:metadata:export'])
+
+        ->set('hasura.metadata.get_inconsistent_command', GetInconsistentMetadata::class)
+            ->parent('hasura.metadata.command')
+            ->tag('console.command', ['command' => 'hasura:metadata:get-inconsistent'])
+
+        ->set('hasura.metadata.reload_command', ReloadMetadata::class)
+            ->parent('hasura.metadata.command')
+            ->tag('console.command', ['command' => 'hasura:metadata:reload'])
+
+        ->set('hasura.metadata.reload_state_processor', ReloadStateProcessor::class)
+            ->args(
+                [
+                    service('hasura.metadata.manager')
+                ]
+            )
+            ->tag('hasura.metadata.state_processor', ['priority' => 2048])
+
         ->set('hasura.metadata.inherited_roles_state_processor', InheritedRolesStateProcessor::class)
             ->args(
                 [
@@ -40,52 +97,7 @@ return static function (ContainerConfigurator $configurator) {
                 ]
             )
             ->tag('hasura.metadata.state_processor', ['priority' => 6])
-        ->set('hasura.metadata.reload_state_processor', ReloadStateProcessor::class)
-            ->args(
-                [
-                    service('hasura.api_client.client')
-                ]
-            )
-            ->tag('hasura.metadata.state_processor', ['priority' => 2048])
-        ->set('hasura.metadata.yaml_operator', YamlOperator::class)
-            ->args(
-                [
-                    service('filesystem')
-                ]
-            )
-        ->set('hasura.metadata.manager', Manager::class)
-            ->args(
-                [
-                    service('hasura.api_client.client'),
-                    param('hasura.metadata.path'),
-                    service('hasura.metadata.yaml_operator')
-                ]
-            )
-        ->set('hasura.metadata.command', BaseCommand::class)
-            ->abstract()
-            ->args(
-                [
-                    service('hasura.metadata.manager')
-                ]
-            )
-        ->set('hasura.metadata.apply_command', ApplyMetadata::class)
-            ->parent('hasura.metadata.command')
-            ->tag('console.command', ['command' => 'hasura:metadata:apply'])
-        ->set('hasura.metadata.clear_command', ClearMetadata::class)
-            ->parent('hasura.metadata.command')
-            ->tag('console.command', ['command' => 'hasura:metadata:clear'])
-        ->set('hasura.metadata.drop_inconsistent_command', DropInconsistentMetadata::class)
-            ->parent('hasura.metadata.command')
-            ->tag('console.command', ['command' => 'hasura:metadata:drop-inconsistent'])
-        ->set('hasura.metadata.export_command', ExportMetadata::class)
-            ->parent('hasura.metadata.command')
-            ->tag('console.command', ['command' => 'hasura:metadata:export'])
-        ->set('hasura.metadata.get_inconsistent_command', GetInconsistentMetadata::class)
-            ->parent('hasura.metadata.command')
-            ->tag('console.command', ['command' => 'hasura:metadata:get-inconsistent'])
-        ->set('hasura.metadata.reload_command', ReloadMetadata::class)
-            ->parent('hasura.metadata.command')
-            ->tag('console.command', ['command' => 'hasura:metadata:reload'])
+
         ->set('hasura.metadata.persist_state_command', PersistState::class)
             ->args(
                 [
