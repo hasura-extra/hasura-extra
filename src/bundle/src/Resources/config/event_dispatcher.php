@@ -21,6 +21,7 @@ return static function (ContainerConfigurator $configurator) {
                     service('hasura.psr_http_message.psr17_factory')
                 ]
             )
+
         ->set('hasura.event_dispatcher.table_event_request_handler_controller', Psr15RequestHandler::class)
             ->parent('hasura.psr_http_message.psr15_request_handler_controller')
             ->arg('index_0', service('hasura.event_dispatcher.table_event_request_handler'))

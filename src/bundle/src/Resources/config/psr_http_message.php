@@ -17,6 +17,7 @@ return static function (ContainerConfigurator $configurator) {
     $configurator
         ->services()
         ->set('hasura.psr_http_message.psr17_factory', Psr17Factory::class)
+
         ->set('hasura.psr_http_message.psr_http_factory', PsrHttpFactory::class)
             ->args(
                 [
@@ -26,7 +27,9 @@ return static function (ContainerConfigurator $configurator) {
                     service('hasura.psr_http_message.psr17_factory')
                 ]
             )
+
         ->set('hasura.psr_http_message.http_foundation_factory', HttpFoundationFactory::class)
+
         ->set('hasura.psr_http_message.psr15_request_handler_controller', Psr15RequestHandler::class)
             ->public()
             ->abstract()
