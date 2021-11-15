@@ -14,6 +14,8 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase as SymfonyKernelTestCase;
 
 abstract class KernelTestCase extends SymfonyKernelTestCase
 {
+    protected string $projectDir = __DIR__ . '/Fixture';
+
     public static function getKernelClass()
     {
         return TestKernel::class;

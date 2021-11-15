@@ -1,0 +1,2 @@
+maker:
+  root_namespace: Hasura\Bundle\Tests\Fixture\App

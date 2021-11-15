@@ -76,6 +76,8 @@ final class HasuraExtensionTest extends TestCase
         $this->assertTrue($container->has('hasura.graphql.authorization_service'));
         $this->assertTrue($container->has('hasura.graphql.controller.dummy_query'));
 
+        $this->assertTrue($container->has('hasura.maker.maker_entity'));
+
         $this->assertTrue($container->has('hasura.metadata.manager'));
         $this->assertTrue($container->has('hasura.metadata.yaml_operator'));
         $this->assertTrue($container->has('hasura.metadata.apply_command'));
@@ -111,5 +113,15 @@ final class HasuraExtensionTest extends TestCase
             ],
             $container->getExtensionConfig('security')
         );
+    }
+
+    public function testDisableDecorateMakeEntity(): void
+    {
+        $container = new ContainerBuilder();
+        $extension = new HasuraExtension();
+
+        $extension->load([['decorate_make_entity' => false]], $container);
+
+        $this->assertFalse($container->has('hasura.maker.maker_entity'));
     }
 }

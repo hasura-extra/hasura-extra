@@ -45,6 +45,7 @@ final class HasuraExtension extends Extension implements PrependExtensionInterfa
         $this->registerApiClient($container, $config, $loader);
         $this->registerAuth($container, $config, $loader);
         $this->registerGraphQLite($container, $config, $loader);
+        $this->registerMaker($container, $config, $loader);
         $this->registerMetadata($container, $config, $loader);
         $this->registerSailor($container, $config, $loader);
 
@@ -78,6 +79,15 @@ final class HasuraExtension extends Extension implements PrependExtensionInterfa
         if (!class_exists(Registry::class)) {
             $container->removeDefinition('hasura.graphql.parameter.arg_entity_middleware');
             $container->removeDefinition('hasura.graphql.field.transactional_middleware');
+        }
+    }
+
+    private function registerMaker(ContainerBuilder $container, array $config, PhpFileLoader $loader): void
+    {
+        $loader->load('maker.php');
+
+        if (false === $config['decorate_make_entity']) {
+            $container->removeDefinition('hasura.maker.maker_entity');
         }
     }
 
