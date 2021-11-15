@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Hasura\Bundle\DependencyInjection;
 
+use Symfony\Bundle\MakerBundle\MakerBundle;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -34,6 +35,9 @@ final class Configuration implements ConfigurationInterface
                 ->scalarNode('remote_schema_name')
                     ->cannotBeEmpty()
                     ->defaultNull()
+                ->end()
+                ->booleanNode('decorate_make_entity')
+                    ->defaultValue(class_exists(MakerBundle::class))
                 ->end()
                 ->arrayNode('metadata')
                     ->addDefaultsIfNotSet()

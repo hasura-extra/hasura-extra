@@ -28,6 +28,7 @@ final class ConfigurationTest extends TestCase
                 'base_uri' => 'http://hasura:8080',
                 'admin_secret' => null,
                 'remote_schema_name' => null,
+                'decorate_make_entity' => true,
                 'metadata' => [
                     'path' => '%kernel.project_dir%/hasura/metadata'
                 ],
@@ -58,6 +59,7 @@ final class ConfigurationTest extends TestCase
                     'base_uri' => 'http://localhost',
                     'admin_secret' => 'secret',
                     'remote_schema_name' => 'bundle',
+                    'decorate_make_entity' => false,
                 ],
             ]
         );
@@ -67,6 +69,7 @@ final class ConfigurationTest extends TestCase
                 'base_uri' => 'http://localhost',
                 'admin_secret' => 'secret',
                 'remote_schema_name' => 'bundle',
+                'decorate_make_entity' => false,
                 'metadata' => [
                     'path' => '%kernel.project_dir%/hasura/metadata'
                 ],

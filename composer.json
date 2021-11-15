@@ -24,6 +24,7 @@
         "nyholm/psr7": "^1.0",
         "phpunit/phpunit": "^9.5",
         "symfony/dotenv": "^5.0",
+        "symfony/maker-bundle": "^1.0",
         "symfony/orm-pack": "^2.1",
         "symfony/test-pack": "^1.0",
         "symfony/uid": "^5.0",

@@ -20,16 +20,16 @@ abstract class ConsoleTestCase extends KernelTestCase
 
     protected function setUp(): void
     {
-        parent::setUp();
-
         $this->application = new Application(self::bootKernel());
+
+        parent::setUp();
     }
 
     protected function tearDown(): void
     {
-        $this->application = null;
-
         parent::tearDown();
+
+        $this->application = null;
     }
 
     protected function getCommand(string $name): Command
