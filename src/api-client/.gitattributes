@@ -1,5 +1,6 @@
 * text=auto
 
+/.gitattributes export-ignore
 /.github export-ignore
 /tests export-ignore
 /phpunit.xml.dist export-ignore
