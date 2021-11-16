@@ -21,7 +21,8 @@ interface StateProcessorInterface
     /**
      * process (sync remote schema role permissions, inherited roles, etc...) to Hasura.
      *
+     * @param bool $allowInconsistent whether allow inconsistent after process.
      * @throws ClientExceptionInterface when process state to Hasura have problems.
      */
-    public function process(): void;
+    public function process(bool $allowInconsistent = false): void;
 }

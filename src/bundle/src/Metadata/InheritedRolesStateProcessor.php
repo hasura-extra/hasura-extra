@@ -26,7 +26,7 @@ final class InheritedRolesStateProcessor implements StateProcessorInterface
     ) {
     }
 
-    public function process(): void
+    public function process(bool $allowInconsistent = false): void
     {
         $data = $this->client->metadata()->query('export_metadata', [], 2);
         $metadata = MetadataUtils::normalizeMetadata($data['metadata']);
@@ -62,7 +62,7 @@ final class InheritedRolesStateProcessor implements StateProcessorInterface
         $this->client->metadata()->query(
             'replace_metadata',
             [
-                'allow_inconsistent_metadata' => false,
+                'allow_inconsistent_metadata' => $allowInconsistent,
                 'metadata' => $metadata
             ],
             2

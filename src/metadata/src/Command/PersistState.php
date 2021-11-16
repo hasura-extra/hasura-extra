@@ -13,6 +13,7 @@ namespace Hasura\Metadata\Command;
 use Hasura\Metadata\StateProcessorInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
@@ -28,6 +29,11 @@ final class PersistState extends Command
         parent::__construct();
     }
 
+    protected function configure()
+    {
+        $this->addOption('allow-inconsistent', mode: InputOption::VALUE_NONE, description: 'Allow inconsistent after process');
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $symfonyStyle = new SymfonyStyle($input, $output);
@@ -39,7 +45,7 @@ final class PersistState extends Command
         try {
             foreach ($this->processors as $processor) {
                 /** @var StateProcessorInterface $processor */
-                $processor->process();
+                $processor->process($input->getOption('allow-inconsistent'));
             }
         } catch (ClientExceptionInterface $clientException) {
             $content = $clientException->getResponse()->getContent(false);

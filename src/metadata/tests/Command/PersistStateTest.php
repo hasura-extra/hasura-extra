@@ -17,20 +17,33 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 final class PersistStateTest extends TestCase
 {
-    public function testPersistRemoteSchema(): void
+    public function testPersistState(): void
     {
-        $command = new PersistState([$this->createMockProcessor()]);
-        $tester = new CommandTester($command);
-        $tester->execute([]);
+        foreach ([true, false] as $allowInconsistent) {
+            $command = new PersistState([$this->createMockProcessor($allowInconsistent)]);
+            $tester = new CommandTester($command);
+            $tester->execute(['--allow-inconsistent' => $allowInconsistent]);
 
-        $this->assertStringContainsString('Persisting application state to Hasura...', $tester->getDisplay());
-        $this->assertStringContainsString('Congratulation! Application state persisted with Hasura!', $tester->getDisplay());
+            $this->assertStringContainsString('Persisting application state to Hasura...', $tester->getDisplay());
+            $this->assertStringContainsString(
+                'Congratulation! Application state persisted with Hasura!',
+                $tester->getDisplay()
+            );
+        }
     }
 
-    private function createMockProcessor(): StateProcessorInterface
+    private function createMockProcessor(bool $expectAllowInconsistent): StateProcessorInterface
     {
         $mock = $this->createMock(StateProcessorInterface::class);
-        $mock->expects($this->once())->method('process');
+        $mock
+            ->expects($this->once())
+            ->method('process')
+            ->willReturnCallback(
+                fn(bool $actualAllowInconsistent) => $this->assertSame(
+                    $expectAllowInconsistent,
+                    $actualAllowInconsistent
+                )
+            );
 
         return $mock;
     }
