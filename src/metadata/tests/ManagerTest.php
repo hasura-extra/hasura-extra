@@ -35,8 +35,22 @@ final class ManagerTest extends TestCase
         $this->assertSame($oldData['resource_version'] + 1, $newData['resource_version']);
     }
 
+    public function testApplyMetadataFromArray()
+    {
+        $oldData = $this->client->metadata()->query('export_metadata', [], 2);
+
+        $this->manager->applyFromArray($oldData['metadata']);
+
+        $newData = $this->client->metadata()->query('export_metadata', [], 2);
+
+        $this->assertSame($oldData['metadata'], $newData['metadata']);
+        $this->assertSame($oldData['resource_version'] + 1, $newData['resource_version']);
+    }
+
     public function testReloadMetadata()
     {
+        $this->expectNotToPerformAssertions();
+
         $this->manager->reload();
     }
 
@@ -50,6 +64,13 @@ final class ManagerTest extends TestCase
 
         $this->manager->export(true);
         $this->assertFileDoesNotExist(self::METADATA_PATH . '/dummy');
+    }
+
+    public function testExportMetadataToArray()
+    {
+        $metadata = $this->manager->exportToArray();
+
+        $this->assertNotEmpty($metadata);
     }
 
     public function testClearMetadata()
