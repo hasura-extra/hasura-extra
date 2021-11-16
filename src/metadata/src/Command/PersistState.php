@@ -10,23 +10,23 @@ declare(strict_types=1);
 
 namespace Hasura\Metadata\Command;
 
+use Hasura\Metadata\ManagerInterface;
 use Hasura\Metadata\StateProcessorInterface;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 
-final class PersistState extends Command
+final class PersistState extends BaseCommand
 {
     protected static $defaultName = 'persist-state';
 
     protected static $defaultDescription = 'Persist application state with Hasura.';
 
-    public function __construct(private iterable $processors)
+    public function __construct(ManagerInterface $manager, private iterable $processors)
     {
-        parent::__construct();
+        parent::__construct($manager);
     }
 
     protected function configure()
@@ -45,7 +45,7 @@ final class PersistState extends Command
         try {
             foreach ($this->processors as $processor) {
                 /** @var StateProcessorInterface $processor */
-                $processor->process($input->getOption('allow-inconsistent'));
+                $processor->process($this->metadataManager, $input->getOption('allow-inconsistent'));
             }
         } catch (ClientExceptionInterface $clientException) {
             $content = $clientException->getResponse()->getContent(false);

@@ -18,8 +18,8 @@ final class ReloadStateProcessorTest extends TestCase
     {
         $this->expectNotToPerformAssertions();
 
-        $processor = new ReloadStateProcessor($this->manager);
+        $processor = new ReloadStateProcessor();
 
-        $processor->process();
+        $processor->process($this->manager);
     }
 }

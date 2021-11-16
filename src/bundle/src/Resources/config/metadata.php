@@ -81,17 +81,11 @@ return static function (ContainerConfigurator $configurator) {
             ->tag('console.command', ['command' => 'hasura:metadata:reload'])
 
         ->set('hasura.metadata.reload_state_processor', ReloadStateProcessor::class)
-            ->args(
-                [
-                    service('hasura.metadata.manager')
-                ]
-            )
             ->tag('hasura.metadata.state_processor', ['priority' => 2048])
 
         ->set('hasura.metadata.inherited_roles_state_processor', InheritedRolesStateProcessor::class)
             ->args(
                 [
-                    service('hasura.api_client.client'),
                     param('security.role_hierarchy.roles'),
                     service('hasura.metadata.remote_schema')->nullOnInvalid()
                 ]
@@ -99,11 +93,8 @@ return static function (ContainerConfigurator $configurator) {
             ->tag('hasura.metadata.state_processor', ['priority' => 6])
 
         ->set('hasura.metadata.persist_state_command', PersistState::class)
-            ->args(
-                [
-                    tagged_iterator('hasura.metadata.state_processor')
-                ]
-            )
+            ->parent('hasura.metadata.command')
+            ->arg(1, tagged_iterator('hasura.metadata.state_processor'))
             ->tag('console.command', ['command' => 'hasura:metadata:persist-state'])
     ;
 };
