@@ -36,9 +36,7 @@ final class PersistState extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $symfonyStyle = new SymfonyStyle($input, $output);
-
-        $symfonyStyle->section(
+        $this->io->section(
             sprintf('Persisting application state to Hasura...')
         );
 
@@ -50,12 +48,12 @@ final class PersistState extends BaseCommand
         } catch (ClientExceptionInterface $clientException) {
             $content = $clientException->getResponse()->getContent(false);
 
-            $symfonyStyle->error($content);
+            $this->io->error($content);
 
             return 1;
         }
 
-        $symfonyStyle->success('Congratulation! Application state persisted with Hasura!');
+        $this->io->success('Congratulation! Application state persisted with Hasura!');
 
         return 0;
     }
