@@ -16,14 +16,31 @@ namespace Hasura\Metadata;
 interface ManagerInterface
 {
     /**
+     * Export metadata to files
+     *
      * @param bool $force export, delete old metadata before export
      */
     public function export(bool $force): void;
 
     /**
+     * Export metadata to PHP array
+     */
+    public function exportToArray(): array;
+
+    /**
+     * Apply metadata from exported files
+     *
      * @param bool $allowInconsistent current metadata with database sources
      */
     public function apply(bool $allowInconsistent = false): void;
+
+    /**
+     * Apply metadata from array
+     *
+     * @param array $metadata to apply
+     * @param bool $allowInconsistent current metadata with database sources
+     */
+    public function applyFromArray(array $metadata, bool $allowInconsistent = false): void;
 
     /**
      * @param bool $reloadRemoteSchemas whether reload remote schemas or not
