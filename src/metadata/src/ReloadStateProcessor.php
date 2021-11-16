@@ -16,7 +16,7 @@ final class ReloadStateProcessor implements StateProcessorInterface
     {
     }
 
-    public function process(): void
+    public function process(bool $allowInconsistent = false): void
     {
         $this->manager->reload(true, true);
     }

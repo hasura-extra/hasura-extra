@@ -35,7 +35,7 @@ final class RemoteSchemaPermissionStateProcessor implements StateProcessorInterf
         $this->schema->assertValid();
     }
 
-    public function process(): void
+    public function process(bool $allowInconsistent = false): void
     {
         $remoteSchema = $this->remoteSchema;
         $data = $this->client->metadata()->query('export_metadata', [], 2);
@@ -61,7 +61,7 @@ final class RemoteSchemaPermissionStateProcessor implements StateProcessorInterf
             'replace_metadata',
             [
                 'metadata' => $metadata,
-                'allow_inconsistent_metadata' => false
+                'allow_inconsistent_metadata' => $allowInconsistent
             ],
             2
         );
