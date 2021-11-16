@@ -37,7 +37,7 @@ final class RequestHandler implements RequestHandlerInterface
         $sessionVariables = ['x-hasura-role' => $role];
 
         if (null !== $this->sessionVariableEnhancer) {
-            $sessionVariables = $this->sessionVariableEnhancer->enhance($sessionVariables);
+            $sessionVariables = $this->sessionVariableEnhancer->enhance($sessionVariables, $request);
         }
 
         // Respect role decider

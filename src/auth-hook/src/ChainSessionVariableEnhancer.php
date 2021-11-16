@@ -10,17 +10,19 @@ declare(strict_types=1);
 
 namespace Hasura\AuthHook;
 
+use Psr\Http\Message\ServerRequestInterface;
+
 final class ChainSessionVariableEnhancer implements SessionVariableEnhancerInterface
 {
     public function __construct(private iterable $enhancers)
     {
     }
 
-    public function enhance(array $sessionVariables): array
+    public function enhance(array $sessionVariables, ServerRequestInterface $request): array
     {
         foreach ($this->enhancers as $enhancer) {
             /** @var SessionVariableEnhancerInterface $enhancer */
-            $sessionVariables = $enhancer->enhance($sessionVariables);
+            $sessionVariables = $enhancer->enhance($sessionVariables, $request);
         }
 
         return $sessionVariables;

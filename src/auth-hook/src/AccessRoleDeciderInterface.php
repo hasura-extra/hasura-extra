@@ -18,9 +18,9 @@ use Psr\Http\Message\ServerRequestInterface;
 interface AccessRoleDeciderInterface
 {
     /**
-     * @param ServerRequestInterface $serverRequest current request.
+     * @param ServerRequestInterface $request current request.
      * @return string access role of current request (x-hasura-role).
      * @throws UnauthorizedException in case current request's unauthorized. (ex: user had request unauthorized role)
      */
-    public function decideAccessRole(ServerRequestInterface $serverRequest): string;
+    public function decideAccessRole(ServerRequestInterface $request): string;
 }

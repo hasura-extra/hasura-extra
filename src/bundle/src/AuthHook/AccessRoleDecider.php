@@ -27,13 +27,13 @@ final class AccessRoleDecider implements AccessRoleDeciderInterface
     ) {
     }
 
-    public function decideAccessRole(ServerRequestInterface $serverRequest): string
+    public function decideAccessRole(ServerRequestInterface $request): string
     {
         if (!$this->tokenStorage?->getToken()?->getUser() instanceof UserInterface) {
             return $this->anonymousRole;
         }
 
-        $requestedRole = $serverRequest->getHeader('x-hasura-role')[0] ?? $this->defaultRole;
+        $requestedRole = $request->getHeader('x-hasura-role')[0] ?? $this->defaultRole;
 
         if (false === $this->authorizationChecker->isGranted($requestedRole)) {
             throw new UnauthorizedException(sprintf('Unauthorized to access with role: `%s`', $requestedRole));

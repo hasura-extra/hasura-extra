@@ -11,10 +11,11 @@ declare(strict_types=1);
 namespace Hasura\Bundle\Tests\Fixture\App\Security;
 
 use Hasura\AuthHook\SessionVariableEnhancerInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 final class SessionVariableEnhancer implements SessionVariableEnhancerInterface
 {
-    public function enhance(array $sessionVariables): array
+    public function enhance(array $sessionVariables, ServerRequestInterface $request): array
     {
         $sessionVariables['x-hasura-test'] = 'test';
 
