@@ -12,12 +12,8 @@ namespace Hasura\Metadata;
 
 final class ReloadStateProcessor implements StateProcessorInterface
 {
-    public function __construct(private ManagerInterface $manager)
+    public function process(ManagerInterface $manager, bool $allowInconsistent = false): void
     {
-    }
-
-    public function process(bool $allowInconsistent = false): void
-    {
-        $this->manager->reload(true, true);
+        $manager->reload(true, true);
     }
 }

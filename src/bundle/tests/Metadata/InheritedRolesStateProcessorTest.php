@@ -12,6 +12,8 @@ namespace Hasura\Bundle\Tests\Metadata;
 
 use Hasura\Bundle\Metadata\ChildRoleMissingException;
 use Hasura\Bundle\Metadata\InheritedRolesStateProcessor;
+use Hasura\Metadata\Manager;
+use Hasura\Metadata\OperatorInterface;
 use Hasura\Metadata\RemoteSchema;
 
 final class InheritedRolesStateProcessorTest extends TestCase
@@ -24,12 +26,12 @@ final class InheritedRolesStateProcessorTest extends TestCase
         $this->assertNotContains('ROLE_ADMIN', $roles);
 
         $processor = new InheritedRolesStateProcessor(
-            $this->client,
             self::getContainer()->getParameter('security.role_hierarchy.roles'),
             new RemoteSchema('bundle')
         );
 
-        $processor->process();
+        $manager = new Manager($this->client, '', $this->createMock(OperatorInterface::class));
+        $processor->process($manager);
 
         $data = $this->client->metadata()->query('export_metadata', [], 2);
 
@@ -43,12 +45,12 @@ final class InheritedRolesStateProcessorTest extends TestCase
     {
         $this->expectException(ChildRoleMissingException::class);
 
+        $manager = new Manager($this->client, '', $this->createMock(OperatorInterface::class));
         $processor = new InheritedRolesStateProcessor(
-            $this->client,
             self::getContainer()->getParameter('security.role_hierarchy.roles'),
             null
         );
 
-        $processor->process();
+        $processor->process($manager);
     }
 }

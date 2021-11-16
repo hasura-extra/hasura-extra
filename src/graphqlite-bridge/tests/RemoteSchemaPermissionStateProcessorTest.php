@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace Hasura\GraphQLiteBridge\Tests;
 
 use Hasura\GraphQLiteBridge\RemoteSchemaPermissionStateProcessor;
+use Hasura\Metadata\Manager;
 use Hasura\Metadata\NotExistRemoteSchemaException;
+use Hasura\Metadata\OperatorInterface;
 use Hasura\Metadata\RemoteSchema;
 
 final class RemoteSchemaPermissionStateProcessorTest extends TestCase
@@ -23,14 +25,14 @@ final class RemoteSchemaPermissionStateProcessorTest extends TestCase
         $this->expectException(NotExistRemoteSchemaException::class);
         $this->expectExceptionMessage('Remote schema: `test` not exist, Did you forget to add it?');
 
+        $manager = new Manager($this->client, '', $this->createMock(OperatorInterface::class));
         $processor = new RemoteSchemaPermissionStateProcessor(
             new RemoteSchema('test'),
             $this->schema,
-            $this->client,
             $this->annotationTracker
         );
 
-        $processor->process();
+        $processor->process($manager);
     }
 
     public function testCanSyncRolePermissions(): void
@@ -40,13 +42,13 @@ final class RemoteSchemaPermissionStateProcessorTest extends TestCase
         $this->assertSame('graphqlite-bridge', $remoteSchema['name']);
         $this->assertArrayNotHasKey('permissions', $remoteSchema);
 
+        $manager = new Manager($this->client, '', $this->createMock(OperatorInterface::class));
         $processor = new RemoteSchemaPermissionStateProcessor(
             new RemoteSchema('graphqlite-bridge'),
             $this->schema,
-            $this->client,
             $this->annotationTracker
         );
-        $processor->process();
+        $processor->process($manager);
 
         $remoteSchema = $this->fetchRemoteSchemaMetadata();
 

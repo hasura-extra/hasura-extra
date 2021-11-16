@@ -10,9 +10,8 @@ declare(strict_types=1);
 
 namespace Hasura\Bundle\Metadata;
 
-use Hasura\ApiClient\Client;
 use Hasura\GraphQLiteBridge\Controller\DummyQuery;
-use Hasura\Metadata\MetadataUtils;
+use Hasura\Metadata\ManagerInterface;
 use Hasura\Metadata\NotExistRemoteSchemaException;
 use Hasura\Metadata\RemoteSchemaInterface;
 use Hasura\Metadata\StateProcessorInterface;
@@ -20,16 +19,14 @@ use Hasura\Metadata\StateProcessorInterface;
 final class InheritedRolesStateProcessor implements StateProcessorInterface
 {
     public function __construct(
-        private Client $client,
         private array $hierarchyRoles,
         private ?RemoteSchemaInterface $remoteSchema = null
     ) {
     }
 
-    public function process(bool $allowInconsistent = false): void
+    public function process(ManagerInterface $manager, bool $allowInconsistent = false): void
     {
-        $data = $this->client->metadata()->query('export_metadata', [], 2);
-        $metadata = MetadataUtils::normalizeMetadata($data['metadata']);
+        $metadata = $manager->exportToArray();
         $currentRoles = $this->collectCurrentRoles($metadata);
         $items = [];
 
@@ -59,14 +56,7 @@ final class InheritedRolesStateProcessor implements StateProcessorInterface
 
         $metadata['inherited_roles'] = $items;
 
-        $this->client->metadata()->query(
-            'replace_metadata',
-            [
-                'allow_inconsistent_metadata' => $allowInconsistent,
-                'metadata' => $metadata
-            ],
-            2
-        );
+        $manager->applyFromArray($metadata, $allowInconsistent);
     }
 
     private function addDummyRemoteSchemaPermissions(array $roleSet, array &$metadata): void

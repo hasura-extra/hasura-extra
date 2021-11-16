@@ -13,11 +13,10 @@ namespace Hasura\GraphQLiteBridge;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Schema;
 use GraphQL\Utils\SchemaPrinter;
-use Hasura\ApiClient\Client;
 use Hasura\GraphQLiteBridge\Attribute\Roles;
 use Hasura\GraphQLiteBridge\Controller\DummyQuery;
 use Hasura\GraphQLiteBridge\Field\AnnotationTracker;
-use Hasura\Metadata\MetadataUtils;
+use Hasura\Metadata\ManagerInterface;
 use Hasura\Metadata\NotExistRemoteSchemaException;
 use Hasura\Metadata\RemoteSchemaInterface;
 use Hasura\Metadata\StateProcessorInterface;
@@ -27,7 +26,6 @@ final class RemoteSchemaPermissionStateProcessor implements StateProcessorInterf
     public function __construct(
         private RemoteSchemaInterface $remoteSchema,
         private Schema $schema,
-        private Client $client,
         private AnnotationTracker $annotationTracker,
         private string $dummyQueryField = DummyQuery::NAME
     ) {
@@ -35,11 +33,10 @@ final class RemoteSchemaPermissionStateProcessor implements StateProcessorInterf
         $this->schema->assertValid();
     }
 
-    public function process(bool $allowInconsistent = false): void
+    public function process(ManagerInterface $manager, bool $allowInconsistent = false): void
     {
         $remoteSchema = $this->remoteSchema;
-        $data = $this->client->metadata()->query('export_metadata', [], 2);
-        $metadata = MetadataUtils::normalizeMetadata($data['metadata']);
+        $metadata = $manager->exportToArray();
         $metadata['remote_schemas'] ??= [];
 
         $updated = false;
@@ -57,14 +54,7 @@ final class RemoteSchemaPermissionStateProcessor implements StateProcessorInterf
             throw new NotExistRemoteSchemaException($remoteSchema->getName());
         }
 
-        $this->client->metadata()->query(
-            'replace_metadata',
-            [
-                'metadata' => $metadata,
-                'allow_inconsistent_metadata' => $allowInconsistent
-            ],
-            2
-        );
+        $manager->applyFromArray($metadata, $allowInconsistent);
     }
 
     private function createRemoteSchemaPermissions(): array

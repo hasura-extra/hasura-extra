@@ -115,7 +115,6 @@ return static function (ContainerConfigurator $configurator) {
                 [
                     service('hasura.metadata.remote_schema'),
                     service(Schema::class),
-                    service('hasura.api_client.client'),
                     service('hasura.graphql.field.annotation_tracker')
                 ]
             )

@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Hasura\Metadata\Tests\Command;
 
 use Hasura\Metadata\Command\PersistState;
+use Hasura\Metadata\ManagerInterface;
 use Hasura\Metadata\StateProcessorInterface;
 use Hasura\Metadata\Tests\TestCase;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -20,7 +21,7 @@ final class PersistStateTest extends TestCase
     public function testPersistState(): void
     {
         foreach ([true, false] as $allowInconsistent) {
-            $command = new PersistState([$this->createMockProcessor($allowInconsistent)]);
+            $command = new PersistState($this->manager, [$this->createMockProcessor($allowInconsistent)]);
             $tester = new CommandTester($command);
             $tester->execute(['--allow-inconsistent' => $allowInconsistent]);
 
@@ -39,7 +40,7 @@ final class PersistStateTest extends TestCase
             ->expects($this->once())
             ->method('process')
             ->willReturnCallback(
-                fn(bool $actualAllowInconsistent) => $this->assertSame(
+                fn(ManagerInterface $manager, bool $actualAllowInconsistent) => $this->assertSame(
                     $expectAllowInconsistent,
                     $actualAllowInconsistent
                 )
