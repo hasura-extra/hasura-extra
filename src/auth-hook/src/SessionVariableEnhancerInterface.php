@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace Hasura\AuthHook;
 
+use Psr\Http\Message\ServerRequestInterface;
+
 /**
  * An interface implements by classes want to enhance session variables of current request.
  */
@@ -17,7 +19,8 @@ interface SessionVariableEnhancerInterface
 {
     /**
      * @param array $sessionVariables of current request.
+     * @param ServerRequestInterface $request current request.
      * @return array session variables enhanced will be use.
      */
-    public function enhance(array $sessionVariables): array;
+    public function enhance(array $sessionVariables, ServerRequestInterface $request): array;
 }

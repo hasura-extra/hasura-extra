@@ -13,6 +13,7 @@ namespace Hasura\AuthHook\Tests;
 use Hasura\AuthHook\ChainSessionVariableEnhancer;
 use Hasura\AuthHook\SessionVariableEnhancerInterface;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ServerRequestInterface;
 
 final class ChainSessionVariableEnhancerTest extends TestCase
 {
@@ -23,7 +24,7 @@ final class ChainSessionVariableEnhancerTest extends TestCase
         $enhancer3 = $this->createMockEnhancer(['c' => 'override']);
 
         $chain = new ChainSessionVariableEnhancer([$enhancer1, $enhancer2, $enhancer3]);
-        $sessionVariables = $chain->enhance(['d' => 4]);
+        $sessionVariables = $chain->enhance(['d' => 4], $this->createMock(ServerRequestInterface::class));
 
         $this->assertSame(['d' => 4, 'a' => 1, 'c' => 'override', 'b' => 2], $sessionVariables);
     }
