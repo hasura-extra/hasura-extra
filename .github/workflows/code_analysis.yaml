@@ -25,7 +25,8 @@ jobs:
           - name: Binary File Run
             run: |
               # test run bin files
-              src/metadata/bin/hasura-metadata
+              php src/metadata/bin/hasura-metadata
+              php src/sailor-bridge/bin/hasura-sailor
     steps:
       - uses: actions/checkout@v2
 
