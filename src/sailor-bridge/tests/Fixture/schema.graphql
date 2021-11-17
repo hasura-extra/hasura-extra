@@ -2357,6 +2357,10 @@ input jsonb_comparison_exp {
   _nin: [jsonb!]
 }
 
+type login_output {
+  id: Int!
+}
+
 """mutation root"""
 type mutation_root {
   article_insert(obj: article_insert_obj_input!): article_insert_output
@@ -2641,6 +2645,9 @@ type mutation_root {
     """on conflict condition"""
     on_conflict: hasura_events_on_conflict
   ): hasura_events
+
+  """login"""
+  login(email: String!, password: String!): login_output!
 
   """
   update data of the table: "_attributes.chat"

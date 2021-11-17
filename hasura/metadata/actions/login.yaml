@@ -1,0 +1,24 @@
+name: login
+definition:
+    handler: 'http://localhost:3000'
+    output_type: login_output!
+    arguments:
+        -
+            name: email
+            type: String!
+        -
+            name: password
+            type: String!
+    request_transform:
+        body: |-
+            {
+                "username": {{$body.input.email}},
+                "password": {{$body.input.password}}
+            }
+        content_type: application/json
+        method: POST
+        query_params: {  }
+        template_engine: Kriti
+    type: mutation
+    kind: synchronous
+comment: login
