@@ -191,4 +191,15 @@ CONTENT,
             file_get_contents($this->projectDir . '/src/GraphQL/Test/Test2/InsertMutation/Output.php')
         );
     }
+
+    public function testMakeWithRegenerateOption(): void
+    {
+        $command = $this->application->get('make:entity');
+        $tester = new CommandTester($command);
+
+        $tester->execute(['name' => 'Test\\Test3'], ['interaction' => false]);
+        $tester->execute(['name' => 'Hasura\Bundle\Tests\Fixture\App\Entity\Test', '--regenerate' => true, '--graphql' => true]);
+
+        $this->assertStringNotContainsString('Add GraphQL insert/update mutations', $tester->getDisplay());
+    }
 }
