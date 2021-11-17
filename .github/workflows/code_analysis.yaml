@@ -26,6 +26,7 @@ jobs:
             run: |
               # test run bin files
               src/metadata/bin/hasura-metadata
+              src/sailor-bridge/bin/hasura-sailor
     steps:
       - uses: actions/checkout@v2
 
