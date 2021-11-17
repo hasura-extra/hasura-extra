@@ -32,6 +32,7 @@ final class MetadataUtils
         static $objectFieldPatterns = [
             '~^sources\.\d+\.tables\.\d+\.(select|insert|update|delete)_permissions\.\d+\.permission\.(check|filter)$~',
             '~^remote_schemas\.\d+\.definition\.customization\.(type_names|field_names\.\d+)\.mapping$~',
+            '~^actions\.\d+\.definition\.request_transform\.query_params$~',
         ];
 
         foreach ($value as $childField => &$childValue) {
