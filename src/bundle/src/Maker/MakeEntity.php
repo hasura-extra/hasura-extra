@@ -37,6 +37,11 @@ final class MakeEntity extends AbstractMaker
     public function interact(InputInterface $input, ConsoleStyle $io, Command $command)
     {
         $this->maker->interact($input, $io, $command);
+
+        if ($input->getOption('regenerate')) {
+            return;
+        }
+
         $entityClassName = $input->getArgument('name');
         $insertNamespace = sprintf('GraphQL\\%s\\InsertMutation\\', $entityClassName);
         $updateNamespace = sprintf('GraphQL\\%s\\UpdateMutation\\', $entityClassName);
@@ -69,7 +74,7 @@ final class MakeEntity extends AbstractMaker
 
     public function generate(InputInterface $input, ConsoleStyle $io, Generator $generator)
     {
-        if (!$input->getOption('graphql')) {
+        if (!$input->getOption('graphql') || $input->getOption('regenerate')) {
             $this->maker->generate($input, $io, $generator);
 
             return;
@@ -87,8 +92,7 @@ final class MakeEntity extends AbstractMaker
             $outputType = u(sprintf('%s_%s_mutation_output', $entity, $mutationName))
                 ->snake()
                 ->lower()
-                ->toString()
-            ;
+                ->toString();
             $resolverClassDetails = $generator->createClassNameDetails('Resolver', $namespace);
             $generator->generateClass(
                 $resolverClassDetails->getFullName(),
@@ -105,8 +109,7 @@ final class MakeEntity extends AbstractMaker
                 $name = u(sprintf('%s_%s_mutation_%s', $entity, $mutationName, $ioName))
                     ->snake()
                     ->lower()
-                    ->toString()
-                ;
+                    ->toString();
                 $ioClassDetails = $generator->createClassNameDetails($ioName, $namespace);
                 $generator->generateClass(
                     $ioClassDetails->getFullName(),
