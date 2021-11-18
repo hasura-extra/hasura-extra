@@ -127,7 +127,7 @@ final class HasuraExtensionTest extends TestCase
         $this->assertFalse($container->has('hasura.maker.maker_entity'));
     }
 
-    public function testDisableProcessors(): void
+    public function testDisableMetadataStateProcessors(): void
     {
         $container = new ContainerBuilder();
         $extension = new HasuraExtension();
