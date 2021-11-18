@@ -23,14 +23,18 @@ final class PersistState extends BaseCommand
 
     protected static $defaultDescription = 'Persist application state with Hasura.';
 
-    public function __construct(ManagerInterface $manager, private iterable $processors)
+    public function __construct(ManagerInterface $manager, private StateProcessorInterface $processor)
     {
         parent::__construct($manager);
     }
 
     protected function configure()
     {
-        $this->addOption('allow-inconsistent', mode: InputOption::VALUE_NONE, description: 'Allow inconsistent after process');
+        $this->addOption(
+            'allow-inconsistent',
+            mode: InputOption::VALUE_NONE,
+            description: 'Allow inconsistent after process'
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -40,10 +44,7 @@ final class PersistState extends BaseCommand
         );
 
         try {
-            foreach ($this->processors as $processor) {
-                /** @var StateProcessorInterface $processor */
-                $processor->process($this->metadataManager, $input->getOption('allow-inconsistent'));
-            }
+            $this->processor->process($this->metadataManager, $input->getOption('allow-inconsistent'));
         } catch (ClientExceptionInterface $clientException) {
             $content = $clientException->getResponse()->getContent(false);
 
