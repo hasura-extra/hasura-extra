@@ -43,11 +43,11 @@ final class HasuraExtension extends Extension implements PrependExtensionInterfa
         $container->setParameter('hasura.base_uri', $config['base_uri']);
 
         $this->registerApiClient($container, $config, $loader);
-        $this->registerAuth($container, $config, $loader);
+        $this->registerAuth($container, $config['auth'], $loader);
         $this->registerGraphQLite($container, $config, $loader);
         $this->registerMaker($container, $config, $loader);
-        $this->registerMetadata($container, $config, $loader);
-        $this->registerSailor($container, $config, $loader);
+        $this->registerMetadata($container, $config['metadata'], $loader);
+        $this->registerSailor($container, $config['sailor'], $loader);
 
         $this->configRemoteSchema($container, $config);
     }
@@ -62,8 +62,8 @@ final class HasuraExtension extends Extension implements PrependExtensionInterfa
 
     private function registerAuth(ContainerBuilder $container, array $config, PhpFileLoader $loader): void
     {
-        $container->setParameter('hasura.auth.default_role', $config['auth']['default_role']);
-        $container->setParameter('hasura.auth.anonymous_role', $config['auth']['anonymous_role']);
+        $container->setParameter('hasura.auth.default_role', $config['default_role']);
+        $container->setParameter('hasura.auth.anonymous_role', $config['anonymous_role']);
 
         $loader->load('auth.php');
 
@@ -93,9 +93,25 @@ final class HasuraExtension extends Extension implements PrependExtensionInterfa
 
     private function registerMetadata(ContainerBuilder $container, array $config, PhpFileLoader $loader): void
     {
-        $container->setParameter('hasura.metadata.path', $config['metadata']['path']);
+        $container->setParameter('hasura.metadata.path', $config['path']);
+        $container->setParameter(
+            'hasura.metadata.state_processors.enabled_remote_schema_permissions',
+            $config['state_processors']['enabled_remote_schema_permissions']
+        );
+        $container->setParameter(
+            'hasura.metadata.state_processors.enabled_inherited_roles',
+            $config['state_processors']['enabled_inherited_roles']
+        );
 
         $loader->load('metadata.php');
+
+        if (false === $config['state_processors']['enabled_remote_schema_permissions']) {
+            $container->removeDefinition('hasura.graphql.remote_schema_permission_state_processor');
+        }
+
+        if (false === $config['state_processors']['enabled_inherited_roles']) {
+            $container->removeDefinition('hasura.metadata.inherited_roles_state_processor');
+        }
 
         $container
             ->registerForAutoconfiguration(StateProcessorInterface::class)
@@ -104,10 +120,10 @@ final class HasuraExtension extends Extension implements PrependExtensionInterfa
 
     private function registerSailor(ContainerBuilder $containerBuilder, array $config, PhpFileLoader $loader): void
     {
-        $containerBuilder->setParameter('hasura.sailor.executor_path', $config['sailor']['executor_path']);
-        $containerBuilder->setParameter('hasura.sailor.executor_namespace', $config['sailor']['executor_namespace']);
-        $containerBuilder->setParameter('hasura.sailor.query_spec_path', $config['sailor']['query_spec_path']);
-        $containerBuilder->setParameter('hasura.sailor.schema_path', $config['sailor']['schema_path']);
+        $containerBuilder->setParameter('hasura.sailor.executor_path', $config['executor_path']);
+        $containerBuilder->setParameter('hasura.sailor.executor_namespace', $config['executor_namespace']);
+        $containerBuilder->setParameter('hasura.sailor.query_spec_path', $config['query_spec_path']);
+        $containerBuilder->setParameter('hasura.sailor.schema_path', $config['schema_path']);
 
         $loader->load('sailor.php');
     }
@@ -116,7 +132,12 @@ final class HasuraExtension extends Extension implements PrependExtensionInterfa
     {
         if (null === $config['remote_schema_name']) {
             $container->removeDefinition('hasura.metadata.remote_schema');
-            $container->removeDefinition('hasura.graphql.remote_schema_permission_state_processor');
+
+            if ($container->hasDefinition('hasura.graphql.remote_schema_permission_state_processor')) {
+                $container->removeDefinition('hasura.graphql.remote_schema_permission_state_processor');
+            }
+
+            $container->setParameter('hasura.metadata.state_processors.enabled_remote_schema_permissions', false);
 
             return;
         }

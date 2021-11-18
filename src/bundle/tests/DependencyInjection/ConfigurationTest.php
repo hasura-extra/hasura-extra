@@ -30,6 +30,10 @@ final class ConfigurationTest extends TestCase
                 'remote_schema_name' => null,
                 'decorate_make_entity' => true,
                 'metadata' => [
+                    'state_processors' => [
+                        'enabled_remote_schema_permissions' => true,
+                        'enabled_inherited_roles' => true,
+                    ],
                     'path' => '%kernel.project_dir%/hasura/metadata'
                 ],
                 'auth' => [
@@ -60,6 +64,12 @@ final class ConfigurationTest extends TestCase
                     'admin_secret' => 'secret',
                     'remote_schema_name' => 'bundle',
                     'decorate_make_entity' => false,
+                    'metadata' => [
+                        'state_processors' => [
+                            'enabled_remote_schema_permissions' => false,
+                            'enabled_inherited_roles' => false,
+                        ],
+                    ]
                 ],
             ]
         );
@@ -71,6 +81,10 @@ final class ConfigurationTest extends TestCase
                 'remote_schema_name' => 'bundle',
                 'decorate_make_entity' => false,
                 'metadata' => [
+                    'state_processors' => [
+                        'enabled_remote_schema_permissions' => false,
+                        'enabled_inherited_roles' => false,
+                    ],
                     'path' => '%kernel.project_dir%/hasura/metadata'
                 ],
                 'auth' => [

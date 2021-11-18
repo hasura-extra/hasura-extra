@@ -21,8 +21,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters->set(
         Option::SKIP,
         [
+            __DIR__ . '/src/bundle/tests/Fixture',
             __DIR__ . '/src/bundle/src/Maker/Resources/skeleton',
             __DIR__ . '/src/bundle/src/Resources/config',
+            __DIR__ . '/src/bundle/src/DependencyInjection/Configuration.php',
         ]
     );
 
