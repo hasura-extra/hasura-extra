@@ -88,6 +88,9 @@ final class HasuraExtensionTest extends TestCase
         $this->assertTrue($container->has('hasura.metadata.get_inconsistent_command'));
         $this->assertTrue($container->has('hasura.metadata.reload_command'));
         $this->assertTrue($container->has('hasura.metadata.persist_state_command'));
+        $this->assertTrue($container->has('hasura.metadata.state_processor'));
+        $this->assertTrue($container->has('hasura.metadata.reload_state_processor'));
+        $this->assertTrue($container->has('hasura.metadata.inherited_roles_state_processor'));
 
         $this->assertTrue($container->has('hasura.psr_http_message.psr17_factory'));
         $this->assertTrue($container->has('hasura.psr_http_message.psr_http_factory'));

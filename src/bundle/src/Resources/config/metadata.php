@@ -9,6 +9,7 @@
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Hasura\Bundle\Metadata\InheritedRolesStateProcessor;
+use Hasura\Metadata\ChainStateProcessor;
 use Hasura\Metadata\Command\ApplyMetadata;
 use Hasura\Metadata\Command\BaseCommand;
 use Hasura\Metadata\Command\ClearMetadata;
@@ -20,6 +21,7 @@ use Hasura\Metadata\Command\ReloadMetadata;
 use Hasura\Metadata\Manager;
 use Hasura\Metadata\ReloadStateProcessor;
 use Hasura\Metadata\RemoteSchema;
+use Hasura\Metadata\StateProcessorInterface;
 use Hasura\Metadata\YamlOperator;
 
 return static function (ContainerConfigurator $configurator) {
@@ -80,6 +82,19 @@ return static function (ContainerConfigurator $configurator) {
             ->parent('hasura.metadata.command')
             ->tag('console.command', ['command' => 'hasura:metadata:reload'])
 
+        ->set('hasura.metadata.persist_state_command', PersistState::class)
+            ->parent('hasura.metadata.command')
+            ->arg(1, service('hasura.metadata.state_processor'))
+            ->tag('console.command', ['command' => 'hasura:metadata:persist-state'])
+
+        ->set('hasura.metadata.state_processor', ChainStateProcessor::class)
+            ->args(
+                [
+                    tagged_iterator('hasura.metadata.state_processor')
+                ]
+            )
+        ->alias(StateProcessorInterface::class, 'hasura.metadata.state_processor')
+
         ->set('hasura.metadata.reload_state_processor', ReloadStateProcessor::class)
             ->tag('hasura.metadata.state_processor', ['priority' => 2048])
 
@@ -91,10 +106,5 @@ return static function (ContainerConfigurator $configurator) {
                 ]
             )
             ->tag('hasura.metadata.state_processor', ['priority' => 6])
-
-        ->set('hasura.metadata.persist_state_command', PersistState::class)
-            ->parent('hasura.metadata.command')
-            ->arg(1, tagged_iterator('hasura.metadata.state_processor'))
-            ->tag('console.command', ['command' => 'hasura:metadata:persist-state'])
     ;
 };

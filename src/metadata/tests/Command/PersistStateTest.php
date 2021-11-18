@@ -21,7 +21,7 @@ final class PersistStateTest extends TestCase
     public function testPersistState(): void
     {
         foreach ([true, false] as $allowInconsistent) {
-            $command = new PersistState($this->manager, [$this->createMockProcessor($allowInconsistent)]);
+            $command = new PersistState($this->manager, $this->createMockProcessor($allowInconsistent));
             $tester = new CommandTester($command);
             $tester->execute(['--allow-inconsistent' => $allowInconsistent]);
 
