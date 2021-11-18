@@ -14,7 +14,7 @@ return static function (ContainerConfigurator $configurator) {
     $services = $configurator->services();
     $services
         ->set(
-            'hasura.maker.maker_entity',
+            'hasura.maker.make_entity',
             MakeEntity::class
         )
             ->decorate('maker.maker.make_entity', priority: -8)

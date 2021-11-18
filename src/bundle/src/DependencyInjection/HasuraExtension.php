@@ -84,11 +84,9 @@ final class HasuraExtension extends Extension implements PrependExtensionInterfa
 
     private function registerMaker(ContainerBuilder $container, array $config, PhpFileLoader $loader): void
     {
-        $loader->load('maker.php');
+        $container->setParameter('hasura.maker.decorate_make_entity', $config['decorate_make_entity']);
 
-        if (false === $config['decorate_make_entity']) {
-            $container->removeDefinition('hasura.maker.maker_entity');
-        }
+        $loader->load('maker.php');
     }
 
     private function registerMetadata(ContainerBuilder $container, array $config, PhpFileLoader $loader): void
