@@ -5,7 +5,7 @@ metadata:
   labels:
   {{- include "hasura.labels" . | nindent 4 }}
 data:
-  HASURA_GRAPHQL_SERVER_HOST: {{ .Values.serverHost | quote }}
+  HASURA_GRAPHQL_SERVER_HOST: {{ tpl .Values.serverHost $ | quote }}
   HASURA_GRAPHQL_SERVER_PORT: {{ .Values.serverPort | quote }}
   HASURA_GRAPHQL_ENABLE_REMOTE_SCHEMA_PERMISSIONS: {{ .Values.enableRemoteSchemaPermission | quote }}
   HASURA_GRAPHQL_DEV_MODE: {{ .Values.devMode | quote }}
@@ -42,7 +42,7 @@ data:
   HASURA_GRAPHQL_ADMIN_INTERNAL_ERRORS: {{ .Values.adminInternalErrors | quote }}
   {{- end }}
 {{- if .Values.corsDomain }}
-  HASURA_GRAPHQL_CORS_DOMAIN: {{ .Values.corsDomain | quote }}
+  HASURA_GRAPHQL_CORS_DOMAIN: {{ tpl .Values.corsDomain $ | quote }}
 {{- else }}
   HASURA_GRAPHQL_DISABLE_CORS: 'true'
 {{- end }}
@@ -50,7 +50,7 @@ data:
   HASURA_GRAPHQL_JWT_SECRET: {{ .Values.jwtSecret | quote }}
   HASURA_GRAPHQL_UNAUTHORIZED_ROLE: {{ .Values.unauthorizedRole | quote }}
 {{- else if .Values.authHook  }}
-  HASURA_GRAPHQL_AUTH_HOOK: {{ .Values.authHook | quote }}
+  HASURA_GRAPHQL_AUTH_HOOK: {{ tpl .Values.authHook $ | quote }}
   HASURA_GRAPHQL_AUTH_HOOK_MODE: {{ .Values.authHookMode | quote }}
 {{- end }}
 {{- with .Values.extraEnvVarsCM }}
