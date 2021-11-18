@@ -41,6 +41,8 @@ final class HasuraExtensionTest extends TestCase
 
         $this->assertTrue($container->hasParameter('hasura.base_uri'));
         $this->assertTrue($container->hasParameter('hasura.metadata.path'));
+        $this->assertTrue($container->hasParameter('hasura.metadata.state_processors.enabled_inherited_roles'));
+        $this->assertTrue($container->hasParameter('hasura.metadata.state_processors.enabled_remote_schema_permissions'));
         $this->assertTrue($container->hasParameter('hasura.sailor.executor_namespace'));
         $this->assertTrue($container->hasParameter('hasura.sailor.query_spec_path'));
         $this->assertTrue($container->hasParameter('hasura.sailor.executor_path'));
@@ -123,5 +125,28 @@ final class HasuraExtensionTest extends TestCase
         $extension->load([['decorate_make_entity' => false]], $container);
 
         $this->assertFalse($container->has('hasura.maker.maker_entity'));
+    }
+
+    public function testDisableProcessors(): void
+    {
+        $container = new ContainerBuilder();
+        $extension = new HasuraExtension();
+
+        $extension->load(
+            [
+                [
+                    'metadata' => [
+                        'state_processors' => [
+                            'enabled_remote_schema_permissions' => false,
+                            'enabled_inherited_roles' => false,
+                        ]
+                    ]
+                ]
+            ],
+            $container
+        );
+
+        $this->assertFalse($container->has('hasura.metadata.inherited_roles_state_processor'));
+        $this->assertFalse($container->has('hasura.graphql.remote_schema_permission_state_processor'));
     }
 }
