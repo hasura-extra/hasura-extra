@@ -20,7 +20,7 @@ final class MetadataPass implements CompilerPassInterface
         if ($container->getParameter('hasura.metadata.state_processors.enabled_inherited_roles')) {
             if (false === $container->hasParameter('security.role_hierarchy.roles')) {
                 throw new \LogicException(
-                    'The SecurityBundle is not registered in your application. Try running "composer require symfony/security-bundle".'
+                    '`hasura.metadata.state_processors.enabled_inherited_roles` enabled but the SecurityBundle is not registered in your application. Try running "composer require symfony/security-bundle" or disabled it.'
                 );
             }
 
