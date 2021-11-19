@@ -23,7 +23,7 @@ use TheCodingMachine\GraphQLite\Parameters\ParameterInterface;
 
 final class ArgEntityMiddleware implements ParameterMiddlewareInterface
 {
-    public function __construct(private ManagerRegistry $registry)
+    public function __construct(private ?ManagerRegistry $registry)
     {
     }
 
@@ -44,7 +44,15 @@ final class ArgEntityMiddleware implements ParameterMiddlewareInterface
         $parameterType = $parameter->getType();
 
         if (!$parameterType instanceof \ReflectionNamedType) {
-            throw new GraphQLRuntimeException(sprintf('Parameter `%s` is not supported by %s', $parameter->getName(), ArgEntityAttribute::class));
+            throw new GraphQLRuntimeException(
+                sprintf('Parameter `%s` is not supported by %s', $parameter->getName(), ArgEntityAttribute::class)
+            );
+        }
+
+        if (null === $this->registry) {
+            throw new \LogicException(
+                'The DoctrineBundle is not registered in your application. Try running "composer require symfony/orm-pack".'
+            );
         }
 
         $em = $this->registry->getManager($attribute->getEntityManager());

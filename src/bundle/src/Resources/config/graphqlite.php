@@ -61,7 +61,7 @@ return static function (ContainerConfigurator $configurator) {
         ->set('hasura.graphql.field.transactional_middleware', TransactionalMiddleware::class)
             ->args(
                 [
-                    service('doctrine')
+                    service('doctrine')->nullOnInvalid()
                 ]
             )
 
@@ -103,7 +103,7 @@ return static function (ContainerConfigurator $configurator) {
         ->set('hasura.graphql.parameter.arg_entity_middleware', ArgEntityMiddleware::class)
             ->args(
                 [
-                    service('doctrine')
+                    service('doctrine')->nullOnInvalid()
                 ]
             )
 
