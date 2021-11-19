@@ -24,7 +24,6 @@
         "hasura-extra/graphqlite-bridge": "dev-main",
         "hasura-extra/sailor-bridge": "dev-main",
         "thecodingmachine/graphqlite-bundle": "^5.0",
-        "symfony/event-dispatcher": "^5.0",
         "symfony/framework-bundle": "^5.0",
         "symfony/psr7-pack": "^1.0"
     },

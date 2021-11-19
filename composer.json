@@ -9,7 +9,6 @@
         "psr/http-server-handler": "^1.0",
         "spawnia/sailor": "^v0.10",
         "symfony/console": "^5.0",
-        "symfony/event-dispatcher": "^5.0",
         "symfony/filesystem": "^5.0",
         "symfony/framework-bundle": "^5.0",
         "symfony/http-client": "^5.0",
@@ -53,6 +52,9 @@
             "Hasura\\Metadata\\Tests\\": "src/metadata/tests",
             "Hasura\\SailorBridge\\Tests\\": "src/sailor-bridge/tests"
         }
+    },
+    "conflict": {
+        "hasura-extra/hasura-bundle": "*"
     },
     "replace": {
         "hasura-extra/api-client": "self.version",

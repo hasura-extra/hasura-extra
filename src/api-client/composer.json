@@ -15,6 +15,9 @@
             "Hasura\\ApiClient\\Tests\\": "tests"
         }
     },
+    "conflict": {
+        "hasura-extra/hasura-bundle": "*"
+    },
     "require": {
         "php": ">=8.0",
         "symfony/http-client": "^5.0"
