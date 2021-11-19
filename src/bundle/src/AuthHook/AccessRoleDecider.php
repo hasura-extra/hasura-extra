@@ -22,13 +22,19 @@ final class AccessRoleDecider implements AccessRoleDeciderInterface
     public function __construct(
         private string $anonymousRole,
         private string $defaultRole,
-        private TokenStorageInterface $tokenStorage,
-        private AuthorizationCheckerInterface $authorizationChecker,
+        private ?TokenStorageInterface $tokenStorage,
+        private ?AuthorizationCheckerInterface $authorizationChecker,
     ) {
     }
 
     public function decideAccessRole(ServerRequestInterface $request): string
     {
+        if (null === $this->tokenStorage || null === $this->authorizationChecker) {
+            throw new \LogicException(
+                'The SecurityBundle is not registered in your application. Try running "composer require symfony/security-bundle".'
+            );
+        }
+
         if (!$this->tokenStorage?->getToken()?->getUser() instanceof UserInterface) {
             return $this->anonymousRole;
         }
