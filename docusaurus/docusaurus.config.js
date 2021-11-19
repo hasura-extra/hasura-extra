@@ -51,7 +51,8 @@ const config = {
           },
           {
             href: 'https://github.com/hasura-extra',
-            label: 'GitHub',
+            className: 'header-github-link',
+            'aria-label': 'GitHub repository',
             position: 'right',
           },
         ],
