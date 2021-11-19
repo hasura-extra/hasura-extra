@@ -101,7 +101,7 @@ return static function (ContainerConfigurator $configurator) {
         ->set('hasura.metadata.inherited_roles_state_processor', InheritedRolesStateProcessor::class)
             ->args(
                 [
-                    param('security.role_hierarchy.roles'),
+                    abstract_arg('role hierarchy'),
                     service('hasura.metadata.remote_schema')->nullOnInvalid()
                 ]
             )

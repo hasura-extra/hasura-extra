@@ -13,6 +13,7 @@ namespace Hasura\Bundle;
 use Hasura\Bundle\DependencyInjection\CompilerPass\DecorateMakeEntityPass;
 use Hasura\Bundle\DependencyInjection\CompilerPass\GraphQLiteMiddlewarePass;
 use Hasura\Bundle\DependencyInjection\CompilerPass\GraphQLitePass;
+use Hasura\Bundle\DependencyInjection\CompilerPass\MetadataPass;
 use Spawnia\Sailor\Configuration;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -29,6 +30,7 @@ final class HasuraBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $container->addCompilerPass(new DecorateMakeEntityPass());
+        $container->addCompilerPass(new MetadataPass());
 
         $this->addGraphQLitePasses($container);
     }

@@ -36,7 +36,7 @@ return static function (ContainerConfigurator $configurator) {
         ->set('hasura.graphql.authorization_service', AuthorizationService::class)
             ->args(
                 [
-                    service('security.authorization_checker')
+                    service('security.authorization_checker')->nullOnInvalid()
                 ]
             )
 

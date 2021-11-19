@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Hasura\Bundle\DependencyInjection;
 
 use Symfony\Bundle\MakerBundle\MakerBundle;
+use Symfony\Bundle\SecurityBundle\SecurityBundle;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -54,7 +55,7 @@ final class Configuration implements ConfigurationInterface
                                     ->info('Whether process GraphQLite roles attributes state to Hasura or not.')
                                 ->end()
                                 ->booleanNode('enabled_inherited_roles')
-                                    ->defaultTrue()
+                                    ->defaultValue(class_exists(SecurityBundle::class))
                                     ->info('Whether process Symfony security hierarchy roles state to Hasura or not.')
                                 ->end()
                             ->end()

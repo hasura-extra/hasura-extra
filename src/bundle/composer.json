@@ -26,8 +26,7 @@
         "thecodingmachine/graphqlite-bundle": "^5.0",
         "symfony/event-dispatcher": "^5.0",
         "symfony/framework-bundle": "^5.0",
-        "symfony/psr7-pack": "^1.0",
-        "symfony/security-bundle": "^5.0"
+        "symfony/psr7-pack": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5",
@@ -35,7 +34,8 @@
         "symfony/orm-pack": "^2.1",
         "symfony/test-pack": "^1.0",
         "symfony/uid": "^5.0",
-        "symfony/filesystem": "^5.0"
+        "symfony/filesystem": "^5.0",
+        "symfony/security-bundle": "^5.0"
     },
     "conflict": {
         "hasura-extra/hasura-bundle": "*"
