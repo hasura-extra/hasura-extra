@@ -16,5 +16,8 @@
         <include>
             <directory suffix=".php">src/*/src</directory>
         </include>
+        <exclude>
+            <directory suffix=".php">src/monorepo-builder/src</directory>
+        </exclude>
     </coverage>
 </phpunit>
