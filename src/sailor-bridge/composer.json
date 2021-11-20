@@ -18,7 +18,7 @@
     "require": {
         "php": ">=8.0",
         "spawnia/sailor": "^v0.10",
-        "hasura-extra/api-client": "^2.0"
+        "hasura-extra/api-client": "^2.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5",
