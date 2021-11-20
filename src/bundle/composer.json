@@ -2,8 +2,6 @@
     "name": "hasura-extra/bundle",
     "license": "MIT",
     "description": "Symfony bundle to build modern web APIs with Hasura graphql engine.",
-    "prefer-stable": true,
-    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "Hasura\\Bundle\\": "src"
@@ -17,12 +15,12 @@
     },
     "require": {
         "php": ">=8.0",
-        "hasura-extra/auth-hook": "dev-main",
-        "hasura-extra/api-client": "dev-main",
-        "hasura-extra/metadata": "dev-main",
-        "hasura-extra/event-dispatcher": "dev-main",
-        "hasura-extra/graphqlite-bridge": "dev-main",
-        "hasura-extra/sailor-bridge": "dev-main",
+        "hasura-extra/auth-hook": "^2.0",
+        "hasura-extra/api-client": "^2.0",
+        "hasura-extra/metadata": "^2.0",
+        "hasura-extra/event-dispatcher": "^2.0",
+        "hasura-extra/graphqlite-bridge": "^2.0",
+        "hasura-extra/sailor-bridge": "^2.0",
         "thecodingmachine/graphqlite-bundle": "^5.0",
         "symfony/framework-bundle": "^5.0",
         "symfony/psr7-pack": "^1.0"
@@ -38,5 +36,7 @@
     },
     "conflict": {
         "hasura-extra/hasura-bundle": "*"
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

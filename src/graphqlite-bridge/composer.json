@@ -2,8 +2,6 @@
     "name": "hasura-extra/graphqlite-bridge",
     "license": "MIT",
     "description": "Provides integration for GraphQLite with Hasura Extra packages.",
-    "prefer-stable": true,
-    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "Hasura\\GraphQLiteBridge\\": "src"
@@ -16,12 +14,20 @@
     },
     "require": {
         "php": ">=8.0",
-        "hasura-extra/api-client": "dev-main",
-        "hasura-extra/metadata": "dev-main",
+        "hasura-extra/api-client": "^2.0",
+        "hasura-extra/metadata": "^2.0",
         "thecodingmachine/graphqlite": "^5.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5",
         "symfony/uid": "^5.0"
-    }
+    },
+    "conflict": {
+        "hasura-extra/sailor-bridge": "<2.0.0",
+        "hasura-extra/auth-hook": "<2.0.0",
+        "hasura-extra/event-dispatcher": "<2.0.0",
+        "hasura-extra/bundle": "<2.0.0"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

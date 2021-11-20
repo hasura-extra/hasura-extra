@@ -2,8 +2,6 @@
     "name": "hasura-extra/api-client",
     "license": "MIT",
     "description": "The library provides an api client to interact with Hasura api.",
-    "prefer-stable": true,
-    "minimum-stability": "dev",
     "type": "library",
     "autoload": {
         "psr-4": {
@@ -16,7 +14,13 @@
         }
     },
     "conflict": {
-        "hasura-extra/hasura-bundle": "*"
+        "hasura-extra/hasura-bundle": "*",
+        "hasura-extra/sailor-bridge": "<2.0.0",
+        "hasura-extra/auth-hook": "<2.0.0",
+        "hasura-extra/event-dispatcher": "<2.0.0",
+        "hasura-extra/bundle": "<2.0.0",
+        "hasura-extra/graphqlite-bridge": "<2.0.0",
+        "hasura-extra/metadata": "<2.0.0"
     },
     "require": {
         "php": ">=8.0",
@@ -24,5 +28,7 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5"
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
