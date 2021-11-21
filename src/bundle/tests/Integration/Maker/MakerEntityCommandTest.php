@@ -31,7 +31,9 @@ final class MakerEntityCommandTest extends ConsoleTestCase
         $command = $this->application->get('make:entity');
         $tester = new CommandTester($command);
 
-        $tester->execute(['name' => 'Test\\Test1']);
+        $tester->execute([
+            'name' => 'Test\\Test1',
+        ]);
 
         $this->assertStringContainsString('Add GraphQL insert/update mutations', $tester->getDisplay());
 
@@ -52,7 +54,12 @@ final class MakerEntityCommandTest extends ConsoleTestCase
         $tester = new CommandTester($command);
 
         try {
-            $tester->execute(['name' => 'Test\\Test2', '--graphql' => true], ['interaction' => false]);
+            $tester->execute([
+                'name' => 'Test\\Test2',
+                '--graphql' => true,
+            ], [
+                'interaction' => false,
+            ]);
         } catch (MissingInputException) {
         }
 
@@ -197,8 +204,16 @@ CONTENT,
         $command = $this->application->get('make:entity');
         $tester = new CommandTester($command);
 
-        $tester->execute(['name' => 'Test\\Test3'], ['interaction' => false]);
-        $tester->execute(['name' => 'Hasura\Bundle\Tests\Fixture\App\Entity\Test', '--regenerate' => true, '--graphql' => true]);
+        $tester->execute([
+            'name' => 'Test\\Test3',
+        ], [
+            'interaction' => false,
+        ]);
+        $tester->execute([
+            'name' => 'Hasura\Bundle\Tests\Fixture\App\Entity\Test',
+            '--regenerate' => true,
+            '--graphql' => true,
+        ]);
 
         $this->assertStringNotContainsString('Add GraphQL insert/update mutations', $tester->getDisplay());
     }

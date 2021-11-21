@@ -26,7 +26,7 @@ final class HasuraExtension extends Extension implements PrependExtensionInterfa
         $container->prependExtensionConfig(
             'security',
             [
-                'enable_authenticator_manager' => true
+                'enable_authenticator_manager' => true,
             ]
         );
     }

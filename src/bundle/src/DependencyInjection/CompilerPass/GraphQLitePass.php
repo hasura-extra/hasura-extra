@@ -23,7 +23,7 @@ final class GraphQLitePass implements CompilerPassInterface
         'hasura.graphql.parameter.object_assertion_middleware',
         'hasura.graphql.parameter.arg_naming_middleware',
         'hasura.graphql.parameter.arg_entity_middleware',
-        'hasura.graphql.parameter.avoid_explicit_default_null_middleware'
+        'hasura.graphql.parameter.avoid_explicit_default_null_middleware',
     ];
 
     private const FIELD_MIDDLEWARES = [
@@ -31,7 +31,7 @@ final class GraphQLitePass implements CompilerPassInterface
         'hasura.graphql.field.annotation_tracking_middleware',
         'hasura.graphql.field.arg_naming_middleware',
         'hasura.graphql.field.transactional_middleware',
-        'hasura.graphql.field.authorization_middleware'
+        'hasura.graphql.field.authorization_middleware',
     ];
 
     public function process(ContainerBuilder $container)

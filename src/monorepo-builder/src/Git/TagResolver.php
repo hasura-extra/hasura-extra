@@ -45,7 +45,7 @@ final class TagResolver implements TagResolverInterface
 
         return \array_filter(
             \explode("\n", $normalizedTags),
-            fn(string $tag) => false === str_starts_with($tag, 'helm-chart')
+            fn (string $tag) => false === str_starts_with($tag, 'helm-chart')
         );
     }
 }

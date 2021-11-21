@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 namespace Hasura\Bundle\Tests\Integration\GraphQLite;
 
-
 final class RootTypeMapperTest extends TestCase
 {
     public function testRootTypeMapper(): void
@@ -28,7 +27,9 @@ query Query($json: json!) {
     )
 }
 GQL;
-        $this->execute($query, ['json' => ['test']]);
+        $this->execute($query, [
+            'json' => ['test'],
+        ]);
         $this->assertResponseIsSuccessful();
 
         $data = $this->responseData()['data']['root_type_mapper_test'];
@@ -40,6 +41,9 @@ GQL;
         $this->assertArrayHasKey('timetz', $data);
         $this->assertArrayHasKey('uuid', $data);
 
-        $this->assertSame(['a' => 'b', 'b' => ['test']], $data['jsonb']);
+        $this->assertSame([
+            'a' => 'b',
+            'b' => ['test'],
+        ], $data['jsonb']);
     }
 }

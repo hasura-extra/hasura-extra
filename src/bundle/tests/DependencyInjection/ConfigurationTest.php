@@ -34,18 +34,18 @@ final class ConfigurationTest extends TestCase
                         'enabled_remote_schema_permissions' => true,
                         'enabled_inherited_roles' => true,
                     ],
-                    'path' => '%kernel.project_dir%/hasura/metadata'
+                    'path' => '%kernel.project_dir%/hasura/metadata',
                 ],
                 'auth' => [
                     'anonymous_role' => 'ROLE_ANONYMOUS',
-                    'default_role' => 'ROLE_USER'
+                    'default_role' => 'ROLE_USER',
                 ],
                 'sailor' => [
                     'executor_namespace' => 'App\GraphQLExecutor',
                     'executor_path' => '%kernel.project_dir%/src/GraphQLExecutor',
                     'query_spec_path' => '%kernel.project_dir%/hasura/graphql',
-                    'schema_path' => '%kernel.project_dir%/hasura/schema.graphql'
-                ]
+                    'schema_path' => '%kernel.project_dir%/hasura/schema.graphql',
+                ],
             ],
             $config
         );
@@ -69,7 +69,7 @@ final class ConfigurationTest extends TestCase
                             'enabled_remote_schema_permissions' => false,
                             'enabled_inherited_roles' => false,
                         ],
-                    ]
+                    ],
                 ],
             ]
         );
@@ -85,18 +85,18 @@ final class ConfigurationTest extends TestCase
                         'enabled_remote_schema_permissions' => false,
                         'enabled_inherited_roles' => false,
                     ],
-                    'path' => '%kernel.project_dir%/hasura/metadata'
+                    'path' => '%kernel.project_dir%/hasura/metadata',
                 ],
                 'auth' => [
                     'anonymous_role' => 'ROLE_ANONYMOUS',
-                    'default_role' => 'ROLE_USER'
+                    'default_role' => 'ROLE_USER',
                 ],
                 'sailor' => [
                     'executor_namespace' => 'App\GraphQLExecutor',
                     'executor_path' => '%kernel.project_dir%/src/GraphQLExecutor',
                     'query_spec_path' => '%kernel.project_dir%/hasura/graphql',
-                    'schema_path' => '%kernel.project_dir%/hasura/schema.graphql'
-                ]
+                    'schema_path' => '%kernel.project_dir%/hasura/schema.graphql',
+                ],
             ],
             $config
         );

@@ -17,7 +17,7 @@ abstract class TestCase extends WebTestCase
     protected function execute($query, array $variables = null, array $server = []): void
     {
         $data = [
-            'query' => $query
+            'query' => $query,
         ];
 
         if (null !== $variables) {
@@ -29,7 +29,7 @@ abstract class TestCase extends WebTestCase
             '/graphql',
             server: array_merge(
                 [
-                    'CONTENT_TYPE' => 'application/json'
+                    'CONTENT_TYPE' => 'application/json',
                 ],
                 $server
             ),

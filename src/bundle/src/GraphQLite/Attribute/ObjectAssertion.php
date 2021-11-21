@@ -25,7 +25,7 @@ final class ObjectAssertion implements ParameterAnnotationInterface, MiddlewareA
 
     public function __construct(
         private string $for,
-        private array|string|null|GroupSequence $groups = null,
+        private array | string | null | GroupSequence $groups = null,
         private int $mode = self::BEFORE_RESOLVE_CALL,
         private ?array $customViolationPropertyPaths = null
     ) {

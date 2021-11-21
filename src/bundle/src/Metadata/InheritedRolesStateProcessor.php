@@ -50,7 +50,7 @@ final class InheritedRolesStateProcessor implements StateProcessorInterface
 
             $items[] = [
                 'role_name' => $role,
-                'role_set' => $set
+                'role_set' => $set,
             ];
         }
 
@@ -64,14 +64,14 @@ final class InheritedRolesStateProcessor implements StateProcessorInterface
         $added = false;
         $remoteSchemas = $metadata['remote_schemas'] ?? [];
         $permissionsAppend = array_map(
-            fn(string $role) => [
+            fn (string $role) => [
                 'role' => $role,
                 'definition' => [
                     'schema' => sprintf(
                         'schema { query: Query } type Query { %s: String! }',
                         DummyQuery::NAME
-                    )
-                ]
+                    ),
+                ],
             ],
             $roleSet
         );

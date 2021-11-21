@@ -64,8 +64,7 @@ trait SchemaFactoryTrait
 
     private function createAuthorizationService(): AuthorizationServiceInterface
     {
-        return new class implements AuthorizationServiceInterface {
-
+        return new class() implements AuthorizationServiceInterface {
             public function isAllowed(string $right, $subject = null): bool
             {
                 return 'allow' === $right;

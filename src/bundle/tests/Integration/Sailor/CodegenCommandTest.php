@@ -33,7 +33,7 @@ query Articles {
     }
 }
 GQL;
-        file_put_contents($this->querySpecPath .'/article.graphql', $query);
+        file_put_contents($this->querySpecPath . '/article.graphql', $query);
 
         $codegenCommand = $this->getCommand('hasura:sailor:codegen');
         $codegenCommandTester = new CommandTester($codegenCommand);

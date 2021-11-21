@@ -86,7 +86,7 @@ abstract class AbstractJson extends AbstractScalar
 
         if ($node instanceof ListValueNode) {
             return array_map(
-                fn($value) => $this->parseJsonValueNode($value, $variables),
+                fn ($value) => $this->parseJsonValueNode($value, $variables),
                 iterator_to_array($node->values->getIterator())
             );
         }

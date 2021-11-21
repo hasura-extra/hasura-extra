@@ -39,7 +39,7 @@ trait BackupMetadataTrait
             'replace_metadata',
             [
                 'allow_inconsistent_metadata' => false,
-                'metadata' => $this->metadataBackup
+                'metadata' => $this->metadataBackup,
             ]
         );
 

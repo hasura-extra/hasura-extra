@@ -51,7 +51,7 @@ class TestCase extends PHPUnitTestCase
                 'replace_metadata',
                 [
                     'metadata' => $this->metadataBackup,
-                    'allow_inconsistent_metadata' => false
+                    'allow_inconsistent_metadata' => false,
                 ],
                 2
             );

@@ -12,5 +12,4 @@ namespace Hasura\AuthHook;
 
 interface ExceptionInterface extends \Throwable
 {
-
 }
