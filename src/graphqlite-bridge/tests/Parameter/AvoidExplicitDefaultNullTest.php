@@ -38,8 +38,7 @@ final class AvoidExplicitDefaultNullTest extends TestCase
 
     private function createScalarInputTypeParameter(): InputTypeParameterInterface
     {
-        return new class implements InputTypeParameterInterface {
-
+        return new class() implements InputTypeParameterInterface {
             public function resolve(?object $source, array $args, $context, ResolveInfo $info)
             {
             }
@@ -63,11 +62,10 @@ final class AvoidExplicitDefaultNullTest extends TestCase
 
     private function createInputObjectTypeParameter(): InputTypeParameterInterface
     {
-        return new class implements InputTypeParameterInterface {
-
+        return new class() implements InputTypeParameterInterface {
             public function resolve(?object $source, array $args, $context, ResolveInfo $info)
             {
-                // TODO: Implement resolve() method.
+                
             }
 
             public function getType(): InputType
@@ -78,9 +76,9 @@ final class AvoidExplicitDefaultNullTest extends TestCase
                         'fields' => [
                             'id' => [
                                 'type' => Type::string(),
-                                'defaultValue' => null
-                            ]
-                        ]
+                                'defaultValue' => null,
+                            ],
+                        ],
                     ]
                 );
             }

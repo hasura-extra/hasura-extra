@@ -34,7 +34,7 @@ final class AuthHookTest extends WebTestCase
             'GET',
             '/hasura_auth_hook',
             server: [
-                'HTTP_AUTHORIZATION' => 'Basic ' . base64_encode('test:test')
+                'HTTP_AUTHORIZATION' => 'Basic ' . base64_encode('test:test'),
             ]
         );
 
@@ -55,7 +55,7 @@ final class AuthHookTest extends WebTestCase
             '/hasura_auth_hook',
             server: [
                 'HTTP_X_HASURA_ROLE' => 'ROLE_TESTER',
-                'HTTP_AUTHORIZATION' => 'Basic ' . base64_encode('test:test')
+                'HTTP_AUTHORIZATION' => 'Basic ' . base64_encode('test:test'),
             ]
         );
 

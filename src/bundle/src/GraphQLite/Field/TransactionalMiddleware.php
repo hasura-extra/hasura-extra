@@ -12,8 +12,8 @@ namespace Hasura\Bundle\GraphQLite\Field;
 
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\Proxy;
-use Hasura\Bundle\GraphQLite\Attribute\Transactional;
 use GraphQL\Type\Definition\FieldDefinition;
+use Hasura\Bundle\GraphQLite\Attribute\Transactional;
 use TheCodingMachine\GraphQLite\Middlewares\FieldHandlerInterface;
 use TheCodingMachine\GraphQLite\Middlewares\FieldMiddlewareInterface;
 use TheCodingMachine\GraphQLite\QueryFieldDescriptor;

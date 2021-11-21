@@ -10,9 +10,9 @@ declare(strict_types=1);
 
 namespace Hasura\Bundle\GraphQLite\Parameter;
 
-use Hasura\Bundle\GraphQLite\ObjectAssertion\Executor;
 use GraphQL\Type\Definition\InputType;
 use GraphQL\Type\Definition\ResolveInfo;
+use Hasura\Bundle\GraphQLite\ObjectAssertion\Executor;
 use Hasura\GraphQLiteBridge\Parameter\WrappingParameterInterface;
 use Hasura\GraphQLiteBridge\Parameter\WrappingParameterTrait;
 use Symfony\Component\Validator\Constraints\GroupSequence;
@@ -26,7 +26,7 @@ final class ObjectAssertion implements InputTypeParameterInterface, WrappingPara
         private Executor $executor,
         private string $atPath,
         private ?array $customViolationPropertyPaths,
-        private array|string|null|GroupSequence $groups,
+        private array | string | null | GroupSequence $groups,
         InputTypeParameterInterface $parameter,
     ) {
         $this->parameter = $parameter;

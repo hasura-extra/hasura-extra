@@ -94,7 +94,11 @@ final class RequestHandlerTest extends TestCase
                 'sessionVariables' => null,
                 'unauthorized' => false,
                 'expectedHttpStatusCode' => 200,
-                'expectedContent' => json_encode(['x-hasura-role' => 'admin'])
+                'expectedContent' => json_encode(
+                    [
+                        'x-hasura-role' => 'admin',
+                    ]
+                ),
             ],
             [
                 'header' => 'x-hasura-role',
@@ -102,23 +106,38 @@ final class RequestHandlerTest extends TestCase
                 'sessionVariables' => [],
                 'unauthorized' => false,
                 'expectedHttpStatusCode' => 200,
-                'expectedContent' => json_encode(['x-hasura-role' => 'admin'])
+                'expectedContent' => json_encode(
+                    [
+                        'x-hasura-role' => 'admin',
+                    ]
+                ),
             ],
             [
                 'header' => 'x-hasura-role-2',
                 'headerValue' => 'admin',
-                'sessionVariables' => ['x-hasura-user-id' => 1],
+                'sessionVariables' => [
+                    'x-hasura-user-id' => 1,
+                ],
                 'unauthorized' => false,
                 'expectedHttpStatusCode' => 200,
-                'expectedContent' => json_encode(['x-hasura-user-id' => 1, 'x-hasura-role' => 'anonymous'])
+                'expectedContent' => json_encode([
+                    'x-hasura-user-id' => 1,
+                    'x-hasura-role' => 'anonymous',
+                    
+                ]),
             ],
             [
                 'header' => 'x-hasura-role',
                 'headerValue' => 'admin',
-                'sessionVariables' => ['x-hasura-user-id' => 1],
+                'sessionVariables' => [
+                    'x-hasura-user-id' => 1,
+                ],
                 'unauthorized' => true,
                 'expectedHttpStatusCode' => 401,
-                'expectedContent' => json_encode(['message' => 'unauthorized'])
+                'expectedContent' => json_encode([
+                    'message' => 'unauthorized',
+                    
+                ]),
             ],
         ];
     }

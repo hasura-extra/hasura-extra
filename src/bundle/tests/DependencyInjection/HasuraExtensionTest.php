@@ -23,7 +23,9 @@ final class HasuraExtensionTest extends TestCase
 
         $extension->load(
             [
-                ['remote_schema_name' => 'bundle']
+                [
+                    'remote_schema_name' => 'bundle',
+                ],
             ],
             $container
         );
@@ -114,8 +116,8 @@ final class HasuraExtensionTest extends TestCase
         $this->assertSame(
             [
                 [
-                    'enable_authenticator_manager' => true
-                ]
+                    'enable_authenticator_manager' => true,
+                ],
             ],
             $container->getExtensionConfig('security')
         );
@@ -126,7 +128,9 @@ final class HasuraExtensionTest extends TestCase
         $container = new ContainerBuilder();
         $extension = new HasuraExtension();
 
-        $extension->load([['decorate_make_entity' => false]], $container);
+        $extension->load([[
+            'decorate_make_entity' => false,
+        ]], $container);
 
         $this->assertFalse($container->getParameter('hasura.maker.decorate_make_entity'));
     }
@@ -143,9 +147,9 @@ final class HasuraExtensionTest extends TestCase
                         'state_processors' => [
                             'enabled_remote_schema_permissions' => false,
                             'enabled_inherited_roles' => false,
-                        ]
-                    ]
-                ]
+                        ],
+                    ],
+                ],
             ],
             $container
         );

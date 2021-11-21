@@ -10,8 +10,8 @@ declare(strict_types=1);
 
 namespace Hasura\GraphQLiteBridge\Field;
 
-use Hasura\GraphQLiteBridge\Attribute\Roles;
 use GraphQL\Type\Definition\FieldDefinition;
+use Hasura\GraphQLiteBridge\Attribute\Roles;
 use TheCodingMachine\GraphQLite\Middlewares\FieldHandlerInterface;
 use TheCodingMachine\GraphQLite\Middlewares\FieldMiddlewareInterface;
 use TheCodingMachine\GraphQLite\Middlewares\MissingAuthorizationException;

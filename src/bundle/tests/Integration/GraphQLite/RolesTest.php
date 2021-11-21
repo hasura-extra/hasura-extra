@@ -41,7 +41,7 @@ GQL;
         $this->execute(
             $query,
             server: [
-                'HTTP_AUTHORIZATION' => 'Basic ' . base64_encode('test:test')
+                'HTTP_AUTHORIZATION' => 'Basic ' . base64_encode('test:test'),
             ]
         );
 

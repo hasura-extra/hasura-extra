@@ -19,14 +19,28 @@ final class ChainSessionVariableEnhancerTest extends TestCase
 {
     public function testEnhanceSessionVariables(): void
     {
-        $enhancer1 = $this->createMockEnhancer(['a' => 1, 'c' => 3]);
-        $enhancer2 = $this->createMockEnhancer(['b' => 2]);
-        $enhancer3 = $this->createMockEnhancer(['c' => 'override']);
+        $enhancer1 = $this->createMockEnhancer([
+            'a' => 1,
+            'c' => 3,
+        ]);
+        $enhancer2 = $this->createMockEnhancer([
+            'b' => 2,
+        ]);
+        $enhancer3 = $this->createMockEnhancer([
+            'c' => 'override',
+        ]);
 
         $chain = new ChainSessionVariableEnhancer([$enhancer1, $enhancer2, $enhancer3]);
-        $sessionVariables = $chain->enhance(['d' => 4], $this->createMock(ServerRequestInterface::class));
+        $sessionVariables = $chain->enhance([
+            'd' => 4,
+        ], $this->createMock(ServerRequestInterface::class));
 
-        $this->assertSame(['d' => 4, 'a' => 1, 'c' => 'override', 'b' => 2], $sessionVariables);
+        $this->assertSame([
+            'd' => 4,
+            'a' => 1,
+            'c' => 'override',
+            'b' => 2,
+        ], $sessionVariables);
     }
 
     private function createMockEnhancer(array $appendSessionVariables): SessionVariableEnhancerInterface
@@ -36,7 +50,7 @@ final class ChainSessionVariableEnhancerTest extends TestCase
             ->expects($this->once())
             ->method('enhance')
             ->willReturnCallback(
-                static fn(array $sessionVariables) => array_merge($sessionVariables, $appendSessionVariables)
+                static fn (array $sessionVariables) => array_merge($sessionVariables, $appendSessionVariables)
             );
 
         return $enhancer;

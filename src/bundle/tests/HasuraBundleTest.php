@@ -36,7 +36,7 @@ final class HasuraBundleTest extends KernelTestCase
         $bundle->build($container);
 
         $passConfig = $container->getCompilerPassConfig();
-        $passClasses = array_map(fn(CompilerPassInterface $pass) => $pass::class, $passConfig->getPasses());
+        $passClasses = array_map(fn (CompilerPassInterface $pass) => $pass::class, $passConfig->getPasses());
 
         $this->assertContains(DecorateMakeEntityPass::class, $passClasses);
         $this->assertContains(MetadataPass::class, $passClasses);

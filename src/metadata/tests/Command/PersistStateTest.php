@@ -23,7 +23,9 @@ final class PersistStateTest extends TestCase
         foreach ([true, false] as $allowInconsistent) {
             $command = new PersistState($this->manager, $this->createMockProcessor($allowInconsistent));
             $tester = new CommandTester($command);
-            $tester->execute(['--allow-inconsistent' => $allowInconsistent]);
+            $tester->execute([
+                '--allow-inconsistent' => $allowInconsistent,
+            ]);
 
             $this->assertStringContainsString('Persisting application state to Hasura...', $tester->getDisplay());
             $this->assertStringContainsString(
@@ -40,7 +42,7 @@ final class PersistStateTest extends TestCase
             ->expects($this->once())
             ->method('process')
             ->willReturnCallback(
-                fn(ManagerInterface $manager, bool $actualAllowInconsistent) => $this->assertSame(
+                fn (ManagerInterface $manager, bool $actualAllowInconsistent) => $this->assertSame(
                     $expectAllowInconsistent,
                     $actualAllowInconsistent
                 )

@@ -44,9 +44,9 @@ GQL;
                     'emailField' => 'test@example.org',
                     'textField' => '1',
                     'sub' => [
-                        'subTextField' => '2'
-                    ]
-                ]
+                        'subTextField' => '2',
+                    ],
+                ],
             ],
             $data['data']
         );
@@ -95,7 +95,9 @@ object_assertion_after_test (id: $id)
 }
 GQL;
 
-        $this->execute($query, ['id' => 1]);
+        $this->execute($query, [
+            'id' => 1,
+        ]);
         $this->assertResponseIsSuccessful();
 
         $data = $this->responseData();
@@ -112,7 +114,9 @@ object_assertion_after_test (id: $id, new_email: "email2@example.org")
 }
 GQL;
 
-        $this->execute($query, ['id' => 1]);
+        $this->execute($query, [
+            'id' => 1,
+        ]);
         $this->assertResponseStatusCodeSame(400);
 
         $data = $this->responseData();

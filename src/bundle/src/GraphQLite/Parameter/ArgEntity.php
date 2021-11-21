@@ -73,11 +73,15 @@ final class ArgEntity implements ArgNamingParameterInterface
 
             $entity = $this->repository->find($args[$this->name]);
         } else {
-            $entity = $this->repository->findOneBy([$this->fieldName => $args[$this->name]]);
+            $entity = $this->repository->findOneBy([
+                $this->fieldName => $args[$this->name],
+            ]);
         }
 
         if (null === $entity && !$this->nullableEntity) {
-            throw new GraphQLException(sprintf('Can not found instance by `%s`', $args[$this->name]), category: 'input_args', extensions: ['field' => $this->argName]);
+            throw new GraphQLException(sprintf('Can not found instance by `%s`', $args[$this->name]), category: 'input_args', extensions: [
+                'field' => $this->argName,
+            ]);
         }
 
         /** @var SymfonyRequestContextInterface $context */
@@ -105,7 +109,9 @@ final class ArgEntity implements ArgNamingParameterInterface
                 $resolveInfo->variableValues
             );
 
-            $this->repository->findBy([$this->fieldName => $ids]);
+            $this->repository->findBy([
+                $this->fieldName => $ids,
+            ]);
         }
     }
 

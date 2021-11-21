@@ -31,10 +31,14 @@ final class RequestHandler implements RequestHandlerInterface
         try {
             $role = $this->roleDecider->decideAccessRole($request);
         } catch (UnauthorizedException $exception) {
-            return $this->makeJsonResponse(['message' => $exception->getMessage()], 401);
+            return $this->makeJsonResponse([
+                'message' => $exception->getMessage(),
+            ], 401);
         }
 
-        $sessionVariables = ['x-hasura-role' => $role];
+        $sessionVariables = [
+            'x-hasura-role' => $role,
+        ];
 
         if (null !== $this->sessionVariableEnhancer) {
             $sessionVariables = $this->sessionVariableEnhancer->enhance($sessionVariables, $request);
