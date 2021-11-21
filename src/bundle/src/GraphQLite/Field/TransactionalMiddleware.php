@@ -12,15 +12,15 @@ namespace Hasura\Bundle\GraphQLite\Field;
 
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\Proxy;
-use Hasura\Bundle\GraphQLite\Attribute\Transactional;
 use GraphQL\Type\Definition\FieldDefinition;
+use Hasura\Bundle\GraphQLite\Attribute\Transactional;
 use TheCodingMachine\GraphQLite\Middlewares\FieldHandlerInterface;
 use TheCodingMachine\GraphQLite\Middlewares\FieldMiddlewareInterface;
 use TheCodingMachine\GraphQLite\QueryFieldDescriptor;
 
 final class TransactionalMiddleware implements FieldMiddlewareInterface
 {
-    public function __construct(private ManagerRegistry $registry)
+    public function __construct(private ?ManagerRegistry $registry)
     {
     }
 
@@ -34,6 +34,12 @@ final class TransactionalMiddleware implements FieldMiddlewareInterface
 
         if (null === $transactional) {
             return $fieldHandler->handle($queryFieldDescriptor);
+        }
+
+        if (null === $this->registry) {
+            throw new \LogicException(
+                'The DoctrineBundle is not registered in your application. Try running "composer require symfony/orm-pack".'
+            );
         }
 
         $resolver = $queryFieldDescriptor->getResolver();

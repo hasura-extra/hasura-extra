@@ -116,7 +116,9 @@ final class RemoteSchemaPermissionStateProcessor implements StateProcessorInterf
         }
 
         $schema = sprintf("schema {\n %s \n}", implode("\n", $operationTypes));
-        $types = SchemaPrinter::doPrint(new Schema($schemaConfig), ['commentDescriptions' => true]);
+        $types = SchemaPrinter::doPrint(new Schema($schemaConfig), [
+            'commentDescriptions' => true,
+        ]);
 
         return sprintf("%s \n %s", $schema, $types);
     }
@@ -126,7 +128,7 @@ final class RemoteSchemaPermissionStateProcessor implements StateProcessorInterf
         $config = $type->config;
         $config['fields'] = array_filter(
             $type->getFields(),
-            fn($field) => in_array($field, $fields, true),
+            fn ($field) => in_array($field, $fields, true),
             ARRAY_FILTER_USE_KEY
         );
 

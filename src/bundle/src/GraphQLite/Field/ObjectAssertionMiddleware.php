@@ -34,7 +34,7 @@ final class ObjectAssertionMiddleware implements FieldMiddlewareInterface
         $attributes = $annotations->getAnnotationsByType(ObjectAssertion::class);
         $activeAttributes = array_filter(
             $attributes,
-            fn(ObjectAssertion $attr) => $attr->getMode() & ObjectAssertion::AFTER_RESOLVE_CALL
+            fn (ObjectAssertion $attr) => $attr->getMode() & ObjectAssertion::AFTER_RESOLVE_CALL
         );
 
         if (empty($activeAttributes)) {

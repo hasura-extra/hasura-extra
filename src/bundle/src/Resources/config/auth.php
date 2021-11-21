@@ -22,8 +22,8 @@ return static function (ContainerConfigurator $configurator) {
                 [
                     param('hasura.auth.anonymous_role'),
                     param('hasura.auth.default_role'),
-                    service('security.token_storage'),
-                    service('security.authorization_checker')
+                    service('security.token_storage')->nullOnInvalid(),
+                    service('security.authorization_checker')->nullOnInvalid()
                 ]
             )
 

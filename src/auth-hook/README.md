@@ -1,5 +1,3 @@
-English | [Tiếng Việt](./README-VI.md)
-
 Auth Hook
 =========
 
@@ -18,3 +16,8 @@ Documentation
 ------
 
 The document of this library can be browsed on [Github page](https://hasura-extra.github.io/).
+
+License
+-------
+
+This project is released under the [MIT License](./LICENSE).

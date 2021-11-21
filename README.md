@@ -1,5 +1,3 @@
-English | [Tiếng Việt](./README-VI.md)
-
 Hasura Extra
 ============
 
@@ -14,3 +12,7 @@ Documentation
 
 The document can be browsed on [Github page](https://hasura-extra.github.io/).
 
+License
+-------
+
+This project is released under the [MIT License](./LICENSE).

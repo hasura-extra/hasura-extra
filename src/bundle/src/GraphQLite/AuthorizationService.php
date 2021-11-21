@@ -15,12 +15,18 @@ use TheCodingMachine\GraphQLite\Security\AuthorizationServiceInterface;
 
 final class AuthorizationService implements AuthorizationServiceInterface
 {
-    public function __construct(private AuthorizationCheckerInterface $authorizationChecker)
+    public function __construct(private ?AuthorizationCheckerInterface $authorizationChecker)
     {
     }
 
     public function isAllowed(string $right, $subject = null): bool
     {
+        if (null === $this->authorizationChecker) {
+            throw new \LogicException(
+                'The SecurityBundle is not registered in your application. Try running "composer require symfony/security-bundle".'
+            );
+        }
+
         return $this->authorizationChecker->isGranted($right, $subject);
     }
 }

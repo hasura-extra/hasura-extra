@@ -70,6 +70,20 @@ final class AccessRoleDeciderTest extends TestCase
         $this->assertSame('test', $role);
     }
 
+    public function testMissingSecurityBundle(): void
+    {
+        $this->expectException(\LogicException::class);
+
+        $decider = new AccessRoleDecider(
+            'anonymous',
+            'default',
+            null,
+            null
+        );
+
+        $decider->decideAccessRole($this->createMock(ServerRequestInterface::class));
+    }
+
     private function createMockAuthorizationChecker(bool $accept, int $callTime = 1): AuthorizationCheckerInterface
     {
         $checker = $this->createMock(AuthorizationCheckerInterface::class);

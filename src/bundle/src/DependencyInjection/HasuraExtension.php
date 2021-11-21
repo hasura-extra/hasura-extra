@@ -26,7 +26,7 @@ final class HasuraExtension extends Extension implements PrependExtensionInterfa
         $container->prependExtensionConfig(
             'security',
             [
-                'enable_authenticator_manager' => true
+                'enable_authenticator_manager' => true,
             ]
         );
     }
@@ -39,12 +39,12 @@ final class HasuraExtension extends Extension implements PrependExtensionInterfa
 
         $loader->load('psr_http_message.php');
         $loader->load('event_dispatcher.php');
+        $loader->load('graphqlite.php');
 
         $container->setParameter('hasura.base_uri', $config['base_uri']);
 
         $this->registerApiClient($container, $config, $loader);
         $this->registerAuth($container, $config['auth'], $loader);
-        $this->registerGraphQLite($container, $config, $loader);
         $this->registerMaker($container, $config, $loader);
         $this->registerMetadata($container, $config['metadata'], $loader);
         $this->registerSailor($container, $config['sailor'], $loader);
@@ -70,16 +70,6 @@ final class HasuraExtension extends Extension implements PrependExtensionInterfa
         $container
             ->registerForAutoconfiguration(SessionVariableEnhancerInterface::class)
             ->addTag('hasura.auth_hook.session_variable_enhancer');
-    }
-
-    private function registerGraphQLite(ContainerBuilder $container, array $config, PhpFileLoader $loader): void
-    {
-        $loader->load('graphqlite.php');
-
-        if (!class_exists(Registry::class)) {
-            $container->removeDefinition('hasura.graphql.parameter.arg_entity_middleware');
-            $container->removeDefinition('hasura.graphql.field.transactional_middleware');
-        }
     }
 
     private function registerMaker(ContainerBuilder $container, array $config, PhpFileLoader $loader): void

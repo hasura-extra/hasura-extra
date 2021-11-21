@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 namespace Hasura\Bundle\Tests\Integration\GraphQLite;
 
-
 final class ArgNamingTest extends TestCase
 {
     public function testNaming(): void

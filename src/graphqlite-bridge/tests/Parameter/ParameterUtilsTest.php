@@ -38,7 +38,6 @@ final class ParameterUtilsTest extends TestCase
     private function createMockWrapper(InputTypeParameterInterface $willReturn): InputTypeParameterInterface
     {
         return new class($willReturn) implements WrappingParameterInterface, InputTypeParameterInterface {
-
             public function __construct(private InputTypeParameterInterface $willReturn)
             {
             }

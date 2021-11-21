@@ -24,7 +24,13 @@ final class JsonbTest extends TestCase
 
         $this->assertArrayNotHasKey('errors', $result);
         $this->assertSame(
-            ['a' => 1, 'b' => false, 'c' => [1, 2, 3], 'd' => 'e', 'f' => []],
+            [
+                'a' => 1,
+                'b' => false,
+                'c' => [1, 2, 3],
+                'd' => 'e',
+                'f' => [],
+            ],
             $result['data']['test_scalar']['jsonb']
         );
     }

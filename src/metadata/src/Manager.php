@@ -21,17 +21,13 @@ final class Manager implements ManagerInterface
     ) {
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    
     public function export(bool $force): void
     {
         $this->operator->export($this->exportToArray(), $this->metadataPath, $force);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    
     public function exportToArray(): array
     {
         $data = $this->apiClient->metadata()->query(
@@ -43,9 +39,7 @@ final class Manager implements ManagerInterface
         return MetadataUtils::normalizeMetadata($data['metadata']);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    
     public function apply(bool $allowInconsistent = false): void
     {
         $metadata = $this->operator->load($this->metadataPath);
@@ -57,9 +51,7 @@ final class Manager implements ManagerInterface
         $this->applyFromArray($metadata, $allowInconsistent);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    
     public function applyFromArray(array $metadata, bool $allowInconsistent = false): void
     {
         $this->apiClient->metadata()->query(
@@ -72,9 +64,7 @@ final class Manager implements ManagerInterface
         );
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    
     public function reload(bool $reloadRemoteSchemas = true, bool $reloadSources = true): void
     {
         $this->apiClient->metadata()->query(
@@ -86,9 +76,7 @@ final class Manager implements ManagerInterface
         );
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    
     public function clear(): void
     {
         $this->apiClient->metadata()->query(
@@ -97,9 +85,7 @@ final class Manager implements ManagerInterface
         );
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    
     public function getInconsistentMetadata(): array
     {
         return $this->apiClient->metadata()->query(
@@ -108,9 +94,7 @@ final class Manager implements ManagerInterface
         );
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    
     public function dropInconsistentMetadata(): void
     {
         $this->apiClient->metadata()->query(

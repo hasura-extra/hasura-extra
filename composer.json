@@ -9,12 +9,10 @@
         "psr/http-server-handler": "^1.0",
         "spawnia/sailor": "^v0.10",
         "symfony/console": "^5.0",
-        "symfony/event-dispatcher": "^5.0",
         "symfony/filesystem": "^5.0",
         "symfony/framework-bundle": "^5.0",
         "symfony/http-client": "^5.0",
         "symfony/psr7-pack": "^1.0",
-        "symfony/security-bundle": "^5.0",
         "symfony/string": "^5.0",
         "symfony/yaml": "^5.0",
         "thecodingmachine/graphqlite": "^5.0",
@@ -26,10 +24,11 @@
         "symfony/dotenv": "^5.0",
         "symfony/maker-bundle": "^1.0",
         "symfony/orm-pack": "^2.1",
+        "symfony/security-bundle": "^5.0",
         "symfony/test-pack": "^1.0",
         "symfony/uid": "^5.0",
         "symplify/easy-coding-standard": "^9.4",
-        "symplify/monorepo-builder": "^9.4"
+        "symplify/monorepo-builder": "dev-main"
     },
     "autoload": {
         "psr-4": {
@@ -39,6 +38,7 @@
             "Hasura\\EventDispatcher\\": "src/event-dispatcher/src",
             "Hasura\\GraphQLiteBridge\\": "src/graphqlite-bridge/src",
             "Hasura\\Metadata\\": "src/metadata/src",
+            "Hasura\\MonorepoBuilder\\": "src/monorepo-builder/src",
             "Hasura\\SailorBridge\\": "src/sailor-bridge/src"
         }
     },
@@ -54,14 +54,17 @@
             "Hasura\\SailorBridge\\Tests\\": "src/sailor-bridge/tests"
         }
     },
+    "conflict": {
+        "hasura-extra/hasura-bundle": "*"
+    },
     "replace": {
-        "hasura-extra/api-client": "self.version",
-        "hasura-extra/auth-hook": "self.version",
-        "hasura-extra/bundle": "self.version",
-        "hasura-extra/event-dispatcher": "self.version",
-        "hasura-extra/graphqlite-bridge": "self.version",
-        "hasura-extra/metadata": "self.version",
-        "hasura-extra/sailor-bridge": "self.version"
+        "hasura-extra/api-client": "2.0.0",
+        "hasura-extra/auth-hook": "2.0.0",
+        "hasura-extra/bundle": "2.0.0",
+        "hasura-extra/event-dispatcher": "2.0.0",
+        "hasura-extra/graphqlite-bridge": "2.0.0",
+        "hasura-extra/metadata": "2.0.0",
+        "hasura-extra/sailor-bridge": "2.0.0"
     },
     "minimum-stability": "dev",
     "prefer-stable": true

@@ -19,18 +19,32 @@ use TheCodingMachine\GraphQLite\Validator\Mappers\Parameters\AssertParameterMidd
 
 final class GraphQLitePass implements CompilerPassInterface
 {
+    private const PARAMETER_MIDDLEWARES = [
+        'hasura.graphql.parameter.object_assertion_middleware',
+        'hasura.graphql.parameter.arg_naming_middleware',
+        'hasura.graphql.parameter.arg_entity_middleware',
+        'hasura.graphql.parameter.avoid_explicit_default_null_middleware',
+    ];
+
+    private const FIELD_MIDDLEWARES = [
+        'hasura.graphql.field.object_assertion_middleware',
+        'hasura.graphql.field.annotation_tracking_middleware',
+        'hasura.graphql.field.arg_naming_middleware',
+        'hasura.graphql.field.transactional_middleware',
+        'hasura.graphql.field.authorization_middleware',
+    ];
+
     public function process(ContainerBuilder $container)
     {
         $schemaFactory = $container->getDefinition(SchemaFactory::class);
 
-        $schemaFactory->addMethodCall(
-            'addFieldMiddleware',
-            [
-                new Reference('hasura.graphql.field.authorization_middleware')
-            ]
-        );
+        foreach (self::PARAMETER_MIDDLEWARES as $middleware) {
+            $schemaFactory->addMethodCall('addParameterMiddleware', [new Reference($middleware)]);
+        }
 
-        $container->removeDefinition(AssertParameterMiddleware::class);
+        foreach (self::FIELD_MIDDLEWARES as $middleware) {
+            $schemaFactory->addMethodCall('addFieldMiddleware', [new Reference($middleware)]);
+        }
 
         $container->setAlias(AssertParameterMiddleware::class, 'hasura.graphql.parameter.assertion_middleware');
         $container->setAlias(AuthorizationServiceInterface::class, 'hasura.graphql.authorization_service');

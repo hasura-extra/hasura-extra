@@ -1,5 +1,3 @@
-English | [Tiếng Việt](./README-VI.md)
-
 Api Client
 ==========
 
@@ -46,3 +44,7 @@ relay graphql     | [link](https://hasura.io/docs/latest/graphql/core/api-refere
 metadata          | [link](https://hasura.io/docs/latest/graphql/core/api-reference/metadata.html)
 version           | [link](https://hasura.io/docs/latest/graphql/core/api-reference/version.html)
 
+License
+-------
+
+This project is released under the [MIT License](./LICENSE).
