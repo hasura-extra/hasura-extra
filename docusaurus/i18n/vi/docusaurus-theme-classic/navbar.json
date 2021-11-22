@@ -1,0 +1,14 @@
+{
+  "title": {
+    "message": "Hasura Extra",
+    "description": "The title in the navbar"
+  },
+  "item.label.Documentation": {
+    "message": "Tài liệu",
+    "description": "Navbar item with label Documentation"
+  },
+  "item.label.Tutorial": {
+    "message": "Hướng dẫn",
+    "description": "Navbar item with label Tutorial"
+  }
+}
