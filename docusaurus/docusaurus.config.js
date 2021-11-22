@@ -12,7 +12,7 @@ const config = {
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  // favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.ico',
   organizationName: 'hasura-extra',
   projectName: 'hasura-extra.github.io',
   deploymentBranch: 'main',
@@ -25,8 +25,16 @@ const config = {
         docs: {
           editCurrentVersion: true,
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/hasura-extra/hasura-extra/edit/main/docusaurus/',
-          routeBasePath: '/'
+          editUrl: ({locale, versionDocsDirPath, docPath, version}) => {
+            if (locale === 'en') {
+              return `https://github.com/hasura-extra/hasura-extra/edit/main/docusaurus/${versionDocsDirPath}/${docPath}`;
+            }
+
+            return `https://github.com/hasura-extra/hasura-extra/edit/main/docusaurus/i18n/${locale}/docusaurus-plugin-content-docs/${version}/${docPath}`;
+          },
+          routeBasePath: '/',
+          showLastUpdateAuthor: true,
+          showLastUpdateTime: true,
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -34,20 +42,52 @@ const config = {
       }),
     ],
   ],
+  plugins: [
+      [
+          '@docusaurus/plugin-content-docs',
+          {
+              id: 'tutorial',
+              path: 'tutorial',
+              routeBasePath: 'tutorial',
+              sidebarPath: require.resolve('./sidebarsTutorial.js'),
+              editCurrentVersion: true,
+              editUrl: ({locale, versionDocsDirPath, docPath, version}) => {
+                if (locale === 'en') {
+                  return `https://github.com/hasura-extra/hasura-extra/edit/main/docusaurus/${versionDocsDirPath}/${docPath}`;
+                }
 
+                return `https://github.com/hasura-extra/hasura-extra/edit/main/docusaurus/i18n/${locale}/docusaurus-plugin-content-docs-tutorial/${version}/${docPath}`;
+              }
+          },
+      ]
+  ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      image: 'img/logo-text.png',
       navbar: {
         title: 'Hasura Extra',
-        // logo: {
-        //   alt: 'My Site Logo',
-        //   src: 'img/logo.svg',
-        // },
+        logo: {
+          alt: 'Logo',
+          src: 'img/logo.png',
+        },
         items: [
           {
-            type: 'localeDropdown',
+            type: 'doc',
+            label: 'Documentation',
+            docId: 'introduction',
+            position: 'left'
+          },
+          {
+            type: 'doc',
+            label: 'Tutorial',
+            docId: 'introduction',
             position: 'left',
+            docsPluginId: 'tutorial'
+          },
+          {
+            type: 'localeDropdown',
+            position: 'right',
           },
           {
             href: 'https://github.com/hasura-extra',
@@ -58,8 +98,12 @@ const config = {
         ],
       },
       footer: {
-        style: 'dark',
-        copyright: `Copyright © ${new Date().getFullYear()} Minh Vuong. Built with Docusaurus.`,
+        style: 'light',
+        "logo": {
+          "src": "img/logo-text.png",
+          "href": "/",
+        },
+        copyright: `Copyright © ${new Date().getFullYear()} Minh Vuong.`,
       },
       prism: {
         theme: lightCodeTheme,
