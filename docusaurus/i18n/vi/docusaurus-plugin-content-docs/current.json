@@ -3,8 +3,8 @@
     "message": "Next",
     "description": "The label for version current"
   },
-  "sidebar.main.category.Getting Started": {
-    "message": "Bắt đầu",
+  "sidebar.main.category.Installation": {
+    "message": "Cài đặt",
     "description": "The label for category Getting Started in sidebar main"
   }
 }
