@@ -19,7 +19,7 @@ Nếu như project của bạn bắt đầu từ [Symfony App](../02-installatio
 chúng tôi đã thêm sẵn giúp bạn.
 :::
 
-Để handle business logic bạn cần thêm remote schema trỏ về GraphQL server (GraphQLite) url path sẽ là `/graphql`,
+Để handle business logic bạn cần thêm remote schema trỏ về GraphQL server ([GraphQLite](./02-graphqlite.md)) url path sẽ là `/graphql`,
 xem hướng dẫn tại [đây](https://hasura.io/docs/latest/graphql/core/remote-schemas/adding-schema.html).
 
 ## Cấu hình remote schema name
