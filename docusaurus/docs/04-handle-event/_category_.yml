@@ -1,0 +1,3 @@
+label: 'Handle event'
+collapsible: true # make the category collapsible
+collapsed: true # keep the category open by default
