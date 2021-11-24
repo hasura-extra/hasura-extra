@@ -40,7 +40,7 @@ postgres | tcp | 5432 | 5432 | -
 hasura | http | 8080 | 8080 | -
 mailhog | http/smtp | 8025,1025 | 8025 | Server mail mock, để test send mail 
 
-Bây giờ bạn hãy truy cập vào Hasura theo URL: http://localhost:8080 Hasura sẽ đòi hỏi bạn điền
+Bây giờ bạn hãy truy cập vào Hasura theo URL: [http://localhost:8080](http://localhost:8080) Hasura sẽ đòi hỏi bạn điền
 admin secret trong lần đăng nhập đầu tiên, ở các lần sau Hasura sẽ không hỏi lại:
 
 

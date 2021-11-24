@@ -10,7 +10,7 @@ Chính vì lý do đó chúng ta chỉ nên sử dụng read operation của Has
 còn riêng đối với write operation (chủ yếu là update/insert) thì chúng ta sẽ xây dựng [remote schema](https://hasura.io/docs/latest/graphql/core/remote-schemas/index.html) để handle.
 
 Mô phỏng (nguồn [Hasura](https://hasura.io)):
-![Copyright https://hasura.io](./assets/remote-schema.png)
+![Copyright https://hasura.io](../assets/remote-schema.png)
 
 ## Thêm remote schema
 

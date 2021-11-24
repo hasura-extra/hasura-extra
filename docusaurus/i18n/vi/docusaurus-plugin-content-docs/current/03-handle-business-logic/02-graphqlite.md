@@ -238,9 +238,9 @@ entity sẽ được update và flush vào DB nhờ `Transactional` attribute xe
 Attribute này chỉ dành cho Symfony bundle
 :::
 
-Attribute này sẽ wrap resolver của bạn trong một Doctrine transaction nếu như có bất kỳ exception nào xảy ra trong resolver của bạn thì toàn bộ SQL query
-sẽ được rollback, ngược lại nếu không các entities đang managed bởi Entity Manager sẽ được flush vào database. Ngoài ra attribute này còn có tính năng
-tự động persist đối với các entity vừa được khởi tạo (không get từ repository), ví dụ:
+Attribute này sẽ wrap resolver của bạn trong một Doctrine transaction, nếu như có bất kỳ exception nào xảy ra trong resolver của bạn thì toàn bộ SQL query
+sẽ được rollback, ngược lại nếu không, các entities đang managed bởi Entity Manager sẽ được flush vào database. Ngoài ra attribute này còn có tính năng
+tự động persist đối với các entity vừa được khởi tạo (state new), ví dụ:
 
 ```php
 use Hasura\Bundle\GraphQLite\Attribute\ObjectAssertion;
@@ -275,7 +275,7 @@ Nếu project của bạn có nhiều database connections thì bạn có thể 
 ### Roles
 
 Attribute này dùng cho authorization khác với [Right](https://graphqlite.thecodingmachine.io/docs/authentication-authorization#logged-and-right-annotations) attribute,
-nó hổ trợ bạn thêm được nhiều roles cùng 1 lúc và hổ trợ [persist-state]() sync roles lên remote schema permissions.
+nó hổ trợ bạn thêm được nhiều roles cùng 1 lúc và hổ trợ [persist-state](../07-manage-metadata/07-persist-application-state.md) sync roles lên remote schema permissions.
 
 ```php
 use Hasura\GraphQLiteBridge\Attribute\Roles;
