@@ -20,7 +20,7 @@ bỏ qua bài hướng dẫn và chọn cách cài đặt phù hợp với proje
 Nếu như project của bạn là một project mới thì bạn nên sử dụng [Symfony App](./03-symfony-app.md), đây là một boilerplate được cài đặt sẵn các
 cấu hình cần thiết cho việc integrate giữa Symfony và Hasura như local [remote schema](https://hasura.io/docs/latest/graphql/core/remote-schemas/index.html), 
 handle [event triggered](https://hasura.io/docs/latest/graphql/core/event-triggers/index.html) bởi Hasura, tổ chức sắp xếp Hasura metadata, 
-Sailor graphql client code generator, authentication hook, JWT... và có example giúp bạn dễ tiếp cận hơn.
+Sailor graphql client code generator, authentication hook, JWT, Helm chart dùng để deploy dự án của bạn lên Kubernetes và có example giúp bạn dễ tiếp cận hơn.
 
 Mặt khác bạn có thể cài đặt bundle thông qua Composer:
 

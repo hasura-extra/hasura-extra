@@ -13,7 +13,7 @@ vì toàn bộ session variables của end-user sẽ store trong JWT.
 :::
 
 Hasura Extra webhook authn cung cấp [session variable enhancer](https://github.com/hasura-extra/auth-hook/blob/main/src/SessionVariableEnhancerInterface.php) interface,
-dùng để building session variables của end-user request.
+dùng để building session variables cho phiên request của end-user.
 
 ## Đối với Symfony users
 

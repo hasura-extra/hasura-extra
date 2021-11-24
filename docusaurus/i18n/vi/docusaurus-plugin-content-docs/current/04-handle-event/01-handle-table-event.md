@@ -54,7 +54,7 @@ final class WelcomeUserRegisteredSubscriber implements EventSubscriberInterface
 
     public function onTableEvent(TableEvent $event)
     {
-        if ($event->getTriggerName() !== 'user_registered') {
+        if ('user_registered' !== $event->getTriggerName()) {
             return;
         }
 
@@ -73,6 +73,6 @@ final class WelcomeUserRegisteredSubscriber implements EventSubscriberInterface
 }
 ```
 
-Như ví dụ trên, với event trigger tên là `user_registered` được tạo ở [bước đầu tiên](#add-event-trigger), mỗi khi user registered Hasura
-sẽ trigger webhook đến url path: `/hasura_table_event` và từ đó dispatcher sẽ dispatch sự kiện `Hasura\EventDispatcher\TableEvent`, chúng ta
-handle gửi mail đến end-user.
+Như ví dụ trên, với event trigger tên là `user_registered` được tạo ở [bước đầu tiên](#add-event-trigger), mỗi khi user registered (inserted) Hasura
+sẽ trigger webhook đến url path: `/hasura_table_event` và từ đó dispatcher sẽ dispatch sự kiện `Hasura\EventDispatcher\TableEvent`, subscriber
+sẽ gửi mail welcome đến end-user.
