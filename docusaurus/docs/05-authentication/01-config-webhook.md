@@ -1,5 +1,5 @@
 ---
-id: config-authentication-webhook
+id: config-webhook
 title: Config webhook
 sidebar_title: Config webhook
 ---

@@ -1,5 +1,5 @@
 ---
-id: config-authentication-webhook
+id: config-webhook
 title: Config webhook
 sidebar_title: Config webhook
 ---
@@ -19,4 +19,5 @@ Nếu như bạn sử dụng [Symfony App](../02-installation/03-symfony-app.md)
 
 Để cấu hình webhook mode bạn cần set `HASURA_GRAPHQL_AUTH_HOOK` env của Hasura container trỏ về url path `/hasura_auth_hook`,
 tiếp đến là cấu hình Symfony [security firewall](https://symfony.com/doc/current/security.html#the-firewall) bao phủ `/hasura_auth_hook` path.
+
 Vậy là xong, bạn đã config xong Hasura webhook auth mode cho Symfony rồi đấy. 
