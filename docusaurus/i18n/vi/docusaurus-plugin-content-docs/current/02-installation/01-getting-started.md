@@ -1,5 +1,5 @@
 ---
-id: installation
+id: getting-started
 title: Bắt đầu
 sidebar_title: Bắt đầu
 ---

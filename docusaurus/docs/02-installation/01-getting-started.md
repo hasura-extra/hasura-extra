@@ -1,6 +1,7 @@
 ---
-id: installation
-title: Installation
-sidebar_label: Installation
+id: getting-started
+title: Getting Started
+sidebar_label: Getting Started
 ---
 
+Work in progress

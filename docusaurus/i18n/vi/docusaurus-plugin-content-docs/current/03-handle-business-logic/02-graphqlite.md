@@ -1,24 +1,15 @@
 ---
-id: handle-business-logic 
-title: Handle business logic 
-sidebar_title: Handle business logic
+id: graphqlite
+title: GraphQLite
+sidebar_title: GraphQLite
 ---
-
-Hasura giúp chúng ta rất nhiều trong vấn đề CRUD và authorization, tuy nhiên nó không thể giúp chúng ta handle business
-logic vì mỗi dự án sẽ có các đặc thù riêng
-(ví dụ: validation data, gọi 3rd parties API...). Chính vì lý do đó chúng ta chỉ nên sử dụng read operation của Hasura 
-(đôi khi cũng sẽ xài delete nếu không có logic cầu kỳ), còn riêng đối với write operation (chủ yếu là update/insert) thì
-chúng ta sẽ xây dựng [remote schema](https://hasura.io/docs/latest/graphql/core/remote-schemas/index.html) để handle.
-
-Mô phỏng (nguồn [Hasura](https://hasura.io)):
-![Copyright https://hasura.io](./assets/remote-schema.png)
 
 Hasura Extra tích hợp với GraphQLite để xây dựng GraphQL server handle business logic, nếu như bạn chưa biết về nó thì trước
 hết nên đọc tài liệu tại [đây](https://graphqlite.thecodingmachine.io/).
 
 ## Attributes
 
-Các attributes mở rộng được Hasura Extra cung cấp
+Dưới đây là các attributes của GraphQLite mở rộng được Hasura Extra cung cấp
 
 ### ArgNaming
 
@@ -237,7 +228,7 @@ class Resolver
 }
 ```
 
-Khi mutation field `update_user` được gọi property `email` của object input đã được validate và chúng ta sử dụng property đó để set email cho entity 
+Khi mutation field `update_user` được gọi property `email` của object input đã được validate và chúng ta sử dụng property đó để set email cho entity
 User, tiếp đến resolver sẽ trả về `true` và đồng thời entity User sẽ được validate nếu như field `email` không tồn tại trên DB thì
 entity sẽ được update và flush vào DB nhờ `Transactional` attribute xem thêm tại bên dưới, ngược lại sẽ báo lỗi `email` không unique.
 
@@ -272,8 +263,34 @@ class Resolver
 }
 ```
 
-Khi mutation field `insert_user` được gọi thì object User sẽ được khởi tạo thông qua input object của end-user 
+Khi mutation field `insert_user` được gọi thì object User sẽ được khởi tạo thông qua input object của end-user
 và `Transactional` attribute sẽ tự động persist nó giúp bạn, sau đó sẽ flush vào database.
+
+Nếu project của bạn có nhiều database connections thì bạn có thể chỉ định Entity Manager thông qua thông số `entityManager` như sau:
+
+```php 
+#[Transactional(entityManager: 'custom')]
+```
+
+### Roles
+
+Attribute này dùng cho authorization khác với [Right](https://graphqlite.thecodingmachine.io/docs/authentication-authorization#logged-and-right-annotations) attribute,
+nó hổ trợ bạn thêm được nhiều roles cùng 1 lúc và hổ trợ [persist-state]() sync roles lên remote schema permissions.
+
+```php
+use Hasura\GraphQLiteBridge\Attribute\Roles;
+use TheCodingMachine\GraphQLite\Annotations as GQL;
+
+class Resolver
+{
+    #[GQL\Mutation(name: 'hello')]
+    #[Roles('ROLE_USER', 'ROLE_ADMIN')]
+    public function __invoke(Input $input): string 
+    {
+        return 'world';
+    }
+}
+```
 
 ## Scalar types
 
