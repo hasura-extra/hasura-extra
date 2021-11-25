@@ -5,7 +5,8 @@ sidebar_title: Session variable enhancer
 ---
 
 [Session variables](https://hasura.io/docs/latest/graphql/core/auth/authorization/roles-variables.html#dynamic-session-variables) là
-các variables của 1 phiên request dùng để định danh user và các thông số đi kèm nhằm phục vụ cho authorization (authz).
+các variables của 1 phiên request dùng để định danh user và các thông số đi kèm nhằm phục vụ cho 
+[authorization / access control](https://hasura.io/docs/latest/graphql/core/auth/authorization/index.html).
 
 :::info
 Nếu như hệ thống authentication (authn) của bạn không sử dụng [webhook mode](./01-config-webhook.md) thì hãy bỏ qua tài liệu này,
