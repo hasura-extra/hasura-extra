@@ -11,7 +11,7 @@ Tài liệu này dành cho các project bắt đầu bằng [Symfony App](../02-
 ## Deploy trên KinD {#deploy-on-kind}
 
 [Kubernetes in Docker](https://kind.sigs.k8s.io/) là cluster local lý tưởng để test thử Helm chart của project trước khi deploy lên môi trường production,
-đâu tiên bạn cần setup KinD theo hướng dẫn tại trang chủ, sau đó [setup local registry](https://kind.sigs.k8s.io/docs/user/local-registry/), vậy
+đầu tiên bạn cần setup KinD theo hướng dẫn tại trang chủ, sau đó [setup local registry](https://kind.sigs.k8s.io/docs/user/local-registry/), vậy
 là bạn đã chuẩn bị xong môi trường KinD rồi đấy.
 
 Tiếp đến hãy build Docker image:
