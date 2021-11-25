@@ -103,7 +103,7 @@ const config = {
           "src": "img/logo-text.png",
           "href": "/",
         },
-        copyright: `Copyright © ${new Date().getFullYear()} Minh Vuong.`,
+        copyright: `Copyright © ${new Date().getFullYear()} <a href='https://github.com/vuongxuongminh/'>Minh Vuong.</a>`,
       },
       prism: {
         theme: lightCodeTheme,

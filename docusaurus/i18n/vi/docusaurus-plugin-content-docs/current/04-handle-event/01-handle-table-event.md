@@ -7,7 +7,7 @@ sidebar_title: Handle table event
 Hasura Extra sẽ dispatch [table events triggered](https://hasura.io/docs/latest/graphql/core/event-triggers/index.html) bởi Hasura 
 thông qua [PSR-14](https://www.php-fig.org/psr/psr-14/) event dispatcher.
 
-Mặc định khi cài Symfony bundle url path để handle table event sẽ là `/hasura_table_event` bạn sẽ cần url path này ở bước [thêm remote schema](#add-event-trigger).
+Mặc định khi cài Symfony bundle url path để handle table event sẽ là `/hasura_table_event` bạn sẽ cần url path này ở bước [thêm event trigger](#add-event-trigger).
 
 ## Thêm event trigger tại Hasura {#add-event-trigger}
 

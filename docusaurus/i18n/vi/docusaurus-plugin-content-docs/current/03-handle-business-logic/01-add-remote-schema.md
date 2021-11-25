@@ -6,7 +6,7 @@ sidebar_title: Thêm remote schema
 
 Hasura giúp chúng ta rất nhiều trong vấn đề CRUD và authorization, tuy nhiên nó không thể giúp chúng ta handle business
 logic vì mỗi dự án sẽ có các đặc thù riêng (ví dụ: validation data, gọi 3rd parties API...). 
-Chính vì lý do đó chúng ta chỉ nên sử dụng read operation của Hasura (đôi khi cũng sẽ xài delete nếu không có logic cầu kỳ), 
+Chính vì lý do đó chúng ta chỉ nên sử dụng read operation (query root field) và realtime websocket (subscribe root field) của Hasura (đôi khi cũng sẽ xài delete nếu không có logic cầu kỳ), 
 còn riêng đối với write operation (chủ yếu là update/insert) thì chúng ta sẽ xây dựng [remote schema](https://hasura.io/docs/latest/graphql/core/remote-schemas/index.html) để handle.
 
 Mô phỏng (nguồn [Hasura](https://hasura.io)):
