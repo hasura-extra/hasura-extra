@@ -13,11 +13,12 @@ Nếu như project của bạn sử dụng [Symfony App](../02-installation/03-s
 bạn không cần làm theo các bước bên dưới mà chỉ nên đọc để hiểu cơ chế hoạt động của nó như thế nào.
 :::
 
-Hasura Extra webhook mode có thể dễ dàng tích hợp [JWT](https://jwt.io) authentication thông qua [Lexik JWT authentication bundle](https://github.com/lexik/LexikJWTAuthenticationBundle).
+Hasura Extra webhook mode có thể dễ dàng tích hợp [JWT](https://jwt.io) authentication thông qua [Lexik JWT authentication bundle](https://github.com/lexik/LexikJWTAuthenticationBundle)
+và [Hasura action](https://hasura.io/docs/latest/graphql/core/actions/index.html).
 
-## Cài đặt
+## Cài đặt Lexik JWT authentication
 
-Cài đặt Lexik JWT authentication thông qua Composer:
+Cài đặt thông qua Composer:
 
 ```shell
 composer require jwt
@@ -67,6 +68,57 @@ login:
 ```
 
 Như bạn thấy route trên không có controller, mục đích chỉ để định danh cho `json_login` ở trên.
+
+## Listen authentication failure event
+
+Bạn cần tạo một subscriber/listener để listen authentication failure event nhằm [format response payload theo yêu cầu của Hasura action](https://hasura.io/docs/latest/graphql/core/actions/action-handlers.html#returning-an-error-response).
+
+Ví dụ:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\EventSubscriber\Authentication;
+
+use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationFailureEvent;
+use Lexik\Bundle\JWTAuthenticationBundle\Events;
+use Lexik\Bundle\JWTAuthenticationBundle\Response\JWTAuthenticationFailureResponse;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
+final class AuthenticationFailureSubscriber implements EventSubscriberInterface
+{
+    public static function getSubscribedEvents()
+    {
+        return [
+            Events::AUTHENTICATION_FAILURE => ['onAuthenticationFailure', -8]
+        ];
+    }
+
+    public function onAuthenticationFailure(AuthenticationFailureEvent $event): void
+    {
+        $response = $event->getResponse();
+
+        if ($response instanceof JWTAuthenticationFailureResponse) {
+            // Set response compatible with Hasura action.
+            // https://hasura.io/docs/latest/graphql/core/actions/action-handlers.html#returning-an-error-response
+            $event->setResponse(
+                new JsonResponse(
+                    [
+                        'extensions' => [
+                            'category' => 'security'
+                        ],
+                        'message' => $response->getMessage()
+                    ],
+                    $response->getStatusCode()
+                )
+            );
+        }
+    }
+}
+```
 
 Vậy là bạn đã chuẩn bị xong ở application rồi đấy, tiếp đến hãy [config action login trên Hasura](#action-login-on-hasura).
 
