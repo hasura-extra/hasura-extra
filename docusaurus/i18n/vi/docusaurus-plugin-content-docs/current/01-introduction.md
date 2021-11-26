@@ -5,8 +5,8 @@ sidebar_title: Giới thiệu
 slug: /
 ---
 
-[Hasura](https://hasura.io) graphql engine là một Open Source phục vụ cho việc xây dựng web APIs với [graphql](https://graphql.org/),
-nó giúp cho bạn xây dựng application nhanh hơn so với cách thông thường, nhờ dựng sẵn CRUD, realtime (websocket) và bộ Authorization xịn xò.
+[Hasura](https://hasura.io) graphql engine là một Open Source phục vụ cho việc xây dựng web APIs với [GraphQL](https://graphql.org/),
+nó giúp cho bạn xây dựng application nhanh hơn so với cách thông thường, nhờ dựng sẵn CRUD, realtime websocket và bộ authorization xịn xò.
 
 Hasura Extra cung cấp bộ thư viện PHP giúp cho bạn làm việc với Hasura đơn giản và dễ dàng hơn.
 
