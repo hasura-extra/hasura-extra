@@ -5,7 +5,7 @@ sidebar_title: Introduction
 slug: /
 ---
 
-[Hasura](https://hasura.io) graphql engine's an Open Source project to build the modern web APIs with [graphql](https://graphql.org),
+[Hasura](https://hasura.io) graphql engine's an Open Source project to build the modern web APIs with [GraphQL](https://graphql.org),
 it help you build application faster than normal ways thanks to built-in CRUD, realtime websocket and the awesome authorization system.
 
 Hasura Extra provides set of PHP libraries to work together with Hasura for more simple and easy.

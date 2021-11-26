@@ -20,6 +20,9 @@ HASURA_ADMIN_SECRET=ChangeMe \
 POSTGRES_PASSWORD=ChangeMe \
 APP_HASURA_SECRET=ChangeMe \
 APP_HASURA_BASIC_AUTH="$(printf hasura:${APP_HASURA_SECRET} | base64 -)" \
+JWT_SECRET_KEY=ChangeMe \
+JWT_PUBLIC_KEY=ChangeMe \
+MAILER_DSN=ChangeMe \
 docker-compose -f docker-compose.yaml -f docker-compose.prod.yaml up -d
 ```
 
