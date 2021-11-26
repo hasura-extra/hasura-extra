@@ -3,6 +3,7 @@
     "license": "MIT",
     "description": "Handle Hasura metadata & business logic in minutes.",
     "require": {
+        "laravel/framework": "^8.0",
         "php": ">=8.0",
         "psr/event-dispatcher": "^1.0",
         "psr/http-factory": "^1.0",
@@ -16,10 +17,12 @@
         "symfony/string": "^5.0",
         "symfony/yaml": "^5.0",
         "thecodingmachine/graphqlite": "^5.0",
-        "thecodingmachine/graphqlite-bundle": "^5.0"
+        "thecodingmachine/graphqlite-bundle": "^5.0",
+        "thecodingmachine/graphqlite-laravel": "^5.0"
     },
     "require-dev": {
         "nyholm/psr7": "^1.0",
+        "orchestra/testbench": "^6.0",
         "phpunit/phpunit": "^9.5",
         "symfony/dotenv": "^5.0",
         "symfony/maker-bundle": "^1.0",
@@ -37,6 +40,7 @@
             "Hasura\\Bundle\\": "src/bundle/src",
             "Hasura\\EventDispatcher\\": "src/event-dispatcher/src",
             "Hasura\\GraphQLiteBridge\\": "src/graphqlite-bridge/src",
+            "Hasura\\Laravel\\": "src/laravel/src",
             "Hasura\\Metadata\\": "src/metadata/src",
             "Hasura\\MonorepoBuilder\\": "src/monorepo-builder/src",
             "Hasura\\SailorBridge\\": "src/sailor-bridge/src"
@@ -50,6 +54,7 @@
             "Hasura\\Bundle\\Tests\\Fixture\\App\\": "src/bundle/tests/Fixture/src",
             "Hasura\\EventDispatcher\\Tests\\": "src/event-dispatcher/tests",
             "Hasura\\GraphQLiteBridge\\Tests\\": "src/graphqlite-bridge/tests",
+            "Hasura\\Laravel\\Tests\\": "src/laravel/tests",
             "Hasura\\Metadata\\Tests\\": "src/metadata/tests",
             "Hasura\\SailorBridge\\Tests\\": "src/sailor-bridge/tests"
         }
@@ -63,6 +68,7 @@
         "hasura-extra/bundle": "2.0.0",
         "hasura-extra/event-dispatcher": "2.0.0",
         "hasura-extra/graphqlite-bridge": "2.0.0",
+        "hasura-extra/laravel": "self.version",
         "hasura-extra/metadata": "2.0.0",
         "hasura-extra/sailor-bridge": "2.0.0"
     },
