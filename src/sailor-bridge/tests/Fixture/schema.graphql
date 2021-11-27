@@ -3440,6 +3440,7 @@ type query_root {
   hasura_events_by_pk(id: Int!): hasura_events
   language(code: ID!): Language
   languages(filter: LanguageFilterInput): [Language!]!
+  metadata_dummy: String!
 
   """
   

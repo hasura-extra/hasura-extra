@@ -34,3 +34,17 @@
         forward_client_headers: true
     comment: ''
     permissions: !include remote_schemas/graphqlite-bridge/permissions.yaml
+-
+    name: metadata
+    definition:
+        url: 'http://apache/metadata.php'
+        timeout_seconds: 60
+        customization:
+            field_names:
+                -
+                    prefix: metadata_
+                    parent_type: Query
+                    mapping: {  }
+        forward_client_headers: true
+    comment: ''
+    permissions: !include remote_schemas/metadata/permissions.yaml
