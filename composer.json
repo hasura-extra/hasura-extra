@@ -8,6 +8,7 @@
         "psr/event-dispatcher": "^1.0",
         "psr/http-factory": "^1.0",
         "psr/http-server-handler": "^1.0",
+        "spatie/laravel-permission": "^5.4",
         "spawnia/sailor": "^v0.10",
         "symfony/console": "^5.0",
         "symfony/filesystem": "^5.0",

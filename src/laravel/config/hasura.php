@@ -4,16 +4,21 @@ return [
     /*
      * Hasura base uri
      */
-    'base_uri' => 'http://hasura:8080',
+    'base_uri' => env('HASURA_BASE_URI', 'http://hasura:8080'),
     /*
      * Hasura admin secret
      */
-    'admin_secret' => null,
+    'admin_secret' => env('HASURA_ADMIN_SECRET'),
     /*
      * Application remote schema name had added on Hasura.
      */
     'remote_schema_name' => null,
     'auth' => [
+        /*
+         * Illuminate auth guard use to authenticate user via webhook mode,
+         * default null mean with use `auth.defaults.guard` config.
+         */
+        'guard' => null,
         /*
          * Default role for authenticated user when user not request role via `x-hasura-role` header.
          */

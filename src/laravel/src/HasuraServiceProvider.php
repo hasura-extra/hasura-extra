@@ -11,6 +11,8 @@ declare(strict_types=1);
 namespace Hasura\Laravel;
 
 use Hasura\ApiClient\Client;
+use Hasura\Laravel\AuthHook\AccessRoleDecider;
+use Hasura\Laravel\EventDispatcher\Psr14EventDispatcher;
 use Illuminate\Support\ServiceProvider;
 
 final class HasuraServiceProvider extends ServiceProvider
@@ -30,7 +32,10 @@ final class HasuraServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom($this->getConfigFile(), 'hasura');
+
         $this->registerApiClient();
+        $this->registerAuthHook();
+        $this->registerEventDispatcher();
     }
 
     private function registerApiClient(): void
@@ -41,6 +46,26 @@ final class HasuraServiceProvider extends ServiceProvider
                 config('hasura.base_uri'),
                 config('hasura.admin_secret')
             )
+        );
+    }
+
+    private function registerAuthHook(): void
+    {
+        $this->app->singleton(
+            'hasura.auth_hook.access_role_decider',
+            fn($app) => new AccessRoleDecider(
+                config('hasura.auth.anonymous_role'),
+                config('hasura.auth.default_role'),
+                $app['auth']->guard(config('hasura.auth.guard'))
+            )
+        );
+    }
+
+    private function registerEventDispatcher(): void
+    {
+        $this->app->singleton(
+            'hasura.event_dispatcher.psr14_event_dispatcher',
+            fn($app) => new Psr14EventDispatcher($app['events'])
         );
     }
 
