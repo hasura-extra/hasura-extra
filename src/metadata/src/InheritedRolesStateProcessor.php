@@ -8,19 +8,14 @@
 
 declare(strict_types=1);
 
-namespace Hasura\Bundle\Metadata;
-
-use Hasura\GraphQLiteBridge\Controller\DummyQuery;
-use Hasura\Metadata\ManagerInterface;
-use Hasura\Metadata\NotExistRemoteSchemaException;
-use Hasura\Metadata\RemoteSchemaInterface;
-use Hasura\Metadata\StateProcessorInterface;
+namespace Hasura\Metadata;
 
 final class InheritedRolesStateProcessor implements StateProcessorInterface
 {
     public function __construct(
-        private array $hierarchyRoles,
-        private ?RemoteSchemaInterface $remoteSchema = null
+        private array $inheritedRoles,
+        private ?RemoteSchemaInterface $remoteSchema = null,
+        private ?string $remoteSchemaDummySDL = null
     ) {
     }
 
@@ -30,11 +25,11 @@ final class InheritedRolesStateProcessor implements StateProcessorInterface
         $currentRoles = $this->collectCurrentRoles($metadata);
         $items = [];
 
-        foreach ($this->hierarchyRoles as $role => $set) {
+        foreach ($this->inheritedRoles as $role => $set) {
             $diff = array_diff($set, $currentRoles);
 
             if (!empty($diff)) {
-                if (null === $this->remoteSchema) {
+                if (null === $this->remoteSchema || null === $this->remoteSchemaDummySDL) {
                     throw new ChildRoleMissingException(
                         sprintf(
                             'Can not create inherited role: `%s`, missing child roles: [%s]',
@@ -67,10 +62,7 @@ final class InheritedRolesStateProcessor implements StateProcessorInterface
             fn (string $role) => [
                 'role' => $role,
                 'definition' => [
-                    'schema' => sprintf(
-                        'schema { query: Query } type Query { %s: String! }',
-                        DummyQuery::NAME
-                    ),
+                    'schema' => $this->remoteSchemaDummySDL
                 ],
             ],
             $roleSet

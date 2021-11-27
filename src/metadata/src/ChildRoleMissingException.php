@@ -8,11 +8,8 @@
 
 declare(strict_types=1);
 
-namespace Hasura\Bundle\Tests\Metadata;
+namespace Hasura\Metadata;
 
-use Hasura\Bundle\Tests\KernelTestCase;
-
-abstract class TestCase extends KernelTestCase
+final class ChildRoleMissingException extends \RuntimeException implements ExceptionInterface
 {
-    use BackupMetadataTrait;
 }
