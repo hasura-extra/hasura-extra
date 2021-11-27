@@ -1,6 +1,7 @@
 security:
   role_hierarchy:
     ROLE_ADMIN: [ROLE_USER, ROLE_TESTER]
+    ROLE_MANAGER: [ROLE_UNKNOWN]
 
   enable_authenticator_manager: true
 

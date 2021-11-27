@@ -8,7 +8,6 @@
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use Hasura\Bundle\Metadata\InheritedRolesStateProcessor;
 use Hasura\Metadata\ChainStateProcessor;
 use Hasura\Metadata\Command\ApplyMetadata;
 use Hasura\Metadata\Command\BaseCommand;
@@ -18,6 +17,7 @@ use Hasura\Metadata\Command\ExportMetadata;
 use Hasura\Metadata\Command\GetInconsistentMetadata;
 use Hasura\Metadata\Command\PersistState;
 use Hasura\Metadata\Command\ReloadMetadata;
+use Hasura\Metadata\InheritedRolesStateProcessor;
 use Hasura\Metadata\Manager;
 use Hasura\Metadata\ReloadStateProcessor;
 use Hasura\Metadata\RemoteSchema;
@@ -102,7 +102,8 @@ return static function (ContainerConfigurator $configurator) {
             ->args(
                 [
                     abstract_arg('role hierarchy'),
-                    service('hasura.metadata.remote_schema')->nullOnInvalid()
+                    service('hasura.metadata.remote_schema')->nullOnInvalid(),
+                    'schema { query: Query } type Query { _dummy: String! }'
                 ]
             )
             ->tag('hasura.metadata.state_processor', ['priority' => 6])

@@ -8,12 +8,10 @@
 
 declare(strict_types=1);
 
-namespace Hasura\Bundle\Tests\Metadata;
+namespace Hasura\Metadata\Tests;
 
-use Hasura\Bundle\Metadata\ChildRoleMissingException;
-use Hasura\Bundle\Metadata\InheritedRolesStateProcessor;
-use Hasura\Metadata\Manager;
-use Hasura\Metadata\OperatorInterface;
+use Hasura\Metadata\ChildRoleMissingException;
+use Hasura\Metadata\InheritedRolesStateProcessor;
 use Hasura\Metadata\RemoteSchema;
 
 final class InheritedRolesStateProcessorTest extends TestCase
@@ -23,34 +21,40 @@ final class InheritedRolesStateProcessorTest extends TestCase
         $data = $this->client->metadata()->query('export_metadata', [], 2);
         $roles = array_column($data['metadata']['inherited_roles'], 'role_name');
 
-        $this->assertNotContains('ROLE_ADMIN', $roles);
+        $this->assertNotContains('a', $roles);
+        $this->assertNotContains('d', $roles);
 
         $processor = new InheritedRolesStateProcessor(
-            self::getContainer()->getParameter('security.role_hierarchy.roles'),
-            new RemoteSchema('bundle')
+            [
+                'a' => ['b', 'c'],
+                'd' => ['e'],
+            ],
+            new RemoteSchema('metadata'),
+            'schema { query: Query } type Query { dummy: String! }'
         );
 
-        $manager = new Manager($this->client, '', $this->createMock(OperatorInterface::class));
-        $processor->process($manager);
+        $processor->process($this->manager);
 
         $data = $this->client->metadata()->query('export_metadata', [], 2);
 
         $roles = array_column($data['metadata']['inherited_roles'], null, 'role_name');
 
-        $this->assertArrayHasKey('ROLE_ADMIN', $roles);
-        $this->assertSame(['ROLE_USER', 'ROLE_TESTER'], $roles['ROLE_ADMIN']['role_set']);
+        $this->assertArrayHasKey('a', $roles);
+        $this->assertArrayHasKey('d', $roles);
+        $this->assertSame(['b', 'c'], $roles['a']['role_set']);
+        $this->assertSame(['e'], $roles['d']['role_set']);
     }
 
     public function testProcessChildRoleMissing(): void
     {
         $this->expectException(ChildRoleMissingException::class);
 
-        $manager = new Manager($this->client, '', $this->createMock(OperatorInterface::class));
         $processor = new InheritedRolesStateProcessor(
-            self::getContainer()->getParameter('security.role_hierarchy.roles'),
+            ['a' => ['b', 'c']],
+            null,
             null
         );
 
-        $processor->process($manager);
+        $processor->process($this->manager);
     }
 }
