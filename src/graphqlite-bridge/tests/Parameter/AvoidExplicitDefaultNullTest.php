@@ -65,7 +65,6 @@ final class AvoidExplicitDefaultNullTest extends TestCase
         return new class() implements InputTypeParameterInterface {
             public function resolve(?object $source, array $args, $context, ResolveInfo $info)
             {
-                
             }
 
             public function getType(): InputType
