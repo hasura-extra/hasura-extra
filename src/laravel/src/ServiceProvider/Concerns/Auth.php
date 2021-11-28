@@ -33,7 +33,10 @@ trait Auth
     {
         if (config('hasura.auth.enabled_role_check_method')) {
             $this->app[Gate::class]->before(
-                static fn(...$args) => app(GateRoleChecker::class)->check(...$args)
+                static fn(?object $user, iterable|string $abilities) => app(GateRoleChecker::class)->check(
+                    $user,
+                    $abilities
+                )
             );
         }
 
