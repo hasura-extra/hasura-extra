@@ -54,3 +54,7 @@ test-graphqlite-bridge:
 .PHONY: test-bundle
 test-bundle:
 	./vendor/bin/phpunit src/bundle
+
+.PHONY: test-laravel
+test-laravel:
+	./vendor/bin/phpunit src/laravel

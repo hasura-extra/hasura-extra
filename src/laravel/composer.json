@@ -1,0 +1,41 @@
+{
+    "name": "hasura-extra/laravel",
+    "license": "MIT",
+    "description": "Laravel package to build modern web APIs with Hasura graphql engine.",
+    "autoload": {
+        "psr-4": {
+            "Hasura\\Laravel\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Hasura\\Laravel\\Tests\\": "tests",
+            "Hasura\\Laravel\\Tests\\Fixture\\App\\": "tests/Fixture/app"
+        }
+    },
+    "require": {
+        "php": ">=8.0",
+        "hasura-extra/auth-hook": "^2.1",
+        "hasura-extra/api-client": "^2.1",
+        "hasura-extra/metadata": "^2.1",
+        "hasura-extra/event-dispatcher": "^2.1",
+        "hasura-extra/graphqlite-bridge": "^2.1",
+        "hasura-extra/sailor-bridge": "^2.1",
+        "thecodingmachine/graphqlite-laravel": "^5.0",
+        "laravel/framework": "^8.0",
+        "symfony/psr7-pack": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "symfony/uid": "^5.0",
+        "symfony/filesystem": "^5.0",
+        "orchestra/testbench": "^6.0"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "branch-alias": {
+            "dev-main": "2.1-dev"
+        }
+    }
+}
