@@ -12,16 +12,17 @@ namespace Hasura\Laravel\AuthHook;
 
 use Hasura\AuthHook\AccessRoleDeciderInterface;
 use Hasura\AuthHook\UnauthorizedException;
+use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Contracts\Auth\Guard;
 use Psr\Http\Message\ServerRequestInterface;
-use Spatie\Permission\Traits\HasRoles;
 
 final class AccessRoleDecider implements AccessRoleDeciderInterface
 {
     public function __construct(
         private string $anonymousRole,
         private string $defaultRole,
-        private Guard $guard
+        private Guard $guard,
+        private Gate $gate
     ) {
     }
 
@@ -33,19 +34,9 @@ final class AccessRoleDecider implements AccessRoleDeciderInterface
             return $this->anonymousRole;
         }
 
-        if (false === in_array(HasRoles::class, class_uses($user), true)) {
-            throw new \LogicException(
-                sprintf(
-                    'Your %s model should be use %s trait to use auth hook.',
-                    $user::class,
-                    HasRoles::class
-                )
-            );
-        }
-
         $requestedRole = $request->getHeader('x-hasura-role')[0] ?? $this->defaultRole;
 
-        if (false === $user->hasRole($requestedRole)) {
+        if (false === $this->gate->check($requestedRole)) {
             throw new UnauthorizedException(sprintf('Unauthorized to access with role: `%s`', $requestedRole));
         }
 
