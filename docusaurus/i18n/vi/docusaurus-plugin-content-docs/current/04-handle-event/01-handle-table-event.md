@@ -121,5 +121,5 @@ Sau đó khi bạn [thêm event trigger tại Hasura](#add-event-trigger), bạn
 
 ![authorization header](../assets/config-webhook-authorization-header.png)
 
-Vậy là bạn đã config xong basic authentication rồi đấy, lưu ý theo ví dụ trên bạn cần config `APP_HASURA_SECRET` trong `.env` của application,
-và `APP_HASURA_BASIC_AUTH` env của `hasura` service container.
+Lưu ý theo ví dụ trên bạn cần config `APP_HASURA_SECRET` trong `.env` của application và `APP_HASURA_BASIC_AUTH` env của `hasura` service container.
+Ví dụ với `APP_HASURA_SECRET` là `!ChangeMe!` thì `APP_HASURA_BASIC_AUTH` sẽ là `Basic: aGFzdXJhOiFDaGFuZ2VNZSE=` (base64_encode('hasura:!ChangeMe')).
