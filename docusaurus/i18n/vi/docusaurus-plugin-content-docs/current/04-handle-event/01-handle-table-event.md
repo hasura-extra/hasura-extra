@@ -76,3 +76,50 @@ final class WelcomeUserRegisteredSubscriber implements EventSubscriberInterface
 Như ví dụ trên, với event trigger tên là `user_registered` được tạo ở [bước đầu tiên](#add-event-trigger), mỗi khi user registered (inserted) Hasura
 sẽ trigger webhook đến url path: `/hasura_table_event` và từ đó dispatcher sẽ dispatch sự kiện `Hasura\EventDispatcher\TableEvent`, subscriber
 sẽ gửi mail welcome đến end-user.
+
+### Security config
+
+:::info
+Nếu như project của bạn sử dụng [Symfony App](../02-installation/03-symfony-app.md), template đã config sẵn giúp bạn, bạn
+không cần làm theo tài liệu bên dưới.
+:::
+
+Như bạn thấy route path: `/hasura_table_event` bất kỳ ai cũng có thể send request đến nó, bạn cần phải cấu hình security
+cho nó để cho chỉ có Hasura mới có thể request đến route path này, có rất nhiều cách để cấu hình, trong tài liệu này chúng ta
+sẽ sử dụng basic authentication để xác minh request đến từ Hasura.
+
+Cấu hình [basic authentication](https://symfony.com/doc/current/security.html#http-basic) 
+với [memory user provider](https://symfony.com/doc/current/security/user_providers.html#security-memory-user-provider) 
+để xác minh request đến từ Hasura:
+
+```yaml
+security:
+    enable_authenticator_manager: true
+    password_hashers:
+        Symfony\Component\Security\Core\User\InMemoryUser: 'plaintext'
+    providers:
+        ...
+        hasura:
+            memory:
+                users:
+                    hasura: { password: '%env(APP_HASURA_SECRET)%' }
+    firewalls:
+        ...
+        table_event:
+            pattern: ^/hasura_table_event$
+            stateless: true
+            provider: hasura
+            http_basic:
+                realm: Hasura Area
+    access_control:
+         ...
+         - { path: ^/hasura_table_event$, roles: IS_AUTHENTICATED_FULLY }
+
+```
+
+Sau đó khi bạn [thêm event trigger tại Hasura](#add-event-trigger), bạn cần thêm basic auth header:
+
+![authorization header](../assets/config-webhook-authorization-header.png)
+
+Lưu ý theo ví dụ trên bạn cần config `APP_HASURA_SECRET` trong `.env` của application và `APP_HASURA_BASIC_AUTH` env của `hasura` service container.
+Ví dụ với `APP_HASURA_SECRET` là `!ChangeMe!` thì `APP_HASURA_BASIC_AUTH` sẽ là `Basic: aGFzdXJhOiFDaGFuZ2VNZSE=` (base64_encode('hasura:!ChangeMe')).
