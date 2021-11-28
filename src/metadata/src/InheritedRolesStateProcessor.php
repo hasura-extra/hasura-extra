@@ -62,7 +62,7 @@ final class InheritedRolesStateProcessor implements StateProcessorInterface
             fn (string $role) => [
                 'role' => $role,
                 'definition' => [
-                    'schema' => $this->remoteSchemaDummySDL
+                    'schema' => $this->remoteSchemaDummySDL,
                 ],
             ],
             $roleSet

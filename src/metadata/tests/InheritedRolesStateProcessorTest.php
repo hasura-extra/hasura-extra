@@ -50,7 +50,9 @@ final class InheritedRolesStateProcessorTest extends TestCase
         $this->expectException(ChildRoleMissingException::class);
 
         $processor = new InheritedRolesStateProcessor(
-            ['a' => ['b', 'c']],
+            [
+                'a' => ['b', 'c'],
+            ],
             null,
             null
         );
