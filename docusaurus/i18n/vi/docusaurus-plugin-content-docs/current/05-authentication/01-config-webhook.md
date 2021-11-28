@@ -18,6 +18,11 @@ Nếu như bạn sử dụng [Symfony App](../02-installation/03-symfony-app.md)
 
 Để cấu hình webhook mode bạn cần set `HASURA_GRAPHQL_AUTH_HOOK` env của Hasura container trỏ về url path `/hasura_auth_hook`,
 tiếp đến là cấu hình Symfony [security firewall](https://symfony.com/doc/current/security.html#the-firewall) bao phủ `/hasura_auth_hook` path,
-bạn có thể kham khảo thêm tại cách cấu hình [JWT authentication](./04-jwt-authentication.md).
+bạn có thể kham khảo thêm tại cách cấu hình [JWT authentication](./05-symfony-jwt-authentication.md).
 
 Vậy là xong, bạn đã config xong Hasura webhook auth mode cho Symfony rồi đấy. 
+
+## `X-Hasura-Role` header
+
+Khi client send request đến Hasura có thể gửi kèm `X-Hasura-Role` header để chỉ định role cho request, nếu như user identifier
+của request KHÔNG sở hữu role được chỉ định thì request sẽ bị chặn lại.
