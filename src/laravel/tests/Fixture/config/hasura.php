@@ -59,8 +59,8 @@ return [
         ]
     ],
     'sailor' => [
-        'executor_path' => app_path('Http/GraphQLExecutors'),
-        'executor_namespace' => 'Hasura\Laravel\Tests\Fixture\App\Http\GraphQLExecutors',
+        'executor_path' => app_path('GraphQLExecutors'),
+        'executor_namespace' => 'Hasura\Laravel\Tests\Fixture\App\GraphQLExecutors',
         'schema_path' => base_path('hasura/schema.graphql'),
         'query_spec_path' => base_path('hasura/graphql'),
     ]

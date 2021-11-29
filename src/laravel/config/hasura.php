@@ -66,7 +66,7 @@ return [
         /*
          * Namespace of executor classes generated.
          */
-        'executor_namespace' => 'App\Http\GraphQLExecutors',
+        'executor_namespace' => 'App\GraphQLExecutors',
         /*
          * Path store Hasura SDL when run `hasura:sailor:introspect` command.
          */
