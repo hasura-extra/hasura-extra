@@ -8,11 +8,11 @@ return [
     /*
      * Hasura admin secret.
      */
-    'admin_secret' => env('HASURA_ADMIN_SECRET'),
+    'admin_secret' => 'test',
     /*
      * App secret will use to identifier Hasura webhook request (actions, events triggered).
      */
-    'app_secret' => env('APP_HASURA_SECRET', '!ChangeMe!'),
+    'app_secret' => 'test',
     /*
      * Application remote schema name had added on Hasura.
      */
@@ -60,7 +60,7 @@ return [
     ],
     'sailor' => [
         'executor_path' => app_path('GraphQLExecutors'),
-        'executor_namespace' => 'App\GraphQLExecutors',
+        'executor_namespace' => 'Hasura\Laravel\Tests\Fixture\App\GraphQLExecutors',
         'schema_path' => base_path('hasura/schema.graphql'),
         'query_spec_path' => base_path('hasura/graphql'),
     ]
