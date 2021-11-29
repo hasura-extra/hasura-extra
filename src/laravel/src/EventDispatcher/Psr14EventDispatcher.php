@@ -40,7 +40,7 @@ final class Psr14EventDispatcher implements EventDispatcherInterface
                 break;
             }
 
-            $listener($event);
+            $listener($event, [$event]);
         }
     }
 }

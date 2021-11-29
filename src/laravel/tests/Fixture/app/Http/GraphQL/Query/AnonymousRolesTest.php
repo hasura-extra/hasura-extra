@@ -13,12 +13,12 @@ namespace Hasura\Laravel\Tests\Fixture\App\Http\GraphQL\Query;
 use Hasura\GraphQLiteBridge\Attribute\Roles;
 use TheCodingMachine\GraphQLite\Annotations\Query;
 
-final class RolesTest
+final class AnonymousRolesTest
 {
-    #[Query(name: 'roles_test')]
-    #[Roles('tester', 'user')]
+    #[Query(name: 'anonymous_roles_test')]
+    #[Roles('anonymous')]
     public function __invoke(): string
     {
-        return 'authorized';
+        return 'anonymous';
     }
 }

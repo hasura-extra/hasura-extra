@@ -12,6 +12,8 @@ namespace Hasura\Laravel\ServiceProvider\Concerns;
 
 use Hasura\ApiClient\Client;
 use Hasura\Laravel\ServiceProvider\HasuraServiceProvider;
+use Hasura\SailorBridge\Command\Codegen;
+use Hasura\SailorBridge\Command\Introspect;
 use Hasura\SailorBridge\EndpointConfig;
 use Hasura\SailorBridge\SailorClient;
 use Spawnia\Sailor\Configuration;
@@ -24,6 +26,13 @@ trait Sailor
     private function bootSailor(): void
     {
         Configuration::setEndpoint('hasura', $this->app[EndpointConfig::class]);
+
+        $this->commands(
+            [
+                Codegen::class,
+                Introspect::class
+            ]
+        );
     }
 
     private function registerSailor(): void
@@ -42,6 +51,26 @@ trait Sailor
                 config('hasura.sailor.query_spec_path'),
                 config('hasura.sailor.schema_path')
             )
+        );
+
+        $this->app->singleton(
+            Codegen::class,
+            function () {
+                $command = new Codegen();
+                $command->setName('hasura:sailor:codegen');
+
+                return $command;
+            }
+        );
+
+        $this->app->singleton(
+            Introspect::class,
+            function () {
+                $command = new Introspect();
+                $command->setName('hasura:sailor:introspect');
+
+                return $command;
+            }
         );
     }
 }

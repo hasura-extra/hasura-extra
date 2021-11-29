@@ -51,21 +51,4 @@ final class AuthHookTest extends TestCase
 
         $response->assertUnauthorized();
     }
-
-    private function loginWithRoles(array|string $withRoles): void
-    {
-        $user = new class($withRoles) extends GenericUser {
-            public function __construct(private array|string $roles)
-            {
-                parent::__construct(['id' => 1]);
-            }
-
-            public function getRoles(): array|string
-            {
-                return $this->roles;
-            }
-        };
-
-        $this->app['auth']->login($user);
-    }
 }

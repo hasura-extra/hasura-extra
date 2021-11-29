@@ -12,6 +12,7 @@ namespace Hasura\Laravel\Tests;
 
 use Hasura\Laravel\ServiceProvider\HasuraServiceProvider;
 use Hasura\Laravel\Tests\Fixture\App\Http\Kernel as HttpKernel;
+use Illuminate\Auth\GenericUser;
 use Illuminate\Contracts\Http\Kernel as HttpKernelContract;
 use Illuminate\Testing\TestResponse;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
@@ -46,5 +47,22 @@ class TestCase extends OrchestraTestCase
     {
         $router->post('/hasura_table_event', 'Hasura\EventDispatcher\TableEventRequestHandler@handle');
         $router->post('/hasura_auth_hook', 'Hasura\AuthHook\RequestHandler@handle');
+    }
+
+    protected function loginWithRoles(array|string $withRoles): void
+    {
+        $user = new class($withRoles) extends GenericUser {
+            public function __construct(private array|string $roles)
+            {
+                parent::__construct(['id' => 1]);
+            }
+
+            public function getRoles(): array|string
+            {
+                return $this->roles;
+            }
+        };
+
+        $this->app['auth']->login($user);
     }
 }
