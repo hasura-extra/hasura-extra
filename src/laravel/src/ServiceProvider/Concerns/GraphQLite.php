@@ -17,7 +17,6 @@ use Hasura\GraphQLiteBridge\Field\AnnotationTrackingMiddleware as FieldAnnotatio
 use Hasura\GraphQLiteBridge\Field\ArgNamingMiddleware as FieldArgNamingMiddleware;
 use Hasura\GraphQLiteBridge\Field\AuthorizationMiddleware as FieldAuthorizationMiddleware;
 use Hasura\GraphQLiteBridge\Parameter\ArgNamingMiddleware as ParameterArgNamingMiddleware;
-use Hasura\GraphQLiteBridge\Parameter\AvoidExplicitDefaultNullMiddleware;
 use Hasura\GraphQLiteBridge\Parameter\AvoidExplicitDefaultNullMiddleware as ParameterAvoidExplicitDefaultNullMiddleware;
 use Hasura\GraphQLiteBridge\RemoteSchemaPermissionStateProcessor;
 use Hasura\GraphQLiteBridge\RootTypeMapperFactory;
@@ -89,7 +88,7 @@ trait GraphQLite
             $factory->addFieldMiddleware($app[FieldAuthorizationMiddleware::class]);
 
             $factory->addParameterMiddleware($app[ParameterArgNamingMiddleware::class]);
-            $factory->addParameterMiddleware($app[AvoidExplicitDefaultNullMiddleware::class]);
+            $factory->addParameterMiddleware($app[ParameterAvoidExplicitDefaultNullMiddleware::class]);
 
             $factory->addRootTypeMapperFactory($app[RootTypeMapperFactory::class]);
 

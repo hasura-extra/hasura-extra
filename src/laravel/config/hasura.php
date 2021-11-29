@@ -10,7 +10,7 @@ return [
      */
     'admin_secret' => env('HASURA_ADMIN_SECRET'),
     /*
-     * App secret will use to identifier Hasura webhook request (actions, events triggered).
+     * App secret will use to identifier Hasura webhook requests (actions, events triggered).
      */
     'app_secret' => env('APP_HASURA_SECRET', '!ChangeMe!'),
     /*
@@ -59,9 +59,21 @@ return [
         ]
     ],
     'sailor' => [
+        /*
+         * Path store executor classes generated.
+         */
         'executor_path' => app_path('GraphQLExecutors'),
+        /*
+         * Namespace of executor classes generated.
+         */
         'executor_namespace' => 'App\GraphQLExecutors',
+        /*
+         * Path store Hasura SDL when run `hasura:sailor:introspect` command.
+         */
         'schema_path' => base_path('hasura/schema.graphql'),
+        /*
+         * Path store your GraphQL queries spec.
+         */
         'query_spec_path' => base_path('hasura/graphql'),
     ]
 ];
