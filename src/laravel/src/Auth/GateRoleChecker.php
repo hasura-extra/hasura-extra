@@ -25,7 +25,7 @@ final class GateRoleChecker
         }
 
         if (method_exists($user, 'getRoles')) {
-            $roles = $this->inheritanceRole->getReachableRoleNames($user->getRoles());
+            $roles = $this->inheritanceRole->getReachableRoleNames((array)$user->getRoles());
 
             foreach ($roles as $role) {
                 if ($role === $abilities) {
