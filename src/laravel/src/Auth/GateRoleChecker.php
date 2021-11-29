@@ -10,8 +10,6 @@ declare(strict_types=1);
 
 namespace Hasura\Laravel\Auth;
 
-use Illuminate\Foundation\Auth\User;
-
 final class GateRoleChecker
 {
     public function __construct(
@@ -20,14 +18,14 @@ final class GateRoleChecker
     ) {
     }
 
-    public function check(?User $user, iterable|string $abilities): ?bool
+    public function check(?object $user, iterable|string $abilities): ?bool
     {
         if (null === $user) {
             return $abilities === $this->anonymousRole ? true : null;
         }
 
         if (method_exists($user, 'getRoles')) {
-            $roles = $this->inheritanceRole->getReachableRoleNames($user->getRoles());
+            $roles = $this->inheritanceRole->getReachableRoleNames((array)$user->getRoles());
 
             foreach ($roles as $role) {
                 if ($role === $abilities) {
