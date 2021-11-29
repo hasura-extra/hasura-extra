@@ -35,6 +35,24 @@
     comment: ''
     permissions: !include remote_schemas/graphqlite-bridge/permissions.yaml
 -
+    name: laravel
+    definition:
+        url: 'http://apache/laravel.php/graphql'
+        timeout_seconds: 60
+        customization:
+            field_names:
+                -
+                    prefix: laravel_
+                    parent_type: Query
+                    mapping: {  }
+                -
+                    prefix: laravel_
+                    parent_type: Mutation
+                    mapping: {  }
+        forward_client_headers: true
+    comment: ''
+    permissions: !include remote_schemas/laravel/permissions.yaml
+-
     name: metadata
     definition:
         url: 'http://apache/metadata.php'

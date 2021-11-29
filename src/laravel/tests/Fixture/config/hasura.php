@@ -16,7 +16,7 @@ return [
     /*
      * Application remote schema name had added on Hasura.
      */
-    'remote_schema_name' => null,
+    'remote_schema_name' => 'laravel',
     'auth' => [
         /*
          * When set to true, the method for checking roles will be registered on the gate.
@@ -38,7 +38,9 @@ return [
         /*
          * Set of enhancers implements \Hasura\AuthHook\SessionVariableEnhancerInterface support to enhance session variables of request.
          */
-        'session_variable_enhancers' => []
+        'session_variable_enhancers' => [
+            \Hasura\Laravel\Tests\Fixture\App\Hasura\AuthenticatedSessionVariableEnhancer::class
+        ]
     ],
     'metadata' => [
         /*
@@ -53,8 +55,7 @@ return [
              * Hasura Extra processors should be run first.
              */
             \Hasura\Metadata\ReloadStateProcessor::class,
-            // If you want to add the remote schema permission state processor below, please make sure you had config `remote_schema_name`.
-            // \Hasura\GraphQLiteBridge\RemoteSchemaPermissionStateProcessor::class,
+            \Hasura\GraphQLiteBridge\RemoteSchemaPermissionStateProcessor::class,
             \Hasura\Metadata\InheritedRolesStateProcessor::class,
         ]
     ],
