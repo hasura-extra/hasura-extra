@@ -2646,6 +2646,11 @@ type mutation_root {
     on_conflict: hasura_events_on_conflict
   ): hasura_events
 
+  """
+  A placeholder query used by thecodingmachine/graphqlite when there are no declared mutations.
+  """
+  laravel_dummyMutation: String
+
   """login"""
   login(email: String!, password: String!): login_output!
 
@@ -3440,6 +3445,48 @@ type query_root {
   hasura_events_by_pk(id: Int!): hasura_events
   language(code: ID!): Language
   languages(filter: LanguageFilterInput): [Language!]!
+
+  """
+  
+  
+  """
+  laravel__dummy: String!
+
+  """
+  
+  
+  """
+  laravel_anonymous_roles_test: String!
+
+  """
+  
+  
+  """
+  laravel_arg_naming_tests(snake_case: String!): String!
+
+  """
+  
+  
+  """
+  laravel_avoid_explicit_default_null_test(arg: String): String!
+
+  """
+  
+  
+  """
+  laravel_roles_test: String!
+
+  """
+  
+  
+  """
+  laravel_root_type_mapper_test(date: date, json: json, jsonb: jsonb, timestamptz: timestamptz, timetz: timetz, uuid: uuid): json
+
+  """
+  
+  
+  """
+  laravel_test: String!
   metadata_dummy: String!
 
   """
