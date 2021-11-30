@@ -18,7 +18,8 @@
         "symfony/yaml": "^5.0",
         "thecodingmachine/graphqlite": "^5.0",
         "thecodingmachine/graphqlite-bundle": "^5.0",
-        "thecodingmachine/graphqlite-laravel": "^5.0"
+        "thecodingmachine/graphqlite-laravel": "^5.0",
+        "symfony/dependency-injection": "^5.0"
     },
     "require-dev": {
         "nyholm/psr7": "^1.0",
@@ -59,9 +60,6 @@
             "Hasura\\Metadata\\Tests\\": "src/metadata/tests",
             "Hasura\\SailorBridge\\Tests\\": "src/sailor-bridge/tests"
         }
-    },
-    "conflict": {
-        "hasura-extra/hasura-bundle": "*"
     },
     "replace": {
         "hasura-extra/api-client": "2.0.0",
