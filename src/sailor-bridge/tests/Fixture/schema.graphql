@@ -2647,9 +2647,10 @@ type mutation_root {
   ): hasura_events
 
   """
-  A placeholder query used by thecodingmachine/graphqlite when there are no declared mutations.
+  
+  
   """
-  laravel_dummyMutation: String
+  laravel_transactional_test(id: ID!, throw_exception: Boolean = false): transactional_output!
 
   """login"""
   login(email: String!, password: String!): login_output!
@@ -3969,7 +3970,7 @@ scalar timestamptz
 scalar timetz
 
 type transactional_output {
-  name: String
+  name: String!
 }
 
 """A GraphQL type that can contain uuid"""
