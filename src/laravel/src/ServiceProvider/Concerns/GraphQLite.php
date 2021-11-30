@@ -21,6 +21,7 @@ use Hasura\GraphQLiteBridge\Parameter\AvoidExplicitDefaultNullMiddleware as Para
 use Hasura\GraphQLiteBridge\RemoteSchemaPermissionStateProcessor;
 use Hasura\GraphQLiteBridge\RootTypeMapperFactory;
 use Hasura\Laravel\GraphQLite\AuthorizationService;
+use Hasura\Laravel\GraphQLite\Parameter\ArgModelMiddleware as ParameterArgModelMiddleware;
 use Hasura\Laravel\ServiceProvider\HasuraServiceProvider;
 use Hasura\Metadata\RemoteSchemaInterface;
 use TheCodingMachine\GraphQLite\AggregateControllerQueryProviderFactory;
@@ -50,6 +51,8 @@ trait GraphQLite
         $this->app->singleton(FieldArgNamingMiddleware::class);
 
         $this->app->singleton(ParameterArgNamingMiddleware::class);
+
+        $this->app->singleton(ParameterArgModelMiddleware::class);
 
         $this->app->singleton(ParameterAvoidExplicitDefaultNullMiddleware::class);
 
@@ -88,6 +91,7 @@ trait GraphQLite
             $factory->addFieldMiddleware($app[FieldAuthorizationMiddleware::class]);
 
             $factory->addParameterMiddleware($app[ParameterArgNamingMiddleware::class]);
+            $factory->addParameterMiddleware($app[ParameterArgModelMiddleware::class]);
             $factory->addParameterMiddleware($app[ParameterAvoidExplicitDefaultNullMiddleware::class]);
 
             $factory->addRootTypeMapperFactory($app[RootTypeMapperFactory::class]);
