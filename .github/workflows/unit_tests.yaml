@@ -30,6 +30,13 @@ jobs:
 
       - run: make environment
 
+      - uses: jtalk/url-health-check-action@v2
+        with:
+          url: http://localhost/healthz.php
+          max-attempts: 5
+          retry-delay: 5s
+          retry-all: true
+
       - run: make apply-metadata
 
       - run: make test-all

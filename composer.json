@@ -10,9 +10,11 @@
         "psr/http-server-handler": "^1.0",
         "spawnia/sailor": "^v0.10",
         "symfony/console": "^5.0",
+        "symfony/dependency-injection": "^5.0",
         "symfony/filesystem": "^5.0",
         "symfony/framework-bundle": "^5.0",
         "symfony/http-client": "^5.0",
+        "symfony/http-kernel": "^5.0",
         "symfony/psr7-pack": "^1.0",
         "symfony/string": "^5.0",
         "symfony/yaml": "^5.0",
@@ -21,6 +23,7 @@
         "thecodingmachine/graphqlite-laravel": "^5.0"
     },
     "require-dev": {
+        "doctrine/doctrine-bundle": "^2.4",
         "nyholm/psr7": "^1.0",
         "orchestra/testbench": "^6.0",
         "phpunit/phpunit": "^9.5",
@@ -59,9 +62,6 @@
             "Hasura\\Metadata\\Tests\\": "src/metadata/tests",
             "Hasura\\SailorBridge\\Tests\\": "src/sailor-bridge/tests"
         }
-    },
-    "conflict": {
-        "hasura-extra/hasura-bundle": "*"
     },
     "replace": {
         "hasura-extra/api-client": "2.0.0",
