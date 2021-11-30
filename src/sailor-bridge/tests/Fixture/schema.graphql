@@ -3462,6 +3462,18 @@ type query_root {
   
   
   """
+  laravel_arg_model_combine_test(email: String!, id: ID!): json!
+
+  """
+  
+  
+  """
+  laravel_arg_model_n_plus_one_test(id: ID!): Int!
+
+  """
+  
+  
+  """
   laravel_arg_naming_tests(snake_case: String!): String!
 
   """
