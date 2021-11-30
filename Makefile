@@ -1,7 +1,6 @@
 .PHONY: environment
 environment:
 	docker-compose up -d
-	sleep 10 # wait test dependencies
 
 .PHONY: apply-metadata
 apply-metadata:
