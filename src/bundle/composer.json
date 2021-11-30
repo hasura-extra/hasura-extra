@@ -22,11 +22,13 @@
         "hasura-extra/graphqlite-bridge": "^2.1",
         "hasura-extra/sailor-bridge": "^2.1",
         "thecodingmachine/graphqlite-bundle": "^5.0",
+        "symfony/http-kernel": "^5.0",
         "symfony/dependency-injection": "^5.0",
         "symfony/framework-bundle": "^5.0",
         "symfony/psr7-pack": "^1.0"
     },
     "require-dev": {
+        "doctrine/doctrine-bundle": "^2.4",
         "phpunit/phpunit": "^9.5",
         "symfony/maker-bundle": "^1.0",
         "symfony/orm-pack": "^2.1",
