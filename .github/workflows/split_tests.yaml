@@ -61,6 +61,7 @@ jobs:
           url: http://localhost/healthz.php
           max-attempts: 5
           retry-delay: 5s
+          retry-all: true
 
       - run: make apply-metadata
 
