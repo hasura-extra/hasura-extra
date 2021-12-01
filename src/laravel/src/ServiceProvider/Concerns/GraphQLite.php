@@ -23,9 +23,12 @@ use Hasura\GraphQLiteBridge\RootTypeMapperFactory;
 use Hasura\Laravel\GraphQLite\AuthorizationService;
 use Hasura\Laravel\GraphQLite\Field\TransactionalMiddleware as FieldTransactionalMiddleware;
 use Hasura\Laravel\GraphQLite\Parameter\ArgModelMiddleware as ParameterArgModelMiddleware;
+use Hasura\Laravel\GraphQLite\Parameter\ValidateMiddleware as ParameterValidateMiddleware;
+use Hasura\Laravel\GraphQLite\Parameter\ValidateObjectMiddleware as ParameterValidateObjectMiddleware;
 use Hasura\Laravel\ServiceProvider\HasuraServiceProvider;
 use Hasura\Metadata\RemoteSchemaInterface;
 use TheCodingMachine\GraphQLite\AggregateControllerQueryProviderFactory;
+use TheCodingMachine\GraphQLite\Laravel\Mappers\Parameters\ValidateFieldMiddleware;
 use TheCodingMachine\GraphQLite\Laravel\SanePsr11ContainerAdapter;
 use TheCodingMachine\GraphQLite\SchemaFactory;
 use TheCodingMachine\GraphQLite\Security\AuthorizationServiceInterface;
@@ -58,6 +61,10 @@ trait GraphQLite
         $this->app->singleton(ParameterArgModelMiddleware::class);
 
         $this->app->singleton(ParameterAvoidExplicitDefaultNullMiddleware::class);
+
+        $this->app->singleton(ParameterValidateObjectMiddleware::class);
+
+        $this->app->bind(ValidateFieldMiddleware::class, ParameterValidateMiddleware::class);
 
         $this->app->singleton(
             RemoteSchemaPermissionStateProcessor::class,
@@ -94,6 +101,7 @@ trait GraphQLite
             $factory->addFieldMiddleware($app[FieldTransactionalMiddleware::class]);
             $factory->addFieldMiddleware($app[FieldAuthorizationMiddleware::class]);
 
+            $factory->addParameterMiddleware($app[ParameterValidateObjectMiddleware::class]);
             $factory->addParameterMiddleware($app[ParameterArgNamingMiddleware::class]);
             $factory->addParameterMiddleware($app[ParameterArgModelMiddleware::class]);
             $factory->addParameterMiddleware($app[ParameterAvoidExplicitDefaultNullMiddleware::class]);

@@ -35,6 +35,31 @@ GQL;
         );
     }
 
+    public function testNotFound(): void
+    {
+        $query = /** @lang GraphQL */
+            <<<GQL
+query {
+    entities: arg_model_combine_test(id: 111111, email: "email2@example.org")
+}
+GQL;
+        $response = $this->graphql($query);
+
+        $response->assertStatus(400);
+        $response->assertJson(
+            [
+                'errors' => [
+                    [
+                        'extensions' => [
+                            'category' => 'InputArgs',
+                            'field' => 'id'
+                        ]
+                    ]
+                ]
+            ]
+        );
+    }
+
     public function testNPlusOne(): void
     {
         $this->app['db']->enableQueryLog();

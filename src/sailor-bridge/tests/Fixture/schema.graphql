@@ -2652,6 +2652,18 @@ type mutation_root {
   """
   laravel_transactional_test(id: ID!, throw_exception: Boolean = false): transactional_output!
 
+  """
+  
+  
+  """
+  laravel_validate_object_test(object_input: validate_object_input!): json!
+
+  """
+  
+  
+  """
+  laravel_validate_test(email_naming: String!): String!
+
   """login"""
   login(email: String!, password: String!): login_output!
 
@@ -3975,3 +3987,13 @@ type transactional_output {
 
 """A GraphQL type that can contain uuid"""
 scalar uuid
+
+input validate_object_input {
+  email_field: String!
+  sub: validate_object_sub_input!
+  text_field: String!
+}
+
+input validate_object_sub_input {
+  sub_text_field: String!
+}
