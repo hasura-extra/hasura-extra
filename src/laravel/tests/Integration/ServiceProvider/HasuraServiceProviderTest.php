@@ -24,6 +24,7 @@ use Hasura\Laravel\Auth\InheritanceRole;
 use Hasura\Laravel\EventDispatcher\Psr14EventDispatcher;
 use Hasura\Laravel\GraphQLite\AuthorizationService;
 use Hasura\Laravel\GraphQLite\Field\TransactionalMiddleware as FieldTransactionalMiddleware;
+use Hasura\Laravel\GraphQLite\Parameter\ObjectAssertionMiddleware as ParameterObjectAssertionMiddleware;
 use Hasura\Laravel\Tests\TestCase;
 use Hasura\Metadata\Command\ApplyMetadata;
 use Hasura\Metadata\Command\ClearMetadata;
@@ -93,6 +94,7 @@ final class HasuraServiceProviderTest extends TestCase
         $this->assertTrue($this->app->has(FieldTransactionalMiddleware::class));
         $this->assertTrue($this->app->has(ParameterArgNamingMiddleware::class));
         $this->assertTrue($this->app->has(ParameterAvoidExplicitDefaultNullMiddleware::class));
+        $this->assertTrue($this->app->has(ParameterObjectAssertionMiddleware::class));
         $this->assertTrue($this->app->has(RootTypeMapperFactory::class));
 
         $this->assertTrue($this->app->has(SailorClient::class));
