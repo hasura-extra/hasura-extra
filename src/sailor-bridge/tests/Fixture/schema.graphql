@@ -2650,6 +2650,12 @@ type mutation_root {
   
   
   """
+  laravel_object_assertion_test(object_input: input_object_assertion!): json!
+
+  """
+  
+  
+  """
   laravel_transactional_test(id: ID!, throw_exception: Boolean = false): transactional_output!
 
   """login"""
