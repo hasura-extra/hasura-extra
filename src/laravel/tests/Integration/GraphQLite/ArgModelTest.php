@@ -51,7 +51,7 @@ GQL;
                 'errors' => [
                     [
                         'extensions' => [
-                            'category' => 'input_args',
+                            'category' => 'InputArgs',
                             'field' => 'id'
                         ]
                     ]

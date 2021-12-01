@@ -48,7 +48,7 @@ final class ArgModel implements ArgNamingParameterInterface
         $model = $models[$argValue] ?? null;
 
         if (null === $model && !$this->nullableModel) {
-            throw new GraphQLException(sprintf('Can not found instance by `%s`', $argValue), category:   'input_args', extensions: ['field' => $this->argName]);
+            throw new GraphQLException(sprintf('Can not found instance by `%s`', $argValue), category:   'InputArgs', extensions: ['field' => $this->argName]);
         }
 
         return $model;
