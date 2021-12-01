@@ -19,6 +19,7 @@ final class HasuraServiceProvider extends ServiceProvider
     use Concerns\EventDispatcher;
     use Concerns\GraphQLite;
     use Concerns\Metadata;
+    use Concerns\Routes;
     use Concerns\Sailor;
 
     public function boot(): void
@@ -34,6 +35,7 @@ final class HasuraServiceProvider extends ServiceProvider
 
         $this->bootAuth();
         $this->bootMetadata();
+        $this->bootRoutes();
         $this->bootSailor();
     }
 

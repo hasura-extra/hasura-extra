@@ -16,7 +16,7 @@ final class AuthHookTest extends TestCase
 {
     public function testAnonymousRequest(): void
     {
-        $response = $this->post('/hasura_auth_hook');
+        $response = $this->get('/hasura-auth-hook');
 
         $response->assertSuccessful();
         $response->assertExactJson(['x-hasura-role' => 'anonymous', 'x-hasura-test' => 'Laravel']);
@@ -26,7 +26,7 @@ final class AuthHookTest extends TestCase
     {
         $this->loginWithRoles('user');
 
-        $response = $this->post('/hasura_auth_hook');
+        $response = $this->get('/hasura-auth-hook');
 
         $response->assertSuccessful();
         $response->assertExactJson(['x-hasura-role' => 'user', 'x-hasura-test' => 'Laravel']);
@@ -36,7 +36,7 @@ final class AuthHookTest extends TestCase
     {
         $this->loginWithRoles('manager');
 
-        $response = $this->post('/hasura_auth_hook', headers: ['x-hasura-role' => 'manager']);
+        $response = $this->get('/hasura-auth-hook', headers: ['x-hasura-role' => 'manager']);
 
         $response->assertSuccessful();
         $response->assertExactJson(['x-hasura-role' => 'manager', 'x-hasura-test' => 'Laravel']);
@@ -46,7 +46,7 @@ final class AuthHookTest extends TestCase
     {
         $this->loginWithRoles('user');
 
-        $response = $this->post('/hasura_auth_hook', headers: ['x-hasura-role' => 'manager']);
+        $response = $this->get('/hasura-auth-hook', headers: ['x-hasura-role' => 'manager']);
 
         $response->assertUnauthorized();
     }

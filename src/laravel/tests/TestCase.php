@@ -43,12 +43,6 @@ class TestCase extends OrchestraTestCase
         return $this->postJson('/graphql', array_filter(['query' => $query, 'variables' => $variables]));
     }
 
-    protected function defineRoutes($router)
-    {
-        $router->post('/hasura_table_event', 'Hasura\EventDispatcher\TableEventRequestHandler@handle');
-        $router->post('/hasura_auth_hook', 'Hasura\AuthHook\RequestHandler@handle');
-    }
-
     protected function loginWithRoles(array|string $withRoles): void
     {
         $user = new class($withRoles) extends GenericUser {

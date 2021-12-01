@@ -64,5 +64,35 @@ return [
         'executor_namespace' => 'Hasura\Laravel\Tests\Fixture\App\GraphQLExecutors',
         'schema_path' => base_path('hasura/schema.graphql'),
         'query_spec_path' => base_path('hasura/graphql'),
+    ],
+    'routes' => [
+        'auth_hook' => [
+            /*
+             * Enabled auth hook route, disable it when you plan to use Hasura JWT auth mode.
+             */
+            'enabled' => true,
+            /*
+             * Route uri.
+             */
+            'uri' => '/hasura-auth-hook',
+            /*
+             * Set of route middleware.
+             */
+            'middleware' => []
+        ],
+        'table_event' => [
+            /*
+             * Enabled table event handle endpoint, disable it when you not use Hasura event triggered.
+             */
+            'enabled' => true,
+            /*
+             * Route uri.
+             */
+            'uri' => '/hasura-table-event',
+            /*
+             * Set of route middleware.
+             */
+            'middleware' => []
+        ]
     ]
 ];
