@@ -15,7 +15,6 @@ use GraphQL\Type\Definition\ResolveInfo;
 use Hasura\GraphQLiteBridge\Parameter\WrappingParameterInterface;
 use Hasura\GraphQLiteBridge\Parameter\WrappingParameterTrait;
 use Illuminate\Contracts\Validation\Factory;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use TheCodingMachine\GraphQLite\Annotations\Field;
 use TheCodingMachine\GraphQLite\Exceptions\GraphQLAggregateException;
 use TheCodingMachine\GraphQLite\Laravel\Exceptions\ValidateException;
@@ -42,13 +41,15 @@ final class ObjectAssertion implements InputTypeParameterInterface, WrappingPara
             return $object;
         }
 
-        $normalizer = new ObjectNormalizer();
-        $data = $normalizer->normalize($object);
+        $customMessages = method_exists($object, 'customMessages') ? $object->customMessages() : [];
+        $customAttributes = method_exists($object, 'customAttributes') ? $object->customAttributes() : [];
 
-        $customMessages = method_exists($object, 'customMessages') ? $object->customMessages() : null;
-        $customAttributes = method_exists($object, 'customAttributes') ? $object->customAttributes() : null;
-
-        $validator = $this->factory->make($data, $object->rules(), $customMessages, $customAttributes);
+        $validator = $this->factory->make(
+            $this->collectObjectFields($object),
+            $object->rules(),
+            $customMessages,
+            $customAttributes
+        );
 
         if ($validator->fails()) {
             $errorMessages = [];
@@ -73,17 +74,9 @@ final class ObjectAssertion implements InputTypeParameterInterface, WrappingPara
             try {
                 $ref = new \ReflectionProperty($object, $fieldPart);
 
-                $fieldAttributes = $ref->getAttributes(Field::class);
-
-                if (empty($fieldAttributes)) {
-                    break;
-                }
-
-                $fieldAttribute = $fieldAttributes[0]->newInstance();
+                $fieldAttribute = $ref->getAttributes(Field::class)[0]->newInstance();
 
                 $fieldPart = $fieldAttribute->getName() ?? $fieldPart;
-
-                $ref->setAccessible(true);
 
                 $object = $ref->getValue($object);
 
@@ -98,6 +91,31 @@ final class ObjectAssertion implements InputTypeParameterInterface, WrappingPara
         $argumentName = sprintf('%s.%s', $this->atPath, implode('.', $fieldParts));
 
         return $this->customErrorArgumentNames[$argumentName] ?? $argumentName;
+    }
+
+    private function collectObjectFields(object $object): array
+    {
+        $result = [];
+        $ref = new \ReflectionClass($object);
+
+        foreach ($ref->getProperties() as $refProperty) {
+            $fieldAttributes = $refProperty->getAttributes(Field::class);
+
+            if (empty($fieldAttributes)) {
+                continue;
+            }
+
+            $name = $refProperty->getName();
+            $value = $refProperty->getValue($object);
+
+            if (!is_object($value)) {
+                $result[$name] = $value;
+            } else {
+                $result[$name] = $this->collectObjectFields($value);
+            }
+        }
+
+        return $result;
     }
 
     public function getType(): InputType
