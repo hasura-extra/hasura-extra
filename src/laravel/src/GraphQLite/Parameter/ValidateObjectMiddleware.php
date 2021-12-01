@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace Hasura\Laravel\GraphQLite\Parameter;
 
 use Hasura\GraphQLiteBridge\Parameter\ParameterUtils;
-use Hasura\Laravel\GraphQLite\Attribute\ObjectAssertion as Attribute;
+use Hasura\Laravel\GraphQLite\Attribute\ValidateObject as Attribute;
 use Illuminate\Contracts\Validation\Factory;
 use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\Type;
@@ -23,7 +23,7 @@ use TheCodingMachine\GraphQLite\Mappers\Parameters\ParameterMiddlewareInterface;
 use TheCodingMachine\GraphQLite\Parameters\InputTypeParameterInterface;
 use TheCodingMachine\GraphQLite\Parameters\ParameterInterface;
 
-final class ObjectAssertionMiddleware implements ParameterMiddlewareInterface
+final class ValidateObjectMiddleware implements ParameterMiddlewareInterface
 {
     public function __construct(private Factory $factory)
     {
@@ -58,7 +58,7 @@ final class ObjectAssertionMiddleware implements ParameterMiddlewareInterface
         $argNamingParameter = ParameterUtils::getArgNamingParameter($parameterMapped);
         $atPath = $argNamingParameter ? $argNamingParameter->getArgName() : $parameter->getName();
 
-        return new ObjectAssertion(
+        return new ValidateObject(
             $this->factory,
             $atPath,
             $attribute->getCustomErrorArgumentNames(),

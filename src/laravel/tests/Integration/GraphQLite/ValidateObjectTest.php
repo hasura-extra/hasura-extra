@@ -12,14 +12,14 @@ namespace Hasura\Laravel\Tests\Integration\GraphQLite;
 
 use Hasura\Laravel\Tests\TestCase;
 
-final class ObjectAssertionTest extends TestCase
+final class ValidateObjectTest extends TestCase
 {
     public function testAssertion(): void
     {
         $query = /** @lang GraphQL */
             <<<GQL
 mutation {
-object_assertion_test (
+validate_object_test (
     object_input: {
         email_field: "test@example.org", 
         text_field: "1", 
@@ -37,7 +37,7 @@ GQL;
         $response->assertExactJson(
             [
                 'data' => [
-                    'object_assertion_test' => [
+                    'validate_object_test' => [
                         'emailField' => 'test@example.org',
                         'textField' => '1',
                         'sub' => [
@@ -54,7 +54,7 @@ GQL;
         $query = /** @lang GraphQL */
             <<<GQL
 mutation {
-object_assertion_test (
+validate_object_test (
     object_input: {
         email_field: "error", 
         text_field: "", 

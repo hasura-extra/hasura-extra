@@ -13,7 +13,7 @@ namespace Hasura\Laravel\GraphQLite\Attribute;
 use TheCodingMachine\GraphQLite\Annotations\ParameterAnnotationInterface;
 
 #[\Attribute(\Attribute::TARGET_METHOD | \Attribute::IS_REPEATABLE)]
-final class ObjectAssertion implements ParameterAnnotationInterface
+final class ValidateObject implements ParameterAnnotationInterface
 {
     public function __construct(
         private string $for,

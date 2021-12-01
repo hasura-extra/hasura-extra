@@ -13,8 +13,8 @@ namespace Hasura\Laravel\Tests\Fixture\App\Http\GraphQL\Mutation;
 use TheCodingMachine\GraphQLite\Annotations\Field;
 use TheCodingMachine\GraphQLite\Annotations\Input;
 
-#[Input(name: 'input_object_assertion', default: true)]
-final class InputObjectAssertion
+#[Input(name: 'validate_object_input', default: true)]
+final class ValidateObjectInput
 {
     #[Field(name: 'email_field')]
     public string $emailField;
@@ -23,7 +23,7 @@ final class InputObjectAssertion
     public string $textField;
 
     #[Field]
-    public SubInputObjectAssertion $sub;
+    public ValidateObjectSubInput $sub;
 
     public function rules(): array
     {

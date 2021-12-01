@@ -20,7 +20,7 @@ use TheCodingMachine\GraphQLite\Exceptions\GraphQLAggregateException;
 use TheCodingMachine\GraphQLite\Laravel\Exceptions\ValidateException;
 use TheCodingMachine\GraphQLite\Parameters\InputTypeParameterInterface;
 
-final class ObjectAssertion implements InputTypeParameterInterface, WrappingParameterInterface
+final class ValidateObject implements InputTypeParameterInterface, WrappingParameterInterface
 {
     use WrappingParameterTrait;
 
@@ -38,7 +38,13 @@ final class ObjectAssertion implements InputTypeParameterInterface, WrappingPara
         $object = $this->parameter->resolve($source, $args, $context, $info);
 
         if (!method_exists($object, 'rules')) {
-            return $object;
+            throw new \LogicException(
+                sprintf(
+                    'You should be add `rules` method to `%s` class to support validate input arg `%s`',
+                    $object::class,
+                    $this->atPath
+                )
+            );
         }
 
         $customMessages = method_exists($object, 'customMessages') ? $object->customMessages() : [];

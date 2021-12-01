@@ -14,8 +14,8 @@ use Symfony\Component\Validator\Constraints as Assertion;
 use TheCodingMachine\GraphQLite\Annotations\Field;
 use TheCodingMachine\GraphQLite\Annotations\Input;
 
-#[Input(name: 'sub_input_object_assertion', default: true)]
-final class SubInputObjectAssertion
+#[Input(name: 'validate_object_sub_input', default: true)]
+final class ValidateObjectSubInput
 {
     #[Field(name: 'sub_text_field')]
     public string $subTextField;
