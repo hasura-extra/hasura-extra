@@ -90,7 +90,8 @@ return [
              */
             'uri' => '/hasura-table-event',
             /*
-             * Set of route middleware.
+             * Set of route middleware,
+             * `hasura` guard will be use basic auth with fixed user `hasura` and password's `hasura.app_secret` config value above.
              */
             'middleware' => ['auth:hasura']
         ]
