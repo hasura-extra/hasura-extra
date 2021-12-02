@@ -75,12 +75,29 @@ trait Auth
         );
 
         $this->app->singleton(
+            'hasura.gate',
+            static function ($app) {
+                $guards = config('hasura.auth.guard') ?? [null];
+                $user = null;
+
+                foreach ($guards as $guard) {
+                    $user = $app['auth']->guard($guard)->user();
+
+                    if (null !== $user) {
+                        break;
+                    }
+                }
+
+                return $app[Gate::class]->forUser($user);
+            }
+        );
+
+        $this->app->singleton(
             AccessRoleDecider::class,
             static fn($app) => new AccessRoleDecider(
                 config('hasura.auth.anonymous_role'),
                 config('hasura.auth.default_role'),
-                $app['auth']->guard(),
-                $app[Gate::class]
+                $app['hasura.gate']
             )
         );
         $this->app->bind(AccessRoleDeciderInterface::class, AccessRoleDecider::class);

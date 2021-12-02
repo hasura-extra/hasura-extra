@@ -24,6 +24,11 @@ return [
          */
         'enabled_role_check_method' => true,
         /*
+         * An array names of auth guards or `null` used to get current user for authenticate request,
+         * Default `null` mean with use `auth.defaults.guard` config.
+         */
+        'guard' => null,
+        /*
          * Defines inherited roles will use authorize checking and persist to Hasura inherited roles.
          */
         'inherited_roles' => [],
@@ -87,7 +92,7 @@ return [
              */
             'uri' => '/hasura-auth-hook',
             /*
-             * Set of route middleware.
+             * Set of route middleware, please not use `auth` middleware because this route will handle both user and anonymous requests.
              */
             'middleware' => []
         ],

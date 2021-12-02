@@ -21,14 +21,15 @@ final class AccessRoleDeciderTest extends TestCase
 {
     public function testDecideRoleForAnonymous(): void
     {
-        $guard = $this->createMock(Guard::class);
-        $guard->expects($this->once())->method('user')->willReturn(null);
+        $gate = $this->createMock(Gate::class);
+        $gate->expects($this->once())->method('check')->willReturnCallback(
+            static fn(string $role) => $role === 'anonymous'
+        );
 
         $decider = new AccessRoleDecider(
             'anonymous',
             'user',
-            $guard,
-            $this->createMock(Gate::class)
+            $gate
         );
 
         $role = $decider->decideAccessRole($this->createMock(ServerRequestInterface::class));
@@ -38,16 +39,15 @@ final class AccessRoleDeciderTest extends TestCase
 
     public function testDecideDefaultRoleForUser(): void
     {
-        $guard = $this->createMock(Guard::class);
-        $guard->expects($this->once())->method('user')->willReturn(true);
-
         $gate = $this->createMock(Gate::class);
-        $gate->expects($this->once())->method('check')->willReturn(true);
+        $gate
+            ->expects($this->exactly(2))
+            ->method('check')
+            ->willReturn(false, static fn(string $role) => $role === 'user');
 
         $decider = new AccessRoleDecider(
             'anonymous',
             'user',
-            $guard,
             $gate
         );
 
@@ -58,11 +58,11 @@ final class AccessRoleDeciderTest extends TestCase
 
     public function testDecideRequestedRoleForUser(): void
     {
-        $guard = $this->createMock(Guard::class);
-        $guard->expects($this->once())->method('user')->willReturn(true);
-
         $gate = $this->createMock(Gate::class);
-        $gate->expects($this->once())->method('check')->willReturn(true);
+        $gate
+            ->expects($this->exactly(2))
+            ->method('check')
+            ->willReturn(false, static fn(string $role) => $role === 'admin');
 
         $serverRequest = $this->createMock(ServerRequestInterface::class);
         $serverRequest->expects($this->once())->method('getHeader')->willReturn(['admin']);
@@ -70,7 +70,6 @@ final class AccessRoleDeciderTest extends TestCase
         $decider = new AccessRoleDecider(
             'anonymous',
             'user',
-            $guard,
             $gate
         );
 
@@ -83,16 +82,15 @@ final class AccessRoleDeciderTest extends TestCase
     {
         $this->expectException(UnauthorizedException::class);
 
-        $guard = $this->createMock(Guard::class);
-        $guard->expects($this->once())->method('user')->willReturn(true);
-
         $gate = $this->createMock(Gate::class);
-        $gate->expects($this->once())->method('check')->willReturn(false);
+        $gate
+            ->expects($this->exactly(2))
+            ->method('check')
+            ->willReturn(false, false);
 
         $decider = new AccessRoleDecider(
             'anonymous',
             'user',
-            $guard,
             $gate
         );
 

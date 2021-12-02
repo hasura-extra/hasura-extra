@@ -12,8 +12,7 @@ namespace Hasura\Laravel\AuthHook;
 
 use Hasura\AuthHook\AccessRoleDeciderInterface;
 use Hasura\AuthHook\UnauthorizedException;
-use Illuminate\Contracts\Auth\Access\Gate;
-use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Psr\Http\Message\ServerRequestInterface;
 
 final class AccessRoleDecider implements AccessRoleDeciderInterface
@@ -21,16 +20,13 @@ final class AccessRoleDecider implements AccessRoleDeciderInterface
     public function __construct(
         private string $anonymousRole,
         private string $defaultRole,
-        private Guard $guard,
-        private Gate $gate
+        private GateContract $gate,
     ) {
     }
 
     public function decideAccessRole(ServerRequestInterface $request): string
     {
-        $user = $this->guard->user();
-
-        if (null === $user) {
+        if ($this->gate->check($this->anonymousRole)) {
             return $this->anonymousRole;
         }
 
