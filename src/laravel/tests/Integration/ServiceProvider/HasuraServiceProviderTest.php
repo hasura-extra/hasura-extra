@@ -71,6 +71,8 @@ final class HasuraServiceProviderTest extends TestCase
 
     public function testServicesRegistered(): void
     {
+        $this->assertSame(['driver' => 'hasura', 'provider' => null], $this->app['config']['auth.guards.hasura']);
+
         $this->assertTrue($this->app->has(GateRoleChecker::class));
         $this->assertTrue($this->app->has(InheritanceRole::class));
         $this->assertTrue($this->app->has(SessionVariableEnhancerInterface::class));

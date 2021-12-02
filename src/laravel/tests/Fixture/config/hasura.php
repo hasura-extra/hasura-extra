@@ -92,7 +92,7 @@ return [
             /*
              * Set of route middleware.
              */
-            'middleware' => []
+            'middleware' => ['auth:hasura']
         ]
     ]
 ];
