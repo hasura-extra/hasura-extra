@@ -58,7 +58,7 @@ return [
              * Hasura Extra processors should be run first.
              */
             \Hasura\Metadata\ReloadStateProcessor::class,
-            // If you want to add the remote schema permission state processor below, please make sure you had config `remote_schema_name`.
+            // If you want to add the remote schema permission state processor below, please make sure you had config `remote_schema_name` above.
             // \Hasura\GraphQLiteBridge\RemoteSchemaPermissionStateProcessor::class,
             \Hasura\Metadata\InheritedRolesStateProcessor::class,
         ]
@@ -107,7 +107,7 @@ return [
             'uri' => '/hasura-table-event',
             /*
              * Set of route middleware,
-             * `hasura` guard will be use basic auth with fixed user `hasura` and password's `hasura.app_secret` config value above.
+             * `hasura` guard will be use basic auth with fixed user `hasura` and password's `app_secret` config value above.
              */
             'middleware' => ['auth:hasura']
         ]
