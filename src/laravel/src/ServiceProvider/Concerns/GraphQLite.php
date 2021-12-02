@@ -40,7 +40,10 @@ trait GraphQLite
 {
     private function registerGraphQLite(): void
     {
-        $this->app->singleton(AuthorizationService::class);
+        $this->app->singleton(
+            AuthorizationService::class,
+            static fn($app) => new AuthorizationService($app['hasura.gate'])
+        );
         $this->app->bind(AuthorizationServiceInterface::class, AuthorizationService::class);
 
         $this->app->singleton(AnnotationTracker::class);
