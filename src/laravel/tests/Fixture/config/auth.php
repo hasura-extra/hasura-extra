@@ -39,9 +39,6 @@ return [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
-        ],
-        'hasura' => [
-            'driver' => 'hasura'
         ]
     ],
 

@@ -62,6 +62,18 @@ trait Auth
 
     private function registerAuth(): void
     {
+        config(
+            [
+                'auth.guards.hasura' => array_merge(
+                    [
+                        'driver' => 'hasura',
+                        'provider' => null,
+                    ],
+                    config('auth.guards.hasura', [])
+                )
+            ]
+        );
+
         $this->app->singleton(
             AccessRoleDecider::class,
             static fn($app) => new AccessRoleDecider(

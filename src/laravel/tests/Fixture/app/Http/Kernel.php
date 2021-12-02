@@ -2,6 +2,7 @@
 
 namespace Hasura\Laravel\Tests\Fixture\App\Http;
 
+use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 final class Kernel extends HttpKernel
@@ -11,6 +12,6 @@ final class Kernel extends HttpKernel
     ];
 
     protected $routeMiddleware = [
-
+        'auth' => Authenticate::class
     ];
 }

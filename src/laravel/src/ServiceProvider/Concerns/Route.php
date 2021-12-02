@@ -15,9 +15,9 @@ use Hasura\Laravel\ServiceProvider\HasuraServiceProvider;
 /**
  * @mixin HasuraServiceProvider
  */
-trait Routes
+trait Route
 {
-    private function bootRoutes(): void
+    private function bootRoute(): void
     {
         if (config('hasura.routes.auth_hook.enabled')) {
             $this->loadRoutesFrom(__DIR__ . '/../../../routes/auth_hook.php');
