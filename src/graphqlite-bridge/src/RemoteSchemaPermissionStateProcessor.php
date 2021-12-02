@@ -43,7 +43,7 @@ final class RemoteSchemaPermissionStateProcessor implements StateProcessorInterf
 
         foreach ($metadata['remote_schemas'] as &$item) {
             if ($item['name'] === $remoteSchema->getName()) {
-                $item['permissions'] = $this->createRemoteSchemaPermissions();
+                $item['permissions'] = $this->createRemoteSchemaPermissions($item['permissions'] ?? []);
                 $updated = true;
 
                 break;
@@ -57,13 +57,14 @@ final class RemoteSchemaPermissionStateProcessor implements StateProcessorInterf
         $manager->applyFromArray($metadata, $allowInconsistent);
     }
 
-    private function createRemoteSchemaPermissions(): array
+    private function createRemoteSchemaPermissions(array $currentPermissions): array
     {
+        $currentPermissions = array_column($currentPermissions, null, 'role');
         $permissions = [];
         $roleFields = $this->collectRoleFields();
 
         foreach ($roleFields as $role => $fields) {
-            $permissions[] = [
+            $permissions[$role] = [
                 'role' => $role,
                 'definition' => [
                     'schema' => $this->getSchemaDefinition($fields),
@@ -71,7 +72,9 @@ final class RemoteSchemaPermissionStateProcessor implements StateProcessorInterf
             ];
         }
 
-        return $permissions;
+        $permissions = array_merge($currentPermissions, $permissions);
+
+        return array_values($permissions);
     }
 
     private function collectRoleFields(): array

@@ -15,6 +15,7 @@ use Hasura\Metadata\Manager;
 use Hasura\Metadata\NotExistRemoteSchemaException;
 use Hasura\Metadata\OperatorInterface;
 use Hasura\Metadata\RemoteSchema;
+use Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface;
 
 final class RemoteSchemaPermissionStateProcessorTest extends TestCase
 {
@@ -64,7 +65,7 @@ final class RemoteSchemaPermissionStateProcessorTest extends TestCase
         $roleDefinitions = array_combine($roles, $definitions);
 
         $this->assertStringContainsString(
-            /** @lang GraphQL */
+        /** @lang GraphQL */
             <<<SDL
 type Query { dummy: String!
 }
@@ -72,7 +73,7 @@ SDL,
             $roleDefinitions['A']['schema']
         );
         $this->assertStringContainsString(
-            /** @lang GraphQL */
+        /** @lang GraphQL */
             <<<SDL
 type Query { dummy: String!
 }
@@ -80,13 +81,52 @@ SDL,
             $roleDefinitions['B']['schema']
         );
         $this->assertStringContainsString(
-            /** @lang GraphQL */
+        /** @lang GraphQL */
             <<<SDL
 type Query { _dummy: String!
 }
 SDL,
             $roleDefinitions['C']['schema']
         );
+    }
+
+    public function testNotEffectAnotherRoles(): void
+    {
+        $manager = new Manager($this->client, '', $this->createMock(OperatorInterface::class));
+
+        $metadata = $manager->exportToArray();
+
+        foreach ($metadata['remote_schemas'] as &$item) {
+            if ($item['name'] === 'graphqlite-bridge') {
+                $item['permissions'][] = [
+                    'role' => 'user',
+                    'definition' => [
+                        'schema' => "schema { query: Query } type Query { dummy:String! }"
+                    ]
+                ];
+
+                break;
+            }
+        }
+
+        $manager->applyFromArray($metadata);
+
+        $processor = new RemoteSchemaPermissionStateProcessor(
+            new RemoteSchema('graphqlite-bridge'),
+            $this->schema,
+            $this->annotationTracker
+        );
+
+        $processor->process($manager);
+
+        $remoteSchema = $this->fetchRemoteSchemaMetadata();
+
+        $roles = array_column($remoteSchema['permissions'], 'role');
+
+        $this->assertContains('A', $roles);
+        $this->assertContains('B', $roles);
+        $this->assertContains('C', $roles);
+        $this->assertContains('user', $roles);
     }
 
     private function fetchRemoteSchemaMetadata(): array
