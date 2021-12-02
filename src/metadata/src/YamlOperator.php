@@ -274,7 +274,7 @@ final class YamlOperator implements OperatorInterface
 
     public function load(string $fromPath): array
     {
-        $this->ensureMetadataPath($fromPath);
+        $this->ensureMetadataPath($fromPath, false);
 
         $metadata = [];
 
