@@ -507,7 +507,7 @@ class Resolver
 Khi mutation field `insert_user` được gọi thì object User sẽ được khởi tạo thông qua input object của end-user
 và `Transactional` attribute sẽ tự động persist nó giúp bạn, sau đó sẽ flush vào database.
 
-Nếu project của bạn có nhiều database connections thì bạn có thể chỉ định Entity Manager thông qua thông số `entityManager` như sau:
+Nếu project của bạn có nhiều entity managers (multi database) thì bạn có thể chỉ định Entity Manager thông qua thông số `entityManager` như sau:
 
 ```php 
 #[Transactional(entityManager: 'custom')]
