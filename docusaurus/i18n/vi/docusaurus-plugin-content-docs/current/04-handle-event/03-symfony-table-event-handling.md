@@ -4,13 +4,22 @@ title: Symfony table event handling
 sidebar_title: Symfony table event handling
 ---
 
-[Event Dispatcher](https://symfony.com/doc/current/event_dispatcher.html) của Symfony cũng implements **PSR-14** 
-nên việc handle [table event](./01-table-event.md) của Hasura sẽ không khác gì với các system event mà bạn hay handle (ví dụ `kernel.request`). 
+Hasura Extra sẽ dispatch event `Hasura\EventDispatcher\TableEvent` bạn cần 
+[tạo event listener/subscriber để lắng nghe sự kiện](https://symfony.com/doc/current/event_dispatcher.html) này.
+
+:::tip
+Các ví dụ bên dưới đã có sẵn trong [Symfony app](../02-installation/02-application-templates.md) bạn có thể khao khảo và cho chạy thử.
+:::
 
 ## Event handling
 
-Mỗi khi Hasura trigger table event, dispatcher sẽ dispatch event `Hasura\EventDispatcher\TableEvent`, bạn
-chỉ cần subscribe/listen sự kiện trên để chèn business logic, ví dụ:
+Khởi tạo event subscriber thông qua [maker](https://symfony.com/bundles/SymfonyMakerBundle/current/index.html) command:
+
+```shell
+php bin/console make:subscriber WelcomeUserRegisteredSubscriber
+```
+
+Với `WelcomeUserRegisteredSubscriber` class như sau:
 
 ```php
 namespace App\EventSubscriber\Hasura;
@@ -71,11 +80,6 @@ Nếu như bạn chưa biết cách tạo event trigger thì có thể [xem tài
 
 ## Security config
 
-:::info
-Nếu như project của bạn sử dụng [Laravel hoặc Symfony application template](../02-installation/02-application-templates.md), template đã config sẵn giúp bạn, bạn
-không cần làm theo tài liệu bên dưới.
-:::
-
 Như bạn thấy route path: `/hasura_table_event` bất kỳ ai cũng có thể send request đến nó, bạn cần phải cấu hình security
 cho nó để cho chỉ có Hasura mới có thể request đến route path này, có rất nhiều cách để cấu hình, trong tài liệu này chúng ta
 sẽ sử dụng basic authentication để xác minh request đến từ Hasura.
@@ -109,9 +113,9 @@ security:
 
 ```
 
-Sau đó khi bạn [thêm event trigger tại Hasura](#add-event-trigger), bạn cần thêm basic auth header:
+Sau đó khi bạn [thêm event trigger tại Hasura](./01-table-event.md#add-event-trigger), bạn cần thêm basic auth header:
 
 ![authorization header](../assets/config-webhook-authorization-header.png)
 
-Lưu ý theo ví dụ trên bạn cần config `APP_HASURA_SECRET` trong `.env` của application và `APP_HASURA_BASIC_AUTH` env của `hasura` service container.
+Lưu ý theo ví dụ trên bạn cần config `APP_HASURA_SECRET` env của application và `APP_HASURA_BASIC_AUTH` env của `hasura` service container.
 Ví dụ với `APP_HASURA_SECRET` là `!ChangeMe!` thì `APP_HASURA_BASIC_AUTH` sẽ là `Basic: aGFzdXJhOiFDaGFuZ2VNZSE=` (base64_encode('hasura:!ChangeMe!')).
