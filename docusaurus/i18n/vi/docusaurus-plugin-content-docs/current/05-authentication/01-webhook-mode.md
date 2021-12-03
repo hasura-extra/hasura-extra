@@ -13,7 +13,7 @@ cung cấp được bất kỳ hình thức authn tùy theo yêu cầu của pro
 ## Cấu hình webhook mode
 
 :::tip
-Nếu như bạn sử dụng [Laravel hoặc Symfony application template](../02-installation/02-application-template.md) thì hãy bỏ qua tài liệu này vì template đã cấu hình giúp bạn.
+Nếu như bạn sử dụng [Laravel hoặc Symfony application template](../02-installation/02-application-templates.md) thì hãy bỏ qua tài liệu này vì template đã cấu hình giúp bạn.
 :::
 
 ### Đối với Laravel users

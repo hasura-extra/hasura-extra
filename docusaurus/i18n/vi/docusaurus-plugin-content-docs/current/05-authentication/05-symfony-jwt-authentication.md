@@ -9,7 +9,7 @@ Tài liệu này chỉ dành cho Symfony users sử dụng [webhook mode](./01-w
 :::
 
 :::info
-Nếu như project của bạn sử dụng [Laravel hoặc Symfony application template](../02-installation/02-application-template.md), template đã setup mọi thứ giúp bạn,
+Nếu như project của bạn sử dụng [Laravel hoặc Symfony application template](../02-installation/02-application-templates.md), template đã setup mọi thứ giúp bạn,
 bạn không cần làm theo các bước bên dưới mà chỉ nên đọc để hiểu cơ chế hoạt động của nó như thế nào.
 :::
 

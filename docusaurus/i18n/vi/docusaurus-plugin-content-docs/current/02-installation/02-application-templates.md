@@ -1,8 +1,14 @@
 ---
-id: application-template
-title: Application template
-sidebar_title: Application template
+id: application-templates
+title: Application templates
+sidebar_title: Application templates
 ---
+
+Đây là 2 bộ application template (boilerplate) dành riêng cho Laravel và Symfony được cài đặt sẵn các
+cấu hình cần thiết cho việc integrate giữa framework và Hasura như local [remote schema](https://hasura.io/docs/latest/graphql/core/remote-schemas/index.html),
+handle [event triggered](https://hasura.io/docs/latest/graphql/core/event-triggers/index.html) bởi Hasura, tổ chức sắp xếp Hasura metadata,
+Sailor graphql client code generator, authentication hook, Sanctum/JWT authentication, Helm chart dùng để deploy dự án của bạn lên Kubernetes và có example giúp bạn dễ tiếp cận hơn.
+
 
 ## Khởi tạo project
 
@@ -11,12 +17,12 @@ Bạn có thể generate một app repo mới hoặc tải file nén tại Githu
 ### Generate app repo mới tại Github
 
 + [Laravel app](https://github.com/hasura-extra/laravel-app/generate)
-+ [Laravel hoặc Symfony application template](https://github.com/hasura-extra/laravel-app/generate)
++ [Symfony app](https://github.com/hasura-extra/symfony-app/generate)
 
 ### Tải file nén tại Github releases
 
 + [Laravel app](https://github.com/hasura-extra/laravel-app/releases)
-+ [Laravel hoặc Symfony application template](https://github.com/hasura-extra/symfony-app/releases)
++ [Symfony app](https://github.com/hasura-extra/symfony-app/releases)
 
 ## Setup sau khi khởi tạo
 

@@ -27,5 +27,5 @@ type Query {
     hello: String!
 }
 ```
-Hasura Extra tích hợp với GraphQLite để xây dựng GraphQL server handle business logic kết nối với Hasura thông qua [remote schema](../01-add-remote-schema.md).
+Hasura Extra tích hợp với GraphQLite để xây dựng GraphQL server handle business logic kết nối với Hasura thông qua [remote schema](../01-remote-schema.md).
 
