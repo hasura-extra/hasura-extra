@@ -8,7 +8,7 @@ sidebar_title: Với Hasura cloud
 vì mọi thứ đã setup giúp bạn.
 
 :::info
-Tài liệu này dành cho các project bắt đầu bằng [Symfony App](../02-installation/03-symfony-app.md).
+Tài liệu này dành cho các project bắt đầu bằng [Laravel hoặc Symfony application template](../02-installation/02-application-template.md).
 :::
 
 ## Đối với Docker compose

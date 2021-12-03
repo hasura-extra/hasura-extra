@@ -17,5 +17,5 @@ Hasura Extra cung cấp bộ thư viện PHP giúp cho bạn làm việc với H
 + Điều phối sự kiện nhận được từ Hasura ([events triggered](https://hasura.io/docs/latest/graphql/core/event-triggers/index.html)).
 + Authentication hook ([webhooks auth mode](https://hasura.io/docs/latest/graphql/core/auth/authentication/webhook.html)).
 + Tích hợp với [Sailor](https://github.com/spawnia/sailor) typesafe graphql client để tương tác với Hasura graphql api.
-+ Cung cấp application template (boilerplate) dành cho [Symfony](https://symfony.com) framework.
++ Cung cấp application template (boilerplate) dành cho [Laravel](https://laravel.com) và [Symfony](https://symfony.com) frameworks.
 

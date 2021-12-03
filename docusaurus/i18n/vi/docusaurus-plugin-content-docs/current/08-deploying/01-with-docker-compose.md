@@ -5,7 +5,7 @@ sidebar_title: Với Docker compose
 ---
 
 :::info
-Tài liệu này dành cho các project bắt đầu bằng [Symfony App](../02-installation/03-symfony-app.md).
+Tài liệu này dành cho các project bắt đầu bằng [Laravel hoặc Symfony application template](../02-installation/02-application-template.md).
 :::
 
 

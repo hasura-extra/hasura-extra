@@ -1,15 +1,14 @@
 ---
-id: graphqlite
-title: GraphQLite
-sidebar_title: GraphQLite
+id: graphqlite-attributes
+title: Attributes
+sidebar_title: Attributes
 ---
 
-Hasura Extra tích hợp với GraphQLite để xây dựng GraphQL server handle business logic, nếu như bạn chưa biết về nó thì trước
-hết nên đọc tài liệu tại [đây](https://graphqlite.thecodingmachine.io/).
+Hasura Extra cung cấp cho bạn set attributes để có thể xây dựng GraphQL server đơn giản hơn.
 
-## Attributes
+## Common attributes
 
-Dưới đây là các attributes của GraphQLite mở rộng được Hasura Extra cung cấp
+Tập hợp các attributes có thể sử dụng ở cả Laravel và Symfony frameworks.
 
 ### ArgNaming
 
@@ -66,13 +65,38 @@ query {
 }
 ```
 
+
+### Roles
+
+Attribute này dùng cho authorization khác với [Right](https://graphqlite.thecodingmachine.io/docs/authentication-authorization#logged-and-right-annotations) attribute,
+nó hổ trợ bạn thêm được nhiều roles cùng 1 lúc và hổ trợ [persist-state](../../07-manage-metadata/07-persist-application-state.md) sync roles lên remote schema permissions.
+
+```php
+use Hasura\GraphQLiteBridge\Attribute\Roles;
+use TheCodingMachine\GraphQLite\Annotations as GQL;
+
+class Resolver
+{
+    #[GQL\Mutation(name: 'hello')]
+    #[Roles('ROLE_USER', 'ROLE_ADMIN')]
+    public function __invoke(Input $input): string 
+    {
+        return 'world';
+    }
+}
+```
+
+## Laravel attributes 
+
+Tập hợp các attributes sử dụng khi làm việc với Laravel framework.
+
+## Symfony attributes
+
+Tập hợp các attributes sử dụng khi làm việc với Symfony framework.
+
 ### ArgEntity
 
-:::caution
-Attribute này chỉ dành cho Symfony bundle
-:::
-
-Attribute này giúp bạn đơn giản hóa việc get Doctrine entity từ user input ví dụ:
+Atbute này giúp bạn đơn giản hóa việc get Doctrine entity từ user input ví dụ:
 
 ```php
 use App\Entity\MyEntity;
@@ -135,10 +159,6 @@ class Resolver
 ```
 
 ### ObjectAssertion
-
-:::caution
-Attribute này chỉ dành cho Symfony bundle
-:::
 
 Attribute này giúp bạn validate object input
 
@@ -234,10 +254,6 @@ entity sẽ được update và flush vào DB nhờ `Transactional` attribute xe
 
 ### Transactional
 
-:::caution
-Attribute này chỉ dành cho Symfony bundle
-:::
-
 Attribute này sẽ wrap resolver của bạn trong một Doctrine transaction, nếu như có bất kỳ exception nào xảy ra trong resolver của bạn thì toàn bộ SQL query
 sẽ được rollback, ngược lại nếu không, các entities đang managed bởi Entity Manager sẽ được flush vào database. Ngoài ra attribute này còn có tính năng
 tự động persist đối với các entity vừa được khởi tạo (state new), ví dụ:
@@ -270,62 +286,4 @@ Nếu project của bạn có nhiều database connections thì bạn có thể 
 
 ```php 
 #[Transactional(entityManager: 'custom')]
-```
-
-### Roles
-
-Attribute này dùng cho authorization khác với [Right](https://graphqlite.thecodingmachine.io/docs/authentication-authorization#logged-and-right-annotations) attribute,
-nó hổ trợ bạn thêm được nhiều roles cùng 1 lúc và hổ trợ [persist-state](../07-manage-metadata/07-persist-application-state.md) sync roles lên remote schema permissions.
-
-```php
-use Hasura\GraphQLiteBridge\Attribute\Roles;
-use TheCodingMachine\GraphQLite\Annotations as GQL;
-
-class Resolver
-{
-    #[GQL\Mutation(name: 'hello')]
-    #[Roles('ROLE_USER', 'ROLE_ADMIN')]
-    public function __invoke(Input $input): string 
-    {
-        return 'world';
-    }
-}
-```
-
-## Scalar types
-
-Hasura Extra cung cấp [custom scalar types](https://graphqlite.thecodingmachine.io/docs/custom-types#registering-a-custom-scalar-type-advanced) compatible với Hasura giúp cho việc tạo
-[data federation](https://hasura.io/docs/latest/graphql/core/databases/postgres/schema/remote-relationships/remote-schema-relationships.html)
-thuận tiện hơn:
-
-+ json
-+ jsonb
-+ timestamptz
-+ timetz
-+ date
-+ uuid
-
-Ngoài ra bạn còn có thể ứng dụng các type trên để validate user input format.
-
-Cách sử dụng:
-
-```php
-#[Query(name: 'test_scalar', outputType: 'json')]
-public function __invoke(
-    #[UseInputType(inputType: 'date')] ?\DateTimeInterface $date = null,
-    #[UseInputType(inputType: 'json')] ?array $json = null,
-    #[UseInputType(inputType: 'jsonb')] ?array $jsonb = null,
-    #[UseInputType(inputType: 'timestamptz')] ?\DateTimeInterface $timestamptz = null,
-    #[UseInputType(inputType: 'timetz')] ?\DateTimeInterface $timetz = null,
-    ?Uuid $uuid = null,
-): array {
-    return compact(
-        'date', 
-        'json', 
-        'jsonb', 
-        'timestamptz',
-        'timetz',
-        'uuid'
-    );
-}
 ```

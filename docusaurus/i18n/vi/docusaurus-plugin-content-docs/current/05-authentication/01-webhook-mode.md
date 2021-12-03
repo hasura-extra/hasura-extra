@@ -1,7 +1,7 @@
 ---
-id: config-webhook
-title: Config webhook
-sidebar_title: Config webhook
+id: webhook-mode
+title: Webhook mode
+sidebar_title: Webhook mode
 ---
 
 Hasura sẽ không handle phần authentication (authn) cho chúng ta mà chỉ cấp phần integration thông qua [JWT mode](https://hasura.io/docs/latest/graphql/core/auth/authentication/jwt.html) 
@@ -10,17 +10,22 @@ hoặc [Webhook mode](https://hasura.io/docs/latest/graphql/core/auth/authentica
 Hasura Extra cung cấp phần integration authn thông qua webhook mode, nếu so với JWT mode, webhook sẽ không tối ưu performance nhưng bù lại bạn có thể 
 cung cấp được bất kỳ hình thức authn tùy theo yêu cầu của project, thay vì chỉ mỗi JWT token và [session variables được linh động hơn](./02-session-variable-enhancer.md).
 
-## Đối với Symfony users
+## Cấu hình webhook mode
 
 :::tip
-Nếu như bạn sử dụng [Symfony App](../02-installation/03-symfony-app.md) thì hãy bỏ qua bước bên dưới, vì template đã cấu hình giúp bạn.
+Nếu như bạn sử dụng [Laravel hoặc Symfony application template](../02-installation/02-application-template.md) thì hãy bỏ qua tài liệu này vì template đã cấu hình giúp bạn.
 :::
+
+### Đối với Laravel users
+
+Để cấu hình webhook mode bạn cần set `HASURA_GRAPHQL_AUTH_HOOK` env của Hasura container trỏ về url path `/hasura-auth-hook` và cập nhật
+`guard` trong file config `config/hasura.php` nếu như bạn sử dụng multi auth guards.
+
+### Đối với Symfony users
 
 Để cấu hình webhook mode bạn cần set `HASURA_GRAPHQL_AUTH_HOOK` env của Hasura container trỏ về url path `/hasura_auth_hook`,
 tiếp đến là cấu hình Symfony [security firewall](https://symfony.com/doc/current/security.html#the-firewall) bao phủ `/hasura_auth_hook` path,
 bạn có thể kham khảo thêm tại cách cấu hình [JWT authentication](./05-symfony-jwt-authentication.md).
-
-Vậy là xong, bạn đã config xong Hasura webhook auth mode cho Symfony rồi đấy. 
 
 ## `X-Hasura-Role` header
 

@@ -1,13 +1,22 @@
 ---
-id: symfony-app
-title: Symfony App
-sidebar_title: Symfony App
+id: application-template
+title: Application template
+sidebar_title: Application template
 ---
 
 ## Khởi tạo project
 
-Bạn có thể [generate một repo mới](https://github.com/hasura-extra/symfony-app/generate) dựa trên template mà chúng tôi cung cấp hoặc
-tải file nén tại [Github releases](https://github.com/hasura-extra/symfony-app/releases).
+Bạn có thể generate một app repo mới hoặc tải file nén tại Github releases mà chúng tôi cung cấp theo link bên dưới.
+
+### Generate app repo mới tại Github
+
++ [Laravel app](https://github.com/hasura-extra/laravel-app/generate)
++ [Laravel hoặc Symfony application template](https://github.com/hasura-extra/laravel-app/generate)
+
+### Tải file nén tại Github releases
+
++ [Laravel app](https://github.com/hasura-extra/laravel-app/releases)
++ [Laravel hoặc Symfony application template](https://github.com/hasura-extra/symfony-app/releases)
 
 ## Setup sau khi khởi tạo
 
@@ -38,7 +47,7 @@ Tên | Protocol | Container ports | Published ports | Mô tả
 apache | http  | 80 | 80 | -
 postgres | tcp | 5432 | 5432 | -
 hasura | http | 8080 | 8080 | -
-mailhog | http/smtp | 8025,1025 | 8025 | Server mail mock, để test send mail 
+mailhog | http/smtp | 8025,1025 | 8025 | Server mail mock, để test send mail
 
 Bây giờ bạn hãy truy cập vào Hasura theo URL: [http://localhost:8080](http://localhost:8080) Hasura sẽ đòi hỏi bạn điền
 admin secret trong lần đăng nhập đầu tiên, ở các lần sau Hasura sẽ không hỏi lại:
@@ -46,9 +55,7 @@ admin secret trong lần đăng nhập đầu tiên, ở các lần sau Hasura s
 
 ![enter admin secret](../assets/enter-admin-secret.png)
 
-Admin secret là `1234`, bạn có thể thay đổi và tìm hiểu thêm các cấu hình khác trong file 
-`docker-compose.yaml` (lưu ý: khi thay đổi bạn cần restart lại container service). 
+Admin secret là `1234`, bạn có thể thay đổi và tìm hiểu thêm các cấu hình khác trong file
+`docker-compose.yaml` (lưu ý: khi thay đổi bạn cần restart lại container service).
 
 ![graphiql](../assets/graphiql.png)
-
-Đăng nhập xong, kết thúc quá trình cài đặt với Symfony App.

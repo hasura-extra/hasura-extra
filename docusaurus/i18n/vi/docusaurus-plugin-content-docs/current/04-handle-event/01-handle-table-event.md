@@ -14,8 +14,8 @@ Mặc định khi cài Symfony bundle url path để handle table event sẽ là
 Đầu tiên bạn cần thêm event trigger trên Hasura xem hướng dẫn tại [đây](https://hasura.io/docs/latest/graphql/core/event-triggers/create-trigger.html).
 
 :::tip
-Nếu như bạn sử dụng [Symfony App](../02-installation/03-symfony-app.md) thì hãy sử dụng value `{{APP_BASE_URI}}/hasura_table_event` làm 
-webhook url mỗi khi thêm event trigger.
+Nếu như bạn sử dụng [Laravel hoặc Symfony application template](../02-installation/02-application-template.md) thì hãy sử dụng value `{{APP_BASE_URI}}/hasura-table-event` đối với Laravel và
+`{{APP_BASE_URI}}/hasura_table_event` đối với Symfony làm webhook url mỗi khi thêm event trigger.
 :::
 
 ## Dành cho Symfony users
@@ -80,7 +80,7 @@ sẽ gửi mail welcome đến end-user.
 ### Security config
 
 :::info
-Nếu như project của bạn sử dụng [Symfony App](../02-installation/03-symfony-app.md), template đã config sẵn giúp bạn, bạn
+Nếu như project của bạn sử dụng [Laravel hoặc Symfony application template](../02-installation/02-application-template.md), template đã config sẵn giúp bạn, bạn
 không cần làm theo tài liệu bên dưới.
 :::
 

@@ -5,11 +5,11 @@ sidebar_title: Symfony JWT authentication
 ---
 
 :::caution
-Tài liệu này chỉ dành cho Symfony users sử dụng [webhook mode](./01-config-webhook.md).
+Tài liệu này chỉ dành cho Symfony users sử dụng [webhook mode](./01-webhook-mode.md).
 :::
 
 :::info
-Nếu như project của bạn sử dụng [Symfony App](../02-installation/03-symfony-app.md), template đã setup mọi thứ giúp bạn,
+Nếu như project của bạn sử dụng [Laravel hoặc Symfony application template](../02-installation/02-application-template.md), template đã setup mọi thứ giúp bạn,
 bạn không cần làm theo các bước bên dưới mà chỉ nên đọc để hiểu cơ chế hoạt động của nó như thế nào.
 :::
 
@@ -34,7 +34,7 @@ public/private keys sẽ được sinh ra trong thư mục `config/jwt`.
 
 ## Cấu hình security bundle
 
-Bạn cần cấu hình security main firewall (`config/packages/security.yaml`) cho webhook endpoint và [GraphQLite](../03-handle-business-logic/02-graphqlite.md) endpoint,
+Bạn cần cấu hình security main firewall (`config/packages/security.yaml`) cho webhook endpoint và [GraphQLite](../03-handle-business-logic/02-graphqlite/01-graphqlite.md) endpoint,
 ví dụ:
 
 ```yaml

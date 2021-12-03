@@ -9,7 +9,7 @@ các variables của 1 phiên request dùng để định danh user và các th�
 [authorization / access control](https://hasura.io/docs/latest/graphql/core/auth/authorization/index.html).
 
 :::info
-Nếu như hệ thống authentication (authn) của bạn không sử dụng [webhook mode](./01-config-webhook.md) thì hãy bỏ qua tài liệu này,
+Nếu như hệ thống authentication (authn) của bạn không sử dụng [webhook mode](./01-webhook-mode.md) thì hãy bỏ qua tài liệu này,
 vì toàn bộ session variables của end-user sẽ store trong JWT.
 :::
 

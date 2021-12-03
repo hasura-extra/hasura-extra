@@ -24,5 +24,5 @@ php bin/console hasura:sailor:codegen
 Client executor được generate sẽ nằm trong thư mục `App\GraphQLExecutor`, thế là xong, ngay bây giờ bạn đã có thể sử dụng executor rồi đấy.
 
 :::tip
-Nếu như bạn sử dụng [Symfony App](../02-installation/03-symfony-app.md) thì hãy kham khảo cách dùng tại `App\Command\GetCountries` class. 
+Nếu như bạn sử dụng [Laravel hoặc Symfony application template](../02-installation/02-application-template.md) thì hãy kham khảo cách dùng tại `App\Command\GetCountries` class. 
 :::
