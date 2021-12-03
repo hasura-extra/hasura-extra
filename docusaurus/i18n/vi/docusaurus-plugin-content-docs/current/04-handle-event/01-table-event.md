@@ -19,7 +19,7 @@ Symfony bundle url path sẽ là `/hasura_table_event`, bạn sẽ cần url pat
 
 :::tip
 Nếu như bạn sử dụng [Laravel hoặc Symfony application template](../02-installation/02-application-templates.md) thì hãy sử dụng value `{{APP_BASE_URI}}/hasura-table-event` đối với Laravel và
-`{{APP_BASE_URI}}/hasura_table_event` đối với Symfony làm webhook url mỗi khi thêm event trigger.
+`{{APP_BASE_URI}}/hasura_table_event` đối với Symfony để làm webhook url mỗi khi thêm event trigger.
 :::
 
 ## Handling event
