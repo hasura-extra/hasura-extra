@@ -4,7 +4,7 @@ title: Attributes
 sidebar_title: Attributes
 ---
 
-Hasura Extra cung cấp cho bạn set attributes để có thể xây dựng GraphQL server đơn giản hơn.
+Hasura Extra cung cấp cho bạn set [GraphQLite](https://graphqlite.thecodingmachine.io/) attributes để có thể xây dựng GraphQL server đơn giản hơn.
 
 ## Common attributes
 
@@ -90,13 +90,195 @@ class Resolver
 
 Tập hợp các attributes sử dụng khi làm việc với Laravel framework.
 
+### ArgModel
+
+Attribute này giúp bạn đơn giản hóa việc get Eloquent model từ user input ví dụ:
+
+```php
+use App\Models\MyModel;
+use Doctrine\ORM\EntityManagerInterface;
+use TheCodingMachine\GraphQLite\Annotations as GQL;
+
+class Resolver 
+{
+    #[GQL\Query(name: 'arg_model')]
+    public function __invoke(int $id): string 
+    {
+        $entity = MyModel::find($id);
+        
+        return 'hello';
+    }
+    
+}
+```
+
+Resolver trên sẽ được đơn giản hóa khi sử dụng attribute `ArgModel`:
+
+```php
+use App\Models\MyModel;
+use Hasura\Laravel\GraphQLite\Attribute\ArgModel;
+use TheCodingMachine\GraphQLite\Annotations as GQL;
+
+class Resolver
+{
+    #[GQL\Query(name: 'arg_model')]
+    #[ArgModel(for: 'model')]
+    public function __invoke(MyModel $model): string 
+    {
+        return 'hello';
+    }
+    
+}
+```
+
+Mặc định `ArgModel` sẽ sử dụng `id` là tên của arg, graphql input type là `ID!`, search trên column name là `id`, trong trường hợp bạn muốn custom lại thì bạn có thể truyền thêm thông số:
+
+```php
+use App\Models\Article;
+use Hasura\Laravel\GraphQLite\Attribute\ArgModel;
+use TheCodingMachine\GraphQLite\Annotations as GQL;
+
+class Resolver
+{
+    #[GQL\Query(name: 'arg_model')]
+    #[ArgModel(for: 'article', argName: 'article_id', inputType: 'Int!')]
+    public function __invoke(Article $article): string 
+    {
+        return 'hello';
+    }
+    
+}
+```
+
+Nếu như không tìm thấy Eloquent model theo `id` user input, mặc định hệ thống sẽ văng lỗi không tìm thấy đến người dùng nếu như bạn chấp nhận
+việc không tìm thấy model để upsert entity thì hãy cho phép arg `null`:
+
+```php
+#[ArgModel(for: 'article', argName: 'article_id', inputType: 'Int!')]
+public function __invoke(?Article $article): string 
+```
+
+### ValidateObject
+
+Attribute này giúp bạn validate object input
+
+Giả sử như chúng ta có Input object sau:
+
+```php
+use TheCodingMachine\GraphQLite\Annotations as GQL;
+
+#[GQL\Input]
+class Input 
+{
+    #[GQL\Field]
+    public string $email;
+    
+    public function rules(): array 
+    {
+        return ['email' => 'required|email'];
+    }
+}
+```
+
+Với `rules` method trong input object sẽ là nơi định nghĩa các [validation rules](https://laravel.com/docs/8.x/validation#available-validation-rules),
+object property names sẽ tương ứng với field name.
+
+Và resolver sử dụng input object trên:
+
+```php
+use Hasura\Laravel\GraphQLite\Attribute\ValidateObject;
+use TheCodingMachine\GraphQLite\Annotations as GQL;
+
+class Resolver
+{
+    #[GQL\Mutation(name: 'object_assertion')]
+    #[ValidateObject(for: 'input')]
+    public function __invoke(Input $input): bool 
+    {
+        return true;
+    }
+    
+}
+```
+
+Khi query mutation field `object_assertion` mà trả về giá trị `true` đồng nghĩa với property `email` của input object
+là chuỗi email không rỗng, ngược lại sẽ báo lỗi.
+
+Ngoài ra bạn có thể define thêm methods `customMessages` và `customAttributes` cho input class để 
+[điểu chỉnh câu báo lỗi hoặc attribute](https://laravel.com/docs/master/validation#manual-customizing-the-error-messages) cho
+phù hợp:
+
+```php
+use TheCodingMachine\GraphQLite\Annotations as GQL;
+
+#[GQL\Input]
+class Input 
+{
+    #[GQL\Field]
+    public string $email;
+    
+    public function rules(): array 
+    {
+        return ['email' => 'required|email'];
+    }
+    
+    public function customMessages(): array
+    {
+        return ['email.required' => 'You should be type your :attribute.'];
+    }
+    
+    public function customAttributes(): array 
+    {
+        return ['email' => 'email address'];
+    }
+}
+```
+
+### Transactional
+
+Attribute này sẽ wrap resolver của bạn trong một database transaction, nếu như có bất kỳ exception nào xảy ra trong resolver của bạn thì toàn bộ SQL query
+đã thực thi trước đó sẽ được rollback, ví dụ:
+
+```php
+use App\Models\Article;
+use Hasura\Laravel\GraphQLite\Attribute\ValidateObject;
+use Hasura\Laravel\GraphQLite\Attribute\Transactional;
+use TheCodingMachine\GraphQLite\Annotations as GQL;
+
+class Resolver
+{
+    #[GQL\Mutation(name: 'insert_user')]
+    #[ValidateObject(for: 'input')]
+    #[Transactional]
+    public function __invoke(Input $input): bool 
+    {
+        $article = new Article();
+        $article->title = 'Hello World';
+        $article->saveOrFail();
+        
+        throw new \RuntimeException('Test rollback');
+        
+        return true;
+    }
+    
+}
+```
+
+Như ví dụ trên `\RuntimeException` sẽ được throw và article `Hello World` sẽ không bị save lại.
+
+Nếu project của bạn có nhiều database connections thì bạn có thể chỉ định connection name thông qua thông số `connection` như sau:
+
+```php 
+#[Transactional(connection: 'postgres2')]
+```
+
 ## Symfony attributes
 
 Tập hợp các attributes sử dụng khi làm việc với Symfony framework.
 
 ### ArgEntity
 
-Atbute này giúp bạn đơn giản hóa việc get Doctrine entity từ user input ví dụ:
+Attribute này giúp bạn đơn giản hóa việc get Doctrine entity từ user input ví dụ:
 
 ```php
 use App\Entity\MyEntity;
@@ -139,7 +321,7 @@ class Resolver
 }
 ```
 
-Mặc định `ArgEntity` sẽ sử dụng `id` là tên của arg, graphql input type là `ID`, search trên column name là `id` và Doctrine manager là `null` (default), trong trường hợp bạn muốn custom lại thì bạn có thể truyền thêm thông số:
+Mặc định `ArgEntity` sẽ sử dụng `id` là tên của arg, graphql input type là `ID!`, search trên column name là `id` và Doctrine manager là `null` (default), trong trường hợp bạn muốn custom lại thì bạn có thể truyền thêm thông số:
 
 ```php
 use App\Entity\Article;
@@ -156,6 +338,14 @@ class Resolver
     }
     
 }
+```
+
+Nếu như không tìm thấy entity theo `id` user input, mặc định hệ thống sẽ văng lỗi không tìm thấy đến người dùng nếu như bạn chấp nhận
+việc không tìm thấy entity để upsert entity thì hãy cho phép arg `null`:
+
+```php
+#[ArgEntity(for: 'article', argName: 'article_id', inputType: 'Int!', entityManager: 'custom')]
+public function __invoke(?Article $article): string 
 ```
 
 ### ObjectAssertion
@@ -254,9 +444,44 @@ entity sẽ được update và flush vào DB nhờ `Transactional` attribute xe
 
 ### Transactional
 
-Attribute này sẽ wrap resolver của bạn trong một Doctrine transaction, nếu như có bất kỳ exception nào xảy ra trong resolver của bạn thì toàn bộ SQL query
-sẽ được rollback, ngược lại nếu không, các entities đang managed bởi Entity Manager sẽ được flush vào database. Ngoài ra attribute này còn có tính năng
-tự động persist đối với các entity vừa được khởi tạo (state new), ví dụ:
+Attribute này sẽ wrap resolver của bạn trong một database transaction, nếu như có bất kỳ exception nào xảy ra trong resolver của bạn thì toàn bộ SQL query
+đã thực thi trước đó sẽ được rollback, ví dụ:
+
+```php
+use Doctrine\ORM\EntityManagerInterface;
+use Hasura\Bundle\GraphQLite\Attribute\ObjectAssertion;
+use Hasura\Bundle\GraphQLite\Attribute\Transactional;
+use TheCodingMachine\GraphQLite\Annotations as GQL;
+
+class Resolver
+{
+    public function __construct(private EntityManagerInterface $em)
+    {
+    }
+    
+    #[GQL\Mutation(name: 'insert_user')]
+    #[ObjectAssertion(for: 'input')]
+    #[Transactional]
+    public function __invoke(Input $input): User 
+    {
+        $user = new User();
+        $user->setEmail($input->email);
+        
+        $this->em->persist($user);
+        $this->em->flush();
+        
+        throw new \RuntimeException('Test rollback');
+        
+        return $user;
+    }
+    
+}
+```
+
+Như ví dụ trên exception `\RuntimeException` sẽ được throw và entity user sẽ không bị flush vào database.
+
+Ngoài ra attribute này còn có tính năng tự động persist đối với các entity vừa được khởi tạo (state new) giúp cho bạn không cần inject
+entity manager dependency, ví dụ:
 
 ```php
 use Hasura\Bundle\GraphQLite\Attribute\ObjectAssertion;
