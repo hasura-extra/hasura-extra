@@ -83,7 +83,7 @@ class WelcomeMail extends Mailable
 }
 ```
 
-Tiếp đến bạn cần thêm sự kiện `Hasura\EventDispatcher\TableEvent` với `App\Providers\EventServiceProvider`:
+Tiếp đến bạn cần thêm sự kiện `Hasura\EventDispatcher\TableEvent` trong `App\Providers\EventServiceProvider`:
 
 ```php
 use App\Listeners\UserRegistered;
