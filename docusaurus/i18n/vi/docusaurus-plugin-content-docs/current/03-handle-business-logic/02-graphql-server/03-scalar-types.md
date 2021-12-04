@@ -1,7 +1,7 @@
 ---
 id: graphqlite-custom-scalar-types
 title: Custom scalar types
-sidebar_title: Custom scalar types
+sidebar_label: Custom scalar types
 ---
 
 Hasura Extra cung cấp [custom scalar types](https://graphqlite.thecodingmachine.io/docs/custom-types#registering-a-custom-scalar-type-advanced) compatible với Hasura giúp cho việc tạo

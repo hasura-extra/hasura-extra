@@ -1,7 +1,7 @@
 ---
 id: graphqlite-attributes
 title: Attributes
-sidebar_title: Attributes
+sidebar_label: Attributes
 ---
 
 Hasura Extra cung cấp cho bạn set [GraphQLite](https://graphqlite.thecodingmachine.io/) attributes để có thể xây dựng GraphQL server đơn giản hơn.
@@ -66,10 +66,10 @@ query {
 ```
 
 
-### Roles
+### Roles {#attributes-roles}
 
 Attribute này dùng cho authorization khác với [Right](https://graphqlite.thecodingmachine.io/docs/authentication-authorization#logged-and-right-annotations) attribute,
-nó hổ trợ bạn thêm được nhiều roles cùng 1 lúc và hổ trợ [persist-state](../../07-manage-metadata/07-persist-application-state.md) sync roles lên remote schema permissions.
+nó hổ trợ bạn thêm được nhiều roles cùng 1 lúc và hổ trợ [persist-state](../../07-manage-metadata/07-persist-application-state.mdx) sync roles lên remote schema permissions.
 
 ```php
 use Hasura\GraphQLiteBridge\Attribute\Roles;

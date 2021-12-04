@@ -1,7 +1,7 @@
 ---
 id: remote-schema
 title: Remote schema
-sidebar_title: Remote schema
+sidebar_label: Remote schema
 ---
 
 Hasura giúp chúng ta rất nhiều trong vấn đề CRUD, realtime websocket và authorization, tuy nhiên nó không thể giúp chúng ta handle business

@@ -1,0 +1,38 @@
+---
+id: get-inconsistent-metadata
+title: Get inconsistent metadata
+sidebar_label: Get inconsistent metadata
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Trong trường hợp bạn vừa chạy database migrations có thêm, xóa columns hoặc các remote schema thay đổi SDL nhưng metadata thì lại tồn tại
+các cấu hình trước đó thì sẽ xảy ra inconsistent metadata, bạn có thể [drop các inconsistent](./05-drop-inconsistent-metadata.mdx) hoặc
+xem các inconsistent thông qua command.
+
+Để xem các inconsistent bạn cần thực thi command sau:
+
+<Tabs
+defaultValue="laravel"
+values={[
+{label: 'Đối với Laravel users', value: 'laravel'},
+{label: 'Đối với Symfony users', value: 'symfony'},
+]}>
+<TabItem value="laravel">
+
+```shell
+php artisan hasura:metadata:get-inconsistent
+```
+
+Command trên sẽ tổng hợp các lỗi inconsistent và xuất ra ngoài màn hình giúp bạn.
+</TabItem>
+<TabItem value="symfony">
+
+```shell
+php bin/console hasura:metadata:get-inconsistent
+```
+
+Command trên sẽ tổng hợp các lỗi inconsistent và xuất ra ngoài màn hình giúp bạn.
+</TabItem>
+</Tabs>

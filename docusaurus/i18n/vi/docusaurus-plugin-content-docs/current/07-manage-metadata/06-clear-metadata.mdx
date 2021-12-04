@@ -1,0 +1,36 @@
+---
+id: clear-metadata
+title: Clear metadata
+sidebar_label: Clear metadata
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Trong trường hợp bạn muốn xóa trắng Hasura metadata thì hãy thực hiện theo tài liệu bên dưới.
+
+Để xóa trắng Hasura metadata bạn cần thực thi command sau:
+
+<Tabs
+defaultValue="laravel"
+values={[
+{label: 'Đối với Laravel users', value: 'laravel'},
+{label: 'Đối với Symfony users', value: 'symfony'},
+]}>
+<TabItem value="laravel">
+
+```shell
+php artisan hasura:metadata:clear
+```
+
+Command trên sẽ xóa trắng metadata giúp bạn.
+</TabItem>
+<TabItem value="symfony">
+
+```shell
+php bin/console hasura:metadata:clear
+```
+
+Command trên sẽ xóa trắng metadata giúp bạn.
+</TabItem>
+</Tabs>

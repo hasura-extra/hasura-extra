@@ -1,0 +1,76 @@
+---
+id: client-query-generator
+title: Client query generator
+sidebar_label: Client query generator
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Hasura Extra integrate với [Sailor](https://github.com/spawnia/sailor) typesafe graphql client để generate PHP code từ graphql query spec của bạn,
+ứng dụng cho việc khi bạn cần integrate với 3rd parties cũng sử dụng graphql thông qua [Hasura remote schema](https://hasura.io/docs/latest/graphql/core/remote-schemas/index.html).
+
+## Introspection
+
+Đầu tiên bạn cần run [introspection](https://graphql.org/learn/introspection/) command ra Hasura SDL phục vụ cho việc validate query spec của bạn
+trước khi thực hiện [gen code](#code-generation):
+
+<Tabs
+groupId="frameworks"
+defaultValue="laravel"
+values={[
+    {label: 'Đối với Laravel users', value: 'laravel'},
+    {label: 'Đối với Symfony users', value: 'symfony'},
+]}>
+<TabItem value="laravel">
+
+```shell
+php artisan hasura:sailor:introspect
+```
+
+</TabItem>
+<TabItem value="symfony">
+
+```shell
+php bin/console hasura:sailor:introspect
+```
+
+</TabItem>
+</Tabs>
+
+## Code generation {#code-generation}
+
+Sau khi thực hiện introspection query, tiếp đến bạn hãy tạo 1 file query spec `.graphql` trong thư mục `hasura/graphql` và tiến hành generate code thông qua câu lệnh:
+
+<Tabs
+groupId="frameworks"
+defaultValue="laravel"
+values={[
+    {label: 'Đối với Laravel users', value: 'laravel'},
+    {label: 'Đối với Symfony users', value: 'symfony'},
+]}>
+<TabItem value="laravel">
+
+```shell
+php artisan hasura:sailor:codegen
+```
+
+Client executor được generate mặc định nằm trong thư mục `App\GraphQLExecutors`, thế là xong, ngay bây giờ bạn đã có thể sử dụng executor rồi đấy.
+
+:::tip
+Nếu như bạn sử dụng [Laravel app](../02-installation/02-application-templates.md) thì hãy kham khảo cách dùng tại `App\Console\Commands\GetCountries` class.
+:::
+</TabItem>
+<TabItem value="symfony">
+
+```shell
+php bin/console hasura:sailor:codegen
+```
+
+Client executor được generate mặc định nằm trong thư mục `App\GraphQLExecutor`, thế là xong, ngay bây giờ bạn đã có thể sử dụng executor rồi đấy.
+
+:::tip
+Nếu như bạn sử dụng [Symfony app](../02-installation/02-application-templates.md) thì hãy kham khảo cách dùng tại `App\Command\GetCountries` class.
+:::
+</TabItem>
+</Tabs>

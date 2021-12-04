@@ -1,7 +1,7 @@
 ---
 id: graphqlite-attributes
 title: Attributes
-sidebar_title: Attributes
+sidebar_label: Attributes
 ---
 
 Work in progress

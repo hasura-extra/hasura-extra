@@ -1,0 +1,82 @@
+---
+id: state-processor-metadata
+title: State processor
+sidebar_label: State processor
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+State processor sẽ góp phần `process` application [state](https://en.wikipedia.org/wiki/State_(computer_science)) của bạn lên Hasura. 
+
+:::info
+Đây là tính năng nâng cao dành cho những ai muốn xây dựng các processors riêng góp phần khi thực thi [persist application state](./07-persist-application-state.mdx).
+:::
+
+<Tabs
+defaultValue="laravel"
+values={[
+{label: 'Đối với Laravel users', value: 'laravel'},
+{label: 'Đối với Symfony users', value: 'symfony'},
+]}>
+<TabItem value="laravel">
+
+Đầu tiên bạn cần tạo class processor để tham gia tiến trình [persist application state](./07-persist-application-state.mdx):
+
+```php title="app/Hasura/ReloadStateProcessor.php"
+namespace App\Hasura;
+
+use Hasura\Metadata\StateProcessorInterface;
+
+final class ReloadStateProcessor implements StateProcessorInterface
+{
+    public function process(ManagerInterface $manager, bool $allowInconsistent = false): void
+    {
+        $manager->reload(true, true);
+    }
+}
+```
+
+Sau đó bạn cần đăng ký class trên vào `metadata.state_processors` trong file `config/hasura.php`:
+
+```php title="config/hasura.php"
+'metadata' => [
+    'state_processors' => [
+        ...
+        \App\Hasura\ReloadStateProcessor::class
+    ]
+]
+```
+
+Vậy là xong, khi bạn thực hiện [persist application state](./07-persist-application-state.mdx) nó sẽ được gọi kèm
+
+:::tip
+Các processors đều được khởi tạo thông qua app container nên bạn có thể inject dependencies services nếu cần.
+:::
+
+</TabItem>
+<TabItem value="symfony">
+
+Bundle đã cấu hình sẵn [auto configuration](https://symfony.com/doc/current/service_container.html#the-autoconfigure-option) tag `hasura.metadata.state_processor` dành cho
+các classes implements [StateProcessorInterface](https://github.com/hasura-extra/metadata/blob/main/src/StateProcessorInterface.php), khi
+class của bạn implements interface trên thì khi thực hiện [persist application state](./07-persist-application-state.mdx) nó sẽ được gọi kèm, ví dụ:
+
+```php title="src/Hasura/ReloadStateProcessor.php"
+namespace App\Hasura;
+
+use Hasura\Metadata\StateProcessorInterface;
+
+final class ReloadStateProcessor implements StateProcessorInterface
+{
+    public function process(ManagerInterface $manager, bool $allowInconsistent = false): void
+    {
+        $manager->reload(true, true);
+    }
+}
+```
+
+Theo ví dụ trên, reload state processor sẽ thực hiện reload local remote schema SDL (nếu có).
+
+</TabItem>
+</Tabs>
+

@@ -1,0 +1,37 @@
+---
+id: reload-metadata
+title: Reload metadata
+sidebar_label: Reload metadata
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Sau khi database bạn xảy ra thay đổi (thêm/xóa columns) hoặc remote schema có thay đổi về SDL thì bạn cần reload lại metadata,
+để cập nhật state mới nhất.
+
+Để reload metadata bạn cần thực thi command sau:
+
+<Tabs
+defaultValue="laravel"
+values={[
+{label: 'Đối với Laravel users', value: 'laravel'},
+{label: 'Đối với Symfony users', value: 'symfony'},
+]}>
+<TabItem value="laravel">
+
+```shell
+php artisan hasura:metadata:reload
+```
+
+Đợi trong vài giây và việc reload metadata sẽ hoàn tất.
+</TabItem>
+<TabItem value="symfony">
+
+```shell
+php bin/console hasura:metadata:reload
+```
+
+Đợi trong vài giây và việc reload metadata sẽ hoàn tất.
+</TabItem>
+</Tabs>

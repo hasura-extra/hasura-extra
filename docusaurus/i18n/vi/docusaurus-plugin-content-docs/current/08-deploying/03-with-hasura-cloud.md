@@ -1,15 +1,15 @@
 ---
 id: with-hasura-cloud
 title: Với Hasura cloud
-sidebar_title: Với Hasura cloud
+sidebar_label: Với Hasura cloud
 ---
+
+:::info
+Tài liệu này chỉ dành cho các project bắt đầu bằng các [application templates](../02-installation/02-application-templates.md).
+:::
 
 [Hasura Cloud](https://cloud.hasura.io/) là một SaaS system, bạn không cần bận tâm đến làm thế nào để deploy Hasura của bạn lên production,
 vì mọi thứ đã setup giúp bạn.
-
-:::info
-Tài liệu này dành cho các project bắt đầu bằng [Laravel hoặc Symfony application template](../02-installation/02-application-templates.md).
-:::
 
 ## Đối với Docker compose
 

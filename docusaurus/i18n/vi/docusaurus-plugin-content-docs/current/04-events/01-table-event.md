@@ -1,11 +1,19 @@
 ---
 id: table-event
 title: Table event
-sidebar_title: Table event
+sidebar_label: Table event
 ---
 
 Hasura Extra sẽ dispatch [table events triggered](https://hasura.io/docs/latest/graphql/core/event-triggers/index.html) bởi Hasura 
 thông qua [PSR-14](https://www.php-fig.org/psr/psr-14/) event dispatcher.
+
+:::info
+Khác với Doctrine ORM và Eloquent events, Hasura table event sẽ được dispatch async thông qua webhook request không ãnh hưởng đến
+ response time của request mà end-user gọi đến. Cho nên bạn hoàn toàn có thể sử dụng nó thay thế cho một số trường hợp phải sử dụng message queue như send mail hay call first/third parties.
+
+Hasura table event triggered là một nền tảng [change data capture](https://en.wikipedia.org/wiki/Change_data_capture) cho nên bất kỳ
+application nào (ví dụ NodeJS app) tương tác với database rows của bạn đều được trigger events.
+:::
 
 ## Thêm event trigger tại Hasura {#add-event-trigger}
 
@@ -13,7 +21,7 @@ Hướng dẫn cách thêm event trigger trên Hasura bạn có thể xem tại 
 
 :::info
 Khi cài Laravel package url path để handle table event sẽ là `/hasura-table-event` còn đối với
-Symfony bundle url path sẽ là `/hasura_table_event`, bạn sẽ cần url path này ở bước [thêm event trigger](#add-event-trigger).
+Symfony bundle url path sẽ là `/hasura_table_event`.
 :::
 
 :::tip

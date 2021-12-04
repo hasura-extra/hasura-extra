@@ -1,11 +1,11 @@
 ---
 id: with-kubernetes-helm-chart
 title: Với Kubernetes Helm chart
-sidebar_title: Với Kubernetes Helm chart
+sidebar_label: Với Kubernetes Helm chart
 ---
 
 :::info
-Tài liệu này dành cho các project bắt đầu bằng [Laravel hoặc Symfony application template](../02-installation/02-application-templates.md).
+Tài liệu này chỉ dành cho các project bắt đầu bằng các [application templates](../02-installation/02-application-templates.md).
 :::
 
 ## Deploy trên KinD {#deploy-on-kind}
@@ -17,13 +17,13 @@ là bạn đã chuẩn bị xong môi trường KinD rồi đấy.
 Tiếp đến hãy build Docker image:
 
 ```shell
-docker-compose -f docker-compose.yaml build
+docker-compose -f docker-compose.yaml -f docker-compose.prod.yaml build
 ```
 
 Push image lên local registry:
 
 ```shell
-docker-compose -f docker-compose.yaml push 
+docker-compose -f docker-compose.yaml -f docker-compose.prod.yaml push
 ```
 
 Cập nhật Helm dependencies:
@@ -44,7 +44,7 @@ thiết lập khi install chart thông qua `--set` option hoặc sử dụng cá
 Ví dụ với `--set` option:
 
 ```shell
-helm install api ./charts/api --set apache.appSecret=ChangeMe
+helm install api ./charts/api --set apache.appHasuraSecret=ChangeMe
 ```
 
 ## Deploy trên Kubernetes

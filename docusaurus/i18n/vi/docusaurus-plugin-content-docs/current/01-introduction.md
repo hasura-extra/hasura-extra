@@ -1,7 +1,7 @@
 ---
 id: introduction
 title: Giới thiệu
-sidebar_title: Giới thiệu
+sidebar_label: Giới thiệu
 slug: /
 ---
 

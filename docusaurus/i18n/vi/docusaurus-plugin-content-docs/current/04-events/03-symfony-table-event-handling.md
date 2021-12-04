@@ -1,7 +1,7 @@
 ---
 id: symfony-table-event-handling
 title: Symfony table event handling
-sidebar_title: Symfony table event handling
+sidebar_label: Symfony table event handling
 ---
 
 Hasura Extra sẽ dispatch event `Hasura\EventDispatcher\TableEvent` bạn cần 
@@ -21,7 +21,7 @@ php bin/console make:subscriber WelcomeUserRegisteredSubscriber
 
 Với `WelcomeUserRegisteredSubscriber` class như sau:
 
-```php
+```php title="src/EventSubscriber/Hasura/WelcomeUserRegisteredSubscriber.php"
 namespace App\EventSubscriber\Hasura;
 
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -88,7 +88,7 @@ Cấu hình [basic authentication](https://symfony.com/doc/current/security.html
 với [memory user provider](https://symfony.com/doc/current/security/user_providers.html#security-memory-user-provider)
 để xác minh request đến từ Hasura:
 
-```yaml
+```yaml title="config/packages/security.yaml"
 security:
     enable_authenticator_manager: true
     password_hashers:

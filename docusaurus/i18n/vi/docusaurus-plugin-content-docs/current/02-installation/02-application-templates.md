@@ -1,7 +1,7 @@
 ---
 id: application-templates
 title: Application templates
-sidebar_title: Application templates
+sidebar_label: Application templates
 ---
 
 Đây là 2 bộ application template (boilerplate) dành riêng cho Laravel và Symfony được cài đặt sẵn các

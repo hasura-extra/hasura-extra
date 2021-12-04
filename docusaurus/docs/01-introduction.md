@@ -1,7 +1,7 @@
 ---
 id: introduction
 title: Introduction
-sidebar_title: Introduction
+sidebar_label: Introduction
 slug: /
 ---
 

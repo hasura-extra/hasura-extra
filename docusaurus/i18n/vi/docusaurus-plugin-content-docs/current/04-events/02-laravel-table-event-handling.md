@@ -1,7 +1,7 @@
 ---
 id: laravel-table-event-handling
 title: Laravel table event handling
-sidebar_title: Laravel table event handling
+sidebar_label: Laravel table event handling
 ---
 
 Hasura Extra sẽ dispatch event `Hasura\EventDispatcher\TableEvent` bạn cần [tạo listener/subscriber để lắng nghe sự kiện](https://laravel.com/docs/8.x/events) này.
@@ -20,7 +20,7 @@ php artisan make:listener UserRegistered --event="\Hasura\EventDispatcher\TableE
 
 Với `UserRegistered` class như sau:
 
-```php
+```php title="app/Listeners/UserRegistered.php"
 <?php
 
 namespace App\Listeners;
@@ -48,7 +48,7 @@ class UserRegistered
 
 Và `App\Mail\WelcomeMail` như sau:
 
-```php
+```php title="app/Mail/WelcomeMail.php"
 <?php
 namespace App\Mail;
 
@@ -85,7 +85,7 @@ class WelcomeMail extends Mailable
 
 Tiếp đến bạn cần thêm sự kiện `Hasura\EventDispatcher\TableEvent` trong `App\Providers\EventServiceProvider`:
 
-```php
+```php title="app/Providers/EventServiceProvider.php"
 use App\Listeners\UserRegistered;
 use Hasura\EventDispatcher\TableEvent;
 
@@ -119,7 +119,7 @@ sẽ sử dụng [basic authentication](https://en.wikipedia.org/wiki/Basic_acce
 Chúng tôi cung cấp sẵn cho bạn `hasura` guard với username fixed là `hasura` và password với giá trị của `app_secret` (mặc định là `APP_HASURA_SECRET` env) trong file `config/hasura.php`,
 bạn chỉ cần thêm `auth:hasura` middleware cho `routes.table_event` trong file `config/hasura.php`:
 
-```php
+```php title="config/hasura.php"
 'table_event' => [
     /*
      * Enabled table event handle endpoint, disable it when you not use Hasura event triggered.

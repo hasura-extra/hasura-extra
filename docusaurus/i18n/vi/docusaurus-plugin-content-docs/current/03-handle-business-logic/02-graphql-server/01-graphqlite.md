@@ -1,7 +1,7 @@
 ---
 id: graphqlite
 title: GraphQLite
-sidebar_title: GraphQLite
+sidebar_label: GraphQLite
 ---
 
 [GraphQLite](https://graphqlite.thecodingmachine.io/) là một bộ thư viện PHP giúp bạn xây dựng GraphQL server thông qua code-first approach

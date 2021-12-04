@@ -1,0 +1,53 @@
+---
+id: apply-metadata
+title: Apply metadata
+sidebar_label: Apply metadata
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Sau khi đã thực thi [export metadata](./01-export-metadata.mdx) ra files và bây giờ chúng ta sẽ apply metadata trên các máy (môi trường)
+khác nhau.
+
+Để thực thi apply metadata bạn cần thực thi command sau:
+
+
+<Tabs
+defaultValue="laravel"
+values={[
+{label: 'Đối với Laravel users', value: 'laravel'},
+{label: 'Đối với Symfony users', value: 'symfony'},
+]}>
+<TabItem value="laravel">
+
+```shell
+php artisan hasura:metadata:apply
+```
+
+Trong trường hợp data inconsistent (do remote schema hoặc thiếu table columns...) nhưng bạn vẫn chấp nhận và tiếp tục thì hãy xài
+option `--allow-inconsistent`:
+
+```shell
+php artisan hasura:metadata:apply --allow-inconsistent
+```
+
+Vậy là bạn đã hoàn tất apply metadata rồi đấy.
+</TabItem>
+<TabItem value="symfony">
+
+```shell
+php bin/console hasura:metadata:apply
+```
+
+Trong trường hợp data inconsistent (do remote schema hoặc thiếu table columns...) nhưng bạn vẫn chấp nhận và tiếp tục thì hãy xài
+option `--allow-inconsistent`:
+
+```shell
+php bin/console hasura:metadata:apply --allow-inconsistent
+```
+
+Vậy là bạn đã hoàn tất apply metadata rồi đấy.
+</TabItem>
+</Tabs>
+
