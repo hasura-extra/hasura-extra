@@ -4,14 +4,25 @@ title: Với Hasura cloud
 sidebar_label: Với Hasura cloud
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 :::info
 Tài liệu này chỉ dành cho các project bắt đầu bằng các [application templates](../02-installation/02-application-templates.md).
+
+Trước khi xem tài liệu này bạn nên xem qua cách deploy với [Docker compose](./01-with-docker-compose.mdx) hoặc [Kubernetes Helm chart](./02-with-kubernetes-helm-chart.md).
 :::
 
 [Hasura Cloud](https://cloud.hasura.io/) là một SaaS system, bạn không cần bận tâm đến làm thế nào để deploy Hasura của bạn lên production,
 vì mọi thứ đã setup giúp bạn.
 
-## Đối với Docker compose
+<Tabs
+defaultValue="docker-compose"
+values={[
+{label: 'Đối với Docker compose', value: 'docker-compose'},
+{label: 'Đối với Kubernetes Helm chart', value: 'kubernetes'},
+]}>
+<TabItem value="docker-compose">
 
 Đầu tiên bạn cần xóa `hasura` container trong `docker-compose.yaml` (do chúng ta đã sử dụng Hasura cloud).
 
@@ -24,10 +35,11 @@ Ví dụ, chúng ta có các uri sau:
 + Hasura cloud admin secret: `xxx`
 + Apache: `https://app.example`
 
-Thì chúng ta set `APP_BASE_URI` trên Hasura cloud với giá trị `https://app.example` 
+Thì chúng ta set `APP_BASE_URI` trên Hasura cloud với giá trị `https://app.example`
 và set `HASURA_BASE_URI`, `HASURA_ADMIN_SECRET` envs của Apache container với giá trị lần lượt là `https://xxxx-xx.hasura.app` và `xxx`.
 
-## Đối với Kubernetes Helm chart
+</TabItem>
+<TabItem value="kubernetes">
 
 Đầu tiên bạn cần xóa `hasura` chart trong `charts/api/Chart.yaml` và những thứ liên quan đến Hasura trong `charts/api/values.yaml` (do chúng ta đã sử dụng Hasura cloud).
 
@@ -40,13 +52,16 @@ Ví dụ, chúng ta có các uri sau:
 + Hasura cloud admin secret: `xxx`
 + Apache: `https://app.example`
 
-Thì chúng ta set `APP_BASE_URI` trên Hasura cloud với giá trị `https://app.example`, đồng thời khi install Helm chart 
+Thì chúng ta set `APP_BASE_URI` trên Hasura cloud với giá trị `https://app.example`, đồng thời khi install Helm chart
 ta sẽ set `apache.hasuraBaseUri` là `https://xxxx-xx.hasura.app` và `apache.hasuraAdminSecret` là `xxx`
 
 Ví dụ:
 
 ```shell
 helm install api ./charts/api \
-  --set apache.hasuraBaseUri="https://xxxx-xx.hasura.app" \
-  --set apache.hasuraAdminSecret="xxx"
+--set apache.hasuraBaseUri="https://xxxx-xx.hasura.app" \
+--set apache.hasuraAdminSecret="xxx"
 ```
+
+</TabItem>
+</Tabs>

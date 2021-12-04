@@ -37,7 +37,7 @@ MAIL_PASSWORD=ChangeMe \
 docker-compose -f docker-compose.yaml -f docker-compose.prod.yaml up -d
 ```
 
-Đợi vài giây, tiếp đến là chạy database migrations và [apply Hasura metadata](../07-manage-metadata/02-apply-metadata.md):
+Đợi vài giây, tiếp đến là chạy database migrations và [apply Hasura metadata](../07-manage-metadata/02-apply-metadata.mdx):
 
 ```shell
 docker-compose -f docker-compose.yaml -f docker-compose.prod.yaml exec apache php artisan migrate --force --no-interaction; \
@@ -62,7 +62,7 @@ MAILER_DSN=ChangeMe \
 docker-compose -f docker-compose.yaml -f docker-compose.prod.yaml up -d
 ```
 
-Đợi vài giây, tiếp đến là chạy database migrations và [apply Hasura metadata](../07-manage-metadata/02-apply-metadata.md):
+Đợi vài giây, tiếp đến là chạy database migrations và [apply Hasura metadata](../07-manage-metadata/02-apply-metadata.mdx):
 
 ```shell
 docker-compose -f docker-compose.yaml -f docker-compose.prod.yaml exec apache php bin/console doctrine:migrations:migrate --allow-no-migration --no-interaction; \
