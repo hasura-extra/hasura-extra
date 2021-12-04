@@ -1,0 +1,46 @@
+---
+id: webhook-authentication
+title: Webhook authentication
+sidebar_label: Webhook authentication
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Hasura sẽ không handle phần authentication (authn) cho chúng ta mà chỉ cấp phần integration thông qua [JWT mode](https://hasura.io/docs/latest/graphql/core/auth/authentication/jwt.html) 
+hoặc [Webhook mode](https://hasura.io/docs/latest/graphql/core/auth/authentication/webhook.html).
+
+Hasura Extra cung cấp phần authn thông qua webhook mode để integrate với Hasura, nếu so với JWT mode, webhook sẽ không tối ưu performance nhưng bù lại bạn có thể 
+cung cấp được bất kỳ hình thức authn tùy theo yêu cầu của project thay vì chỉ mỗi JWT token và [session variables được linh động hơn](./02-session-variable-enhancer.mdx).
+
+## Cấu hình webhook mode
+
+:::tip
+Nếu như bạn sử dụng [Laravel hoặc Symfony application template](../02-installation/02-application-templates.md) thì hãy bỏ qua tài liệu này vì template đã cấu hình giúp bạn.
+:::
+
+<Tabs
+defaultValue="laravel"
+values={[
+{label: 'Đối với Laravel users', value: 'laravel'},
+{label: 'Đối với Symfony users', value: 'symfony'},
+]}>
+<TabItem value="laravel">
+
+Để cấu hình webhook mode bạn cần set `HASURA_GRAPHQL_AUTH_HOOK` env của Hasura container trỏ về url path `/hasura-auth-hook` và cập nhật
+`guard` trong file config `config/hasura.php` nếu như bạn sử dụng multi auth guards.
+
+</TabItem>
+<TabItem value="symfony">
+
+Để cấu hình webhook mode bạn cần set `HASURA_GRAPHQL_AUTH_HOOK` env của Hasura container trỏ về url path `/hasura_auth_hook`,
+tiếp đến là cấu hình Symfony [security firewall](https://symfony.com/doc/current/security.html#the-firewall) bao phủ `/hasura_auth_hook` path,
+bạn có thể kham khảo thêm tại cách cấu hình [JWT authentication](./06-symfony-jwt-authentication.md).
+
+</TabItem>
+</Tabs>
+
+## `X-Hasura-Role` header
+
+Khi client send request đến Hasura có thể gửi kèm `X-Hasura-Role` header để chỉ định role cho request, nếu như user identifier
+của request KHÔNG sở hữu role được chỉ định thì request sẽ bị chặn lại.

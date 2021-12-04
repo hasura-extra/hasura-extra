@@ -1,0 +1,37 @@
+---
+id: drop-inconsistent-metadata
+title: Drop inconsistent
+sidebar_label: Drop inconsistent
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Drop inconsistent metadata sẽ giúp bạn xóa đi các cấu hình metadata không hợp lệ (table column không tồn tại hoặc remote schema field không tồn tại...),
+trước khi drop, chúng tôi khuyên bạn nên xem lại các cấu hình sẽ bị drop thông qua tài liệu [get inconsistent metadata](./04-get-inconsistent-metadata.mdx).
+
+Để drop các inconsistent metadata bạn cần thực thi command sau:
+
+<Tabs
+defaultValue="laravel"
+values={[
+{label: 'Đối với Laravel users', value: 'laravel'},
+{label: 'Đối với Symfony users', value: 'symfony'},
+]}>
+<TabItem value="laravel">
+
+```shell
+php artisan hasura:metadata:drop-inconsistent
+```
+
+Command trên sẽ drop tất cả inconsistent metadata.
+</TabItem>
+<TabItem value="symfony">
+
+```shell
+php bin/console hasura:metadata:drop-inconsistent
+```
+
+Command trên sẽ drop tất cả inconsistent metadata.
+</TabItem>
+</Tabs>

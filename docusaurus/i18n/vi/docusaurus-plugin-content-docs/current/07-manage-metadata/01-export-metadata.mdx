@@ -1,0 +1,38 @@
+---
+id: export-metadata
+title: Export metadata
+sidebar_label: Export metadata
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Hasura metadata chứa các cấu hình data sources, remote schema, inherited roles, data federation, authorization... của hệ 
+thống của bạn, việc export metadata ra files sẽ giúp bạn share metadata với các members khác trong team và môi trường production,
+các files exported sẽ được sử dụng để [apply](./02-apply-metadata.mdx) trên nhiều môi trường khác nhau và đảm bảo tính consistent.
+
+Để export Hasura metadata bạn cần thực thi command sau:
+
+<Tabs
+    defaultValue="laravel"
+    values={[
+        {label: 'Đối với Laravel users', value: 'laravel'},
+        {label: 'Đối với Symfony users', value: 'symfony'},
+    ]}>
+<TabItem value="laravel">
+
+```shell
+php artisan hasura:metadata:export
+```
+
+</TabItem>
+<TabItem value="symfony">
+
+```shell
+php bin/console hasura:metadata:export
+```
+
+</TabItem>
+</Tabs>
+
+Sau khi chạy command, metadata sẽ được xuất ra files tại thư mục `hasura/metadata`.

@@ -42,25 +42,6 @@ const config = {
       }),
     ],
   ],
-  plugins: [
-      [
-          '@docusaurus/plugin-content-docs',
-          {
-              id: 'tutorial',
-              path: 'tutorial',
-              routeBasePath: 'tutorial',
-              sidebarPath: require.resolve('./sidebarsTutorial.js'),
-              editCurrentVersion: true,
-              editUrl: ({locale, versionDocsDirPath, docPath, version}) => {
-                if (locale === 'en') {
-                  return `https://github.com/hasura-extra/hasura-extra/edit/main/docusaurus/${versionDocsDirPath}/${docPath}`;
-                }
-
-                return `https://github.com/hasura-extra/hasura-extra/edit/main/docusaurus/i18n/${locale}/docusaurus-plugin-content-docs-tutorial/${version}/${docPath}`;
-              }
-          },
-      ]
-  ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
@@ -72,19 +53,6 @@ const config = {
           src: 'img/logo.png',
         },
         items: [
-          {
-            type: 'doc',
-            label: 'Documentation',
-            docId: 'introduction',
-            position: 'left'
-          },
-          {
-            type: 'doc',
-            label: 'Tutorial',
-            docId: 'introduction',
-            position: 'left',
-            docsPluginId: 'tutorial'
-          },
           {
             type: 'localeDropdown',
             position: 'right',
