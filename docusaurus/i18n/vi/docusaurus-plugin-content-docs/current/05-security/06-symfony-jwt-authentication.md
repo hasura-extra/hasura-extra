@@ -34,7 +34,7 @@ public/private keys sẽ được sinh ra trong thư mục `config/jwt`.
 
 ## Cấu hình security bundle
 
-Bạn cần cấu hình security main firewall (`config/packages/security.yaml`) cho webhook endpoint và [GraphQLite](../03-handle-business-logic/02-graphqlite/01-graphqlite.md) endpoint,
+Bạn cần cấu hình security main firewall (`config/packages/security.yaml`) cho webhook endpoint và [GraphQLite](../03-handle-business-logic/02-graphql-server/01-graphqlite.md) endpoint,
 ví dụ:
 
 ```yaml title="config/packages/security.yaml"

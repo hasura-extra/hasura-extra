@@ -5,7 +5,7 @@ sidebar_label: Laravel access control
 ---
 
 Hasura extra package cung cấp sẵn cho bạn authorization system thông qua role access control, khái niệm của nó giống với Hasura,
-mỗi user access vào system của bạn đều phải có role kể cả [unauthenticated request cũng có role](./03-unauthenticated-role.mdx).
+mỗi request access vào system của bạn đều phải có role kể cả [unauthenticated request cũng có role](./03-unauthenticated-role.mdx).
 
 ## Định nghĩa roles
 
