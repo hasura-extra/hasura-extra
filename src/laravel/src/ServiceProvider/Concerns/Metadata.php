@@ -55,13 +55,13 @@ trait Metadata
     {
         $this->app->singleton(
             YamlOperator::class,
-            static fn($app) => new YamlOperator(new Filesystem())
+            static fn ($app) => new YamlOperator(new Filesystem())
         );
         $this->app->bind(OperatorInterface::class, YamlOperator::class);
 
         $this->app->singleton(
             Manager::class,
-            static fn($app) => new Manager(
+            static fn ($app) => new Manager(
                 $app[Client::class],
                 config('hasura.metadata.path'),
                 $app[OperatorInterface::class]
@@ -69,12 +69,12 @@ trait Metadata
         );
         $this->app->bind(ManagerInterface::class, Manager::class);
 
-        $hasRemoteSchema = !is_null(config('hasura.remote_schema_name'));
+        $hasRemoteSchema = null !== config('hasura.remote_schema_name');
 
         if ($hasRemoteSchema) {
             $this->app->singleton(
                 RemoteSchema::class,
-                static fn($app) => new RemoteSchema(config('hasura.remote_schema_name'))
+                static fn ($app) => new RemoteSchema(config('hasura.remote_schema_name'))
             );
             $this->app->bind(RemoteSchemaInterface::class, RemoteSchema::class);
         }
@@ -83,7 +83,7 @@ trait Metadata
 
         $this->app->singleton(
             InheritedRolesStateProcessor::class,
-            static fn($app) => new InheritedRolesStateProcessor(
+            static fn ($app) => new InheritedRolesStateProcessor(
                 config('hasura.auth.inherited_roles'),
                 $hasRemoteSchema ? $app[RemoteSchemaInterface::class] : null,
                 'schema { query: Query } type Query { _dummy: String! }'
@@ -92,9 +92,9 @@ trait Metadata
 
         $this->app->singleton(
             ChainStateProcessor::class,
-            static fn($app) => new ChainStateProcessor(
+            static fn ($app) => new ChainStateProcessor(
                 collect(config('hasura.metadata.state_processors'))->map(
-                    static fn(string $class) => $app[$class]
+                    static fn (string $class) => $app[$class]
                 )
             )
         );

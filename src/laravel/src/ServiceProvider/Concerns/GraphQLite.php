@@ -42,7 +42,7 @@ trait GraphQLite
     {
         $this->app->singleton(
             AuthorizationService::class,
-            static fn($app) => new AuthorizationService($app['hasura.gate'])
+            static fn ($app) => new AuthorizationService($app['hasura.gate'])
         );
         $this->app->bind(AuthorizationServiceInterface::class, AuthorizationService::class);
 
@@ -52,7 +52,7 @@ trait GraphQLite
 
         $this->app->singleton(
             FieldAuthorizationMiddleware::class,
-            fn($app) => new FieldAuthorizationMiddleware($app[AuthorizationService::class])
+            fn ($app) => new FieldAuthorizationMiddleware($app[AuthorizationService::class])
         );
 
         $this->app->singleton(FieldArgNamingMiddleware::class);

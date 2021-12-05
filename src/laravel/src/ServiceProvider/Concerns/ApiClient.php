@@ -22,7 +22,7 @@ trait ApiClient
     {
         $this->app->singleton(
             Client::class,
-            static fn() => new Client(
+            static fn () => new Client(
                 config('hasura.base_uri'),
                 config('hasura.admin_secret')
             )

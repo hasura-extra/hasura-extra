@@ -28,8 +28,8 @@ GQL;
         $response->assertExactJson(
             [
                 'data' => [
-                    'validate_test' => 'assertion: test@example.org'
-                ]
+                    'validate_test' => 'assertion: test@example.org',
+                ],
             ]
         );
     }
@@ -51,10 +51,10 @@ GQL;
                     [
                         'extensions' => [
                             'category' => 'Validate',
-                            'argument' => 'email_naming'
-                        ]
-                    ]
-                ]
+                            'argument' => 'email_naming',
+                        ],
+                    ],
+                ],
             ]
         );
     }

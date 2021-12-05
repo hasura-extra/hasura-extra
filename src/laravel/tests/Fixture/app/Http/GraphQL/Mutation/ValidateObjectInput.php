@@ -30,7 +30,7 @@ final class ValidateObjectInput
         return [
             'emailField' => 'email',
             'textField' => 'required',
-            'sub.subTextField' => 'required'
+            'sub.subTextField' => 'required',
         ];
     }
 }

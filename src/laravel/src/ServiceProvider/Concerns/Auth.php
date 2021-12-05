@@ -33,7 +33,7 @@ trait Auth
     {
         if (config('hasura.auth.enabled_role_check_method')) {
             $this->app[Gate::class]->before(
-                static fn(?object $user, iterable|string $abilities) => app(GateRoleChecker::class)->check(
+                static fn (?object $user, iterable|string $abilities) => app(GateRoleChecker::class)->check(
                     $user,
                     $abilities
                 )
@@ -51,7 +51,7 @@ trait Auth
                     [
                         'id' => 'hasura',
                         'password' => $request->getPassword(),
-                        'remember_token' => ''
+                        'remember_token' => '',
                     ]
                 );
             }
@@ -70,7 +70,7 @@ trait Auth
                         'provider' => null,
                     ],
                     config('auth.guards.hasura', [])
-                )
+                ),
             ]
         );
 
@@ -94,7 +94,7 @@ trait Auth
 
         $this->app->singleton(
             AccessRoleDecider::class,
-            static fn($app) => new AccessRoleDecider(
+            static fn ($app) => new AccessRoleDecider(
                 config('hasura.auth.anonymous_role'),
                 config('hasura.auth.default_role'),
                 $app['hasura.gate']
@@ -104,9 +104,9 @@ trait Auth
 
         $this->app->singleton(
             ChainSessionVariableEnhancer::class,
-            static fn($app) => new ChainSessionVariableEnhancer(
+            static fn ($app) => new ChainSessionVariableEnhancer(
                 collect(config('hasura.auth.session_variable_enhancers'))->map(
-                    static fn(string $class) => $app[$class]
+                    static fn (string $class) => $app[$class]
                 )
             )
         );
@@ -114,7 +114,7 @@ trait Auth
 
         $this->app->singleton(
             RequestHandler::class,
-            static fn($app) => new RequestHandler(
+            static fn ($app) => new RequestHandler(
                 $app[AccessRoleDeciderInterface::class],
                 new Psr17Factory(),
                 new Psr17Factory(),
@@ -124,13 +124,13 @@ trait Auth
 
         $this->app->singleton(
             InheritanceRole::class,
-            static fn($app) => new InheritanceRole(config('hasura.auth.inherited_roles'))
+            static fn ($app) => new InheritanceRole(config('hasura.auth.inherited_roles'))
         );
         $this->app->bind(InheritanceRoleContract::class, InheritanceRole::class);
 
         $this->app->singleton(
             GateRoleChecker::class,
-            static fn($app) => new GateRoleChecker(
+            static fn ($app) => new GateRoleChecker(
                 config('hasura.auth.anonymous_role'),
                 $app[InheritanceRoleContract::class]
             )

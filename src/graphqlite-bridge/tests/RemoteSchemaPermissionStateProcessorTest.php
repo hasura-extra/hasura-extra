@@ -65,7 +65,7 @@ final class RemoteSchemaPermissionStateProcessorTest extends TestCase
         $roleDefinitions = array_combine($roles, $definitions);
 
         $this->assertStringContainsString(
-        /** @lang GraphQL */
+            /** @lang GraphQL */
             <<<SDL
 type Query { dummy: String!
 }
@@ -73,7 +73,7 @@ SDL,
             $roleDefinitions['A']['schema']
         );
         $this->assertStringContainsString(
-        /** @lang GraphQL */
+            /** @lang GraphQL */
             <<<SDL
 type Query { dummy: String!
 }
@@ -81,7 +81,7 @@ SDL,
             $roleDefinitions['B']['schema']
         );
         $this->assertStringContainsString(
-        /** @lang GraphQL */
+            /** @lang GraphQL */
             <<<SDL
 type Query { _dummy: String!
 }
@@ -101,8 +101,8 @@ SDL,
                 $item['permissions'][] = [
                     'role' => 'user',
                     'definition' => [
-                        'schema' => "schema { query: Query } type Query { dummy:String! }"
-                    ]
+                        'schema' => "schema { query: Query } type Query { dummy:String! }",
+                    ],
                 ];
 
                 break;

@@ -21,7 +21,7 @@ final class ValidateObjectTest
     #[ValidateObject(
         for: 'objectInput',
         customErrorArgumentNames: [
-            'object_input.text_field' => 'text_field'
+            'object_input.text_field' => 'text_field',
         ]
     )]
     public function __invoke(

@@ -44,7 +44,7 @@ GQL;
                             'subTextField' => '2',
                         ],
                     ],
-                ]
+                ],
             ]
         );
     }
@@ -75,22 +75,22 @@ GQL;
                     [
                         'extensions' => [
                             'argument' => 'object_input.email_field',
-                            'category' => 'Validate'
-                        ]
+                            'category' => 'Validate',
+                        ],
                     ],
                     [
                         'extensions' => [
                             'argument' => 'text_field',
-                            'category' => 'Validate'
-                        ]
+                            'category' => 'Validate',
+                        ],
                     ],
                     [
                         'extensions' => [
                             'argument' => 'object_input.sub.sub_text_field',
-                            'category' => 'Validate'
-                        ]
-                    ]
-                ]
+                            'category' => 'Validate',
+                        ],
+                    ],
+                ],
             ]
         );
     }

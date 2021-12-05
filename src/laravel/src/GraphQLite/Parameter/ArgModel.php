@@ -48,7 +48,9 @@ final class ArgModel implements ArgNamingParameterInterface
         $model = $models[$argValue] ?? null;
 
         if (null === $model && !$this->nullableModel) {
-            throw new GraphQLException(sprintf('Can not found instance by `%s`', $argValue), category:   'InputArgs', extensions: ['field' => $this->argName]);
+            throw new GraphQLException(sprintf('Can not found instance by `%s`', $argValue), category:   'InputArgs', extensions: [
+                'field' => $this->argName,
+            ]);
         }
 
         return $model;
@@ -124,7 +126,7 @@ final class ArgModel implements ArgNamingParameterInterface
             }
         }
 
-        return array_filter($values, fn($value) => null !== $value);
+        return array_filter($values, fn ($value) => null !== $value);
     }
 
     private function collectInputValueFromFieldNode(string $fieldName, FieldNode $node, array $variables): mixed

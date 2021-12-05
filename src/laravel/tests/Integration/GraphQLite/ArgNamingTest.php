@@ -28,8 +28,8 @@ GQL;
         $response->assertJson(
             [
                 'data' => [
-                    'arg_naming_tests' => 'input: test'
-                ]
+                    'arg_naming_tests' => 'input: test',
+                ],
             ],
             true
         );

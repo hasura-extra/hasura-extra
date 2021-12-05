@@ -28,12 +28,10 @@ final class GateTest extends TestCase
     {
         $gate = $this->app[Gate::class];
         $user = new class([]) extends GenericUser {
-
             public function getRoles(): array
             {
                 return ['user', 'manager'];
             }
-
         };
 
         $this->assertFalse($gate->forUser($user)->check('anonymous'));

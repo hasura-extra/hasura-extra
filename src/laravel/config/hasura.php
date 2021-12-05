@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     /*
      * Hasura base uri.
@@ -43,7 +45,7 @@ return [
         /*
          * Set of enhancers implements \Hasura\AuthHook\SessionVariableEnhancerInterface support to enhance session variables of request.
          */
-        'session_variable_enhancers' => []
+        'session_variable_enhancers' => [],
     ],
     'metadata' => [
         /*
@@ -61,7 +63,7 @@ return [
             // If you want to add the remote schema permission state processor below, please make sure you had config `remote_schema_name` above.
             // \Hasura\GraphQLiteBridge\RemoteSchemaPermissionStateProcessor::class,
             \Hasura\Metadata\InheritedRolesStateProcessor::class,
-        ]
+        ],
     ],
     'sailor' => [
         /*
@@ -94,7 +96,7 @@ return [
             /*
              * Set of route middleware, please not use `auth` middleware because this route will handle both user and anonymous requests.
              */
-            'middleware' => []
+            'middleware' => [],
         ],
         'table_event' => [
             /*
@@ -109,7 +111,7 @@ return [
              * Set of route middleware,
              * `hasura` guard will be use basic auth with fixed user `hasura` and password's `app_secret` config value above.
              */
-            'middleware' => ['auth:hasura']
-        ]
-    ]
+            'middleware' => ['auth:hasura'],
+        ],
+    ],
 ];

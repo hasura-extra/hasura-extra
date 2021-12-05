@@ -1,7 +1,8 @@
 <?php
 
-return [
+declare(strict_types=1);
 
+return [
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -231,5 +232,4 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
-
 ];

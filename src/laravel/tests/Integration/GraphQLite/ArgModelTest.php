@@ -29,8 +29,8 @@ GQL;
         $response->assertExactJson(
             [
                 'data' => [
-                    'entities' => [1, 'email2@example.org']
-                ]
+                    'entities' => [1, 'email2@example.org'],
+                ],
             ]
         );
     }
@@ -52,10 +52,10 @@ GQL;
                     [
                         'extensions' => [
                             'category' => 'InputArgs',
-                            'field' => 'id'
-                        ]
-                    ]
-                ]
+                            'field' => 'id',
+                        ],
+                    ],
+                ],
             ]
         );
     }
@@ -82,7 +82,7 @@ GQL;
                     'm1' => 1,
                     'm2' => 2,
                     'm3' => 3,
-                ]
+                ],
             ]
         );
 

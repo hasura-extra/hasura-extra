@@ -26,7 +26,7 @@ trait EventDispatcher
 
         $this->app->singleton(
             TableEventRequestHandler::class,
-            static fn($app) => new TableEventRequestHandler(
+            static fn ($app) => new TableEventRequestHandler(
                 $app[Psr14EventDispatcher::class],
                 new Psr17Factory()
             )
