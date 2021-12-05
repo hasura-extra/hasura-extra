@@ -28,12 +28,10 @@ final class GateRoleCheckerTest extends TestCase
     public function testCheckAuthenticatedUser(): void
     {
         $user = new class([]) extends GenericUser {
-
             public function getRoles(): array
             {
                 return ['user', 'manager'];
             }
-
         };
 
         $checker = new GateRoleChecker('anonymous', new InheritanceRole([]));

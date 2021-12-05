@@ -17,7 +17,9 @@ final class InheritanceRoleTest extends TestCase
 {
     public function testGetReachableRoles(): void
     {
-        $instance = new InheritanceRole(['admin' => ['user', 'manager']]);
+        $instance = new InheritanceRole([
+            'admin' => ['user', 'manager'],
+        ]);
 
         $this->assertSame(['admin', 'user', 'manager'], $instance->getReachableRoleNames(['admin']));
     }

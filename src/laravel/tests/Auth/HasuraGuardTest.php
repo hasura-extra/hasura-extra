@@ -18,12 +18,16 @@ final class HasuraGuardTest extends TestCase
 {
     public function testValidCredentials(): void
     {
-        $request = Request::create('/', server: ['HTTP_AUTHORIZATION' => 'Basic ' . base64_encode('hasura:test')]);
+        $request = Request::create('/', server: [
+            'HTTP_AUTHORIZATION' => 'Basic ' . base64_encode('hasura:test'),
+        ]);
 
         $requestGuard = $this->app['auth']->guard('hasura');
         $requestGuard->setRequest($request);
 
-        $this->assertTrue($requestGuard->validate(['request' => $request]));
+        $this->assertTrue($requestGuard->validate([
+            'request' => $request,
+        ]));
         $this->assertInstanceOf(GenericUser::class, $requestGuard->user());
     }
 
@@ -36,27 +40,37 @@ final class HasuraGuardTest extends TestCase
 
         $requestGuard = $this->app['auth']->guard('hasura');
 
-        $this->assertFalse($requestGuard->validate(['request' => $request]));
+        $this->assertFalse($requestGuard->validate([
+            'request' => $request,
+        ]));
     }
 
     public function badCredentials(): array
     {
         return [
             [
-                []
+                [],
             ],
             [
-                ['HTTP_AUTHORIZATION' => '']
+                [
+                    'HTTP_AUTHORIZATION' => '',
+                ],
             ],
             [
-                ['HTTP_AUTHORIZATION' => 'Basic ' . base64_encode(':test')]
+                [
+                    'HTTP_AUTHORIZATION' => 'Basic ' . base64_encode(':test'),
+                ],
             ],
             [
-                ['HTTP_AUTHORIZATION' => 'Basic ' . base64_encode('hasura:')]
+                [
+                    'HTTP_AUTHORIZATION' => 'Basic ' . base64_encode('hasura:'),
+                ],
             ],
             [
-                ['HTTP_AUTHORIZATION' => 'Basic ' . base64_encode('h:t')]
-            ]
+                [
+                    'HTTP_AUTHORIZATION' => 'Basic ' . base64_encode('h:t'),
+                ],
+            ],
         ];
     }
 }

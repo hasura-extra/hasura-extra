@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     /*
      * Hasura base uri.
@@ -26,7 +28,9 @@ return [
         /*
          * Defines inherited roles will use authorize checking and persist to Hasura inherited roles.
          */
-        'inherited_roles' => ['manager' => ['leader']],
+        'inherited_roles' => [
+            'manager' => ['leader'],
+        ],
         /*
          * Default role for authenticated user when user not request role via `x-hasura-role` header.
          */
@@ -39,8 +43,8 @@ return [
          * Set of enhancers implements \Hasura\AuthHook\SessionVariableEnhancerInterface support to enhance session variables of request.
          */
         'session_variable_enhancers' => [
-            \Hasura\Laravel\Tests\Fixture\App\Hasura\AuthenticatedSessionVariableEnhancer::class
-        ]
+            \Hasura\Laravel\Tests\Fixture\App\Hasura\AuthenticatedSessionVariableEnhancer::class,
+        ],
     ],
     'metadata' => [
         /*
@@ -57,7 +61,7 @@ return [
             \Hasura\Metadata\ReloadStateProcessor::class,
             \Hasura\GraphQLiteBridge\RemoteSchemaPermissionStateProcessor::class,
             \Hasura\Metadata\InheritedRolesStateProcessor::class,
-        ]
+        ],
     ],
     'sailor' => [
         'executor_path' => app_path('GraphQLExecutors'),
@@ -78,7 +82,7 @@ return [
             /*
              * Set of route middleware.
              */
-            'middleware' => []
+            'middleware' => [],
         ],
         'table_event' => [
             /*
@@ -93,7 +97,7 @@ return [
              * Set of route middleware,
              * `hasura` guard will be use basic auth with fixed user `hasura` and password's `hasura.app_secret` config value above.
              */
-            'middleware' => ['auth:hasura']
-        ]
-    ]
+            'middleware' => ['auth:hasura'],
+        ],
+    ],
 ];

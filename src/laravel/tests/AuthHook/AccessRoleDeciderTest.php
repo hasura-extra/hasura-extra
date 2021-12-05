@@ -23,7 +23,7 @@ final class AccessRoleDeciderTest extends TestCase
     {
         $gate = $this->createMock(Gate::class);
         $gate->expects($this->once())->method('check')->willReturnCallback(
-            static fn(string $role) => $role === 'anonymous'
+            static fn (string $role) => $role === 'anonymous'
         );
 
         $decider = new AccessRoleDecider(
@@ -43,7 +43,7 @@ final class AccessRoleDeciderTest extends TestCase
         $gate
             ->expects($this->exactly(2))
             ->method('check')
-            ->willReturn(false, static fn(string $role) => $role === 'user');
+            ->willReturn(false, static fn (string $role) => $role === 'user');
 
         $decider = new AccessRoleDecider(
             'anonymous',
@@ -62,7 +62,7 @@ final class AccessRoleDeciderTest extends TestCase
         $gate
             ->expects($this->exactly(2))
             ->method('check')
-            ->willReturn(false, static fn(string $role) => $role === 'admin');
+            ->willReturn(false, static fn (string $role) => $role === 'admin');
 
         $serverRequest = $this->createMock(ServerRequestInterface::class);
         $serverRequest->expects($this->once())->method('getHeader')->willReturn(['admin']);

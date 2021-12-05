@@ -52,7 +52,7 @@ final class HasuraServiceProviderTest extends TestCase
         $commands = collect(
             $this->app[ConsoleKernelContract::class]->all()
         )->map(
-            fn(object $command) => $command::class
+            fn (object $command) => $command::class
         )->toArray();
 
         $this->assertContains(ApplyMetadata::class, $commands);
@@ -71,7 +71,10 @@ final class HasuraServiceProviderTest extends TestCase
 
     public function testServicesRegistered(): void
     {
-        $this->assertSame(['driver' => 'hasura', 'provider' => null], $this->app['config']['auth.guards.hasura']);
+        $this->assertSame([
+            'driver' => 'hasura',
+            'provider' => null,
+        ], $this->app['config']['auth.guards.hasura']);
 
         $this->assertTrue($this->app->has('hasura.gate'));
         $this->assertTrue($this->app->has(GateRoleChecker::class));

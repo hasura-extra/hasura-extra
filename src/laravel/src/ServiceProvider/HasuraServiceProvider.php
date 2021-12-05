@@ -27,7 +27,7 @@ final class HasuraServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->publishes(
                 [
-                    $this->getConfigFile() => config_path('hasura.php')
+                    $this->getConfigFile() => config_path('hasura.php'),
                 ],
                 'hasura-config'
             );

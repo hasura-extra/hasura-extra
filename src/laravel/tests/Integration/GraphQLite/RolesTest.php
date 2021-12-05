@@ -25,7 +25,12 @@ GQL;
         $response = $this->graphql($query);
 
         $response->assertSuccessful();
-        $response->assertExactJson(['data' => ['anonymous_roles_test' => 'anonymous']]);
+        $response->assertExactJson([
+            'data' => [
+                'anonymous_roles_test' => 'anonymous',
+                
+            ],
+        ]);
     }
 
     public function testUnauthorized()
@@ -53,6 +58,11 @@ GQL;
         $response = $this->graphql($query);
 
         $response->assertSuccessful();
-        $response->assertExactJson(['data' => ['roles_test' => 'authorized']]);
+        $response->assertExactJson([
+            'data' => [
+                'roles_test' => 'authorized',
+                
+            ],
+        ]);
     }
 }

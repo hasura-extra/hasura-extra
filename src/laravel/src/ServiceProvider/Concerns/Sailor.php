@@ -30,7 +30,7 @@ trait Sailor
         $this->commands(
             [
                 Codegen::class,
-                Introspect::class
+                Introspect::class,
             ]
         );
     }
@@ -39,12 +39,12 @@ trait Sailor
     {
         $this->app->singleton(
             SailorClient::class,
-            static fn($app) => new SailorClient($app[Client::class])
+            static fn ($app) => new SailorClient($app[Client::class])
         );
 
         $this->app->singleton(
             EndpointConfig::class,
-            static fn($app) => new EndpointConfig(
+            static fn ($app) => new EndpointConfig(
                 $app[SailorClient::class],
                 config('hasura.sailor.executor_namespace'),
                 config('hasura.sailor.executor_path'),

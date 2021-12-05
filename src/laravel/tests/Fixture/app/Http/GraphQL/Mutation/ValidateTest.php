@@ -19,7 +19,9 @@ final class ValidateTest
     #[ArgNaming(for: 'email', name: 'email_naming')]
     #[Mutation(name: 'validate_test')]
     public function __invoke(
-        #[Validate(['rule' => 'email'])]
+        #[Validate([
+            'rule' => 'email',
+        ])]
         string $email
     ): string {
         return 'assertion: ' . $email;

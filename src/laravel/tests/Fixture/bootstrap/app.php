@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Orchestra\Testbench\Console\Commander;
 
 $APP_KEY = $_SERVER['APP_KEY'] ?? $_ENV['APP_KEY'] ?? 'AckfSECXIvnK5r28GVIWUAxmbBSjTsmF';
@@ -9,12 +11,12 @@ $config = [
     'laravel' => dirname(__DIR__),
     'env' => [
         'APP_KEY="' . $APP_KEY . '"',
-        'DB_CONNECTION="' . $DB_CONNECTION . '"'
+        'DB_CONNECTION="' . $DB_CONNECTION . '"',
     ],
     'providers' => [
         \TheCodingMachine\GraphQLite\Laravel\Providers\GraphQLiteServiceProvider::class,
-        \Hasura\Laravel\ServiceProvider\HasuraServiceProvider::class
-    ]
+        \Hasura\Laravel\ServiceProvider\HasuraServiceProvider::class,
+    ],
 ];
 
 $app = (new Commander($config, getcwd()))->laravel();

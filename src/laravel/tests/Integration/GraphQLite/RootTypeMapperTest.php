@@ -29,7 +29,9 @@ query Query($json: json!) {
     )
 }
 GQL;
-        $response = $this->graphql($query, ['json' => ['test']]);
+        $response = $this->graphql($query, [
+            'json' => ['test'],
+        ]);
 
         $response->assertSuccessful();
         $response->assertJson(
@@ -37,8 +39,8 @@ GQL;
                 'data' => [
                     'root_type_mapper_test' => [
                         'json' => ['test'],
-                    ]
-                ]
+                    ],
+                ],
             ],
             true
         );
