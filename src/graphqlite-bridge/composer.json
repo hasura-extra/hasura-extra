@@ -14,8 +14,8 @@
     },
     "require": {
         "php": ">=8.0",
-        "hasura-extra/api-client": "^2.1",
-        "hasura-extra/metadata": "^2.1",
+        "hasura-extra/api-client": "^2.2",
+        "hasura-extra/metadata": "^2.2",
         "thecodingmachine/graphqlite": "^5.0"
     },
     "require-dev": {
@@ -31,7 +31,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "2.1-dev"
+            "dev-main": "2.2-dev"
         }
     },
     "minimum-stability": "dev",
