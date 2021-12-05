@@ -22,18 +22,19 @@
         "nyholm/psr7": "^1.0"
     },
     "conflict": {
-        "hasura-extra/sailor-bridge": "<2.0.0",
-        "hasura-extra/event-dispatcher": "<2.0.0",
-        "hasura-extra/api-client": "<2.0.0",
-        "hasura-extra/bundle": "<2.0.0",
-        "hasura-extra/graphqlite-bridge": "<2.0.0",
-        "hasura-extra/metadata": "<2.0.0"
+        "hasura-extra/sailor-bridge": "<2.1.0",
+        "hasura-extra/event-dispatcher": "<2.1.0",
+        "hasura-extra/api-client": "<2.1.0",
+        "hasura-extra/bundle": "<2.1.0",
+        "hasura-extra/graphqlite-bridge": "<2.1.0",
+        "hasura-extra/metadata": "<2.1.0",
+        "hasura-extra/laravel": "<2.1.0"
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "extra": {
         "branch-alias": {
             "dev-main": "2.1-dev"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

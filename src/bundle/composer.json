@@ -38,13 +38,14 @@
         "symfony/security-bundle": "^5.0"
     },
     "conflict": {
-        "hasura-extra/hasura-bundle": "*"
+        "hasura-extra/hasura-bundle": "*",
+        "hasura-extra/laravel": "<2.1.0"
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "extra": {
         "branch-alias": {
             "dev-main": "2.1-dev"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
