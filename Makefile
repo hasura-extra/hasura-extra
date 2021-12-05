@@ -57,3 +57,7 @@ test-bundle:
 .PHONY: test-laravel
 test-laravel:
 	./vendor/bin/phpunit src/laravel
+
+.PHONY: changelog
+changelog:
+	github_changelog_generator -u hasura-extra -p hasura-extra --exclude-tags-regex "helm-chart-*"
