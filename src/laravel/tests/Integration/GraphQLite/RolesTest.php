@@ -28,7 +28,6 @@ GQL;
         $response->assertExactJson([
             'data' => [
                 'anonymous_roles_test' => 'anonymous',
-                
             ],
         ]);
     }
@@ -61,7 +60,6 @@ GQL;
         $response->assertExactJson([
             'data' => [
                 'roles_test' => 'authorized',
-                
             ],
         ]);
     }
