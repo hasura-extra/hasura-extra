@@ -60,4 +60,4 @@ test-laravel:
 
 .PHONY: changelog
 changelog:
-	github_changelog_generator -u hasura-extra -p hasura-extra --exclude-tags-regex "helm-chart-*"
+	docker run -it --rm -v "$(PWD)":/usr/local/src/your-app ferrarimarco/github-changelog-generator -u hasura-extra -p hasura-extra --exclude-tags-regex "helm-chart-*" --output= --unreleased-only --token=$$GITHUB_TOKEN --no-issues --usernames-as-github-logins --no-verbose
