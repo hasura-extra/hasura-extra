@@ -20,8 +20,11 @@ use TheCodingMachine\GraphQLite\QueryFieldDescriptor;
 
 final class TransactionalMiddleware implements FieldMiddlewareInterface
 {
-    public function __construct(private ?ManagerRegistry $registry)
+    private $registry;
+
+    public function __construct(?ManagerRegistry $registry)
     {
+        $this->registry = $registry;
     }
 
     public function process(

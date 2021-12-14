@@ -14,8 +14,6 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Validator\Constraints\GroupSequence;
 use Symfony\Component\Validator\ConstraintViolation;
-use Symfony\Component\Validator\ConstraintViolationInterface;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use TheCodingMachine\GraphQLite\Annotations\Field;
 use TheCodingMachine\GraphQLite\Validator\ValidationFailedException;
@@ -46,66 +44,26 @@ final class Executor
             return;
         }
 
-        $this->ensureViolationPropertyPaths($value, $violations, $atPath);
+        foreach ($violations as $pos => $violation) {
+            $violation = $this->ensureViolationPropertyPath($value, $violation, $atPath, $customViolationPropertyPaths);
 
-        if (null !== $customViolationPropertyPaths) {
-            $this->customViolationPropertyPaths($violations, $customViolationPropertyPaths);
+            $violations->set($pos, $violation);
         }
 
         throw new ValidationFailedException($violations);
     }
 
-    private function customViolationPropertyPaths(
-        ConstraintViolationListInterface $violations,
-        array $customViolationPropertyPaths
-    ): void {
-        foreach ($violations as $pos => $violation) {
-            /** @var ConstraintViolationInterface $violation */
-            $propertyPath = $violation->getPropertyPath();
-
-            if (isset($customViolationPropertyPaths[$propertyPath])) {
-                $violation = $this->remapViolationPropertyPath(
-                    $violation,
-                    $customViolationPropertyPaths[$propertyPath]
-                );
-
-                $violations->set($pos, $violation);
-            }
-        }
-    }
-
-    private function ensureViolationPropertyPaths(
-        object $value,
-        ConstraintViolationListInterface $violations,
-        string $atPath
-    ): void {
-        $refClass = new \ReflectionClass($value);
-
-        foreach ($violations as $pos => $violation) {
-            $violation = $this->ensureViolationPropertyPath($value, $refClass, $violation);
-            $violation = $this->remapViolationPropertyPath(
-                $violation,
-                sprintf(
-                    '%s.%s',
-                    $atPath,
-                    $violation->getPropertyPath()
-                )
-            );
-
-            $violations->set($pos, $violation);
-        }
-    }
-
     private function ensureViolationPropertyPath(
         object $instance,
-        \ReflectionClass $refClass,
         ConstraintViolation $violation,
+        string $atPath,
+        ?array $customViolationPropertyPaths
     ): ConstraintViolation {
         $parts = explode('.', $violation->getPropertyPath());
 
         foreach ($parts as &$part) {
             try {
-                $refProperty = $refClass->getProperty($part);
+                $refProperty = new \ReflectionProperty($instance, $part);
             } catch (\ReflectionException) {
                 break;
             }
@@ -119,16 +77,17 @@ final class Executor
             $part = end($fieldAttributes)->newInstance()->getName() ?? $part;
 
             $refProperty->setAccessible(true);
+
             $instance = $refProperty->getValue($instance);
 
-            if (is_object($instance)) {
-                $refClass = new \ReflectionClass($instance);
-            } else {
+            if (!is_object($instance)) {
                 break;
             }
         }
 
-        return $this->remapViolationPropertyPath($violation, implode('.', $parts));
+        $path = sprintf('%s.%s', $atPath, implode('.', $parts));
+
+        return $this->remapViolationPropertyPath($violation, $customViolationPropertyPaths[$path] ?? $path);
     }
 
     private function remapViolationPropertyPath(ConstraintViolation $violation, string $path): ConstraintViolation

@@ -19,12 +19,18 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 final class AccessRoleDecider implements AccessRoleDeciderInterface
 {
+    private $tokenStorage;
+
+    private $authorizationChecker;
+
     public function __construct(
         private string $anonymousRole,
         private string $defaultRole,
-        private ?TokenStorageInterface $tokenStorage,
-        private ?AuthorizationCheckerInterface $authorizationChecker,
+        ?TokenStorageInterface $tokenStorage,
+        ?AuthorizationCheckerInterface $authorizationChecker,
     ) {
+        $this->tokenStorage = $tokenStorage;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function decideAccessRole(ServerRequestInterface $request): string

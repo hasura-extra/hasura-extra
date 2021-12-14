@@ -23,8 +23,11 @@ use TheCodingMachine\GraphQLite\Parameters\ParameterInterface;
 
 final class ArgEntityMiddleware implements ParameterMiddlewareInterface
 {
-    public function __construct(private ?ManagerRegistry $registry)
+    private $registry;
+
+    public function __construct(?ManagerRegistry $registry)
     {
+        $this->registry = $registry;
     }
 
     public function mapParameter(

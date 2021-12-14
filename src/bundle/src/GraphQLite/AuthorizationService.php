@@ -15,8 +15,11 @@ use TheCodingMachine\GraphQLite\Security\AuthorizationServiceInterface;
 
 final class AuthorizationService implements AuthorizationServiceInterface
 {
-    public function __construct(private ?AuthorizationCheckerInterface $authorizationChecker)
+    private $authorizationChecker;
+
+    public function __construct(?AuthorizationCheckerInterface $authorizationChecker)
     {
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function isAllowed(string $right, $subject = null): bool
