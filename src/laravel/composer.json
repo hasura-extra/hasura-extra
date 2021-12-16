@@ -15,12 +15,12 @@
     },
     "require": {
         "php": ">=8.0",
-        "hasura-extra/auth-hook": "^2.1.2",
-        "hasura-extra/api-client": "^2.1.2",
-        "hasura-extra/metadata": "^2.1.2",
-        "hasura-extra/event-dispatcher": "^2.1.2",
-        "hasura-extra/graphqlite-bridge": "^2.1.2",
-        "hasura-extra/sailor-bridge": "^2.1.2",
+        "hasura-extra/auth-hook": "^2.2",
+        "hasura-extra/api-client": "^2.2",
+        "hasura-extra/metadata": "^2.2",
+        "hasura-extra/event-dispatcher": "^2.2",
+        "hasura-extra/graphqlite-bridge": "^2.2",
+        "hasura-extra/sailor-bridge": "^2.2",
         "thecodingmachine/graphqlite-laravel": "^5.0",
         "laravel/framework": "^8.0",
         "symfony/psr7-pack": "^1.0"
