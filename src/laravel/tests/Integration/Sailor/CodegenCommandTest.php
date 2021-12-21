@@ -50,7 +50,7 @@ GQL;
 
         $tester->assertSuccessful();
 
-        $articlesClass = config('hasura.sailor.executor_namespace') . '\\Articles';
+        $articlesClass = config('hasura.sailor.executor_namespace') . '\Operations\Articles';
 
         $this->assertTrue(class_exists($articlesClass));
 

@@ -16,11 +16,11 @@
         "php": ">=8.0",
         "hasura-extra/api-client": "^2.2",
         "hasura-extra/metadata": "^2.2",
-        "thecodingmachine/graphqlite": "^5.0"
+        "thecodingmachine/graphqlite": "^5.0",
+        "symfony/uid": "^5.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.5",
-        "symfony/uid": "^5.0"
+        "phpunit/phpunit": "^9.5"
     },
     "conflict": {
         "hasura-extra/sailor-bridge": "<2.1.2",

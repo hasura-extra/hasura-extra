@@ -42,7 +42,7 @@ GQL;
         $this->assertStringContainsString('[OK] Generated successfully!', $codegenCommandTester->getDisplay());
 
         // Check can generated Articles class
-        $articlesClass = self::getContainer()->getParameter('hasura.sailor.executor_namespace') . '\Articles';
+        $articlesClass = self::getContainer()->getParameter('hasura.sailor.executor_namespace') . '\Operations\Articles';
 
         $this->assertTrue(class_exists($articlesClass));
 
