@@ -1,0 +1,7 @@
+query UserAttributes($attribute: jsonb) {
+    userAttributes: _attributes_user_attributes(where: {attribute: {_contains: $attribute}}) {
+        id
+        sender_id
+        attribute
+    }
+}

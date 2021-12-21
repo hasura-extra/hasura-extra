@@ -19,7 +19,7 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class TestCase extends PHPTestCase
 {
-    protected const EXECUTOR_PATH = __DIR__ . '/.executor';
+    protected const EXECUTOR_PATH = __DIR__ . '/Fixture/Generation';
 
     protected const SCHEMA_PATH = __DIR__ . '/Fixture/schema.graphql';
 
@@ -34,7 +34,7 @@ class TestCase extends PHPTestCase
         $apiClient = new Client('http://localhost:8080', 'test');
         $config = new EndpointConfig(
             new SailorClient($apiClient),
-            'App\GraphqlExecutor',
+            'Hasura\SailorBridge\Tests\Fixture\Generation',
             self::EXECUTOR_PATH,
             self::QUERY_SPEC_PATH,
             self::SCHEMA_PATH

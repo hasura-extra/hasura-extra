@@ -20,15 +20,6 @@ final class Uuid extends AbstractScalar
 {
     public const NAME = 'uuid';
 
-    public function __construct()
-    {
-        if (!class_exists(SymfonyUuid::class)) {
-            throw new \RuntimeException('You need to be install symfony/uid Composer package to use `uuid` type!');
-        }
-
-        parent::__construct();
-    }
-
     public function serialize($value)
     {
         if (!$value instanceof SymfonyUuid) {

@@ -8,7 +8,7 @@
         "psr/event-dispatcher": "^1.0",
         "psr/http-factory": "^1.0",
         "psr/http-server-handler": "^1.0",
-        "spawnia/sailor": "^v0.10",
+        "spawnia/sailor": "^v0.14",
         "symfony/console": "^5.0",
         "symfony/dependency-injection": "^5.0",
         "symfony/filesystem": "^5.0",
@@ -17,6 +17,7 @@
         "symfony/http-kernel": "^5.0",
         "symfony/psr7-pack": "^1.0",
         "symfony/string": "^5.0",
+        "symfony/uid": "^5.0",
         "symfony/yaml": "^5.0",
         "thecodingmachine/graphqlite": "^5.0",
         "thecodingmachine/graphqlite-bundle": "^5.0",
@@ -32,7 +33,6 @@
         "symfony/orm-pack": "^2.1",
         "symfony/security-bundle": "^5.0",
         "symfony/test-pack": "^1.0",
-        "symfony/uid": "^5.0",
         "symplify/easy-coding-standard": "^9.4",
         "symplify/monorepo-builder": "dev-main"
     },
@@ -61,6 +61,13 @@
             "Hasura\\Laravel\\Tests\\Fixture\\App\\": "src/laravel/tests/Fixture/app",
             "Hasura\\Metadata\\Tests\\": "src/metadata/tests",
             "Hasura\\SailorBridge\\Tests\\": "src/sailor-bridge/tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Hasura\\Laravel\\ServiceProvider\\HasuraServiceProvider"
+            ]
         }
     },
     "replace": {
