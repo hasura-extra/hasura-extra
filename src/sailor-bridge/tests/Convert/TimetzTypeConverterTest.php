@@ -8,34 +8,34 @@
 
 declare(strict_types=1);
 
-namespace Hasura\SailorBridge\Tests\Converter;
+namespace Hasura\SailorBridge\Tests\Convert;
 
-use Hasura\SailorBridge\Converter\TimestamptzTypeConverter;
+use Hasura\SailorBridge\Convert\TimetzTypeConverter;
 use PHPUnit\Framework\TestCase;
 
-final class TimestamptzTypeConverterTest extends TestCase
+final class TimetzTypeConverterTest extends TestCase
 {
     public function testConvert(): void
     {
-        $converter = new TimestamptzTypeConverter();
-        $timestamptz = $converter->fromGraphQL('2021-12-21T08:17:55+0000');
-        $this->assertInstanceOf(\DateTimeImmutable::class, $timestamptz);
-        $this->assertSame('2021-12-21T08:17:55+0000', $converter->toGraphQL($timestamptz));
+        $converter = new TimetzTypeConverter();
+        $timetz = $converter->fromGraphQL('08:17:55+0000');
+        $this->assertInstanceOf(\DateTimeImmutable::class, $timetz);
+        $this->assertSame('08:17:55+0000', $converter->toGraphQL($timetz));
     }
 
     public function testConvertToGraphQLThrowException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        $converter = new TimestamptzTypeConverter();
-        $converter->toGraphQL('2021-12-21');
+        $converter = new TimetzTypeConverter();
+        $converter->toGraphQL('08:17:55');
     }
 
     public function testConvertFromGraphQLThrowException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        $converter = new TimestamptzTypeConverter();
+        $converter = new TimetzTypeConverter();
         $converter->fromGraphQL(true);
     }
 }

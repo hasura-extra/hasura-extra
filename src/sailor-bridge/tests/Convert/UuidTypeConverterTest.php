@@ -8,10 +8,9 @@
 
 declare(strict_types=1);
 
-namespace Hasura\SailorBridge\Tests\Converter;
+namespace Hasura\SailorBridge\Tests\Convert;
 
-use Hasura\SailorBridge\Converter\TimetzTypeConverter;
-use Hasura\SailorBridge\Converter\UuidTypeConverter;
+use Hasura\SailorBridge\Convert\UuidTypeConverter;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Uid\Uuid;
 

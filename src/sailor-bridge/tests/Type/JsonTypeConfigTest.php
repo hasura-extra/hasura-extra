@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace Hasura\SailorBridge\Tests\Type;
 
-use Hasura\SailorBridge\Converter\JsonTypeConverter;
+use Hasura\SailorBridge\Convert\JsonTypeConverter;
 use Hasura\SailorBridge\Type\JsonTypeConfig;
 use PHPUnit\Framework\TestCase;
 

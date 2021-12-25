@@ -8,12 +8,12 @@
 
 declare(strict_types=1);
 
-namespace Hasura\SailorBridge\Converter;
+namespace Hasura\SailorBridge\Convert;
 
-final class TimetzTypeConverter extends AbstractDateTimeTypeConverter
+final class TimestamptzTypeConverter extends AbstractDateTimeTypeConverter
 {
     protected function getFormat(): string
     {
-        return 'H:i:sO';
+        return DATE_ISO8601;
     }
 }

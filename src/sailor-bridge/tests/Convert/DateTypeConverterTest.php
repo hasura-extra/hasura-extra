@@ -8,9 +8,9 @@
 
 declare(strict_types=1);
 
-namespace Hasura\SailorBridge\Tests\Converter;
+namespace Hasura\SailorBridge\Tests\Convert;
 
-use Hasura\SailorBridge\Converter\DateTypeConverter;
+use Hasura\SailorBridge\Convert\DateTypeConverter;
 use PHPUnit\Framework\TestCase;
 
 final class DateTypeConverterTest extends TestCase

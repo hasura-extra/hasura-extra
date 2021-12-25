@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace Hasura\SailorBridge\Converter;
+namespace Hasura\SailorBridge\Convert;
 
 use Spawnia\Sailor\Convert\TypeConverter as TypeConverterInterface;
 use Symfony\Component\Uid\Uuid;

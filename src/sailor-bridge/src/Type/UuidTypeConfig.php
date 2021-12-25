@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace Hasura\SailorBridge\Type;
 
-use Hasura\SailorBridge\Converter\UuidTypeConverter;
+use Hasura\SailorBridge\Convert\UuidTypeConverter;
 use Spawnia\Sailor\Type\TypeConfig as TypeConfigInterface;
 use Symfony\Component\Uid\Uuid;
 
