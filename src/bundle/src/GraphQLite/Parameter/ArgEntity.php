@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace Hasura\Bundle\GraphQLite\Parameter;
 
-use Doctrine\Persistence\ObjectRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Language\AST\FieldNode;
 use GraphQL\Language\AST\FragmentSpreadNode;
 use GraphQL\Language\AST\SelectionSetNode;
@@ -31,13 +31,13 @@ final class ArgEntity implements ArgNamingParameterInterface
     use ArgNamingParameterTrait;
 
     public function __construct(
-        private ObjectRepository $repository,
+        private EntityManagerInterface $em,
+        private string $entityClass,
         string $name,
         string $argName,
         private string $fieldName,
         private string $inputType,
         private bool $nullableEntity,
-        private bool $isIdentifierField
     ) {
         $this->name = $name;
         $this->argName = $argName;
@@ -50,7 +50,9 @@ final class ArgEntity implements ArgNamingParameterInterface
             'Int' => Type::int(),
             'uuid' => Uuid::getInstance(),
             'String' => Type::string(),
-            default => throw new GraphQLRuntimeException(sprintf('Only support arg input type: `Int`, `ID`, `uuid` and `String`, given `%s`.', $this->inputType))
+            default => throw new GraphQLRuntimeException(
+                sprintf('Only support arg input type: `Int`, `ID`, `uuid` and `String`, given `%s`.', $this->inputType)
+            )
         };
 
         return new NonNull($type);
@@ -68,20 +70,15 @@ final class ArgEntity implements ArgNamingParameterInterface
 
     protected function doResolve(?object $source, array $args, $context, ResolveInfo $info): ?object
     {
-        if ($this->isIdentifierField) {
-            $this->resolveNPlusOne($info);
-
-            $entity = $this->repository->find($args[$this->name]);
-        } else {
-            $entity = $this->repository->findOneBy([
-                $this->fieldName => $args[$this->name],
-            ]);
-        }
+        $index = $args[$this->name];
+        $entity = $this->getEntities($info)[$index] ?? null;
 
         if (null === $entity && !$this->nullableEntity) {
-            throw new GraphQLException(sprintf('Can not found instance by `%s`', $args[$this->name]), category: 'input_args', extensions: [
-                'field' => $this->argName,
-            ]);
+            throw new GraphQLException(
+                            sprintf('Can not found instance by `%s`', $args[$this->name]),
+                category:   'input_args',
+                extensions: ['field' => $this->argName]
+            );
         }
 
         /** @var SymfonyRequestContextInterface $context */
@@ -93,54 +90,70 @@ final class ArgEntity implements ArgNamingParameterInterface
         return $entity;
     }
 
-    private function resolveNPlusOne(ResolveInfo $resolveInfo): void
+    private function getEntities(ResolveInfo $resolveInfo): array
     {
-        static $caches = [];
+        // resolve N+1
+        static $entitiesStack = [];
 
-        $cacheKey = sprintf('%s/%s/%s', spl_object_hash($resolveInfo->operation), $this->fieldName, $this->argName);
+        $cacheKey = sprintf(
+            '%s/%s/%s/%s',
+            $this->entityClass,
+            spl_object_hash($resolveInfo->operation),
+            $this->fieldName,
+            $this->argName
+        );
 
-        if (!isset($caches[$cacheKey])) {
-            $caches[$cacheKey] = true;
-
-            $ids = $this->collectIdsFromSelectionSet(
+        if (!isset($entitiesStack[$cacheKey])) {
+            $entitiesStack[$cacheKey] = [];
+            $metadata = $this->em->getClassMetadata($this->entityClass);
+            $connection = $this->em->getConnection();
+            $repo = $this->em->getRepository($this->entityClass);
+            $values = $this->collectInputValuesFromSelectionSet(
                 $resolveInfo->fieldName,
                 $resolveInfo->operation->selectionSet,
                 $resolveInfo->fragments,
                 $resolveInfo->variableValues
             );
+            $result = $repo->findBy([$this->fieldName => $values]);
 
-            $this->repository->findBy([
-                $this->fieldName => $ids,
-            ]);
+            foreach ($result as $item) {
+                $index = $connection->convertToDatabaseValue(
+                    $metadata->getFieldValue($item, $this->fieldName),
+                    $metadata->getTypeOfField($this->fieldName)
+                );
+                $entitiesStack[$cacheKey][$index] = $item;
+            }
         }
+
+        return $entitiesStack[$cacheKey];
     }
 
-    private function collectIdsFromSelectionSet(
+    private function collectInputValuesFromSelectionSet(
         string $fieldName,
         SelectionSetNode $setNode,
         array $fragments,
         array $variables
     ): array {
-        $ids = [];
+        $values = [];
 
         foreach ($setNode->selections as $selection) {
             if ($selection instanceof FieldNode) {
-                $ids[] = $this->collectIdFromFieldNode($fieldName, $selection, $variables);
+                $values[] = $this->collectInputValueFromFieldNode($fieldName, $selection, $variables);
             } elseif ($selection instanceof FragmentSpreadNode) {
                 $subSetNode = $fragments[$selection->name->value]->selectionSet;
-                $ids = array_merge(
-                    $ids,
-                    $this->collectIdsFromSelectionSet($fieldName, $subSetNode, $fragments, $variables)
+                $values = array_merge(
+                    $values,
+                    $this->collectInputValuesFromSelectionSet($fieldName, $subSetNode, $fragments, $variables)
                 );
             } else {
                 throw new \LogicException('Selection node should be `FieldNode` or `FragmentSpreadNode`');
             }
         }
 
-        return array_filter($ids, fn ($value) => null !== $value);
+        return array_filter($values, fn($value) => null !== $value);
     }
 
-    private function collectIdFromFieldNode(string $fieldName, FieldNode $node, array $variables): mixed
+    private function collectInputValueFromFieldNode(string $fieldName, FieldNode $node, array $variables): mixed
     {
         if ($node->name->value !== $fieldName) {
             return null;

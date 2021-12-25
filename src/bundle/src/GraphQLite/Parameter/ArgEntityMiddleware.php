@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 namespace Hasura\Bundle\GraphQLite\Parameter;
 
-use Doctrine\ORM\Mapping\MappingException;
 use Doctrine\Persistence\ManagerRegistry;
 use Hasura\Bundle\GraphQLite\Attribute\ArgEntity as ArgEntityAttribute;
 use phpDocumentor\Reflection\DocBlock;
@@ -61,26 +60,26 @@ final class ArgEntityMiddleware implements ParameterMiddlewareInterface
         $em = $this->registry->getManager($attribute->getEntityManager());
         $entityClass = $parameterType->getName();
 
-        if (!$em->getMetadataFactory()->isTransient($entityClass)) {
-            $metadata = $em->getClassMetadata($entityClass);
-
-            try {
-                $isIdentifierField = $metadata->getSingleIdentifierFieldName() === $attribute->getFieldName();
-            } catch (MappingException) {
-                $isIdentifierField = false;
-            }
-
-            return new ArgEntity(
-                $em->getRepository($parameterType->getName()),
-                $parameter->getName(),
-                $attribute->getArgName(),
-                $attribute->getFieldName(),
-                $attribute->getInputType(),
-                $parameter->allowsNull(),
-                $isIdentifierField
-            );
-        } else {
+        if ($em->getMetadataFactory()->isTransient($entityClass)) {
             throw new GraphQLRuntimeException(sprintf('`%s` is not an entity class!', $parameterType->getName()));
         }
+
+        $metadata = $em->getClassMetadata($entityClass);
+
+        if (!$metadata->hasField($attribute->getFieldName())) {
+            throw new GraphQLRuntimeException(
+                sprintf('Entity class: `%s` not have field: `%s`.', $entityClass, $attribute->getFieldName())
+            );
+        }
+
+        return new ArgEntity(
+            $em,
+            $entityClass,
+            $parameter->getName(),
+            $attribute->getArgName(),
+            $attribute->getFieldName(),
+            $attribute->getInputType(),
+            $parameter->allowsNull(),
+        );
     }
 }
