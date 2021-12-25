@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace Hasura\Bundle\GraphQLite\Parameter;
 
-use Doctrine\Persistence\ObjectRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Language\AST\FieldNode;
 use GraphQL\Language\AST\FragmentSpreadNode;
 use GraphQL\Language\AST\SelectionSetNode;
@@ -31,7 +31,8 @@ final class ArgEntity implements ArgNamingParameterInterface
     use ArgNamingParameterTrait;
 
     public function __construct(
-        private ObjectRepository $repository,
+        private EntityManagerInterface $em,
+        private string $entityClass,
         string $name,
         string $argName,
         private string $fieldName,
@@ -96,7 +97,7 @@ final class ArgEntity implements ArgNamingParameterInterface
 
         $cacheKey = sprintf(
             '%s/%s/%s/%s',
-            get_class($this->repository),
+            $this->entityClass,
             spl_object_hash($resolveInfo->operation),
             $this->fieldName,
             $this->argName
@@ -104,18 +105,22 @@ final class ArgEntity implements ArgNamingParameterInterface
 
         if (!isset($entitiesStack[$cacheKey])) {
             $entitiesStack[$cacheKey] = [];
+            $metadata = $this->em->getClassMetadata($this->entityClass);
+            $connection = $this->em->getConnection();
+            $repo = $this->em->getRepository($this->entityClass);
             $values = $this->collectInputValuesFromSelectionSet(
                 $resolveInfo->fieldName,
                 $resolveInfo->operation->selectionSet,
                 $resolveInfo->fragments,
                 $resolveInfo->variableValues
             );
-            $result = $this->repository->findBy([$this->fieldName => $values]);
+            $result = $repo->findBy([$this->fieldName => $values]);
 
             foreach ($result as $item) {
-                $refProp = new \ReflectionProperty($item, $this->fieldName);
-                $refProp->setAccessible(true);
-                $index = $refProp->getValue($item);
+                $index = $connection->convertToDatabaseValue(
+                    $metadata->getFieldValue($item, $this->fieldName),
+                    $metadata->getTypeOfField($this->fieldName)
+                );
                 $entitiesStack[$cacheKey][$index] = $item;
             }
         }

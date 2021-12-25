@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 namespace Hasura\Bundle\GraphQLite\Parameter;
 
-use Doctrine\ORM\Mapping\MappingException;
 use Doctrine\Persistence\ManagerRegistry;
 use Hasura\Bundle\GraphQLite\Attribute\ArgEntity as ArgEntityAttribute;
 use phpDocumentor\Reflection\DocBlock;
@@ -67,8 +66,15 @@ final class ArgEntityMiddleware implements ParameterMiddlewareInterface
 
         $metadata = $em->getClassMetadata($entityClass);
 
+        if (!$metadata->hasField($attribute->getFieldName())) {
+            throw new GraphQLRuntimeException(
+                sprintf('Entity class: `%s` not have field: `%s`.', $entityClass, $attribute->getFieldName())
+            );
+        }
+
         return new ArgEntity(
-            $em->getRepository($parameterType->getName()),
+            $em,
+            $entityClass,
             $parameter->getName(),
             $attribute->getArgName(),
             $attribute->getFieldName(),
