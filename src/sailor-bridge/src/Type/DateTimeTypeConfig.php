@@ -10,9 +10,9 @@ declare(strict_types=1);
 
 namespace Hasura\SailorBridge\Type;
 
-use Hasura\SailorBridge\Converter\DateTypeConverter;
-use Hasura\SailorBridge\Converter\TimestamptzTypeConverter;
-use Hasura\SailorBridge\Converter\TimetzTypeConverter;
+use Hasura\SailorBridge\Convert\DateTypeConverter;
+use Hasura\SailorBridge\Convert\TimestamptzTypeConverter;
+use Hasura\SailorBridge\Convert\TimetzTypeConverter;
 use Spawnia\Sailor\Type\TypeConfig as TypeConfigInterface;
 
 final class DateTimeTypeConfig implements TypeConfigInterface

@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace Hasura\SailorBridge\Type;
 
-use Hasura\SailorBridge\Converter\JsonTypeConverter;
+use Hasura\SailorBridge\Convert\JsonTypeConverter;
 use Spawnia\Sailor\Type\TypeConfig as TypeConfigInterface;
 
 final class JsonTypeConfig implements TypeConfigInterface

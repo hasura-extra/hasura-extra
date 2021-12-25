@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace Hasura\SailorBridge\Tests\Type;
 
-use Hasura\SailorBridge\Converter\UuidTypeConverter;
+use Hasura\SailorBridge\Convert\UuidTypeConverter;
 use Hasura\SailorBridge\Type\UuidTypeConfig;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Uid\Uuid;

@@ -8,9 +8,9 @@
 
 declare(strict_types=1);
 
-namespace Hasura\SailorBridge\Tests\Converter;
+namespace Hasura\SailorBridge\Tests\Convert;
 
-use Hasura\SailorBridge\Converter\JsonTypeConverter;
+use Hasura\SailorBridge\Convert\JsonTypeConverter;
 use PHPUnit\Framework\TestCase;
 
 final class JsonTypeConverterTest extends TestCase
