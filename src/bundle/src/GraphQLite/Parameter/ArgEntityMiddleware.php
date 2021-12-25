@@ -61,26 +61,19 @@ final class ArgEntityMiddleware implements ParameterMiddlewareInterface
         $em = $this->registry->getManager($attribute->getEntityManager());
         $entityClass = $parameterType->getName();
 
-        if (!$em->getMetadataFactory()->isTransient($entityClass)) {
-            $metadata = $em->getClassMetadata($entityClass);
-
-            try {
-                $isIdentifierField = $metadata->getSingleIdentifierFieldName() === $attribute->getFieldName();
-            } catch (MappingException) {
-                $isIdentifierField = false;
-            }
-
-            return new ArgEntity(
-                $em->getRepository($parameterType->getName()),
-                $parameter->getName(),
-                $attribute->getArgName(),
-                $attribute->getFieldName(),
-                $attribute->getInputType(),
-                $parameter->allowsNull(),
-                $isIdentifierField
-            );
-        } else {
+        if ($em->getMetadataFactory()->isTransient($entityClass)) {
             throw new GraphQLRuntimeException(sprintf('`%s` is not an entity class!', $parameterType->getName()));
         }
+
+        $metadata = $em->getClassMetadata($entityClass);
+
+        return new ArgEntity(
+            $em->getRepository($parameterType->getName()),
+            $parameter->getName(),
+            $attribute->getArgName(),
+            $attribute->getFieldName(),
+            $attribute->getInputType(),
+            $parameter->allowsNull(),
+        );
     }
 }
