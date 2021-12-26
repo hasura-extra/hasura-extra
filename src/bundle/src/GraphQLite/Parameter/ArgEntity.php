@@ -75,9 +75,11 @@ final class ArgEntity implements ArgNamingParameterInterface
 
         if (null === $entity && !$this->nullableEntity) {
             throw new GraphQLException(
-                            sprintf('Can not found instance by `%s`', $args[$this->name]),
+                sprintf('Can not found instance by `%s`', $args[$this->name]),
                 category:   'input_args',
-                extensions: ['field' => $this->argName]
+                extensions: [
+                    'field' => $this->argName,
+                ]
             );
         }
 
@@ -114,7 +116,9 @@ final class ArgEntity implements ArgNamingParameterInterface
                 $resolveInfo->fragments,
                 $resolveInfo->variableValues
             );
-            $result = $repo->findBy([$this->fieldName => $values]);
+            $result = $repo->findBy([
+                $this->fieldName => $values,
+            ]);
 
             foreach ($result as $item) {
                 $index = $connection->convertToDatabaseValue(
@@ -150,7 +154,7 @@ final class ArgEntity implements ArgNamingParameterInterface
             }
         }
 
-        return array_filter($values, fn($value) => null !== $value);
+        return array_filter($values, fn ($value) => null !== $value);
     }
 
     private function collectInputValueFromFieldNode(string $fieldName, FieldNode $node, array $variables): mixed
