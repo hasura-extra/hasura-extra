@@ -39,7 +39,7 @@
     },
     "conflict": {
         "hasura-extra/hasura-bundle": "*",
-        "hasura-extra/laravel": "<2.1.2"
+        "hasura-extra/laravel": "<2.2.0"
     },
     "extra": {
         "branch-alias": {

@@ -15,13 +15,13 @@
     },
     "conflict": {
         "hasura-extra/hasura-bundle": "*",
-        "hasura-extra/sailor-bridge": "<2.1.2",
-        "hasura-extra/auth-hook": "<2.1.2",
-        "hasura-extra/event-dispatcher": "<2.1.2",
-        "hasura-extra/bundle": "<2.1.2",
-        "hasura-extra/graphqlite-bridge": "<2.1.2",
-        "hasura-extra/metadata": "<2.1.2",
-        "hasura-extra/laravel": "<2.1.2"
+        "hasura-extra/sailor-bridge": "<2.2.0",
+        "hasura-extra/auth-hook": "<2.2.0",
+        "hasura-extra/event-dispatcher": "<2.2.0",
+        "hasura-extra/bundle": "<2.2.0",
+        "hasura-extra/graphqlite-bridge": "<2.2.0",
+        "hasura-extra/metadata": "<2.2.0",
+        "hasura-extra/laravel": "<2.2.0"
     },
     "require": {
         "php": ">=8.0",
