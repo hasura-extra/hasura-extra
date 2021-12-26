@@ -26,7 +26,9 @@ final class CodegenTest extends TestCase
         $this->assertStringContainsString('Generating...', $tester->getDisplay());
         $this->assertStringContainsString('Generated successfully!', $tester->getDisplay());
 
-        $attributes = UserAttributes::execute(['is_moderator' => 'true']);
+        $attributes = UserAttributes::execute([
+            'is_moderator' => 'true',
+        ]);
 
         $this->assertSame('true', $attributes->data->userAttributes[0]->attribute->is_moderator);
 

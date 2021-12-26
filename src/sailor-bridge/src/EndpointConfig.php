@@ -63,7 +63,7 @@ final class EndpointConfig extends AbstractEndpointConfig
                 'date' => new DateTimeTypeConfig('date'),
                 'timetz' => new DateTimeTypeConfig('timetz'),
                 'timestamptz' => new DateTimeTypeConfig('timestamptz'),
-                'uuid' => new UuidTypeConfig()
+                'uuid' => new UuidTypeConfig(),
             ]
         );
     }

@@ -18,7 +18,10 @@ final class JsonTypeConverterTest extends TestCase
     public function testConvert(): void
     {
         $converter = new JsonTypeConverter();
-        $data = ['a' => 'b', 'c' => 'd'];
+        $data = [
+            'a' => 'b',
+            'c' => 'd',
+        ];
 
         $this->assertSame($data, $converter->toGraphQL($data));
         $this->assertSame($data, $converter->fromGraphQL($data));
