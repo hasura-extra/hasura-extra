@@ -10,16 +10,29 @@ declare(strict_types=1);
 
 namespace Hasura\ApiClient\Tests;
 
+use Hasura\ApiClient\Client;
 use Hasura\ApiClient\ConfigApi;
 use Hasura\ApiClient\GraphqlApi;
 use Hasura\ApiClient\MetadataApi;
 use Hasura\ApiClient\RelayGraphqlApi;
 use Hasura\ApiClient\VersionApi;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpClient\HttpClient;
 
 final class ClientTest extends TestCase
 {
     use ClientSetupTrait;
+
+    public function testUseCustomHttpClient(): void
+    {
+        $customHttpClient = HttpClient::create(['headers' => ['x-test' => true]]);
+        $client = new Client('http://localhost:8080', '123456', [], $customHttpClient);
+        $refProp = new \ReflectionProperty($client, 'httpClient');
+        $refProp->setAccessible(true);
+
+        $httpClient = $refProp->getValue($client);
+        $this->assertNotSame($customHttpClient, $httpClient);
+    }
 
     public function testMetadata(): void
     {

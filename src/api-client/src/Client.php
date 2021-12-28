@@ -17,15 +17,23 @@ final class Client
 {
     private HttpClientInterface $httpClient;
 
-    public function __construct(string $baseUri, string $adminSecret = null, array $httpClientOptions = [])
-    {
+    public function __construct(
+        string $baseUri,
+        string $adminSecret = null,
+        array $httpClientOptions = [],
+        HttpClientInterface $httpClient = null
+    ) {
         $httpClientOptions['base_uri'] = $baseUri;
 
         if ($adminSecret) {
             $httpClientOptions['headers']['X-Hasura-Admin-Secret'] = $adminSecret;
         }
 
-        $this->httpClient = HttpClient::create($httpClientOptions);
+        if (null === $httpClient) {
+            $this->httpClient = HttpClient::create($httpClientOptions);
+        } else {
+            $this->httpClient = $httpClient->withOptions($httpClientOptions);
+        }
     }
 
     public function metadata(): MetadataApi
