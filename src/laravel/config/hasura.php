@@ -85,7 +85,9 @@ return [
         /*
          * Custom type configs.
          */
-        'type_configs' => []
+        'type_configs' => [
+            // 'your_type_name' => YourTypeConfig::class
+        ]
     ],
     'routes' => [
         'auth_hook' => [
