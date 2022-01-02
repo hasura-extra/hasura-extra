@@ -25,7 +25,12 @@ final class ClientTest extends TestCase
 
     public function testUseCustomHttpClient(): void
     {
-        $customHttpClient = HttpClient::create(['headers' => ['x-test' => true]]);
+        $customHttpClient = HttpClient::create([
+            'headers' => [
+                'x-test' => true,
+                
+            ],
+        ]);
         $client = new Client('http://localhost:8080', '123456', [], $customHttpClient);
         $refProp = new \ReflectionProperty($client, 'httpClient');
         $refProp->setAccessible(true);
