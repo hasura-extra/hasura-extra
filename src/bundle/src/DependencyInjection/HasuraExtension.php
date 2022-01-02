@@ -18,6 +18,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 
 final class HasuraExtension extends Extension implements PrependExtensionInterface
 {
@@ -114,6 +115,18 @@ final class HasuraExtension extends Extension implements PrependExtensionInterfa
         $containerBuilder->setParameter('hasura.sailor.schema_path', $config['schema_path']);
 
         $loader->load('sailor.php');
+
+        $endpointConfigDef = $containerBuilder->getDefinition('hasura.sailor.endpoint_config');
+
+        foreach ($config['type_configs'] as $item) {
+            $endpointConfigDef->addMethodCall(
+                'addTypeConfig',
+                [
+                    $item['name'],
+                    new Reference($item['service'])
+                ]
+            );
+        }
     }
 
     private function configRemoteSchema(ContainerBuilder $container, array $config): void

@@ -39,18 +39,28 @@ trait Sailor
     {
         $this->app->singleton(
             SailorClient::class,
-            static fn ($app) => new SailorClient($app[Client::class])
+            static fn($app) => new SailorClient($app[Client::class])
         );
 
         $this->app->singleton(
             EndpointConfig::class,
-            static fn ($app) => new EndpointConfig(
-                $app[SailorClient::class],
-                config('hasura.sailor.executor_namespace'),
-                config('hasura.sailor.executor_path'),
-                config('hasura.sailor.query_spec_path'),
-                config('hasura.sailor.schema_path')
-            )
+            static function ($app): EndpointConfig {
+                $instance = new EndpointConfig(
+                    $app[SailorClient::class],
+                    config('hasura.sailor.executor_namespace'),
+                    config('hasura.sailor.executor_path'),
+                    config('hasura.sailor.query_spec_path'),
+                    config('hasura.sailor.schema_path')
+                );
+
+                $typeConfigs = config('hasura.sailor.type_configs', []);
+
+                foreach ($typeConfigs as $name => $typeConfig) {
+                    $instance->addTypeConfig($name, $app[$typeConfig]);
+                }
+
+                return $instance;
+            }
         );
 
         $this->app->singleton(

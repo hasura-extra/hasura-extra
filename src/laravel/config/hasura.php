@@ -82,6 +82,12 @@ return [
          * Path store your GraphQL queries spec.
          */
         'query_spec_path' => base_path('hasura/graphql'),
+        /*
+         * Custom type configs.
+         */
+        'type_configs' => [
+            // 'your_type_name' => YourTypeConfig::class
+        ]
     ],
     'routes' => [
         'auth_hook' => [

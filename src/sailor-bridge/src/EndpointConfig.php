@@ -16,9 +16,12 @@ use Hasura\SailorBridge\Type\JsonTypeConfig;
 use Hasura\SailorBridge\Type\UuidTypeConfig;
 use Spawnia\Sailor\Client as SailorClientInterface;
 use Spawnia\Sailor\EndpointConfig as AbstractEndpointConfig;
+use Spawnia\Sailor\Type\TypeConfig as TypeConfigInterface;
 
 final class EndpointConfig extends AbstractEndpointConfig
 {
+    private array $typeConfigs = [];
+
     public function __construct(
         private SailorClientInterface $client,
         private string $executorNamespace,
@@ -64,7 +67,13 @@ final class EndpointConfig extends AbstractEndpointConfig
                 'timetz' => new DateTimeTypeConfig('timetz'),
                 'timestamptz' => new DateTimeTypeConfig('timestamptz'),
                 'uuid' => new UuidTypeConfig(),
-            ]
+            ],
+            $this->typeConfigs
         );
+    }
+
+    public function addTypeConfig(string $name, TypeConfigInterface $typeConfig): void
+    {
+        $this->typeConfigs[$name] = $typeConfig;
     }
 }
