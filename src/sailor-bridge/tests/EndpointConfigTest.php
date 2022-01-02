@@ -18,16 +18,15 @@ use Hasura\SailorBridge\Type\DateTimeTypeConfig;
 use Hasura\SailorBridge\Type\JsonTypeConfig;
 use Hasura\SailorBridge\Type\UuidTypeConfig;
 use PHPUnit\Framework\TestCase as PHPUnitTestCase;
+use Spawnia\Sailor\Type\TypeConfig;
 
 class EndpointConfigTest extends PHPUnitTestCase
 {
     public function testConstructor(): void
     {
-        $apiClient = new Client('');
-        $sailorClient = new SailorClient($apiClient);
-        $config = new EndpointConfig($sailorClient, '1', '2', '3', '4');
+        $config = $this->initConfig();
 
-        $this->assertSame($sailorClient, $config->makeClient());
+        $this->assertInstanceOf(\Spawnia\Sailor\Client::class, $config->makeClient());
         $this->assertSame('1', $config->namespace());
         $this->assertSame('2', $config->targetPath());
         $this->assertSame('3', $config->searchPath());
@@ -36,9 +35,7 @@ class EndpointConfigTest extends PHPUnitTestCase
 
     public function testConfigureTypes(): void
     {
-        $apiClient = new Client('');
-        $sailorClient = new SailorClient($apiClient);
-        $config = new EndpointConfig($sailorClient, '1', '2', '3', '4');
+        $config = $this->initConfig();
         $types = $config->configureTypes($this->createMock(Schema::class), 'hasura');
 
         $this->assertArrayHasKey('json', $types);
@@ -54,5 +51,25 @@ class EndpointConfigTest extends PHPUnitTestCase
         $this->assertInstanceOf(DateTimeTypeConfig::class, $types['timetz']);
         $this->assertInstanceOf(DateTimeTypeConfig::class, $types['timestamptz']);
         $this->assertInstanceOf(UuidTypeConfig::class, $types['uuid']);
+    }
+
+    public function testAddTypeConfig(): void
+    {
+        $type = $this->createMock(TypeConfig::class);
+        $config = $this->initConfig();
+
+        $config->addTypeConfig('test', $type);
+        $types = $config->configureTypes($this->createMock(Schema::class), 'hasura');
+
+        $this->assertArrayHasKey('test', $types);
+        $this->assertSame($type, $types['test']);
+    }
+
+    private function initConfig(): EndpointConfig
+    {
+        $apiClient = new Client('');
+        $sailorClient = new SailorClient($apiClient);
+
+        return new EndpointConfig($sailorClient, '1', '2', '3', '4');
     }
 }
