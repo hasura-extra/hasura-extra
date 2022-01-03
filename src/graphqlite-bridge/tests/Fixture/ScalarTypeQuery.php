@@ -28,8 +28,14 @@ final class ScalarTypeQuery
     #[Field(name: 'jsonb', outputType: 'jsonb')]
     public ?array $jsonb;
 
+    #[Field(name: 'timestamp', outputType: 'timestamp')]
+    public ?\DateTimeInterface $timestamp;
+
     #[Field(name: 'timestamptz', outputType: 'timestamptz')]
     public ?\DateTimeInterface $timestamptz;
+
+    #[Field(name: 'time', outputType: 'time')]
+    public ?\DateTimeInterface $time;
 
     #[Field(name: 'timetz', outputType: 'timetz')]
     public ?\DateTimeInterface $timetz;
@@ -42,14 +48,18 @@ final class ScalarTypeQuery
         #[UseInputType(inputType: 'date')] ?\DateTimeInterface $date = null,
         #[UseInputType(inputType: 'json')] ?array $json = null,
         #[UseInputType(inputType: 'jsonb')] ?array $jsonb = null,
+        #[UseInputType(inputType: 'timestamp')] ?\DateTimeInterface $timestamp = null,
         #[UseInputType(inputType: 'timestamptz')] ?\DateTimeInterface $timestamptz = null,
+        #[UseInputType(inputType: 'time')] ?\DateTimeInterface $time = null,
         #[UseInputType(inputType: 'timetz')] ?\DateTimeInterface $timetz = null,
         ?Uuid $uuid = null,
     ): self {
         $this->date = $date;
         $this->json = $json;
         $this->jsonb = $jsonb;
+        $this->timestamp = $timestamp;
         $this->timestamptz = $timestamptz;
+        $this->time = $time;
         $this->timetz = $timetz;
         $this->uuid = $uuid;
 
