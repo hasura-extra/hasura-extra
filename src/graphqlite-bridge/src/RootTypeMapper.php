@@ -17,6 +17,8 @@ use GraphQL\Type\Definition\ScalarType;
 use Hasura\GraphQLiteBridge\ScalarType\Date;
 use Hasura\GraphQLiteBridge\ScalarType\Json;
 use Hasura\GraphQLiteBridge\ScalarType\Jsonb;
+use Hasura\GraphQLiteBridge\ScalarType\Time;
+use Hasura\GraphQLiteBridge\ScalarType\Timestamp;
 use Hasura\GraphQLiteBridge\ScalarType\Timestamptz;
 use Hasura\GraphQLiteBridge\ScalarType\Timetz;
 use Hasura\GraphQLiteBridge\ScalarType\Uuid;
@@ -72,7 +74,9 @@ final class RootTypeMapper implements RootTypeMapperInterface
             Date::NAME => Date::getInstance(),
             Json::NAME => Json::getInstance(),
             Jsonb::NAME => Jsonb::getInstance(),
+            Timestamp::NAME => Timestamp::getInstance(),
             Timestamptz::NAME => Timestamptz::getInstance(),
+            Time::NAME => Time::getInstance(),
             Timetz::NAME => Timetz::getInstance(),
             Uuid::NAME => Uuid::getInstance(),
             default => $this->next->mapNameToType($typeName)

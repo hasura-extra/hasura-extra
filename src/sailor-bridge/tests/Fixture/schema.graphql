@@ -3518,7 +3518,7 @@ type query_root {
   
   
   """
-  test_scalar(date: date, json: json, jsonb: jsonb, timestamptz: timestamptz, timetz: timetz, uuid: uuid): scalar_output
+  test_scalar(date: date, json: json, jsonb: jsonb, time: time, timestamp: timestamp, timestamptz: timestamptz, timetz: timetz, uuid: uuid): scalar_output
 }
 
 type scalar_output {
@@ -3539,6 +3539,18 @@ type scalar_output {
   
   """
   jsonb: jsonb
+
+  """
+  
+  
+  """
+  time: time
+
+  """
+  
+  
+  """
+  timestamp: timestamp
 
   """
   
@@ -3957,6 +3969,9 @@ type subscription_root {
   """fetch data from the table: "hasura_events" using primary key columns"""
   hasura_events_by_pk(id: Int!): hasura_events
 }
+
+"""A GraphQL type that can contain time"""
+scalar time
 
 scalar timestamp
 
