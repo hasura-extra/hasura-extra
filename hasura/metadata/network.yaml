@@ -1,0 +1,6 @@
+tls_allowlist:
+    -
+        suffix: ~
+        permissions:
+            - self-signed
+        host: insecure

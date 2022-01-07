@@ -1,5 +1,6 @@
 .PHONY: environment
 environment:
+	composer update
 	docker-compose up -d
 
 .PHONY: apply-metadata
