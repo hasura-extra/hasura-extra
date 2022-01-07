@@ -48,7 +48,9 @@ class EndpointConfigTest extends PHPUnitTestCase
         $this->assertInstanceOf(JsonTypeConfig::class, $types['json']);
         $this->assertInstanceOf(JsonTypeConfig::class, $types['jsonb']);
         $this->assertInstanceOf(DateTimeTypeConfig::class, $types['date']);
+        $this->assertInstanceOf(DateTimeTypeConfig::class, $types['time']);
         $this->assertInstanceOf(DateTimeTypeConfig::class, $types['timetz']);
+        $this->assertInstanceOf(DateTimeTypeConfig::class, $types['timestamp']);
         $this->assertInstanceOf(DateTimeTypeConfig::class, $types['timestamptz']);
         $this->assertInstanceOf(UuidTypeConfig::class, $types['uuid']);
     }

@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace Hasura\SailorBridge\Type;
 
 use Hasura\SailorBridge\Convert\DateTypeConverter;
+use Hasura\SailorBridge\Convert\TimestampTypeConverter;
 use Hasura\SailorBridge\Convert\TimestamptzTypeConverter;
+use Hasura\SailorBridge\Convert\TimeTypeConverter;
 use Hasura\SailorBridge\Convert\TimetzTypeConverter;
 use Spawnia\Sailor\Type\TypeConfig as TypeConfigInterface;
 
@@ -25,8 +27,10 @@ final class DateTimeTypeConfig implements TypeConfigInterface
     {
         return match ($name = $this->typeName) {
             'date' => DateTypeConverter::class,
-            'timetz' => TimetzTypeConverter::class,
+            'timestamp' => TimestampTypeConverter::class,
             'timestamptz' => TimestamptzTypeConverter::class,
+            'time' => TimeTypeConverter::class,
+            'timetz' => TimetzTypeConverter::class,
             default => throw new \RuntimeException(sprintf('Not found type converter for `%s` type', $name))
         };
     }
