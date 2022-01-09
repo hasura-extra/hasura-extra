@@ -45,7 +45,7 @@ final class ConfigurationTest extends TestCase
                     'executor_path' => '%kernel.project_dir%/src/GraphQLExecutor',
                     'query_spec_path' => '%kernel.project_dir%/hasura/graphql',
                     'schema_path' => '%kernel.project_dir%/hasura/schema.graphql',
-                    'type_configs' => []
+                    'type_configs' => [],
                 ],
             ],
             $config
@@ -77,15 +77,15 @@ final class ConfigurationTest extends TestCase
                         'type_configs' => [
                             [
                                 'name' => 'a',
-                                'service' => '@b'
+                                'service' => '@b',
                             ],
                             [
                                 'name' => 'c',
-                                'service' => '@d'
-                            ]
-                        ]
-                    ]
-                ]
+                                'service' => '@d',
+                            ],
+                        ],
+                    ],
+                ],
             ]
         );
 
@@ -106,12 +106,12 @@ final class ConfigurationTest extends TestCase
                     'type_configs' => [
                         [
                             'name' => 'a',
-                            'service' => '@b'
+                            'service' => '@b',
                         ],
                         [
                             'name' => 'c',
-                            'service' => '@d'
-                        ]
+                            'service' => '@d',
+                        ],
                     ],
                     'executor_namespace' => 'App\GraphQLExecutor',
                     'executor_path' => '%kernel.project_dir%/src/GraphQLExecutor',

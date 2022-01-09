@@ -39,7 +39,7 @@ trait Sailor
     {
         $this->app->singleton(
             SailorClient::class,
-            static fn($app) => new SailorClient($app[Client::class])
+            static fn ($app) => new SailorClient($app[Client::class])
         );
 
         $this->app->singleton(

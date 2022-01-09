@@ -123,7 +123,7 @@ final class HasuraExtension extends Extension implements PrependExtensionInterfa
                 'addTypeConfig',
                 [
                     $item['name'],
-                    new Reference($item['service'])
+                    new Reference($item['service']),
                 ]
             );
         }
