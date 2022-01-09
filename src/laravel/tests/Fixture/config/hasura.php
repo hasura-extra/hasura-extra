@@ -68,7 +68,7 @@ return [
         'executor_namespace' => 'Hasura\Laravel\Tests\Fixture\App\GraphQLExecutors',
         'schema_path' => base_path('hasura/schema.graphql'),
         'query_spec_path' => base_path('hasura/graphql'),
-        'type_configs' => []
+        'type_configs' => [],
     ],
     'routes' => [
         'auth_hook' => [

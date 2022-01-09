@@ -28,7 +28,6 @@ final class ClientTest extends TestCase
         $customHttpClient = HttpClient::create([
             'headers' => [
                 'x-test' => true,
-                
             ],
         ]);
         $client = new Client('http://localhost:8080', '123456', [], $customHttpClient);
