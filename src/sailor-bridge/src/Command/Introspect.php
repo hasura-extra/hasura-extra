@@ -33,10 +33,9 @@ final class Introspect extends Command
         $symfonyStyle = new SymfonyStyle($input, $output);
         $symfonyStyle->section('Introspecting...');
 
-        $generator = new Introspector(
-            Configuration::endpoint($this->endpoint),
-            $this->endpoint
-        );
+        $endpointConfig = Configuration::endpoint($this->endpoint);
+        $generator = new Introspector($endpointConfig, $this->endpoint);
+
         $generator->introspect();
 
         $symfonyStyle->success('Introspection successfully!');
