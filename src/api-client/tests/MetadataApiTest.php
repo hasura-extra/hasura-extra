@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Hasura\ApiClient\Tests;
 
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpClient\Exception\ClientException;
 
 final class MetadataApiTest extends TestCase
 {
@@ -32,5 +33,24 @@ final class MetadataApiTest extends TestCase
         $this->assertIsArray($dataVersion1);
         $this->assertIsArray($dataVersion2);
         $this->assertNotSame($dataVersion1, $dataVersion2);
+    }
+
+    public function testQueryWithResourceVersion(): void
+    {
+        $this->expectException(ClientException::class);
+        $this->expectExceptionMessageMatches('~HTTP/1.1 409 Conflict~');
+
+        $this->client->metadata()->query(
+            'replace_metadata',
+            [
+                'metadata' => [
+                    'version' => 3,
+                    'sources' => []
+                ],
+                'allow_inconsistent_metadata' => false
+            ],
+            2,
+            -1
+        );
     }
 }
