@@ -202,7 +202,7 @@ input type for inserting array relation for remote table "_attributes.chat"
 input _attributes_chat_arr_rel_insert_input {
   data: [_attributes_chat_insert_input!]!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: _attributes_chat_on_conflict
 }
 
@@ -320,7 +320,7 @@ type _attributes_chat_mutation_response {
 }
 
 """
-on conflict condition type for table "_attributes.chat"
+on_conflict condition type for table "_attributes.chat"
 """
 input _attributes_chat_on_conflict {
   constraint: _attributes_chat_constraint!
@@ -743,7 +743,7 @@ type _attributes_user_attributes_mutation_response {
 }
 
 """
-on conflict condition type for table "_attributes.user_attributes"
+on_conflict condition type for table "_attributes.user_attributes"
 """
 input _attributes_user_attributes_on_conflict {
   constraint: _attributes_user_attributes_constraint!
@@ -921,12 +921,12 @@ input type for inserting object relation for remote table "_attributes.user"
 input _attributes_user_obj_rel_insert_input {
   data: _attributes_user_insert_input!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: _attributes_user_on_conflict
 }
 
 """
-on conflict condition type for table "_attributes.user"
+on_conflict condition type for table "_attributes.user"
 """
 input _attributes_user_on_conflict {
   constraint: _attributes_user_constraint!
@@ -1155,12 +1155,12 @@ input type for inserting object relation for remote table "_flattenmany.article"
 input _flattenmany_article_obj_rel_insert_input {
   data: _flattenmany_article_insert_input!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: _flattenmany_article_on_conflict
 }
 
 """
-on conflict condition type for table "_flattenmany.article"
+on_conflict condition type for table "_flattenmany.article"
 """
 input _flattenmany_article_on_conflict {
   constraint: _flattenmany_article_constraint!
@@ -1286,7 +1286,7 @@ input type for inserting array relation for remote table "_flattenmany.article_t
 input _flattenmany_article_tag_arr_rel_insert_input {
   data: [_flattenmany_article_tag_insert_input!]!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: _flattenmany_article_tag_on_conflict
 }
 
@@ -1392,7 +1392,7 @@ type _flattenmany_article_tag_mutation_response {
 }
 
 """
-on conflict condition type for table "_flattenmany.article_tag"
+on_conflict condition type for table "_flattenmany.article_tag"
 """
 input _flattenmany_article_tag_on_conflict {
   constraint: _flattenmany_article_tag_constraint!
@@ -2002,12 +2002,12 @@ input type for inserting object relation for remote table "_flattenmany.tag"
 input _flattenmany_tag_obj_rel_insert_input {
   data: _flattenmany_tag_insert_input!
 
-  """on conflict condition"""
+  """upsert condition"""
   on_conflict: _flattenmany_tag_on_conflict
 }
 
 """
-on conflict condition type for table "_flattenmany.tag"
+on_conflict condition type for table "_flattenmany.tag"
 """
 input _flattenmany_tag_on_conflict {
   constraint: _flattenmany_tag_constraint!
@@ -2228,7 +2228,7 @@ type hasura_events_mutation_response {
 }
 
 """
-on conflict condition type for table "hasura_events"
+on_conflict condition type for table "hasura_events"
 """
 input hasura_events_on_conflict {
   constraint: hasura_events_constraint!
@@ -2499,7 +2499,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [_attributes_chat_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: _attributes_chat_on_conflict
   ): _attributes_chat_mutation_response
 
@@ -2510,7 +2510,7 @@ type mutation_root {
     """the row to be inserted"""
     object: _attributes_chat_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: _attributes_chat_on_conflict
   ): _attributes_chat
 
@@ -2521,7 +2521,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [_attributes_user_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: _attributes_user_on_conflict
   ): _attributes_user_mutation_response
 
@@ -2532,7 +2532,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [_attributes_user_attributes_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: _attributes_user_attributes_on_conflict
   ): _attributes_user_attributes_mutation_response
 
@@ -2543,7 +2543,7 @@ type mutation_root {
     """the row to be inserted"""
     object: _attributes_user_attributes_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: _attributes_user_attributes_on_conflict
   ): _attributes_user_attributes
 
@@ -2554,7 +2554,7 @@ type mutation_root {
     """the row to be inserted"""
     object: _attributes_user_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: _attributes_user_on_conflict
   ): _attributes_user
 
@@ -2565,7 +2565,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [_flattenmany_article_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: _flattenmany_article_on_conflict
   ): _flattenmany_article_mutation_response
 
@@ -2576,7 +2576,7 @@ type mutation_root {
     """the row to be inserted"""
     object: _flattenmany_article_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: _flattenmany_article_on_conflict
   ): _flattenmany_article
 
@@ -2587,7 +2587,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [_flattenmany_article_tag_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: _flattenmany_article_tag_on_conflict
   ): _flattenmany_article_tag_mutation_response
 
@@ -2598,7 +2598,7 @@ type mutation_root {
     """the row to be inserted"""
     object: _flattenmany_article_tag_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: _flattenmany_article_tag_on_conflict
   ): _flattenmany_article_tag
 
@@ -2609,7 +2609,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [_flattenmany_tag_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: _flattenmany_tag_on_conflict
   ): _flattenmany_tag_mutation_response
 
@@ -2620,7 +2620,7 @@ type mutation_root {
     """the row to be inserted"""
     object: _flattenmany_tag_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: _flattenmany_tag_on_conflict
   ): _flattenmany_tag
 
@@ -2631,7 +2631,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [hasura_events_insert_input!]!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: hasura_events_on_conflict
   ): hasura_events_mutation_response
 
@@ -2642,7 +2642,7 @@ type mutation_root {
     """the row to be inserted"""
     object: hasura_events_insert_input!
 
-    """on conflict condition"""
+    """upsert condition"""
     on_conflict: hasura_events_on_conflict
   ): hasura_events
 
