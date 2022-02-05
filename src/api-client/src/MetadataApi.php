@@ -17,12 +17,16 @@ final class MetadataApi extends AbstractApi
         return '/v1/metadata';
     }
 
-    public function query(string $type, array $args, int $version = null): array
+    public function query(string $type, array $args, int $version = null, int $resourceVersion = null): array
     {
         $payload = compact('type', 'args');
 
         if (null !== $version) {
             $payload['version'] = $version;
+        }
+
+        if (null !== $resourceVersion) {
+            $payload['resource_version'] = $resourceVersion;
         }
 
         return $this->request('POST', [
