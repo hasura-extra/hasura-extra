@@ -22,6 +22,6 @@ final class ConfigApiTest extends TestCase
 
         $this->assertIsArray($data);
         $this->assertArrayHasKey('version', $data);
-        $this->assertSame('v2.1.0', $data['version']);
+        $this->assertSame('v2.2.0', $data['version']);
     }
 }
