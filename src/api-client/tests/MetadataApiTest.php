@@ -45,9 +45,9 @@ final class MetadataApiTest extends TestCase
             [
                 'metadata' => [
                     'version' => 3,
-                    'sources' => []
+                    'sources' => [],
                 ],
-                'allow_inconsistent_metadata' => false
+                'allow_inconsistent_metadata' => false,
             ],
             2,
             -1
