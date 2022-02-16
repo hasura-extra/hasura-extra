@@ -78,7 +78,7 @@ final class Executor
 
             $refProperty->setAccessible(true);
 
-            $instance = isset($instance->{$part}) ? $refProperty->getValue($instance) : null ;
+            $instance = $refProperty->isInitialized($instance) ? $refProperty->getValue($instance) : null;
 
             if (!is_object($instance)) {
                 break;
