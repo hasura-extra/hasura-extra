@@ -137,6 +137,19 @@ input String_comparison_exp {
   _similar: String
 }
 
+scalar _Any
+
+union _Entity = Continent | Country | Language
+
+type _Service {
+  """
+  The sdl representing the federated service capabilities. Includes federation
+  directives, removes federation types, and includes rest of full schema after
+  schema directives have been applied
+  """
+  sdl: String
+}
+
 """
 columns and relationships of "_attributes.chat"
 """
@@ -3128,6 +3141,7 @@ type query_root {
   
   """
   _dummy: String!
+  _entities(representations: [_Any!]!): [_Entity]!
 
   """
   fetch data from the table: "_flattenmany.article"
@@ -3343,6 +3357,7 @@ type query_root {
   fetch data from the table: "_flattenmany.tag" using primary key columns
   """
   _flattenmany_tag_by_pk(id: Int!): _flattenmany_tag
+  _service: _Service!
 
   """
   
