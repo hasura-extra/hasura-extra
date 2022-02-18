@@ -4,4 +4,58 @@ title: Getting Started
 sidebar_label: Getting Started
 ---
 
-Work in progress
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Hasura Extra is a set of framework-agnostic libraries, and also we provide package/bundle, application templates (boilerplate) for Laravel and Symfony out of the box.
+
+## Preparation
+
++ [Docker](https://www.docker.com/) engine and Docker compose version 3.
+
+## Using application templates
+
+If your get start with a new project, you should use [Laravel or Symfony application templates](./02-application-templates.md), these had been config needed settings for you like
+[local remote schema](https://hasura.io/docs/latest/graphql/core/remote-schemas/index.html), [handle event triggered by Hasura](https://hasura.io/docs/latest/graphql/core/event-triggers/index.html), structured Hasura metadata,
+Sailor graphql client code generator, authentication hook, Sanctum/JWT authentication, and Helm chart help you easy to deploy your project to Kubernetes.
+
+## Using Composer
+
+<Tabs
+    defaultValue="laravel"
+    values={[
+        {label: 'Laravel users', value: 'laravel'},
+        {label: 'Symfony users', value: 'symfony'},
+    ]}>
+<TabItem value="laravel">
+
+```shell
+composer require hasura-extra/laravel
+```
+
+Then you need to publish Hasura Extra config:
+
+```shell
+php artisan vendor:publish --provider="Hasura\Laravel\ServiceProvider\HasuraServiceProvider"
+```
+
+and publish [Laravel GraphQLite](https://graphqlite.thecodingmachine.io/docs/laravel-package) config:
+
+```shell
+php artisan vendor:publish --provider="TheCodingMachine\GraphQLite\Laravel\Providers\GraphQLiteServiceProvider"
+```
+
+Alter publish config files, you should read a comment inside config file and edit if needed.
+
+</TabItem>
+<TabItem value="symfony">
+
+```shell
+composer require hasura-extra/bundle
+```
+
+Symfony Flex will help you config và routes, then you need to file
+`config/packages/hasura.yaml` to setting Hasura base uri, admin secret.
+
+</TabItem>
+</Tabs>
