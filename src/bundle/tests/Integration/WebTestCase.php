@@ -11,9 +11,9 @@ declare(strict_types=1);
 namespace Hasura\Bundle\Tests\Integration;
 
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase as SymfonyWebTestCase;
+use Hasura\Bundle\Tests\WebTestCase as AbstractWebTestCase;
 
-abstract class WebTestCase extends SymfonyWebTestCase
+abstract class WebTestCase extends AbstractWebTestCase
 {
     protected ?KernelBrowser $client;
 
