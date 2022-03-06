@@ -10,8 +10,8 @@ declare(strict_types=1);
 
 namespace Hasura\Bundle\Tests\Integration;
 
-use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Hasura\Bundle\Tests\WebTestCase as AbstractWebTestCase;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 
 abstract class WebTestCase extends AbstractWebTestCase
 {
