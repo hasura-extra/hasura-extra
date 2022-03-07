@@ -15,12 +15,12 @@
     },
     "require": {
         "php": ">=8.0",
-        "hasura-extra/auth-hook": "^2.4",
-        "hasura-extra/api-client": "^2.4",
-        "hasura-extra/metadata": "^2.4",
-        "hasura-extra/event-dispatcher": "^2.4",
-        "hasura-extra/graphqlite-bridge": "^2.4",
-        "hasura-extra/sailor-bridge": "^2.4",
+        "hasura-extra/auth-hook": "^2.5",
+        "hasura-extra/api-client": "^2.5",
+        "hasura-extra/metadata": "^2.5",
+        "hasura-extra/event-dispatcher": "^2.5",
+        "hasura-extra/graphqlite-bridge": "^2.5",
+        "hasura-extra/sailor-bridge": "^2.5",
         "thecodingmachine/graphqlite-laravel": "^5.0",
         "laravel/framework": "^8.0",
         "symfony/psr7-pack": "^1.0"
@@ -33,7 +33,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "2.4-dev"
+            "dev-main": "2.5-dev"
         },
         "laravel": {
             "providers": [
