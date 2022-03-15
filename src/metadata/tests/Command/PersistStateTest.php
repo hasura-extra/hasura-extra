@@ -29,7 +29,7 @@ final class PersistStateTest extends TestCase
 
             $this->assertStringContainsString('Persisting application state to Hasura...', $tester->getDisplay());
             $this->assertStringContainsString(
-                'Congratulation! Application state persisted with Hasura!',
+                'Done!',
                 $tester->getDisplay()
             );
         }
