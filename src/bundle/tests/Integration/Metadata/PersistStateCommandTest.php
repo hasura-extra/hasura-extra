@@ -26,7 +26,7 @@ final class PersistStateCommandTest extends ConsoleTestCase
         $tester->execute([]);
 
         $this->assertStringContainsString(
-            '[OK] Congratulation! Application state persisted with Hasura!',
+            '[OK] Done!',
             $tester->getDisplay()
         );
     }
