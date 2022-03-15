@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Hasura\Metadata\Command;
 
 use Hasura\Metadata\EmptyMetadataException;
+use Hasura\Metadata\LanguagePool;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -18,49 +19,50 @@ use Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface;
 
 final class ApplyMetadata extends BaseCommand
 {
-    protected static $defaultName = 'apply';
+    protected static $defaultName = LanguagePool::COMMAND_APPLY;
 
-    protected static $defaultDescription = 'Apply Hasura metadata';
+    protected static $defaultDescription = LanguagePool::COMMAND_APPLY_DESCRIPTION;
 
     protected function configure()
     {
         parent::configure();
 
         $this->addOption(
-            'allow-inconsistent',
+            LanguagePool::OPTION_ALLOW_INCONSISTENT,
             mode: InputOption::VALUE_NONE,
-            description: 'Allow inconsistent when apply metadata files.'
+            description: LanguagePool::OPTION_ALLOW_INCONSISTENT_DESCRIPTION
         );
 
         $this->addOption(
-            'allow-no-metadata',
+            LanguagePool::OPTION_ALLOW_NO_METADATA,
             mode: InputOption::VALUE_NONE,
-            description: 'Allow no metadata files.'
+            description: LanguagePool::OPTION_ALLOW_NO_METADATA_DESCRIPTION
         );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $this->io->section('Applying...');
+        $this->io->section(LanguagePool::COMMAND_APPLY_PROCESSING);
 
         try {
-            $this->metadataManager->apply($input->getOption('allow-inconsistent'));
+            $this->metadataManager->apply($input->getOption(LanguagePool::OPTION_ALLOW_INCONSISTENT));
 
-            $this->io->success('Done!');
+            $this->io->success(LanguagePool::STATUS_DONE);
 
-            return 0;
+            return self::SUCCESS;
         } catch (HttpExceptionInterface $exception) {
             $this->io->error($exception->getResponse()->getContent(false));
-            $this->io->error('Please check your Hasura server configuration.');
+            $this->io->error(LanguagePool::INFO_CHECK_SERVER_CONFIG);
         } catch (EmptyMetadataException) {
-            if (!$input->getOption('allow-no-metadata')) {
-                $this->io->error('Not found metadata files.');
+            if (!$input->getOption(LanguagePool::OPTION_ALLOW_NO_METADATA)) {
+                $this->io->error(LanguagePool::INFO_NOT_FOUND_METADATA_FILE);
             } else {
-                $this->io->warning('No metadata files to apply.');
-                return 0;
+                $this->io->warning(LanguagePool::INFO_NO_METADATA_APPLY);
+
+                return self::SUCCESS;
             }
         }
 
-        return 1;
+        return self::FAILURE;
     }
 }
