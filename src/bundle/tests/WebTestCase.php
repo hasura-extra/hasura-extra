@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase as SymfonyWebTestCase;
 
 abstract class WebTestCase extends SymfonyWebTestCase
 {
-    protected string $projectDir = __DIR__.'/Fixture';
+    protected string $projectDir = __DIR__ . '/Fixture';
 
     public static function getKernelClass()
     {
