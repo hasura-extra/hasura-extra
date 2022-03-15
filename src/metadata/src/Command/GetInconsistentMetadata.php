@@ -16,10 +16,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 final class GetInconsistentMetadata extends BaseCommand
 {
     protected static $defaultName = 'get-inconsistent';
-
     protected static $defaultDescription = 'Get inconsistent Hasura metadata';
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->io->section('Getting...');
 
@@ -28,7 +27,7 @@ final class GetInconsistentMetadata extends BaseCommand
         if (true === $data['is_consistent']) {
             $this->io->success('Current metadata is consistent with database sources!');
 
-            return 0;
+            return self::SUCCESS;
         }
 
         $this->io->table(
@@ -39,6 +38,6 @@ final class GetInconsistentMetadata extends BaseCommand
             )
         );
 
-        return 1;
+        return self::FAILURE;
     }
 }

@@ -17,36 +17,38 @@ use Symfony\Component\Console\Output\OutputInterface;
 final class ReloadMetadata extends BaseCommand
 {
     protected static $defaultName = 'reload';
-
     protected static $defaultDescription = 'Reload Hasura metadata';
+
+    protected const OPTION_NO_RELOAD_REMOTE_SCHEMAS = 'no-reload-remote-schemas';
+    protected const OPTION_NO_RELOAD_SOURCES = 'no-reload-sources';
 
     protected function configure()
     {
         parent::configure();
 
         $this->addOption(
-            'no-reload-remote-schemas',
+            self::OPTION_NO_RELOAD_REMOTE_SCHEMAS,
             mode: InputOption::VALUE_NONE,
             description: 'No reload remote schemas'
         );
         $this->addOption(
-            'no-reload-sources',
+            self::OPTION_NO_RELOAD_SOURCES,
             mode: InputOption::VALUE_NONE,
             description: 'No reload sources'
         );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->io->section('Reloading...');
 
         $this->metadataManager->reload(
-            !$input->getOption('no-reload-remote-schemas'),
-            !$input->getOption('no-reload-sources')
+            !$input->getOption(self::OPTION_NO_RELOAD_REMOTE_SCHEMAS),
+            !$input->getOption(self::OPTION_NO_RELOAD_SOURCES)
         );
 
-        $this->io->success('Done!');
+        $this->informProcessingDone();
 
-        return 0;
+        return self::SUCCESS;
     }
 }

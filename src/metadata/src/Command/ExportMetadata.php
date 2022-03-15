@@ -18,35 +18,35 @@ use Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface;
 final class ExportMetadata extends BaseCommand
 {
     protected static $defaultName = 'export';
-
     protected static $defaultDescription = 'Export Hasura metadata';
+
+    protected const OPTION_FORCE = 'force';
 
     protected function configure()
     {
         parent::configure();
 
         $this->addOption(
-            'force',
+            self::OPTION_FORCE,
             mode: InputOption::VALUE_NONE,
             description: 'Force metadata files sync with current metadata.'
         );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->io->section('Exporting...');
 
         try {
-            $this->metadataManager->export($input->getOption('force'));
+            $this->metadataManager->export($input->getOption(self::OPTION_FORCE));
+            $this->informProcessingDone();
 
-            $this->io->success('Done!');
-
-            return 0;
+            return self::SUCCESS;
         } catch (HttpExceptionInterface $exception) {
             $this->io->error($exception->getResponse()->getContent(false));
-            $this->io->error('Please check your Hasura server configuration.');
+            $this->io->error(self::INFO_CHECK_SERVER_CONFIG);
         }
 
-        return 1;
+        return self::FAILURE;
     }
 }

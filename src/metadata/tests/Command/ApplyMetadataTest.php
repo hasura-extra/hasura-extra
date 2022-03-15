@@ -12,7 +12,6 @@ namespace Hasura\Metadata\Tests\Command;
 
 use Hasura\Metadata\Command\ApplyMetadata;
 use Hasura\Metadata\Command\ExportMetadata;
-use Hasura\Metadata\LanguagePool;
 use Hasura\Metadata\Tests\TestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 
@@ -36,8 +35,8 @@ final class ApplyMetadataTest extends TestCase
         $currentResourceVersion = $metadataApi->query('export_metadata', [], 2)['resource_version'];
 
         $this->assertSame($oldResourceVersion + 1, $currentResourceVersion);
-        $this->assertStringContainsString(LanguagePool::COMMAND_APPLY_PROCESSING, $tester->getDisplay());
-        $this->assertStringContainsString(LanguagePool::STATUS_DONE, $tester->getDisplay());
+        $this->assertStringContainsString('Applying...', $tester->getDisplay());
+        $this->assertStringContainsString('Done!', $tester->getDisplay());
     }
 
     public function testApplyNothing()
@@ -46,12 +45,12 @@ final class ApplyMetadataTest extends TestCase
         $tester->execute([]);
 
         $this->assertSame(1, $tester->getStatusCode());
-        $this->assertStringContainsString(LanguagePool::INFO_NOT_FOUND_METADATA_FILE, $tester->getDisplay());
+        $this->assertStringContainsString('Not found metadata files.', $tester->getDisplay());
 
         $tester->execute([
             '--allow-no-metadata' => true,
         ]);
         $this->assertSame(0, $tester->getStatusCode());
-        $this->assertStringContainsString(LanguagePool::INFO_NO_METADATA_APPLY, $tester->getDisplay());
+        $this->assertStringContainsString('No metadata files to apply.', $tester->getDisplay());
     }
 }

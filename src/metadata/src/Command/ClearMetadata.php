@@ -16,17 +16,16 @@ use Symfony\Component\Console\Output\OutputInterface;
 final class ClearMetadata extends BaseCommand
 {
     protected static $defaultName = 'clear';
-
     protected static $defaultDescription = 'Clear Hasura metadata';
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->io->section('Clearing...');
 
         $this->metadataManager->clear();
 
-        $this->io->success('Done!');
+        $this->informProcessingDone();
 
-        return 0;
+        return self::SUCCESS;
     }
 }

@@ -20,8 +20,9 @@ use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 final class PersistState extends BaseCommand
 {
     protected static $defaultName = 'persist-state';
-
     protected static $defaultDescription = 'Persist application state with Hasura.';
+
+    protected const OPTION_ALLOW_INCONSISTENT = 'allow-inconsistent';
 
     public function __construct(ManagerInterface $manager, private StateProcessorInterface $processor)
     {
@@ -31,30 +32,27 @@ final class PersistState extends BaseCommand
     protected function configure()
     {
         $this->addOption(
-            'allow-inconsistent',
+            self::OPTION_ALLOW_INCONSISTENT,
             mode: InputOption::VALUE_NONE,
             description: 'Allow inconsistent after process'
         );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $this->io->section(
-            sprintf('Persisting application state to Hasura...')
-        );
+        $this->io->section('Persisting application state to Hasura...');
 
         try {
-            $this->processor->process($this->metadataManager, $input->getOption('allow-inconsistent'));
+            $this->processor->process($this->metadataManager, $input->getOption(self::OPTION_ALLOW_INCONSISTENT));
         } catch (ClientExceptionInterface $clientException) {
             $content = $clientException->getResponse()->getContent(false);
-
             $this->io->error($content);
 
-            return 1;
+            return self::FAILURE;
         }
 
-        $this->io->success('Congratulation! Application state persisted with Hasura!');
+        $this->informProcessingDone();
 
-        return 0;
+        return self::SUCCESS;
     }
 }

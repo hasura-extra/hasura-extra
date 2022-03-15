@@ -18,6 +18,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 abstract class BaseCommand extends Command
 {
+    public const STATUS_DONE = 'Done!';
+    public const INFO_CHECK_SERVER_CONFIG = 'Please check your Hasura server configuration.';
+
     protected SymfonyStyle $io;
 
     public function __construct(protected ManagerInterface $metadataManager)
@@ -28,5 +31,9 @@ abstract class BaseCommand extends Command
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
         $this->io = new SymfonyStyle($input, $output);
+    }
+
+    protected function informProcessingDone() {
+        $this->io->success(self::STATUS_DONE);
     }
 }
