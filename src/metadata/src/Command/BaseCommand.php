@@ -18,7 +18,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 abstract class BaseCommand extends Command
 {
-    public const INFO_CHECK_SERVER_CONFIG = 'Please check your Hasura server configuration.';
+    protected const INFO_CHECK_SERVER_CONFIG = 'Please check your Hasura server configuration.';
 
     protected SymfonyStyle $io;
 
