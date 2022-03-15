@@ -22,6 +22,6 @@ final class DropInconsistentCommandTest extends ConsoleTestCase
 
         $tester->execute([]);
 
-        $this->assertStringContainsString('[OK] Done!', $tester->getDisplay());
+        $this->assertStringContainsString('[OK] Drop inconsistencies in Hasura metadata successfully!', $tester->getDisplay());
     }
 }

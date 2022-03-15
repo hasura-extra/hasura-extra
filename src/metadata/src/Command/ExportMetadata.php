@@ -20,14 +20,12 @@ final class ExportMetadata extends BaseCommand
     protected static $defaultName = 'export';
     protected static $defaultDescription = 'Export Hasura metadata';
 
-    protected const OPTION_FORCE = 'force';
-
     protected function configure()
     {
         parent::configure();
 
         $this->addOption(
-            self::OPTION_FORCE,
+            'force',
             mode: InputOption::VALUE_NONE,
             description: 'Force metadata files sync with current metadata.'
         );
@@ -38,8 +36,8 @@ final class ExportMetadata extends BaseCommand
         $this->io->section('Exporting...');
 
         try {
-            $this->metadataManager->export($input->getOption(self::OPTION_FORCE));
-            $this->informProcessingDone();
+            $this->metadataManager->export($input->getOption('force'));
+            $this->io->success('Export Hasura metadata successfully!');
 
             return self::SUCCESS;
         } catch (HttpExceptionInterface $exception) {

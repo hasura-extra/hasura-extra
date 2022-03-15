@@ -36,7 +36,7 @@ final class ApplyMetadataTest extends TestCase
 
         $this->assertSame($oldResourceVersion + 1, $currentResourceVersion);
         $this->assertStringContainsString('Applying...', $tester->getDisplay());
-        $this->assertStringContainsString('Done!', $tester->getDisplay());
+        $this->assertStringContainsString('Apply Hasura metadata successfully!', $tester->getDisplay());
     }
 
     public function testApplyNothing()

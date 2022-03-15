@@ -21,21 +21,18 @@ final class ApplyMetadata extends BaseCommand
     protected static $defaultName = 'apply';
     protected static $defaultDescription = 'Apply Hasura metadata';
 
-    protected const OPTION_ALLOW_INCONSISTENT = 'allow-inconsistent';
-    protected const OPTION_ALLOW_NO_METADATA = 'allow-no-metadata';
-
     protected function configure()
     {
         parent::configure();
 
         $this->addOption(
-            self::OPTION_ALLOW_INCONSISTENT,
+            'allow-inconsistent',
             mode: InputOption::VALUE_NONE,
             description: 'Allow inconsistent when apply metadata files.'
         );
 
         $this->addOption(
-            self::OPTION_ALLOW_NO_METADATA,
+            'allow-no-metadata',
             mode: InputOption::VALUE_NONE,
             description: 'Allow no metadata files.'
         );
@@ -46,8 +43,8 @@ final class ApplyMetadata extends BaseCommand
         $this->io->section('Applying...');
 
         try {
-            $this->metadataManager->apply($input->getOption(self::OPTION_ALLOW_INCONSISTENT));
-            $this->informProcessingDone();
+            $this->metadataManager->apply($input->getOption('allow-inconsistent'));
+            $this->io->success('Apply Hasura metadata successfully!');
 
             return self::SUCCESS;
         } catch (HttpExceptionInterface $exception) {

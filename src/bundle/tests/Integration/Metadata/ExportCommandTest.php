@@ -32,6 +32,6 @@ final class ExportCommandTest extends ConsoleTestCase
 
         $this->assertDirectoryExists(self::getContainer()->getParameter('hasura.metadata.path'));
 
-        $this->assertStringContainsString('[OK] Done!', $tester->getDisplay());
+        $this->assertStringContainsString('[OK] Export Hasura metadata successfully!', $tester->getDisplay());
     }
 }

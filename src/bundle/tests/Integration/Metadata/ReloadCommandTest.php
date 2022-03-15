@@ -22,6 +22,6 @@ final class ReloadCommandTest extends ConsoleTestCase
 
         $tester->execute([]);
 
-        $this->assertStringContainsString('[OK] Done!', $tester->getDisplay());
+        $this->assertStringContainsString('[OK] Reload Hasura metadata successfully!', $tester->getDisplay());
     }
 }

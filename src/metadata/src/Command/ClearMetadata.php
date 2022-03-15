@@ -24,7 +24,7 @@ final class ClearMetadata extends BaseCommand
 
         $this->metadataManager->clear();
 
-        $this->informProcessingDone();
+        $this->io->success('Clear Hasura metadata successfully!');
 
         return self::SUCCESS;
     }

@@ -19,20 +19,17 @@ final class ReloadMetadata extends BaseCommand
     protected static $defaultName = 'reload';
     protected static $defaultDescription = 'Reload Hasura metadata';
 
-    protected const OPTION_NO_RELOAD_REMOTE_SCHEMAS = 'no-reload-remote-schemas';
-    protected const OPTION_NO_RELOAD_SOURCES = 'no-reload-sources';
-
     protected function configure()
     {
         parent::configure();
 
         $this->addOption(
-            self::OPTION_NO_RELOAD_REMOTE_SCHEMAS,
+            'no-reload-remote-schemas',
             mode: InputOption::VALUE_NONE,
             description: 'No reload remote schemas'
         );
         $this->addOption(
-            self::OPTION_NO_RELOAD_SOURCES,
+            'no-reload-sources',
             mode: InputOption::VALUE_NONE,
             description: 'No reload sources'
         );
@@ -43,11 +40,11 @@ final class ReloadMetadata extends BaseCommand
         $this->io->section('Reloading...');
 
         $this->metadataManager->reload(
-            !$input->getOption(self::OPTION_NO_RELOAD_REMOTE_SCHEMAS),
-            !$input->getOption(self::OPTION_NO_RELOAD_SOURCES)
+            !$input->getOption('no-reload-remote-schemas'),
+            !$input->getOption('no-reload-sources')
         );
 
-        $this->informProcessingDone();
+        $this->io->success('Reload Hasura metadata successfully!');
 
         return self::SUCCESS;
     }

@@ -22,6 +22,6 @@ final class ReloadMetadataTest extends TestCase
         $tester->execute([]);
 
         $this->assertStringContainsString('Reloading...', $tester->getDisplay());
-        $this->assertStringContainsString('Done!', $tester->getDisplay());
+        $this->assertStringContainsString('Reload Hasura metadata successfully!', $tester->getDisplay());
     }
 }

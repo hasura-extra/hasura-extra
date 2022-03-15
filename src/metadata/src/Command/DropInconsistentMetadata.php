@@ -25,7 +25,7 @@ final class DropInconsistentMetadata extends BaseCommand
 
         $this->metadataManager->dropInconsistentMetadata();
 
-        $this->informProcessingDone();
+        $this->io->success('Drop inconsistencies in Hasura metadata successfully!');
 
         return self::SUCCESS;
     }
