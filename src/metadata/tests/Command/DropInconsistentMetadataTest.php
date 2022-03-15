@@ -24,7 +24,7 @@ final class DropInconsistentMetadataTest extends TestCase
         $tester = new CommandTester(new DropInconsistentMetadata($this->manager));
         $tester->execute([]);
         $this->assertStringContainsString('Dropping...', $tester->getDisplay());
-        $this->assertStringContainsString('Done!', $tester->getDisplay());
+        $this->assertStringContainsString('Drop inconsistencies in Hasura metadata successfully!', $tester->getDisplay());
 
         $this->assertFalse(in_array('inconsistent_table', $this->getCurrentTables(), true));
     }

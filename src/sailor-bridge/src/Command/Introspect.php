@@ -40,6 +40,6 @@ final class Introspect extends Command
 
         $symfonyStyle->success('Introspection successfully!');
 
-        return 0;
+        return self::SUCCESS;
     }
 }

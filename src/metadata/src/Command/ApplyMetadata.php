@@ -19,7 +19,6 @@ use Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface;
 final class ApplyMetadata extends BaseCommand
 {
     protected static $defaultName = 'apply';
-
     protected static $defaultDescription = 'Apply Hasura metadata';
 
     protected function configure()
@@ -39,28 +38,28 @@ final class ApplyMetadata extends BaseCommand
         );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->io->section('Applying...');
 
         try {
             $this->metadataManager->apply($input->getOption('allow-inconsistent'));
+            $this->io->success('Apply Hasura metadata successfully!');
 
-            $this->io->success('Done!');
-
-            return 0;
+            return self::SUCCESS;
         } catch (HttpExceptionInterface $exception) {
             $this->io->error($exception->getResponse()->getContent(false));
-            $this->io->error('Please check your Hasura server configuration.');
+            $this->io->error(self::INFO_CHECK_SERVER_CONFIG);
         } catch (EmptyMetadataException) {
             if (!$input->getOption('allow-no-metadata')) {
                 $this->io->error('Not found metadata files.');
             } else {
                 $this->io->warning('No metadata files to apply.');
-                return 0;
+
+                return self::SUCCESS;
             }
         }
 
-        return 1;
+        return self::FAILURE;
     }
 }

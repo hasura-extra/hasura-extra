@@ -21,7 +21,7 @@ final class ClearMetadataTest extends TestCase
         $tester = new CommandTester(new ClearMetadata($this->manager));
         $tester->execute([]);
         $this->assertStringContainsString('Clearing...', $tester->getDisplay());
-        $this->assertStringContainsString('Done!', $tester->getDisplay());
+        $this->assertStringContainsString('Clear Hasura metadata successfully!', $tester->getDisplay());
 
         $metadata = $this->getCurrentMetadata();
 

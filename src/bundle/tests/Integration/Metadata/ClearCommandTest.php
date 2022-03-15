@@ -33,6 +33,6 @@ final class ClearCommandTest extends ConsoleTestCase
 
         $this->assertArrayNotHasKey('remote_schemas', $data['metadata']);
 
-        $this->assertStringContainsString('[OK] Done!', $tester->getDisplay());
+        $this->assertStringContainsString('[OK] Clear Hasura metadata successfully!', $tester->getDisplay());
     }
 }

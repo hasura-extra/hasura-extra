@@ -22,7 +22,7 @@ final class ExportMetadataTest extends TestCase
         $tester->execute([]);
 
         $this->assertStringContainsString('Exporting...', $tester->getDisplay());
-        $this->assertStringContainsString('Done!', $tester->getDisplay());
+        $this->assertStringContainsString('Export Hasura metadata successfully!', $tester->getDisplay());
 
         $actualFiles = $this->getFilesInDir(self::METADATA_PATH);
         $expectedMetadataPath = __DIR__ . '/../../../../hasura/metadata';

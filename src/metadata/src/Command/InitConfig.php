@@ -19,7 +19,6 @@ use Symfony\Component\Filesystem\Filesystem;
 final class InitConfig extends Command
 {
     protected static $defaultName = 'init-config';
-
     protected static $defaultDescription = 'Init config file';
 
     public function __construct(private Filesystem $filesystem)
@@ -27,7 +26,7 @@ final class InitConfig extends Command
         parent::__construct();
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $style = new SymfonyStyle($input, $output);
         $configFile = getcwd() . '/hasura.php';
@@ -35,12 +34,12 @@ final class InitConfig extends Command
         if ($this->filesystem->exists($configFile)) {
             $style->warning('The "hasura.php" configuration file already exists.');
 
-            return 1;
+            return self::FAILURE;
         }
 
         $this->filesystem->copy(__DIR__ . '/../../hasura.php.dist', $configFile);
         $style->success('"hasura.php" configuration file generated.');
 
-        return 0;
+        return self::SUCCESS;
     }
 }

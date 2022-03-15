@@ -17,7 +17,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 final class ReloadMetadata extends BaseCommand
 {
     protected static $defaultName = 'reload';
-
     protected static $defaultDescription = 'Reload Hasura metadata';
 
     protected function configure()
@@ -36,7 +35,7 @@ final class ReloadMetadata extends BaseCommand
         );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->io->section('Reloading...');
 
@@ -45,8 +44,8 @@ final class ReloadMetadata extends BaseCommand
             !$input->getOption('no-reload-sources')
         );
 
-        $this->io->success('Done!');
+        $this->io->success('Reload Hasura metadata successfully!');
 
-        return 0;
+        return self::SUCCESS;
     }
 }
