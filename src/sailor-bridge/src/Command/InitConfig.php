@@ -35,12 +35,12 @@ final class InitConfig extends Command
         if ($this->filesystem->exists($configFile)) {
             $style->warning('The "hasura.php" configuration file already exists.');
 
-            return 1;
+            return self::FAILURE;
         }
 
         $this->filesystem->copy(__DIR__ . '/../../hasura.php.dist', $configFile);
         $style->success('"hasura.php" configuration file generated.');
 
-        return 0;
+        return self::SUCCESS;
     }
 }

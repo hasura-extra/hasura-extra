@@ -44,6 +44,6 @@ final class Codegen extends Command
 
         $symfonyStyle->success('Generated successfully!');
 
-        return 0;
+        return self::SUCCESS;
     }
 }
