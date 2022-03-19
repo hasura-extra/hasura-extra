@@ -19,7 +19,7 @@ final class DropInconsistentMetadata extends BaseCommand
 
     protected static $defaultDescription = 'Drop inconsistent Hasura metadata';
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    protected function doExecute(InputInterface $input, OutputInterface $output): int
     {
         $this->io->section('Dropping...');
 

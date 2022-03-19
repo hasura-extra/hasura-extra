@@ -13,7 +13,6 @@ namespace Hasura\Metadata\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface;
 
 final class ExportMetadata extends BaseCommand
 {
@@ -31,20 +30,14 @@ final class ExportMetadata extends BaseCommand
         );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    protected function doExecute(InputInterface $input, OutputInterface $output): int
     {
         $this->io->section('Exporting...');
 
-        try {
-            $this->metadataManager->export($input->getOption('force'));
-            $this->io->success('Export Hasura metadata successfully!');
+        $this->metadataManager->export($input->getOption('force'));
 
-            return self::SUCCESS;
-        } catch (HttpExceptionInterface $exception) {
-            $this->io->error($exception->getResponse()->getContent(false));
-            $this->io->error(self::INFO_CHECK_SERVER_CONFIG);
-        }
+        $this->io->success('Export Hasura metadata successfully!');
 
-        return self::FAILURE;
+        return self::SUCCESS;
     }
 }
