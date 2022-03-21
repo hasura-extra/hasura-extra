@@ -18,7 +18,7 @@ final class GetInconsistentMetadata extends BaseCommand
     protected static $defaultName = 'get-inconsistent';
     protected static $defaultDescription = 'Get inconsistent Hasura metadata';
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    protected function doExecute(InputInterface $input, OutputInterface $output): int
     {
         $this->io->section('Getting...');
 

@@ -14,7 +14,6 @@ use Hasura\Metadata\EmptyMetadataException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface;
 
 final class ApplyMetadata extends BaseCommand
 {
@@ -38,7 +37,7 @@ final class ApplyMetadata extends BaseCommand
         );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    protected function doExecute(InputInterface $input, OutputInterface $output): int
     {
         $this->io->section('Applying...');
 
@@ -47,9 +46,6 @@ final class ApplyMetadata extends BaseCommand
             $this->io->success('Apply Hasura metadata successfully!');
 
             return self::SUCCESS;
-        } catch (HttpExceptionInterface $exception) {
-            $this->io->error($exception->getResponse()->getContent(false));
-            $this->io->error(self::INFO_CHECK_SERVER_CONFIG);
         } catch (EmptyMetadataException) {
             if (!$input->getOption('allow-no-metadata')) {
                 $this->io->error('Not found metadata files.');

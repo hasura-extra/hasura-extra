@@ -35,7 +35,7 @@ final class ReloadMetadata extends BaseCommand
         );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    protected function doExecute(InputInterface $input, OutputInterface $output): int
     {
         $this->io->section('Reloading...');
 

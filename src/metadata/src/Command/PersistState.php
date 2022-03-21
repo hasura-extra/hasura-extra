@@ -15,7 +15,6 @@ use Hasura\Metadata\StateProcessorInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 
 final class PersistState extends BaseCommand
 {
@@ -36,19 +35,11 @@ final class PersistState extends BaseCommand
         );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    protected function doExecute(InputInterface $input, OutputInterface $output): int
     {
         $this->io->section('Persisting application state to Hasura...');
 
-        try {
-            $this->processor->process($this->metadataManager, $input->getOption('allow-inconsistent'));
-        } catch (ClientExceptionInterface $clientException) {
-            $content = $clientException->getResponse()->getContent(false);
-            $this->io->error($content);
-
-            return self::FAILURE;
-        }
-
+        $this->processor->process($this->metadataManager, $input->getOption('allow-inconsistent'));
         $this->io->success('Persist application states to Hasura successfully!');
 
         return self::SUCCESS;
