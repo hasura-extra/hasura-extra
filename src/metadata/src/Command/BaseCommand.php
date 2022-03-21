@@ -20,8 +20,6 @@ use Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface;
 
 abstract class BaseCommand extends Command
 {
-    protected const INFO_CHECK_SERVER_CONFIG = 'Please check your Hasura server configuration.';
-
     protected SymfonyStyle $io;
 
     public function __construct(protected ManagerInterface $metadataManager)
@@ -45,11 +43,7 @@ abstract class BaseCommand extends Command
             $result = $this->doExecute($input, $output);
         } catch (HttpExceptionInterface $exception) {
             $this->io->error($exception->getResponse()->getContent(false));
-            $this->io->error(self::INFO_CHECK_SERVER_CONFIG);
-
-            $result = self::FAILURE;
-        } catch (\Exception $exception) {
-            $this->io->error($exception->getMessage());
+            $this->io->error('Please check your Hasura server configuration.');
 
             $result = self::FAILURE;
         }
