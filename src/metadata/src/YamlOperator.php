@@ -69,8 +69,8 @@ final class YamlOperator implements OperatorInterface
                 $source['tables'] ?? [],
                 fn (array $table) => sprintf(
                     '%s_%s.yaml',
-                    $this->snakeCase($table['table']['schema']),
-                    $this->snakeCase($table['table']['name'])
+                    $table['table']['schema'],
+                    $table['table']['name']
                 ),
                 $collectionFile,
                 $sourcePath,
@@ -151,7 +151,7 @@ final class YamlOperator implements OperatorInterface
 
             $this->exportItems(
                 $remoteSchema['permissions'] ?? [],
-                fn (array $permission) => sprintf('role_%s.yaml', $this->snakeCase($permission['role'])),
+                fn (array $permission) => sprintf('role_%s.yaml', $permission['role']),
                 $collectionFile,
                 $sourcePath,
                 $basePath
