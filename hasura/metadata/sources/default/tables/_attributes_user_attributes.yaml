@@ -1,0 +1,3 @@
+table:
+    schema: _attributes
+    name: user_attributes
