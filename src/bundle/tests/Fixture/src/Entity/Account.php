@@ -28,7 +28,7 @@ class Account
     #[ORM\Column(type: 'string', length: 512, unique: true)]
     private ?string $email = null;
 
-    #[ORM\Column(type: 'string', length: 64, nullable: true)]
+    #[ORM\Column(type: 'string', length: 2, nullable: true)]
     private ?string $countryCode = null;
 
     public function getId(): ?int
