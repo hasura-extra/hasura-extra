@@ -42,7 +42,7 @@ event_triggers:
                     "schema": {{$body.table.schema}}
                   }
                 }
-            content_type: application/json
             method: POST
+            version: 1
             query_params: {  }
             template_engine: Kriti

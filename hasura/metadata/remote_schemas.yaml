@@ -26,6 +26,21 @@
                 mapping: {  }
     comment: ''
     permissions: !include remote_schemas/countries/permissions.yaml
+    remote_relationships:
+        -
+            relationships:
+                -
+                    definition:
+                        to_source:
+                            relationship_type: array
+                            source: default
+                            table:
+                                schema: public
+                                name: account
+                            field_mapping:
+                                code: country_code
+                    name: accounts
+            type_name: Country
 -
     name: graphqlite-bridge
     definition:

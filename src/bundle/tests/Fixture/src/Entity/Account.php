@@ -28,6 +28,9 @@ class Account
     #[ORM\Column(type: 'string', length: 512, unique: true)]
     private ?string $email = null;
 
+    #[ORM\Column(type: 'string', length: 64, nullable: true)]
+    private ?string $countryCode = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -56,5 +59,15 @@ class Account
     public function setEmail(?string $email): void
     {
         $this->email = $email;
+    }
+
+    public function getCountryCode(): ?string
+    {
+        return $this->countryCode;
+    }
+
+    public function setCountryCode(?string $countryCode): void
+    {
+        $this->countryCode = $countryCode;
     }
 }
