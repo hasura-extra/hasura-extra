@@ -42,7 +42,7 @@
         }
     },
     "conflict": {
-        "hasura-extra/bundle": "<2.4.0"
+        "hasura-extra/bundle": "<2.5.0"
     },
     "minimum-stability": "dev",
     "prefer-stable": true
