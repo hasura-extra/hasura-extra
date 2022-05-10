@@ -15,8 +15,8 @@ definition:
                 "username": {{$body.input.email}},
                 "password": {{$body.input.password}}
             }
-        content_type: application/json
         method: POST
+        version: 1
         query_params: {  }
         template_engine: Kriti
     type: mutation

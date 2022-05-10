@@ -29,7 +29,7 @@ services:
       POSTGRES_PASSWORD: hasura
 
   hasura:
-    image: hasura/graphql-engine:v2.2.0
+    image: hasura/graphql-engine:v2.6.1
     restart: on-failure
     environment:
       HASURA_GRAPHQL_ADMIN_SECRET: 'test'

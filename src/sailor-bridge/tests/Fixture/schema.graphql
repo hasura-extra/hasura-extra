@@ -24,6 +24,38 @@ input ContinentFilterInput {
 }
 
 type Country {
+  accounts(
+    """distinct select on columns"""
+    distinct_on: [account_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [account_order_by!]
+
+    """filter the rows returned"""
+    where: account_bool_exp
+  ): [account!]!
+  accounts_aggregate(
+    """distinct select on columns"""
+    distinct_on: [account_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [account_order_by!]
+
+    """filter the rows returned"""
+    where: account_bool_exp
+  ): account_aggregate!
   capital: String
   code: ID!
   continent: Continent!
@@ -2105,6 +2137,216 @@ type _flattenmany_tag_variance_fields {
   id: Float
 }
 
+"""
+columns and relationships of "account"
+"""
+type account {
+  country: Country
+  country_code: String
+  email: String!
+  id: Int!
+  name: String!
+}
+
+"""
+aggregated selection of "account"
+"""
+type account_aggregate {
+  aggregate: account_aggregate_fields
+  nodes: [account!]!
+}
+
+"""
+aggregate fields of "account"
+"""
+type account_aggregate_fields {
+  avg: account_avg_fields
+  count(columns: [account_select_column!], distinct: Boolean): Int!
+  max: account_max_fields
+  min: account_min_fields
+  stddev: account_stddev_fields
+  stddev_pop: account_stddev_pop_fields
+  stddev_samp: account_stddev_samp_fields
+  sum: account_sum_fields
+  var_pop: account_var_pop_fields
+  var_samp: account_var_samp_fields
+  variance: account_variance_fields
+}
+
+"""aggregate avg on columns"""
+type account_avg_fields {
+  id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "account". All fields are combined with a logical 'AND'.
+"""
+input account_bool_exp {
+  _and: [account_bool_exp!]
+  _not: account_bool_exp
+  _or: [account_bool_exp!]
+  country_code: String_comparison_exp
+  email: String_comparison_exp
+  id: Int_comparison_exp
+  name: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "account"
+"""
+enum account_constraint {
+  """unique or primary key constraint"""
+  account_email_key
+
+  """unique or primary key constraint"""
+  account_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "account"
+"""
+input account_inc_input {
+  id: Int
+}
+
+"""
+input type for inserting data into table "account"
+"""
+input account_insert_input {
+  country_code: String
+  email: String
+  id: Int
+  name: String
+}
+
+"""aggregate max on columns"""
+type account_max_fields {
+  country_code: String
+  email: String
+  id: Int
+  name: String
+}
+
+"""aggregate min on columns"""
+type account_min_fields {
+  country_code: String
+  email: String
+  id: Int
+  name: String
+}
+
+"""
+response of any mutation on the table "account"
+"""
+type account_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [account!]!
+}
+
+"""
+on_conflict condition type for table "account"
+"""
+input account_on_conflict {
+  constraint: account_constraint!
+  update_columns: [account_update_column!]! = []
+  where: account_bool_exp
+}
+
+"""Ordering options when selecting data from "account"."""
+input account_order_by {
+  country_code: order_by
+  email: order_by
+  id: order_by
+  name: order_by
+}
+
+"""primary key columns input for table: account"""
+input account_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "account"
+"""
+enum account_select_column {
+  """column name"""
+  country_code
+
+  """column name"""
+  email
+
+  """column name"""
+  id
+
+  """column name"""
+  name
+}
+
+"""
+input type for updating data in table "account"
+"""
+input account_set_input {
+  country_code: String
+  email: String
+  id: Int
+  name: String
+}
+
+"""aggregate stddev on columns"""
+type account_stddev_fields {
+  id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type account_stddev_pop_fields {
+  id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type account_stddev_samp_fields {
+  id: Float
+}
+
+"""aggregate sum on columns"""
+type account_sum_fields {
+  id: Int
+}
+
+"""
+update columns of table "account"
+"""
+enum account_update_column {
+  """column name"""
+  country_code
+
+  """column name"""
+  email
+
+  """column name"""
+  id
+
+  """column name"""
+  name
+}
+
+"""aggregate var_pop on columns"""
+type account_var_pop_fields {
+  id: Float
+}
+
+"""aggregate var_samp on columns"""
+type account_var_samp_fields {
+  id: Float
+}
+
+"""aggregate variance on columns"""
+type account_variance_fields {
+  id: Float
+}
+
 input article_insert_obj_input {
   description: String!
   title: String!
@@ -2341,10 +2583,16 @@ scalar json
 
 scalar jsonb
 
+input jsonb_cast_exp {
+  String: String_comparison_exp
+}
+
 """
 Boolean expression to compare columns of type "jsonb". All fields are combined with logical 'AND'.
 """
 input jsonb_comparison_exp {
+  _cast: jsonb_cast_exp
+
   """is the column contained in the given json value"""
   _contained_in: jsonb
 
@@ -2485,6 +2733,19 @@ type mutation_root {
   delete single row from the table: "_flattenmany.tag"
   """
   delete__flattenmany_tag_by_pk(id: Int!): _flattenmany_tag
+
+  """
+  delete data from the table: "account"
+  """
+  delete_account(
+    """filter the rows which have to be deleted"""
+    where: account_bool_exp!
+  ): account_mutation_response
+
+  """
+  delete single row from the table: "account"
+  """
+  delete_account_by_pk(id: Int!): account
 
   """
   delete data from the table: "hasura_events"
@@ -2636,6 +2897,28 @@ type mutation_root {
     """upsert condition"""
     on_conflict: _flattenmany_tag_on_conflict
   ): _flattenmany_tag
+
+  """
+  insert data into the table: "account"
+  """
+  insert_account(
+    """the rows to be inserted"""
+    objects: [account_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: account_on_conflict
+  ): account_mutation_response
+
+  """
+  insert a single row into the table: "account"
+  """
+  insert_account_one(
+    """the row to be inserted"""
+    object: account_insert_input!
+
+    """upsert condition"""
+    on_conflict: account_on_conflict
+  ): account
 
   """
   insert data into the table: "hasura_events"
@@ -2903,6 +3186,36 @@ type mutation_root {
     _set: _flattenmany_tag_set_input
     pk_columns: _flattenmany_tag_pk_columns_input!
   ): _flattenmany_tag
+
+  """
+  update data of the table: "account"
+  """
+  update_account(
+    """
+    increments the numeric columns with given value of the filtered values
+    """
+    _inc: account_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: account_set_input
+
+    """filter the rows which have to be updated"""
+    where: account_bool_exp!
+  ): account_mutation_response
+
+  """
+  update single row of the table: "account"
+  """
+  update_account_by_pk(
+    """
+    increments the numeric columns with given value of the filtered values
+    """
+    _inc: account_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: account_set_input
+    pk_columns: account_pk_columns_input!
+  ): account
 
   """
   update data of the table: "hasura_events"
@@ -3358,6 +3671,49 @@ type query_root {
   """
   _flattenmany_tag_by_pk(id: Int!): _flattenmany_tag
   _service: _Service!
+
+  """
+  fetch data from the table: "account"
+  """
+  account(
+    """distinct select on columns"""
+    distinct_on: [account_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [account_order_by!]
+
+    """filter the rows returned"""
+    where: account_bool_exp
+  ): [account!]!
+
+  """
+  fetch aggregated fields from the table: "account"
+  """
+  account_aggregate(
+    """distinct select on columns"""
+    distinct_on: [account_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [account_order_by!]
+
+    """filter the rows returned"""
+    where: account_bool_exp
+  ): account_aggregate!
+
+  """fetch data from the table: "account" using primary key columns"""
+  account_by_pk(id: Int!): account
 
   """
   
@@ -3942,6 +4298,49 @@ type subscription_root {
   _flattenmany_tag_by_pk(id: Int!): _flattenmany_tag
 
   """
+  fetch data from the table: "account"
+  """
+  account(
+    """distinct select on columns"""
+    distinct_on: [account_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [account_order_by!]
+
+    """filter the rows returned"""
+    where: account_bool_exp
+  ): [account!]!
+
+  """
+  fetch aggregated fields from the table: "account"
+  """
+  account_aggregate(
+    """distinct select on columns"""
+    distinct_on: [account_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [account_order_by!]
+
+    """filter the rows returned"""
+    where: account_bool_exp
+  ): account_aggregate!
+
+  """fetch data from the table: "account" using primary key columns"""
+  account_by_pk(id: Int!): account
+
+  """
   fetch data from the table: "hasura_events"
   """
   hasura_events(
@@ -4012,7 +4411,7 @@ scalar timestamptz
 scalar timetz
 
 type transactional_output {
-  name: String!
+  name: String
 }
 
 """A GraphQL type that can contain uuid"""

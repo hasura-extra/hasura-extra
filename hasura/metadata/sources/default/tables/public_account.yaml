@@ -1,0 +1,14 @@
+table:
+    schema: public
+    name: account
+remote_relationships:
+    -
+        definition:
+            remote_field:
+                country:
+                    arguments:
+                        code: $country_code
+            hasura_fields:
+                - country_code
+            remote_schema: countries
+        name: country

@@ -1,2 +1,4 @@
 -
     collection: allowed-queries
+    scope:
+        global: true
