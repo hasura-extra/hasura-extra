@@ -30,14 +30,14 @@
         "symfony/filesystem": "^5.0",
         "symfony/string": "^5.0",
         "symfony/yaml": "^5.0",
-        "hasura-extra/api-client": "^2.5"
+        "hasura-extra/api-client": "^2.6"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5"
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "2.5-dev"
+            "dev-main": "2.6-dev"
         }
     },
     "minimum-stability": "dev",
