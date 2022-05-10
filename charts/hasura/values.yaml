@@ -160,8 +160,11 @@ authHook: ~
 # -- HTTP method to use for the authorization webhook.
 authHookMode: 'GET'
 
-# -- A JSON string containing type and the JWK used for verifying (and other optional details). Example: {"type": "HS256", "key": "3bd561c37d214b4496d09049fadc542c"}. See the [JWT docs](https://hasura.io/docs/latest/graphql/core/auth/authentication/jwt.html).
-jwtSecret: ~
+# -- An object map containing type and the JWK used for verifying (and other optional details). See the [JWT docs](https://hasura.io/docs/latest/graphql/core/auth/authentication/jwt.html).
+jwtSecret: {}
+#  type: "HS256"
+#  key: "3bd561c37d214b4496d09049fadc542c"
+#  jwk_url: ""
 
 # -- Unauthorized role, used when access-key is not sent in access-key only mode or the Authorization header is absent in JWT mode. Example: anonymous. Now whenever the “authorization” header is absent, the request’s role will default to anonymous.
 unauthorizedRole: 'anonymous'
