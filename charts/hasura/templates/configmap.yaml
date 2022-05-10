@@ -46,10 +46,7 @@ data:
 {{- else }}
   HASURA_GRAPHQL_DISABLE_CORS: 'true'
 {{- end }}
-{{- if .Values.jwtSecret }}
-  HASURA_GRAPHQL_JWT_SECRET: {{ .Values.jwtSecret | quote }}
-  HASURA_GRAPHQL_UNAUTHORIZED_ROLE: {{ .Values.unauthorizedRole | quote }}
-{{- else if .Values.authHook  }}
+{{- if .Values.authHook  }}
   HASURA_GRAPHQL_AUTH_HOOK: {{ tpl .Values.authHook $ | quote }}
   HASURA_GRAPHQL_AUTH_HOOK_MODE: {{ .Values.authHookMode | quote }}
 {{- end }}

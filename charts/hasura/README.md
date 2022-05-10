@@ -1,6 +1,6 @@
 # Hasura Chart for Kubernetes
 
-![Version: 2.2.0](https://img.shields.io/badge/Version-2.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v2.2.0](https://img.shields.io/badge/AppVersion-v2.2.0-informational?style=flat-square)
+![Version: 2.3.0](https://img.shields.io/badge/Version-2.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v2.6.1](https://img.shields.io/badge/AppVersion-v2.6.1-informational?style=flat-square)
 
 A Helm chart to install Hasura graphql engine in a Kubernetes cluster.
 
@@ -55,7 +55,7 @@ To install the chart with the release name `my-release`, run the following comma
 | ingress.hosts[0].paths[0].path | string | `"/"` |  |
 | ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
 | ingress.tls | list | See [values.yaml](values.yaml). | Ingress TLS configuration. |
-| jwtSecret | string | `nil` | A JSON string containing type and the JWK used for verifying (and other optional details). Example: {"type": "HS256", "key": "3bd561c37d214b4496d09049fadc542c"}. See the [JWT docs](https://hasura.io/docs/latest/graphql/core/auth/authentication/jwt.html). |
+| jwtSecret | object | `{}` | An object map containing type and the JWK used for verifying (and other optional details). See the [JWT docs](https://hasura.io/docs/latest/graphql/core/auth/authentication/jwt.html). |
 | liveQueriesMultiplexedBatchSize | int | `100` | Multiplexed live queries are split into batches of the specified size. |
 | liveQueriesMultiplexedRefetchInterval | int | `1000` | Updated results (if any) will be sent at most once in this interval (in milliseconds) for live queries which can be multiplexed. |
 | logLevel | string | `"info"` | Set the logging level. Options: debug, info, warn, error. |
