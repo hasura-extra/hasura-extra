@@ -57,8 +57,57 @@ jobs:
       - run: make environment
 
       - uses: jtalk/url-health-check-action@v2
+        name: Health check Apache
         with:
           url: http://localhost/healthz.php
+          max-attempts: 5
+          retry-delay: 5s
+          retry-all: true
+
+      - uses: jtalk/url-health-check-action@v2
+        name: Health check Hasura api client
+        with:
+          url: http://localhost:8081/healthz
+          max-attempts: 5
+          retry-delay: 5s
+          retry-all: true
+
+      - uses: jtalk/url-health-check-action@v2
+        name: Health check Hasura metadata
+        with:
+          url: http://localhost:8082/healthz
+          max-attempts: 5
+          retry-delay: 5s
+          retry-all: true
+
+      - uses: jtalk/url-health-check-action@v2
+        name: Health check Hasura GraphQLite bridge
+        with:
+          url: http://localhost:8083/healthz
+          max-attempts: 5
+          retry-delay: 5s
+          retry-all: true
+
+      - uses: jtalk/url-health-check-action@v2
+        name: Health check Hasura bundle
+        with:
+          url: http://localhost:8085/healthz
+          max-attempts: 5
+          retry-delay: 5s
+          retry-all: true
+
+      - uses: jtalk/url-health-check-action@v2
+        name: Health check Hasura Laravel
+        with:
+          url: http://localhost:8086/healthz
+          max-attempts: 5
+          retry-delay: 5s
+          retry-all: true
+
+      - uses: jtalk/url-health-check-action@v2
+        name: Health check Hasura Sailor bridge
+        with:
+          url: http://localhost:8087/healthz
           max-attempts: 5
           retry-delay: 5s
           retry-all: true
