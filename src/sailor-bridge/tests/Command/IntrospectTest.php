@@ -18,7 +18,7 @@ class IntrospectTest extends TestCase
 {
     public function testIntrospect(): void
     {
-        $oldSchema = file_get_contents(self::SCHEMA_PATH);
+        $expectedSchema = file_get_contents(self::EXPECTED_SCHEMA_PATH);
         $this->filesystem->remove(self::SCHEMA_PATH);
         $tester = new CommandTester(new Introspect());
         $tester->execute([]);
@@ -26,6 +26,6 @@ class IntrospectTest extends TestCase
         $this->assertStringContainsString('Introspecting...', $tester->getDisplay());
         $this->assertStringContainsString('Introspection successfully!', $tester->getDisplay());
         $this->assertFileExists(self::SCHEMA_PATH);
-        $this->assertSame($oldSchema, file_get_contents(self::SCHEMA_PATH));
+        $this->assertSame($expectedSchema, file_get_contents(self::SCHEMA_PATH));
     }
 }

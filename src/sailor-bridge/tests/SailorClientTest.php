@@ -23,7 +23,7 @@ final class SailorClientTest extends PHPUnitTestCase
     {
         parent::setUp();
 
-        $client = new Client('http://localhost:8080', 'test');
+        $client = new Client('http://localhost:8084', 'test');
         $this->sailorClient = new SailorClient($client);
     }
 

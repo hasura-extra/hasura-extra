@@ -1,0 +1,5 @@
+- !include tables/_flattenmany_article.yaml
+- !include tables/_flattenmany_article_tag.yaml
+- !include tables/_flattenmany_article_tags_view.yaml
+- !include tables/_flattenmany_tag.yaml
+- !include tables/_flattenmany_tag_articles_view.yaml

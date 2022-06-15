@@ -1,2 +1,0 @@
-- !include rest_endpoints/get_country_codes.yaml
-- !include rest_endpoints/hasura_events.yaml

@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Hasura\Metadata\Tests;
 
 use Hasura\ApiClient\Client;
+use Hasura\Laravel\Tests\Fixture\App\GraphQLExecutors\Types\__DirectiveLocation;
 use Hasura\Metadata\Manager;
 use Hasura\Metadata\ManagerInterface;
 use Hasura\Metadata\MetadataUtils;
@@ -22,6 +23,8 @@ class TestCase extends PHPUnitTestCase
 {
     protected const METADATA_PATH = __DIR__ . '/.metadata';
 
+    protected const EXPECTED_METADATA_PATH = __DIR__ . '/../metadata';
+
     protected ManagerInterface $manager;
 
     protected Client $client;
@@ -32,7 +35,7 @@ class TestCase extends PHPUnitTestCase
     {
         parent::setUp();
 
-        $client = $this->client = new Client('http://localhost:8080', 'test');
+        $client = $this->client = new Client('http://localhost:8082', 'test');
         $this->manager = new Manager(
             $client,
             self::METADATA_PATH,

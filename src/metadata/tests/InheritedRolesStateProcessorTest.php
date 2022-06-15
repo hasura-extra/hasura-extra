@@ -29,7 +29,7 @@ final class InheritedRolesStateProcessorTest extends TestCase
                 'a' => ['b', 'c'],
                 'd' => ['e'],
             ],
-            new RemoteSchema('metadata'),
+            new RemoteSchema('test'),
             'schema { query: Query } type Query { dummy: String! }'
         );
 

@@ -1,0 +1,12 @@
+table:
+    schema: _attributes
+    name: chat
+object_relationships:
+    -
+        name: user
+        using:
+            foreign_key_constraint_on: receiver_id
+    -
+        name: userBySenderId
+        using:
+            foreign_key_constraint_on: sender_id

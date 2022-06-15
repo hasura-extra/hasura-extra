@@ -1,0 +1,7 @@
+-
+    name: laravel
+    definition:
+        url: 'http://apache/laravel.php/graphql'
+        timeout_seconds: 60
+    comment: ''
+    permissions: !include remote_schemas/laravel/permissions.yaml

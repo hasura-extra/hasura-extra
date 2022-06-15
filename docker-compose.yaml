@@ -6,8 +6,6 @@ services:
     volumes:
       - $PWD:/var/www/html:rw,cached
     environment:
-      DATABASE_URL: postgres://hasura:hasura@postgres/hasura
-      HASURA_BASE_URI: http://hasura:8080
       PHP_EXTENSION_PDO_PGSQL: 1
       APACHE_DOCUMENT_ROOT: public/
     ports:
@@ -28,19 +26,104 @@ services:
       POSTGRES_USER: hasura
       POSTGRES_PASSWORD: hasura
 
-  hasura:
-    image: hasura/graphql-engine:v2.6.1
+  hasura-api-client:
+    image: hasura/graphql-engine:v2.7.0
     restart: on-failure
     environment:
       HASURA_GRAPHQL_ADMIN_SECRET: 'test'
       HASURA_GRAPHQL_ENABLE_REMOTE_SCHEMA_PERMISSIONS: 'true'
-      HASURA_GRAPHQL_DATABASE_URL: postgres://hasura:hasura@postgres/hasura
+      HASURA_GRAPHQL_DATABASE_URL: postgres://hasura:hasura@postgres/api_client
       HASURA_GRAPHQL_DEV_MODE: 'true'
       HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
     ports:
       - protocol: tcp
         target: 8080
-        published: 8080
+        published: 8081
+    depends_on:
+      - apache
+      - postgres
+
+  hasura-metadata:
+    image: hasura/graphql-engine:v2.7.0
+    restart: on-failure
+    environment:
+      HASURA_GRAPHQL_ADMIN_SECRET: 'test'
+      HASURA_GRAPHQL_ENABLE_REMOTE_SCHEMA_PERMISSIONS: 'true'
+      HASURA_GRAPHQL_DATABASE_URL: postgres://hasura:hasura@postgres/metadata
+      HASURA_GRAPHQL_DEV_MODE: 'true'
+      HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
+    ports:
+      - protocol: tcp
+        target: 8080
+        published: 8082
+    depends_on:
+      - apache
+      - postgres
+
+  hasura-graphqlite-bridge:
+    image: hasura/graphql-engine:v2.7.0
+    restart: on-failure
+    environment:
+      HASURA_GRAPHQL_ADMIN_SECRET: 'test'
+      HASURA_GRAPHQL_ENABLE_REMOTE_SCHEMA_PERMISSIONS: 'true'
+      HASURA_GRAPHQL_DATABASE_URL: postgres://hasura:hasura@postgres/graphqlite_bridge
+      HASURA_GRAPHQL_DEV_MODE: 'true'
+      HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
+    ports:
+      - protocol: tcp
+        target: 8080
+        published: 8083
+    depends_on:
+      - apache
+      - postgres
+
+  hasura-sailor-bridge:
+    image: hasura/graphql-engine:v2.7.0
+    restart: on-failure
+    environment:
+      HASURA_GRAPHQL_ADMIN_SECRET: 'test'
+      HASURA_GRAPHQL_ENABLE_REMOTE_SCHEMA_PERMISSIONS: 'true'
+      HASURA_GRAPHQL_DATABASE_URL: postgres://hasura:hasura@postgres/sailor_bridge
+      HASURA_GRAPHQL_DEV_MODE: 'true'
+      HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
+    ports:
+      - protocol: tcp
+        target: 8080
+        published: 8084
+    depends_on:
+      - apache
+      - postgres
+
+  hasura-bundle:
+    image: hasura/graphql-engine:v2.7.0
+    restart: on-failure
+    environment:
+      HASURA_GRAPHQL_ADMIN_SECRET: 'test'
+      HASURA_GRAPHQL_ENABLE_REMOTE_SCHEMA_PERMISSIONS: 'true'
+      HASURA_GRAPHQL_DATABASE_URL: postgres://hasura:hasura@postgres/bundle
+      HASURA_GRAPHQL_DEV_MODE: 'true'
+      HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
+    ports:
+      - protocol: tcp
+        target: 8080
+        published: 8085
+    depends_on:
+      - apache
+      - postgres
+
+  hasura-laravel:
+    image: hasura/graphql-engine:v2.7.0
+    restart: on-failure
+    environment:
+      HASURA_GRAPHQL_ADMIN_SECRET: 'test'
+      HASURA_GRAPHQL_ENABLE_REMOTE_SCHEMA_PERMISSIONS: 'true'
+      HASURA_GRAPHQL_DATABASE_URL: postgres://hasura:hasura@postgres/laravel
+      HASURA_GRAPHQL_DEV_MODE: 'true'
+      HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
+    ports:
+      - protocol: tcp
+        target: 8080
+        published: 8086
     depends_on:
       - apache
       - postgres
