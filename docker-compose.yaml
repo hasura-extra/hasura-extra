@@ -4,7 +4,7 @@ services:
   apache:
     image: thecodingmachine/php:8.0-v4-apache
     volumes:
-      - $PWD:/var/www/html:rw,cached
+      - ./:/var/www/html:rw,cached
     environment:
       PHP_EXTENSION_PDO_PGSQL: 1
       APACHE_DOCUMENT_ROOT: public/
@@ -16,7 +16,7 @@ services:
   postgres:
     image: postgres:13-alpine
     volumes:
-      - $PWD/docker/postgres/initdb.d:/docker-entrypoint-initdb.d
+      - ./docker/postgres/initdb.d:/docker-entrypoint-initdb.d
     ports:
       - protocol: tcp
         target: 5432
