@@ -33,7 +33,7 @@ class TestCase extends PHPTestCase
     {
         parent::setUp();
 
-        $apiClient = new Client('http://localhost:8084', 'test');
+        $apiClient = new Client('http://localhost:8087', 'test');
         $config = new EndpointConfig(
             new SailorClient($apiClient),
             'Hasura\SailorBridge\Tests\Fixture\Generation',

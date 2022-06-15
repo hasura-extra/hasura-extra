@@ -13,12 +13,7 @@ apply-metadata:
 	HASURA_BASE_URI="http://localhost:8083" \
 	HASURA_ADMIN_SECRET="test" \
 	HASURA_METADATA_PATH="$(PWD)/src/graphqlite-bridge/metadata" \
-	php ./src/metadata/bin/hasura-metadata apply;
-
-	HASURA_BASE_URI="http://localhost:8084" \
-	HASURA_ADMIN_SECRET="test" \
-	HASURA_METADATA_PATH="$(PWD)/src/sailor-bridge/metadata" \
-	php ./src/metadata/bin/hasura-metadata apply;
+	php ./src/metadata/bin/hasura-metadata apply; \
 
 	HASURA_BASE_URI="http://localhost:8085" \
 	HASURA_ADMIN_SECRET="test" \
@@ -28,6 +23,11 @@ apply-metadata:
 	HASURA_BASE_URI="http://localhost:8086" \
 	HASURA_ADMIN_SECRET="test" \
 	HASURA_METADATA_PATH="$(PWD)/src/laravel/metadata" \
+	php ./src/metadata/bin/hasura-metadata apply; \
+
+	HASURA_BASE_URI="http://localhost:8087" \
+	HASURA_ADMIN_SECRET="test" \
+	HASURA_METADATA_PATH="$(PWD)/src/sailor-bridge/metadata" \
 	php ./src/metadata/bin/hasura-metadata apply;
 
 .PHONY: check-cs
@@ -88,21 +88,7 @@ export-metadata:
 	HASURA_BASE_URI="http://localhost:8083" \
 	HASURA_ADMIN_SECRET="test" \
 	HASURA_METADATA_PATH="$(PWD)/src/graphqlite-bridge/metadata" \
-	php ./src/metadata/bin/hasura-metadata export --force;
-
-	HASURA_BASE_URI="http://localhost:8084" \
-	HASURA_ADMIN_SECRET="test" \
-	HASURA_METADATA_PATH="$(PWD)/src/sailor-bridge/metadata" \
 	php ./src/metadata/bin/hasura-metadata export --force; \
-
-	HASURA_BASE_URI="http://localhost:8084" \
-	HASURA_ADMIN_SECRET="test" \
-	HASURA_METADATA_PATH="$(PWD)/src/sailor-bridge/metadata" \
-	SAILOR_QUERY_SPEC_PATH="$(PWD)/src/sailor-bridge/metadata" \
-	SAILOR_SCHEMA_PATH="$(PWD)/src/sailor-bridge/metadata/schema.graphql" \
-	SAILOR_EXECUTOR_PATH="$(PWD)/src/sailor-bridge/metadata" \
-	SAILOR_EXECUTOR_NAMESPACE="App\\GraphqlExecutor" \
-	php ./src/sailor-bridge/bin/hasura-sailor introspect;
 
 	HASURA_BASE_URI="http://localhost:8085" \
 	HASURA_ADMIN_SECRET="test" \
@@ -112,4 +98,18 @@ export-metadata:
 	HASURA_BASE_URI="http://localhost:8086" \
 	HASURA_ADMIN_SECRET="test" \
 	HASURA_METADATA_PATH="$(PWD)/src/laravel/metadata" \
-	php ./src/metadata/bin/hasura-metadata export --force;
+	php ./src/metadata/bin/hasura-metadata export --force \
+
+	HASURA_BASE_URI="http://localhost:8087" \
+	HASURA_ADMIN_SECRET="test" \
+	HASURA_METADATA_PATH="$(PWD)/src/sailor-bridge/metadata" \
+	php ./src/metadata/bin/hasura-metadata export --force; \
+
+	HASURA_BASE_URI="http://localhost:8087" \
+	HASURA_ADMIN_SECRET="test" \
+	HASURA_METADATA_PATH="$(PWD)/src/sailor-bridge/metadata" \
+	SAILOR_QUERY_SPEC_PATH="$(PWD)/src/sailor-bridge/metadata" \
+	SAILOR_SCHEMA_PATH="$(PWD)/src/sailor-bridge/metadata/schema.graphql" \
+	SAILOR_EXECUTOR_PATH="$(PWD)/src/sailor-bridge/metadata" \
+	SAILOR_EXECUTOR_NAMESPACE="App\\GraphqlExecutor" \
+	php ./src/sailor-bridge/bin/hasura-sailor introspect;

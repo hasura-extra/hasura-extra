@@ -77,23 +77,6 @@ services:
       - apache
       - postgres
 
-  hasura-sailor-bridge:
-    image: hasura/graphql-engine:v2.7.0
-    restart: on-failure
-    environment:
-      HASURA_GRAPHQL_ADMIN_SECRET: 'test'
-      HASURA_GRAPHQL_ENABLE_REMOTE_SCHEMA_PERMISSIONS: 'true'
-      HASURA_GRAPHQL_DATABASE_URL: postgres://hasura:hasura@postgres/sailor_bridge
-      HASURA_GRAPHQL_DEV_MODE: 'true'
-      HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
-    ports:
-      - protocol: tcp
-        target: 8080
-        published: 8084
-    depends_on:
-      - apache
-      - postgres
-
   hasura-bundle:
     image: hasura/graphql-engine:v2.7.0
     restart: on-failure
@@ -124,6 +107,23 @@ services:
       - protocol: tcp
         target: 8080
         published: 8086
+    depends_on:
+      - apache
+      - postgres
+
+  hasura-sailor-bridge:
+    image: hasura/graphql-engine:v2.7.0
+    restart: on-failure
+    environment:
+      HASURA_GRAPHQL_ADMIN_SECRET: 'test'
+      HASURA_GRAPHQL_ENABLE_REMOTE_SCHEMA_PERMISSIONS: 'true'
+      HASURA_GRAPHQL_DATABASE_URL: postgres://hasura:hasura@postgres/sailor_bridge
+      HASURA_GRAPHQL_DEV_MODE: 'true'
+      HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
+    ports:
+      - protocol: tcp
+        target: 8080
+        published: 8087
     depends_on:
       - apache
       - postgres
