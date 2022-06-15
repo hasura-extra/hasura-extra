@@ -1,0 +1,32 @@
+-
+    name: countries
+    definition:
+        url: 'https://countries.trevorblades.com/graphql'
+        timeout_seconds: 60
+        customization:
+            type_names:
+                mapping: {  }
+    comment: ''
+    remote_relationships:
+        -
+            relationships:
+                -
+                    definition:
+                        to_source:
+                            relationship_type: array
+                            source: default
+                            table:
+                                schema: public
+                                name: account
+                            field_mapping:
+                                code: country_code
+                    name: accounts
+            type_name: Country
+    permissions: !include remote_schemas/countries/permissions.yaml
+-
+    name: test
+    definition:
+        url: 'http://apache/metadata.php'
+        timeout_seconds: 60
+    comment: ''
+    permissions: !include remote_schemas/test/permissions.yaml

@@ -6,7 +6,7 @@ return [
     /*
      * Hasura base uri.
      */
-    'base_uri' => env('HASURA_BASE_URI', 'http://hasura:8080'),
+    'base_uri' => env('HASURA_BASE_URI', 'http://localhost:8086'),
     /*
      * Hasura admin secret.
      */

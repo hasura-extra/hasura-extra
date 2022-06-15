@@ -9,7 +9,7 @@ return [
     'connections' => [
         'pgsql' => [
             'driver' => 'pgsql',
-            'url' => env('DATABASE_URL'),
+            'url' => env('DATABASE_URL', 'postgres://hasura:hasura@localhost:5432/laravel'),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,

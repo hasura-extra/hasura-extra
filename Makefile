@@ -5,7 +5,30 @@ environment:
 
 .PHONY: apply-metadata
 apply-metadata:
-	php ./src/metadata/bin/hasura-metadata apply
+	HASURA_BASE_URI="http://localhost:8082" \
+	HASURA_ADMIN_SECRET="test" \
+	HASURA_METADATA_PATH="$(PWD)/src/metadata/metadata" \
+	php ./src/metadata/bin/hasura-metadata apply;
+
+	HASURA_BASE_URI="http://localhost:8083" \
+	HASURA_ADMIN_SECRET="test" \
+	HASURA_METADATA_PATH="$(PWD)/src/graphqlite-bridge/metadata" \
+	php ./src/metadata/bin/hasura-metadata apply; \
+
+	HASURA_BASE_URI="http://localhost:8085" \
+	HASURA_ADMIN_SECRET="test" \
+	HASURA_METADATA_PATH="$(PWD)/src/bundle/metadata" \
+	php ./src/metadata/bin/hasura-metadata apply; \
+
+	HASURA_BASE_URI="http://localhost:8086" \
+	HASURA_ADMIN_SECRET="test" \
+	HASURA_METADATA_PATH="$(PWD)/src/laravel/metadata" \
+	php ./src/metadata/bin/hasura-metadata apply; \
+
+	HASURA_BASE_URI="http://localhost:8087" \
+	HASURA_ADMIN_SECRET="test" \
+	HASURA_METADATA_PATH="$(PWD)/src/sailor-bridge/metadata" \
+	php ./src/metadata/bin/hasura-metadata apply;
 
 .PHONY: check-cs
 check-cs:
@@ -14,14 +37,6 @@ check-cs:
 .PHONY: fix-cs
 fix-cs:
 	./vendor/bin/ecs check --fix
-
-.PHONY: export-metadata
-export-metadata:
-	php ./src/metadata/bin/hasura-metadata export --force
-
-.PHONY: sailor-introspect
-sailor-introspect:
-	php ./src/sailor-bridge/bin/hasura-sailor introspect
 
 .PHONY: test-all
 test-all:
@@ -62,3 +77,55 @@ test-laravel:
 .PHONY: changelog
 changelog:
 	docker run -it --rm -v "$(PWD)":/usr/local/src/your-app ferrarimarco/github-changelog-generator -u hasura-extra -p hasura-extra --exclude-tags-regex "helm-chart-*" --output= --unreleased-only --token=$$GITHUB_TOKEN --no-issues --usernames-as-github-logins --no-verbose
+
+.PHONY: export-metadata
+export-metadata:
+	HASURA_BASE_URI="http://localhost:8082" \
+	HASURA_ADMIN_SECRET="test" \
+	HASURA_METADATA_PATH="$(PWD)/src/metadata/metadata" \
+	php ./src/metadata/bin/hasura-metadata export --force;
+
+	HASURA_BASE_URI="http://localhost:8083" \
+	HASURA_ADMIN_SECRET="test" \
+	HASURA_METADATA_PATH="$(PWD)/src/graphqlite-bridge/metadata" \
+	php ./src/metadata/bin/hasura-metadata export --force; \
+
+	HASURA_BASE_URI="http://localhost:8085" \
+	HASURA_ADMIN_SECRET="test" \
+	HASURA_METADATA_PATH="$(PWD)/src/bundle/metadata" \
+	php ./src/metadata/bin/hasura-metadata export --force; \
+
+	HASURA_BASE_URI="http://localhost:8086" \
+	HASURA_ADMIN_SECRET="test" \
+	HASURA_METADATA_PATH="$(PWD)/src/laravel/metadata" \
+	php ./src/metadata/bin/hasura-metadata export --force \
+
+	HASURA_BASE_URI="http://localhost:8087" \
+	HASURA_ADMIN_SECRET="test" \
+	HASURA_METADATA_PATH="$(PWD)/src/sailor-bridge/metadata" \
+	php ./src/metadata/bin/hasura-metadata export --force; \
+
+	HASURA_BASE_URI="http://localhost:8087" \
+	HASURA_ADMIN_SECRET="test" \
+	HASURA_METADATA_PATH="$(PWD)/src/sailor-bridge/metadata" \
+	SAILOR_QUERY_SPEC_PATH="$(PWD)/src/sailor-bridge/metadata" \
+	SAILOR_SCHEMA_PATH="$(PWD)/src/sailor-bridge/metadata/schema.graphql" \
+	SAILOR_EXECUTOR_PATH="$(PWD)/src/sailor-bridge/metadata" \
+	SAILOR_EXECUTOR_NAMESPACE="App\\GraphqlExecutor" \
+	php ./src/sailor-bridge/bin/hasura-sailor introspect;
+
+.PHONY: binary-test
+binary-test:
+	HASURA_BASE_URI= \
+	HASURA_ADMIN_SECRET= \
+	HASURA_METADATA_PATH= \
+	php ./src/metadata/bin/hasura-metadata;
+
+	HASURA_BASE_URI= \
+	HASURA_ADMIN_SECRET= \
+	HASURA_METADATA_PATH= \
+	SAILOR_QUERY_SPEC_PATH= \
+	SAILOR_SCHEMA_PATH= \
+	SAILOR_EXECUTOR_PATH= \
+	SAILOR_EXECUTOR_NAMESPACE= \
+	php ./src/sailor-bridge/bin/hasura-sailor;

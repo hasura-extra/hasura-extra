@@ -1,0 +1,7 @@
+-
+    name: graphqlite-bridge
+    definition:
+        url: 'http://apache/graphqlite-bridge.php'
+        timeout_seconds: 60
+    comment: ''
+    permissions: !include remote_schemas/graphqlite-bridge/permissions.yaml

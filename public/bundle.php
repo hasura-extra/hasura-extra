@@ -9,8 +9,10 @@ use Symfony\Component\HttpFoundation\Request;
 new class {
     public function __construct()
     {
-        (new Dotenv)->bootEnv(__DIR__.'/.env');
-
+        $_SERVER += [
+            'DATABASE_URL' => 'postgres://hasura:hasura@localhost:5432/bundle',
+            'HASURA_BASE_URI' => 'http://hasura:8085'
+        ];
         $kernel = new TestKernel('test', 1);
         $request = Request::createFromGlobals();
         $response = $kernel->handle($request);

@@ -23,6 +23,8 @@ class TestCase extends PHPTestCase
 
     protected const SCHEMA_PATH = __DIR__ . '/Fixture/schema.graphql';
 
+    protected const EXPECTED_SCHEMA_PATH = __DIR__ . '/../metadata/schema.graphql';
+
     protected const QUERY_SPEC_PATH = __DIR__ . '/Fixture/query_spec';
 
     protected Filesystem $filesystem;
@@ -31,7 +33,7 @@ class TestCase extends PHPTestCase
     {
         parent::setUp();
 
-        $apiClient = new Client('http://localhost:8080', 'test');
+        $apiClient = new Client('http://localhost:8087', 'test');
         $config = new EndpointConfig(
             new SailorClient($apiClient),
             'Hasura\SailorBridge\Tests\Fixture\Generation',

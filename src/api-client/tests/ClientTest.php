@@ -30,7 +30,7 @@ final class ClientTest extends TestCase
                 'x-test' => true,
             ],
         ]);
-        $client = new Client('http://localhost:8080', '123456', [], $customHttpClient);
+        $client = new Client('http://localhost:8081', '123456', [], $customHttpClient);
         $refProp = new \ReflectionProperty($client, 'httpClient');
         $refProp->setAccessible(true);
 

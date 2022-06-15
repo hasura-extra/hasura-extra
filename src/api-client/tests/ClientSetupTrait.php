@@ -24,6 +24,6 @@ trait ClientSetupTrait
     {
         parent::setUp();
 
-        $this->client = new Client('http://localhost:8080', 'test');
+        $this->client = new Client('http://localhost:8081', 'test');
     }
 }

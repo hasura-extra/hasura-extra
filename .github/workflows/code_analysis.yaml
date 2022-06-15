@@ -23,10 +23,7 @@ jobs:
             run: composer validate
 
           - name: Binary File Run
-            run: |
-              # test run bin files
-              php src/metadata/bin/hasura-metadata
-              php src/sailor-bridge/bin/hasura-sailor
+            run: make binary-test
     steps:
       - uses: actions/checkout@v2
 

@@ -1,0 +1,28 @@
+table:
+    schema: _attributes
+    name: user
+array_relationships:
+    -
+        name: chats
+        using:
+            foreign_key_constraint_on:
+                column: receiver_id
+                table:
+                    schema: _attributes
+                    name: chat
+    -
+        name: chatsBySenderId
+        using:
+            foreign_key_constraint_on:
+                column: sender_id
+                table:
+                    schema: _attributes
+                    name: chat
+    -
+        name: user_attributes
+        using:
+            foreign_key_constraint_on:
+                column: sender_id
+                table:
+                    schema: _attributes
+                    name: user_attributes

@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace Hasura\Bundle\Tests\Integration\GraphQLite;
 
-use Doctrine\DBAL\Logging\DebugStack;
+use Doctrine\Bundle\DoctrineBundle\Middleware\BacktraceDebugDataHolder;
 
 final class ArgEntityTest extends TestCase
 {
@@ -51,9 +51,9 @@ GQL;
         $this->assertSame(3, $data['data']['e3']);
 
         // ensure n+1
-        /** @var DebugStack $profile */
-        $profile = $this->client->getContainer()->get('doctrine.dbal.logger.profiling.default');
+        /** @var BacktraceDebugDataHolder $profile */
+        $queryHolder = $this->client->getContainer()->get('doctrine.debug_data_holder');
 
-        $this->assertSame(1, count($profile->queries));
+        $this->assertSame(1, count($queryHolder->getData()['default']));
     }
 }

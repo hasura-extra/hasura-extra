@@ -25,13 +25,12 @@ final class ExportMetadataTest extends TestCase
         $this->assertStringContainsString('Export Hasura metadata successfully!', $tester->getDisplay());
 
         $actualFiles = $this->getFilesInDir(self::METADATA_PATH);
-        $expectedMetadataPath = __DIR__ . '/../../../../hasura/metadata';
-        $expectedFiles = $this->getFilesInDir($expectedMetadataPath);
+        $expectedFiles = $this->getFilesInDir(self::EXPECTED_METADATA_PATH);
 
         $this->assertSame($expectedFiles, $actualFiles, 'Exported files are not expected');
 
         foreach ($expectedFiles as $expectedFile) {
-            $expected = sprintf('%s/%s', $expectedMetadataPath, $expectedFile);
+            $expected = sprintf('%s/%s', self::EXPECTED_METADATA_PATH, $expectedFile);
             $actual = sprintf('%s/%s', self::METADATA_PATH, $expectedFile);
 
             $this->assertFileEquals($expected, $actual);

@@ -34,7 +34,7 @@ class TestCase extends PHPUnitTestCase
         $this->initSchemaFactory();
 
         $this->schema = $this->schemaFactory->createSchema();
-        $this->client = new Client('http://localhost:8080', 'test');
+        $this->client = new Client('http://localhost:8083', 'test');
 
         if ($this->autoBackupAndRestoreMetadata) {
             $data = $this->client->metadata()->query('export_metadata', [], 2);

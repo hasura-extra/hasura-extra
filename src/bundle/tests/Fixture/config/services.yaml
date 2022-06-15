@@ -1,4 +1,6 @@
 parameters:
+  env(DATABASE_URL): postgres://hasura:hasura@localhost:5432/bundle
+  env(HASURA_BASE_URI): 'http://localhost:8085'
 
 services:
   _defaults:

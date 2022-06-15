@@ -1,5 +1,0 @@
-name: article_insert_output
-fields:
-    -
-        name: id
-        type: ID!
