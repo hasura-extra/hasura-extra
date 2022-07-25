@@ -50,6 +50,8 @@ service:
   type: ClusterIP
   # -- Service port.
   port: 80
+  # -- Annotations to be added to the service.
+  annotations: {}
 
 ingress:
   # -- Enable [ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/).

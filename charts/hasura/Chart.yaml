@@ -10,7 +10,7 @@ keywords:
   - graphql
   - hasura-extra
 type: application
-version: 2.3.0
+version: 2.4.0
 appVersion: "v2.6.1"
 maintainers:
   - name: vuongxuongminh
