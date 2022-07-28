@@ -18,7 +18,7 @@
     "require": {
         "php": ">=8.0",
         "spawnia/sailor": "^0.18",
-        "hasura-extra/api-client": "^2.6",
+        "hasura-extra/api-client": "^3.0",
         "symfony/uid": "^6.0"
     },
     "require-dev": {
@@ -26,11 +26,11 @@
         "symfony/filesystem": "^6.0"
     },
     "conflict": {
-        "hasura-extra/auth-hook": "<2.5.0",
-        "hasura-extra/event-dispatcher": "<2.5.0",
-        "hasura-extra/bundle": "<2.5.0",
-        "hasura-extra/graphqlite-bridge": "<2.5.0",
-        "hasura-extra/metadata": "<2.5.0",
+        "hasura-extra/auth-hook": "<3.0.0",
+        "hasura-extra/event-dispatcher": "<3.0.0",
+        "hasura-extra/bundle": "<3.0.0",
+        "hasura-extra/graphqlite-bridge": "<3.0.0",
+        "hasura-extra/metadata": "<3.0.0",
         "hasura-extra/laravel": "<2.5.0"
     },
     "extra": {
