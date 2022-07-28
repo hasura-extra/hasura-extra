@@ -38,7 +38,7 @@ final class TestKernel extends Kernel implements CompilerPassInterface
         $routes->import('Fixture/config/routes.yaml');
     }
 
-    public function getProjectDir()
+    public function getProjectDir(): string
     {
         return __DIR__ . '/Fixture';
     }
