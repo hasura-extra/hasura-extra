@@ -17,6 +17,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory;
 use Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 final class Psr15RequestHandlerTest extends TestCase
 {
@@ -36,6 +37,6 @@ final class Psr15RequestHandlerTest extends TestCase
         $response = $handler($request);
 
         $this->assertSame('', $response->getContent());
-        $this->assertSame(204, $response->getStatusCode());
+        $this->assertSame(Response::HTTP_NO_CONTENT, $response->getStatusCode());
     }
 }

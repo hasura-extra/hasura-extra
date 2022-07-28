@@ -16,7 +16,7 @@ abstract class KernelTestCase extends SymfonyKernelTestCase
 {
     protected string $projectDir = __DIR__ . '/Fixture';
 
-    public static function getKernelClass()
+    public static function getKernelClass(): string
     {
         return TestKernel::class;
     }

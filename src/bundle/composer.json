@@ -22,9 +22,9 @@
         "hasura-extra/graphqlite-bridge": "^2.6",
         "hasura-extra/sailor-bridge": "^2.6",
         "thecodingmachine/graphqlite-bundle": "^5.0",
-        "symfony/http-kernel": "^5.0",
-        "symfony/dependency-injection": "^5.0",
-        "symfony/framework-bundle": "^5.0",
+        "symfony/http-kernel": "^6.0",
+        "symfony/dependency-injection": "^6.0",
+        "symfony/framework-bundle": "^6.0",
         "symfony/psr7-pack": "^1.0"
     },
     "require-dev": {
@@ -33,9 +33,9 @@
         "symfony/maker-bundle": "^1.0",
         "symfony/orm-pack": "^2.1",
         "symfony/test-pack": "^1.0",
-        "symfony/uid": "^5.0",
-        "symfony/filesystem": "^5.0",
-        "symfony/security-bundle": "^5.0"
+        "symfony/uid": "^6.0",
+        "symfony/filesystem": "^6.0",
+        "symfony/security-bundle": "^6.0"
     },
     "conflict": {
         "hasura-extra/hasura-bundle": "*",
