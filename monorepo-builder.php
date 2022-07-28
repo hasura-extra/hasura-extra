@@ -45,6 +45,6 @@ return static function (MBConfig $mbConfig): void {
         'prefer-stable' => true,
     ]);
 
-    $mbConfig->services()->set(TagResolver::class);
+    $mbConfig->services()->set(TagResolver::class)->autowire();
     $mbConfig->services()->alias(TagResolverInterface::class, TagResolver::class);
 };

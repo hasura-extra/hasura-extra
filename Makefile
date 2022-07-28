@@ -22,11 +22,6 @@ apply-metadata:
 
 	HASURA_BASE_URI="http://localhost:8086" \
 	HASURA_ADMIN_SECRET="test" \
-	HASURA_METADATA_PATH="$(PWD)/src/laravel/metadata" \
-	php ./src/metadata/bin/hasura-metadata apply; \
-
-	HASURA_BASE_URI="http://localhost:8087" \
-	HASURA_ADMIN_SECRET="test" \
 	HASURA_METADATA_PATH="$(PWD)/src/sailor-bridge/metadata" \
 	php ./src/metadata/bin/hasura-metadata apply;
 
@@ -97,15 +92,10 @@ export-metadata:
 
 	HASURA_BASE_URI="http://localhost:8086" \
 	HASURA_ADMIN_SECRET="test" \
-	HASURA_METADATA_PATH="$(PWD)/src/laravel/metadata" \
-	php ./src/metadata/bin/hasura-metadata export --force \
-
-	HASURA_BASE_URI="http://localhost:8087" \
-	HASURA_ADMIN_SECRET="test" \
 	HASURA_METADATA_PATH="$(PWD)/src/sailor-bridge/metadata" \
 	php ./src/metadata/bin/hasura-metadata export --force; \
 
-	HASURA_BASE_URI="http://localhost:8087" \
+	HASURA_BASE_URI="http://localhost:8086" \
 	HASURA_ADMIN_SECRET="test" \
 	HASURA_METADATA_PATH="$(PWD)/src/sailor-bridge/metadata" \
 	SAILOR_QUERY_SPEC_PATH="$(PWD)/src/sailor-bridge/metadata" \
