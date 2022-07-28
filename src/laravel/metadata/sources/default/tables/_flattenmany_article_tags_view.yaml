@@ -1,3 +1,0 @@
-table:
-    schema: _flattenmany
-    name: article_tags_view
