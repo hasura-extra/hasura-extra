@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
+use Symplify\MonorepoBuilder\Config\MBConfig;
 use Hasura\MonorepoBuilder\Git\TagResolver;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection;
 use Symplify\MonorepoBuilder\Contract\Git\TagResolverInterface;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\PushNextDevReleaseWorker;
@@ -14,37 +14,37 @@ use Symplify\MonorepoBuilder\Release\ReleaseWorker\SetNextMutualDependenciesRele
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\TagVersionReleaseWorker;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\UpdateBranchAliasReleaseWorker;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\UpdateReplaceReleaseWorker;
-use Symplify\MonorepoBuilder\ValueObject\Option;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $services = $containerConfigurator->services();
-    $parameters = $containerConfigurator->parameters();
-    $services->defaults()->autoconfigure()->autowire();
+return static function (MBConfig $mbConfig): void {
+    $mbConfig->defaultBranch('3.x');
 
-    // for "merge" command
-    $parameters->set(
-        Option::DATA_TO_APPEND,
+    $mbConfig->workers([
+        // release workers - in order to execute
+        UpdateReplaceReleaseWorker::class,
+        SetCurrentMutualConflictsReleaseWorker::class,
+        SetCurrentMutualDependenciesReleaseWorker::class,
+        TagVersionReleaseWorker::class,
+        PushTagReleaseWorker::class,
+        SetNextMutualDependenciesReleaseWorker::class,
+        UpdateBranchAliasReleaseWorker::class,
+        PushNextDevReleaseWorker::class,
+    ]);
+
+    $mbConfig->packageDirectories([__DIR__ . '/src']);
+    $mbConfig->packageDirectoriesExcludes([__DIR__ . '/src/monorepo-builder']);
+
+    $mbConfig->dataToAppend(
         [
             ComposerJsonSection::REQUIRE_DEV => [
                 'phpunit/phpunit' => '^9.5',
             ],
         ]
     );
+    $mbConfig->dataToRemove([
+        'minimum-stability' => 'dev',
+        'prefer-stable' => true,
+    ]);
 
-    $parameters->set(Option::PACKAGE_DIRECTORIES, [__DIR__ . '/src/']);
-    $parameters->set(Option::EXCLUDE_PACKAGE, [__DIR__ . '/src/monorepo-builder']);
-    $parameters->set(Option::DEFAULT_BRANCH_NAME, 'main');
-
-    # release workers - in order to execute
-    $services->set(UpdateReplaceReleaseWorker::class);
-    $services->set(SetCurrentMutualConflictsReleaseWorker::class);
-    $services->set(SetCurrentMutualDependenciesReleaseWorker::class);
-    $services->set(TagVersionReleaseWorker::class);
-    $services->set(PushTagReleaseWorker::class);
-    $services->set(SetNextMutualDependenciesReleaseWorker::class);
-    $services->set(UpdateBranchAliasReleaseWorker::class);
-    $services->set(PushNextDevReleaseWorker::class);
-
-    $services->set(TagResolver::class);
-    $services->alias(TagResolverInterface::class, TagResolver::class);
+    $mbConfig->services()->set(TagResolver::class);
+    $mbConfig->services()->alias(TagResolverInterface::class, TagResolver::class);
 };
