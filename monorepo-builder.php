@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use Symplify\MonorepoBuilder\Config\MBConfig;
 use Hasura\MonorepoBuilder\Git\TagResolver;
 use Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection;
+use Symplify\MonorepoBuilder\Config\MBConfig;
 use Symplify\MonorepoBuilder\Contract\Git\TagResolverInterface;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\PushNextDevReleaseWorker;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\PushTagReleaseWorker;
