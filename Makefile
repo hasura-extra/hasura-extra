@@ -3,27 +3,41 @@ environment:
 	composer update
 	docker-compose up -d
 
-.PHONY: apply-metadata
-apply-metadata:
+.PHONY: apply-metadata-metadata
+apply-metadata-metadata:
 	HASURA_BASE_URI="http://localhost:8082" \
 	HASURA_ADMIN_SECRET="test" \
 	HASURA_METADATA_PATH="$(PWD)/src/metadata/metadata" \
 	php ./src/metadata/bin/hasura-metadata apply;
 
+.PHONY: apply-metadata-graphqlite-bridge
+apply-metadata-graphqlite-bridge:
 	HASURA_BASE_URI="http://localhost:8083" \
 	HASURA_ADMIN_SECRET="test" \
 	HASURA_METADATA_PATH="$(PWD)/src/graphqlite-bridge/metadata" \
-	php ./src/metadata/bin/hasura-metadata apply; \
+	php ./src/metadata/bin/hasura-metadata apply;
 
+.PHONY: apply-metadata-bundle
+apply-metadata-bundle:
 	HASURA_BASE_URI="http://localhost:8085" \
 	HASURA_ADMIN_SECRET="test" \
 	HASURA_METADATA_PATH="$(PWD)/src/bundle/metadata" \
-	php ./src/metadata/bin/hasura-metadata apply; \
+	php ./src/metadata/bin/hasura-metadata apply;
 
+.PHONY: sailor-bridge
+sailor-bridge:
 	HASURA_BASE_URI="http://localhost:8086" \
 	HASURA_ADMIN_SECRET="test" \
 	HASURA_METADATA_PATH="$(PWD)/src/sailor-bridge/metadata" \
 	php ./src/metadata/bin/hasura-metadata apply;
+
+.PHONY: apply-metadata
+apply-metadata:
+	set -e; \
+	make apply-metadata-metadata; \
+	make apply-metadata-graphqlite-bridge; \
+	make apply-metadata-bundle; \
+	make sailor-bridge;
 
 .PHONY: check-cs
 check-cs:

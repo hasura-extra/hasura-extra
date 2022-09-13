@@ -64,52 +64,29 @@ jobs:
           retry-delay: 5s
           retry-all: true
 
-      - if: matrix.package == 'api-client'
-        uses: jtalk/url-health-check-action@v2
+      - name: Prepare health check
+        id: prepare_healthcheck
+        run: |
+          php -r " \
+            echo '::set-output name=port::' . \
+            [ \
+              'api-client' => 8081, \
+              'metadata' => 8082, \
+              'graphqlite-bridge' => 8083, \
+              'bundle' => 8085, \
+              'sailor-bridge' => 8086 \
+            ]['${{ matrix.package }}']; \
+          ";
+
+      - uses: jtalk/url-health-check-action@v2
         name: Health check Hasura api client
         with:
-          url: http://localhost:8081/healthz
+          url: http://localhost:{{ steps.prepare_healthcheck.outputs.port }}/healthz
           max-attempts: 5
           retry-delay: 5s
           retry-all: true
 
-      - if: matrix.package == 'metadata'
-        uses: jtalk/url-health-check-action@v2
-        name: Health check Hasura metadata
-        with:
-          url: http://localhost:8082/healthz
-          max-attempts: 5
-          retry-delay: 5s
-          retry-all: true
-
-      - if: matrix.package == 'graphqlite-bridge'
-        uses: jtalk/url-health-check-action@v2
-        name: Health check Hasura GraphQLite bridge
-        with:
-          url: http://localhost:8083/healthz
-          max-attempts: 5
-          retry-delay: 5s
-          retry-all: true
-
-      - if: matrix.package == 'bundle'
-        uses: jtalk/url-health-check-action@v2
-        name: Health check Hasura bundle
-        with:
-          url: http://localhost:8085/healthz
-          max-attempts: 5
-          retry-delay: 5s
-          retry-all: true
-
-      - if: matrix.package == 'sailor-bridge'
-        uses: jtalk/url-health-check-action@v2
-        name: Health check Hasura Sailor bridge
-        with:
-          url: http://localhost:8086/healthz
-          max-attempts: 5
-          retry-delay: 5s
-          retry-all: true
-
-      - run: make apply-metadata
+      - run: make apply-metadata-${{ matrix.package }} || true
 
       - working-directory: src/${{ matrix.package }}
         run: vendor/bin/phpunit
