@@ -231,3 +231,21 @@ websocketKeepalive: 5
 
 # -- Used to set the connection initialisation timeout for graphql-ws clients. This is ignored for subscription-transport-ws (Apollo) clients.
 websocketConnectionInitTimeout: 3
+
+# -- List of experimental features to be enabled. A comma separated value is expected. Options: inherited_roles, naming_convention, streaming_subscriptions.
+experimentalFeatures: ~
+
+# -- Used to set the default naming convention for all sources. See [naming convention](https://hasura.io/docs/latest/schema/postgres/naming-convention/) for more information.
+defaultNamingConvention: 'hasura-default'
+
+# -- The schema in which Hasura can install extensions in the metadata database. Default: public.
+metadataDatabaseExtensionsSchema: 'public'
+
+# -- Enable sending compressed logs to metrics server.
+enableLogCompression: 'false'
+
+# -- Enables the query field in http-logs for metadata queries.
+enableMetadataQueryLogging: 'false'
+
+# -- Evaluate null values in where input object to True instead of error.
+v1BooleanNullCollapse: ~
