@@ -79,7 +79,7 @@ jobs:
           ";
 
       - uses: jtalk/url-health-check-action@v2
-        name: Health check Hasura api client
+        name: Health check Hasura ${{ matrix.package }}
         with:
           url: http://localhost:${{ steps.prepare_healthcheck.outputs.port }}/healthz
           max-attempts: 5
