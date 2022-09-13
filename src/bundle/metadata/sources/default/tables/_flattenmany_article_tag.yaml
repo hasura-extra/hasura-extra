@@ -1,6 +1,6 @@
 table:
-    schema: _flattenmany
     name: article_tag
+    schema: _flattenmany
 object_relationships:
     -
         name: article

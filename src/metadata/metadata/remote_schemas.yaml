@@ -13,13 +13,13 @@
                 -
                     definition:
                         to_source:
+                            field_mapping:
+                                code: country_code
                             relationship_type: array
                             source: default
                             table:
-                                schema: public
                                 name: account
-                            field_mapping:
-                                code: country_code
+                                schema: public
                     name: accounts
             type_name: Country
     permissions: !include remote_schemas/countries/permissions.yaml

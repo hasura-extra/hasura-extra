@@ -1,6 +1,6 @@
 table:
-    schema: _flattenmany
     name: tag
+    schema: _flattenmany
 array_relationships:
     -
         name: article_tags
@@ -8,5 +8,5 @@ array_relationships:
             foreign_key_constraint_on:
                 column: tag_id
                 table:
-                    schema: _flattenmany
                     name: article_tag
+                    schema: _flattenmany
