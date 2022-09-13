@@ -1,0 +1,6 @@
+tls_allowlist:
+    -
+        host: test.com
+        permissions:
+            - self-signed
+        suffix: ~

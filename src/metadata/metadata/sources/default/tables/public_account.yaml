@@ -1,6 +1,18 @@
 table:
-    schema: public
     name: account
+    schema: public
+remote_relationships:
+    -
+        definition:
+            to_remote_schema:
+                lhs_fields:
+                    - country_code
+                remote_field:
+                    country:
+                        arguments:
+                            code: $country_code
+                remote_schema: countries
+        name: country
 insert_permissions:
     -
         role: manager
@@ -11,7 +23,6 @@ insert_permissions:
                 - email
                 - name
                 - id
-            backend_only: false
 select_permissions:
     -
         role: user

@@ -1,6 +1,6 @@
 table:
-    schema: _attributes
     name: chat
+    schema: _attributes
 object_relationships:
     -
         name: user

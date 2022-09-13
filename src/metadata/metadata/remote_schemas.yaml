@@ -13,13 +13,13 @@
                 -
                     definition:
                         to_source:
+                            field_mapping:
+                                code: country_code
                             relationship_type: array
                             source: default
                             table:
-                                schema: public
                                 name: account
-                            field_mapping:
-                                code: country_code
+                                schema: public
                     name: accounts
             type_name: Country
     permissions: !include remote_schemas/countries/permissions.yaml
@@ -29,4 +29,18 @@
         url: 'http://apache/metadata.php'
         timeout_seconds: 60
     comment: ''
+    remote_relationships:
+        -
+            relationships:
+                -
+                    definition:
+                        to_remote_schema:
+                            lhs_fields:
+                                - dummy
+                            remote_field:
+                                country:
+                                    arguments: { code: $dummy }
+                            remote_schema: countries
+                    name: abc
+            type_name: Query
     permissions: !include remote_schemas/test/permissions.yaml
