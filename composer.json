@@ -19,7 +19,7 @@
         "symfony/uid": "^6.0",
         "symfony/yaml": "^6.0",
         "thecodingmachine/graphqlite": "^5.0",
-        "thecodingmachine/graphqlite-bundle": "^5.0"
+        "thecodingmachine/graphqlite-bundle": "^5.4"
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.4",
