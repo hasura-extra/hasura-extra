@@ -14,8 +14,8 @@
     },
     "require": {
         "php": ">=8.0",
-        "hasura-extra/api-client": "^3.1",
-        "hasura-extra/metadata": "^3.1",
+        "hasura-extra/api-client": "^3.2",
+        "hasura-extra/metadata": "^3.2",
         "thecodingmachine/graphqlite": "^5.0",
         "symfony/uid": "^6.0"
     },
@@ -31,7 +31,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "3.1-dev"
+            "dev-main": "3.2-dev"
         }
     },
     "minimum-stability": "dev",
