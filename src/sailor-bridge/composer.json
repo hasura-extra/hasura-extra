@@ -17,7 +17,7 @@
     ],
     "require": {
         "php": ">=8.0",
-        "spawnia/sailor": "^0.18",
+        "spawnia/sailor": "^0.20",
         "hasura-extra/api-client": "^3.1",
         "symfony/uid": "^6.0"
     },
