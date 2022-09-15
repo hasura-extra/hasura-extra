@@ -21,7 +21,7 @@
         "hasura-extra/event-dispatcher": "^3.1",
         "hasura-extra/graphqlite-bridge": "^3.1",
         "hasura-extra/sailor-bridge": "^3.1",
-        "thecodingmachine/graphqlite-bundle": "^5.0",
+        "thecodingmachine/graphqlite-bundle": "^5.4",
         "symfony/http-kernel": "^6.0",
         "symfony/dependency-injection": "^6.0",
         "symfony/framework-bundle": "^6.0",
