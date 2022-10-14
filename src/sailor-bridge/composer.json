@@ -18,7 +18,7 @@
     "require": {
         "php": ">=8.0",
         "spawnia/sailor": "^0.20",
-        "hasura-extra/api-client": "^3.2",
+        "hasura-extra/api-client": "^3.3",
         "symfony/uid": "^6.0"
     },
     "require-dev": {
@@ -35,7 +35,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "3.2-dev"
+            "dev-main": "3.3-dev"
         }
     },
     "minimum-stability": "dev",
