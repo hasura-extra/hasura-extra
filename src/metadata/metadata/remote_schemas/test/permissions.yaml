@@ -1,1 +1,1 @@
-[]
+- !include permissions/role_user.yaml

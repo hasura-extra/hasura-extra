@@ -4,4 +4,5 @@
         url: 'http://apache/graphqlite-bridge.php'
         timeout_seconds: 60
     comment: ''
+    remote_relationships: !include remote_schemas/graphqlite-bridge/remote_relationships.yaml
     permissions: !include remote_schemas/graphqlite-bridge/permissions.yaml

@@ -285,7 +285,7 @@ input _attributes_chat_order_by {
   userBySenderId: _attributes_user_order_by
 }
 
-"""primary key columns input for table: _attributes_chat"""
+"""primary key columns input for table: _attributes.chat"""
 input _attributes_chat_pk_columns_input {
   id: Int!
 }
@@ -832,7 +832,7 @@ input _attributes_user_attributes_order_by {
   user: _attributes_user_order_by
 }
 
-"""primary key columns input for table: _attributes_user_attributes"""
+"""primary key columns input for table: _attributes.user_attributes"""
 input _attributes_user_attributes_pk_columns_input {
   id: Int!
 }
@@ -1126,7 +1126,7 @@ input _attributes_user_order_by {
   user_attributes_aggregate: _attributes_user_attributes_aggregate_order_by
 }
 
-"""primary key columns input for table: _attributes_user"""
+"""primary key columns input for table: _attributes.user"""
 input _attributes_user_pk_columns_input {
   id: Int!
 }

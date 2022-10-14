@@ -11,7 +11,7 @@ keywords:
   - hasura-extra
 type: application
 version: 2.5.0
-appVersion: "v2.11.2"
+appVersion: "v2.13.0-ce"
 maintainers:
   - name: vuongxuongminh
     email: vuongxuongminh@gmail.com

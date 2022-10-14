@@ -4,4 +4,5 @@
         url: 'http://apache/bundle.php/graphql'
         timeout_seconds: 60
     comment: ''
+    remote_relationships: !include remote_schemas/bundle/remote_relationships.yaml
     permissions: !include remote_schemas/bundle/permissions.yaml
