@@ -1,0 +1,13 @@
+relationships:
+    -
+        definition:
+            to_remote_schema:
+                lhs_fields:
+                    - dummy
+                remote_field:
+                    country:
+                        arguments:
+                            code: $dummy
+                remote_schema: countries
+        name: abc
+type_name: Query

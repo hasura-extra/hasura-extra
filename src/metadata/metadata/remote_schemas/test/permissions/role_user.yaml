@@ -1,0 +1,7 @@
+role: user
+definition:
+    schema: |-
+        schema  { query: Query }
+
+        type Query { dummy: String!
+        }

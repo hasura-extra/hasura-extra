@@ -21,8 +21,8 @@ final class MetadataUtilsTest extends TestCase
         $remoteSchemas = array_column($metadata['remote_schemas'], null, 'name');
 
         $this->assertArrayHasKey('countries', $remoteSchemas);
-        $this->assertIsArray($remoteSchemas['countries']['definition']['customization']['type_names']['mapping']);
-        $this->assertEmpty($remoteSchemas['countries']['definition']['customization']['type_names']['mapping']);
+        $this->assertIsArray($remoteSchemas['countries']['definition']['customization']);
+        $this->assertEmpty($remoteSchemas['countries']['definition']['customization']);
 
         $metadataNormalized = MetadataUtils::normalizeMetadata($metadata);
         $remoteSchemas = array_column($metadataNormalized['remote_schemas'], null, 'name');
@@ -30,7 +30,7 @@ final class MetadataUtilsTest extends TestCase
         $this->assertArrayHasKey('countries', $remoteSchemas);
         $this->assertNotSame($metadataNormalized, $metadata);
         $this->assertIsObject(
-            $remoteSchemas['countries']['definition']['customization']['type_names']['mapping']
+            $remoteSchemas['countries']['definition']['customization']
         );
     }
 }

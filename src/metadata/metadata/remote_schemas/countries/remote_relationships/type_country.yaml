@@ -1,0 +1,13 @@
+relationships:
+    -
+        definition:
+            to_source:
+                field_mapping:
+                    code: country_code
+                relationship_type: array
+                source: default
+                table:
+                    name: account
+                    schema: public
+        name: accounts
+type_name: Country
