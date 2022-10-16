@@ -67,7 +67,7 @@ final class YamlOperator implements OperatorInterface
 
             $this->exportItems(
                 $source['tables'] ?? [],
-                fn(array $table) => sprintf(
+                fn (array $table) => sprintf(
                     '%s_%s.yaml',
                     $table['table']['schema'],
                     $table['table']['name']
@@ -91,7 +91,7 @@ final class YamlOperator implements OperatorInterface
     {
         $this->exportItems(
             $actions,
-            fn(array $item) => sprintf('%s.yaml', $this->snakeCase($item['name'])),
+            fn (array $item) => sprintf('%s.yaml', $this->snakeCase($item['name'])),
             $file,
             'actions',
             $basePath
@@ -117,7 +117,7 @@ final class YamlOperator implements OperatorInterface
 
             $this->exportItems(
                 $items,
-                fn(array $item) => sprintf('%s.yaml', $this->snakeCase($item['name'])),
+                fn (array $item) => sprintf('%s.yaml', $this->snakeCase($item['name'])),
                 $collectionFilePath,
                 $typePath,
                 $basePath
@@ -134,7 +134,7 @@ final class YamlOperator implements OperatorInterface
     {
         $this->exportItems(
             $cronTriggers,
-            fn(array $item) => sprintf('%s.yaml', $this->snakeCase($item['name'])),
+            fn (array $item) => sprintf('%s.yaml', $this->snakeCase($item['name'])),
             $file,
             'cron_triggers',
             $basePath
@@ -149,11 +149,11 @@ final class YamlOperator implements OperatorInterface
             $expands = [
                 'remote_relationships' => [
                     'key' => 'type_name',
-                    'prefix' => 'type'
+                    'prefix' => 'type',
                 ],
                 'permissions' => [
                     'key' => 'role',
-                    'prefix' => 'role'
+                    'prefix' => 'role',
                 ],
             ];
 
@@ -163,7 +163,7 @@ final class YamlOperator implements OperatorInterface
 
                 $this->exportItems(
                     $remoteSchema[$kind] ?? [],
-                    fn(array $item) => sprintf(
+                    fn (array $item) => sprintf(
                         '%s_%s.yaml',
                         $info['prefix'],
                         $this->snakeCase($item[$info['key']])
@@ -189,7 +189,7 @@ final class YamlOperator implements OperatorInterface
     {
         $this->exportItems(
             $restEndpoints,
-            fn(array $item) => sprintf('%s.yaml', $this->snakeCase($item['name'])),
+            fn (array $item) => sprintf('%s.yaml', $this->snakeCase($item['name'])),
             $file,
             'rest_endpoints',
             $basePath
@@ -212,7 +212,7 @@ final class YamlOperator implements OperatorInterface
     {
         $this->exportItems(
             $inheritedRoles,
-            fn(array $item) => sprintf('%s.yaml', $this->snakeCase($item['role_name'])),
+            fn (array $item) => sprintf('%s.yaml', $this->snakeCase($item['role_name'])),
             $file,
             'inherited_roles',
             $basePath
@@ -223,7 +223,7 @@ final class YamlOperator implements OperatorInterface
     {
         $this->exportItems(
             $queryCollections,
-            fn(array $item) => sprintf('%s.yaml', $this->snakeCase($item['name'])),
+            fn (array $item) => sprintf('%s.yaml', $this->snakeCase($item['name'])),
             $file,
             'query_collections',
             $basePath
