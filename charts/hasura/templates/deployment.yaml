@@ -42,7 +42,11 @@ spec:
             - configMapRef:
                 name: {{ include "hasura.fullname" . }}
             - secretRef:
+                {{- if .Values.secretName }}
+                name: {{ .Values.secretName }}
+                {{- else }}
                 name: {{ include "hasura.fullname" . }}
+                {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.serverPort }}

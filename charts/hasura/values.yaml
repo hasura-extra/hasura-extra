@@ -129,6 +129,13 @@ adminSecret: '!ChangeMe!'
 # -- Postgres database URL. Example: postgres://admin:mypass@mydomain.com:5432/mydb
 dbUrl: '!ChangeMe!'
 
+# -- secretName points to secret that is already created with environment variables such as:
+## HASURA_GRAPHQL_DATABASE_URL (required)
+## HASURA_GRAPHQL_ADMIN_SECRET (required)
+## HASURA_GRAPHQL_JWT_SECRET (optional)
+## HASURA_GRAPHQL_UNAUTHORIZED_ROLE (optional)
+secretName: ""
+
 # -- Set dev mode for GraphQL requests; include the internal key in the errors extensions of the response (if required).
 devMode: 'false'
 

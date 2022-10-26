@@ -1,6 +1,6 @@
 # Hasura Chart for Kubernetes
 
-![Version: 2.7.0](https://img.shields.io/badge/Version-2.7.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v2.13.0-ce](https://img.shields.io/badge/AppVersion-v2.13.0--ce-informational?style=flat-square)
+![Version: 2.8.0](https://img.shields.io/badge/Version-2.8.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v2.13.0-ce](https://img.shields.io/badge/AppVersion-v2.13.0--ce-informational?style=flat-square)
 
 A Helm chart to install Hasura graphql engine in a Kubernetes cluster.
 
@@ -71,6 +71,7 @@ To install the chart with the release name `my-release`, run the following comma
 | replicaCount | int | `1` | The number of replicas (pods) to launch |
 | resources | object | No requests or limits. | Container resource [requests and limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/). See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#resources) for details. |
 | schemaSyncPollInterval | int | `1000` | Interval to poll metadata storage for updates in milliseconds - Set to 0 to disable. |
+| secretName | string | `""` | The name of the secret to use. Secret should contain at least `HASURA_GRAPHQL_DATABASE_URL` and `HASURA_GRAPHQL_ADMIN_SECRET`. |
 | securityContext | object | `{}` | Container [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container). See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#security-context-1) for details. |
 | serverHost | string | `"*"` | Host on which graphql-engine will listen. |
 | serverPort | int | `8080` | Port on which graphql-engine should be served. |
