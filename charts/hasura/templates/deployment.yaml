@@ -43,7 +43,7 @@ spec:
                 name: {{ include "hasura.fullname" . }}
             - secretRef:
                 name: {{ include "hasura.fullname" . }}
-          {{ - with .Values.extraEnvVars }}
+          {{- with .Values.extraEnvVars }}
           env:
             {{- toYaml . | nindent 12 }}
           {{- end }}
