@@ -123,6 +123,16 @@ extraEnvVarsCM: {}
 ##   ENV_STORE_IN_SECRET: value
 extraEnvVarsSecret: {}
 
+# -- extraEnvVars append to extra environment variables. See [values.yaml](values.yaml).
+extraEnvVars: []
+# - name: TEST
+#   value: "test"
+# - name: PASSWORD
+#   valueFrom:
+#     secretKeyRef:
+#       name: hasura
+#       key: password
+
 # -- Admin secret key, required to access this instance. This is mandatory when you use webhook or JWT.
 adminSecret: '!ChangeMe!'
 

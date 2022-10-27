@@ -43,6 +43,10 @@ spec:
                 name: {{ include "hasura.fullname" . }}
             - secretRef:
                 name: {{ include "hasura.fullname" . }}
+          {{ - with .Values.extraEnvVars }}
+          env:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.serverPort }}
