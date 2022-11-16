@@ -28,12 +28,12 @@ abstract class AbstractScalar extends ScalarType
 
     final public static function getInstance(): static
     {
-        static $instance;
+        static $instances = [];
 
-        if (null === $instance) {
-            $instance = new static();
+        if (!isset($instances[static::class])) {
+            $instances[static::class] = new static();
         }
 
-        return $instance;
+        return $instances[static::class];
     }
 }
