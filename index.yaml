@@ -2,6 +2,27 @@ apiVersion: v1
 entries:
   hasura:
   - apiVersion: v2
+    appVersion: v2.15.0-ce
+    created: "2022-11-16T09:06:40.707543877Z"
+    description: A Helm chart to install Hasura graphql engine in a Kubernetes cluster.
+    digest: 301cce52a57cd6c017c89e168de0c09204a4b116239af2c46e92fa11f464b99b
+    home: https://hasura-extra.github.io/
+    keywords:
+    - hasura
+    - graphql
+    - hasura-extra
+    maintainers:
+    - email: vuongxuongminh@gmail.com
+      name: vuongxuongminh
+    name: hasura
+    sources:
+    - https://github.com/hasura/graphql-engine
+    - https://github.com/hasura-extra/hasura-extra/tree/charts/hasura
+    type: application
+    urls:
+    - https://github.com/hasura-extra/hasura-extra/releases/download/helm-chart-2.9.0/hasura-2.9.0.tgz
+    version: 2.9.0
+  - apiVersion: v2
     appVersion: v2.13.0-ce
     created: "2022-10-28T14:08:12.79938218Z"
     description: A Helm chart to install Hasura graphql engine in a Kubernetes cluster.
@@ -315,4 +336,4 @@ entries:
     urls:
     - https://github.com/hasura-extra/hasura-extra/releases/download/helm-chart-1.0.0/hasura-1.0.0.tgz
     version: 1.0.0
-generated: "2022-10-28T14:08:12.799592385Z"
+generated: "2022-11-16T09:06:40.707748695Z"
