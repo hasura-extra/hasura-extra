@@ -22,6 +22,6 @@ final class VersionApiTest extends TestCase
 
         $this->assertIsArray($data);
         $this->assertArrayHasKey('version', $data);
-        $this->assertSame('v2.13.0-ce', $data['version']);
+        $this->assertSame('v2.15.0-ce', $data['version']);
     }
 }

@@ -106,6 +106,17 @@ type _attributes_chat_aggregate {
   nodes: [_attributes_chat!]!
 }
 
+input _attributes_chat_aggregate_bool_exp {
+  count: _attributes_chat_aggregate_bool_exp_count
+}
+
+input _attributes_chat_aggregate_bool_exp_count {
+  arguments: [_attributes_chat_select_column!]
+  distinct: Boolean
+  filter: _attributes_chat_bool_exp
+  predicate: Int_comparison_exp!
+}
+
 """
 aggregate fields of "_attributes.chat"
 """
@@ -647,6 +658,17 @@ type _attributes_user_attributes_aggregate {
   nodes: [_attributes_user_attributes!]!
 }
 
+input _attributes_user_attributes_aggregate_bool_exp {
+  count: _attributes_user_attributes_aggregate_bool_exp_count
+}
+
+input _attributes_user_attributes_aggregate_bool_exp_count {
+  arguments: [_attributes_user_attributes_select_column!]
+  distinct: Boolean
+  filter: _attributes_user_attributes_bool_exp
+  predicate: Int_comparison_exp!
+}
+
 """
 aggregate fields of "_attributes.user_attributes"
 """
@@ -1042,9 +1064,12 @@ input _attributes_user_bool_exp {
   _or: [_attributes_user_bool_exp!]
   chats: _attributes_chat_bool_exp
   chatsBySenderId: _attributes_chat_bool_exp
+  chatsBySenderId_aggregate: _attributes_chat_aggregate_bool_exp
+  chats_aggregate: _attributes_chat_aggregate_bool_exp
   id: Int_comparison_exp
   name: String_comparison_exp
   user_attributes: _attributes_user_attributes_bool_exp
+  user_attributes_aggregate: _attributes_user_attributes_aggregate_bool_exp
 }
 
 """
@@ -1741,7 +1766,7 @@ type subscription_root {
   _attributes_chat_by_pk(id: Int!): _attributes_chat
 
   """
-  fetch data from the table in a streaming manner : "_attributes.chat"
+  fetch data from the table in a streaming manner: "_attributes.chat"
   """
   _attributes_chat_stream(
     """maximum number of rows returned in a single batch"""
@@ -1840,7 +1865,7 @@ type subscription_root {
   _attributes_user_attributes_by_pk(id: Int!): _attributes_user_attributes
 
   """
-  fetch data from the table in a streaming manner : "_attributes.user_attributes"
+  fetch data from the table in a streaming manner: "_attributes.user_attributes"
   """
   _attributes_user_attributes_stream(
     """maximum number of rows returned in a single batch"""
@@ -1859,7 +1884,7 @@ type subscription_root {
   _attributes_user_by_pk(id: Int!): _attributes_user
 
   """
-  fetch data from the table in a streaming manner : "_attributes.user"
+  fetch data from the table in a streaming manner: "_attributes.user"
   """
   _attributes_user_stream(
     """maximum number of rows returned in a single batch"""
