@@ -69,7 +69,7 @@ GQL;
 
         $this->assertFalse($this->em->isOpen());
 
-        $this->em = $this->client->getContainer()->get('doctrine')->resetManager();
+        $this->em = $this->client->getContainer()->get('doctrine')->resetManager('default');
 
         $account = $this->em->find(Account::class, 1);
 
