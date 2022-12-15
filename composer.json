@@ -19,7 +19,8 @@
         "symfony/uid": "^6.0",
         "symfony/yaml": "^6.0",
         "thecodingmachine/graphqlite": "^5.0",
-        "thecodingmachine/graphqlite-bundle": "^5.4"
+        "thecodingmachine/graphqlite-bundle": "^5.4",
+        "webonyx/graphql-php": "^14.10"
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.4",
@@ -40,6 +41,7 @@
             "Hasura\\AuthHook\\": "src/auth-hook/src",
             "Hasura\\Bundle\\": "src/bundle/src",
             "Hasura\\EventDispatcher\\": "src/event-dispatcher/src",
+            "Hasura\\GraphQLScalars\\": "src/graphql-scalars/src",
             "Hasura\\GraphQLiteBridge\\": "src/graphqlite-bridge/src",
             "Hasura\\Metadata\\": "src/metadata/src",
             "Hasura\\MonorepoBuilder\\": "src/monorepo-builder/src",
@@ -53,6 +55,7 @@
             "Hasura\\Bundle\\Tests\\": "src/bundle/tests",
             "Hasura\\Bundle\\Tests\\Fixture\\App\\": "src/bundle/tests/Fixture/src",
             "Hasura\\EventDispatcher\\Tests\\": "src/event-dispatcher/tests",
+            "Hasura\\GraphQLScalars\\Tests\\": "src/graphql-scalars/tests",
             "Hasura\\GraphQLiteBridge\\Tests\\": "src/graphqlite-bridge/tests",
             "Hasura\\Metadata\\Tests\\": "src/metadata/tests",
             "Hasura\\SailorBridge\\Tests\\": "src/sailor-bridge/tests"
@@ -63,6 +66,7 @@
         "hasura-extra/auth-hook": "3.2.0",
         "hasura-extra/bundle": "3.2.0",
         "hasura-extra/event-dispatcher": "3.2.0",
+        "hasura-extra/graphql-scalars": "self.version",
         "hasura-extra/graphqlite-bridge": "3.2.0",
         "hasura-extra/metadata": "3.2.0",
         "hasura-extra/sailor-bridge": "3.2.0"

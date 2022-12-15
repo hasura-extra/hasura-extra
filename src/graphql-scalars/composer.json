@@ -1,0 +1,31 @@
+{
+    "name": "hasura-extra/graphql-scalars",
+    "license": "MIT",
+    "description": "The library provides scalar types compatible with Hasura graphql engine.",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Hasura\\GraphQLScalars\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Hasura\\GraphQLScalars\\Tests\\": "tests"
+        }
+    },
+    "require": {
+        "php": ">=8.0",
+        "webonyx/graphql-php": "^14.10",
+        "symfony/uid": "^6.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "3.3-dev"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
