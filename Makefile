@@ -79,9 +79,9 @@ test-graphqlite-bridge:
 test-bundle:
 	./vendor/bin/phpunit src/bundle
 
-.PHONY: test-laravel
-test-laravel:
-	./vendor/bin/phpunit src/laravel
+.PHONY: test-graphql-scalars
+test-graphql-scalars:
+	./vendor/bin/phpunit src/graphql-scalars
 
 .PHONY: changelog
 changelog:
