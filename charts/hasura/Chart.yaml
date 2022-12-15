@@ -10,8 +10,8 @@ keywords:
   - graphql
   - hasura-extra
 type: application
-version: 2.9.0
-appVersion: "v2.15.0-ce"
+version: 2.10.0
+appVersion: "v2.16.0-ce"
 maintainers:
   - name: vuongxuongminh
     email: vuongxuongminh@gmail.com

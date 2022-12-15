@@ -35,7 +35,8 @@
         "symfony/test-pack": "^1.0",
         "symfony/uid": "^6.0",
         "symfony/filesystem": "^6.0",
-        "symfony/security-bundle": "^6.0"
+        "symfony/security-bundle": "^6.0",
+        "symfony/proxy-manager-bridge": "^6.0"
     },
     "conflict": {
         "hasura-extra/hasura-bundle": "*",
