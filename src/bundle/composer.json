@@ -15,12 +15,12 @@
     },
     "require": {
         "php": ">=8.0",
-        "hasura-extra/auth-hook": "^3.3",
-        "hasura-extra/api-client": "^3.3",
-        "hasura-extra/metadata": "^3.3",
-        "hasura-extra/event-dispatcher": "^3.3",
-        "hasura-extra/graphqlite-bridge": "^3.3",
-        "hasura-extra/sailor-bridge": "^3.3",
+        "hasura-extra/auth-hook": "^3.4",
+        "hasura-extra/api-client": "^3.4",
+        "hasura-extra/metadata": "^3.4",
+        "hasura-extra/event-dispatcher": "^3.4",
+        "hasura-extra/graphqlite-bridge": "^3.4",
+        "hasura-extra/sailor-bridge": "^3.4",
         "thecodingmachine/graphqlite-bundle": "^5.4",
         "symfony/http-kernel": "^6.0",
         "symfony/dependency-injection": "^6.0",
@@ -45,7 +45,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "3.3-dev"
+            "dev-main": "3.4-dev"
         }
     },
     "minimum-stability": "dev",
