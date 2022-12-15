@@ -40,7 +40,8 @@
     },
     "conflict": {
         "hasura-extra/hasura-bundle": "*",
-        "hasura-extra/laravel": "<2.5.0"
+        "hasura-extra/laravel": "<2.5.0",
+        "hasura-extra/graphql-scalars": "<3.3.0"
     },
     "extra": {
         "branch-alias": {

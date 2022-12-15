@@ -26,12 +26,13 @@
         "symfony/filesystem": "^6.0"
     },
     "conflict": {
-        "hasura-extra/auth-hook": "<3.2.0",
-        "hasura-extra/event-dispatcher": "<3.2.0",
-        "hasura-extra/bundle": "<3.2.0",
-        "hasura-extra/graphqlite-bridge": "<3.2.0",
-        "hasura-extra/metadata": "<3.2.0",
-        "hasura-extra/laravel": "<2.5.0"
+        "hasura-extra/auth-hook": "<3.3.0",
+        "hasura-extra/event-dispatcher": "<3.3.0",
+        "hasura-extra/bundle": "<3.3.0",
+        "hasura-extra/graphqlite-bridge": "<3.3.0",
+        "hasura-extra/metadata": "<3.3.0",
+        "hasura-extra/laravel": "<2.5.0",
+        "hasura-extra/graphql-scalars": "<3.3.0"
     },
     "extra": {
         "branch-alias": {
