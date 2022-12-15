@@ -46,10 +46,6 @@ class UuidTest extends AbstractScalarTypeTest
             $v6 = SymfonyUuid::v6(),
             $v6->toRfc4122(),
         ];
-        yield 'v7' => [
-            $v7 = SymfonyUuid::v7(),
-            $v7->toRfc4122(),
-        ];
     }
 
     public function valuesToParse(): iterable
