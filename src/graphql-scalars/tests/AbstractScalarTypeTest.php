@@ -84,5 +84,4 @@ abstract class AbstractScalarTypeTest extends TestCase
     abstract public function invalidValuesToParse(): iterable;
 
     abstract public function invalidNodesToParseLiteral(): iterable;
-
 }

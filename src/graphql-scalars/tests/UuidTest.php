@@ -32,7 +32,7 @@ class UuidTest extends AbstractScalarTypeTest
         ];
         yield 'v3' => [
             $v3 = SymfonyUuid::v3($v1, __METHOD__),
-            $v3->toRfc4122()
+            $v3->toRfc4122(),
         ];
         yield 'v4' => [
             $v4 = SymfonyUuid::v4(),
@@ -63,11 +63,15 @@ class UuidTest extends AbstractScalarTypeTest
     public function nodesToParseLiteral(): iterable
     {
         yield 'max' => [
-            new StringValueNode(['value' => 'ffffffff-ffff-ffff-ffff-ffffffffffff']),
+            new StringValueNode([
+                'value' => 'ffffffff-ffff-ffff-ffff-ffffffffffff',
+            ]),
             SymfonyUuid::fromRfc4122('ffffffff-ffff-ffff-ffff-ffffffffffff'),
         ];
         yield 'min' => [
-            new StringValueNode(['value' => '00000000-0000-0000-0000-000000000000']),
+            new StringValueNode([
+                'value' => '00000000-0000-0000-0000-000000000000',
+            ]),
             SymfonyUuid::fromRfc4122('00000000-0000-0000-0000-000000000000'),
         ];
     }
@@ -91,9 +95,21 @@ class UuidTest extends AbstractScalarTypeTest
 
     public function invalidNodesToParseLiteral(): iterable
     {
-        yield 'empty string' => [new StringValueNode(['value' => ''])];
-        yield 'invalid uuid' => [new StringValueNode(['value' => 'ffffffff'])];
-        yield 'boolean' => [new BooleanValueNode(['value' => false])];
-        yield 'list' => [new ListValueNode(['values' => []])];
+        yield 'empty string' => [
+            new StringValueNode([
+                'value' => '',
+            ]), ];
+        yield 'invalid uuid' => [
+            new StringValueNode([
+                'value' => 'ffffffff',
+            ]), ];
+        yield 'boolean' => [
+            new BooleanValueNode([
+                'value' => false,
+            ]), ];
+        yield 'list' => [
+            new ListValueNode([
+                'values' => [],
+            ]), ];
     }
 }

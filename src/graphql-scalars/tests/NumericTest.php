@@ -44,8 +44,12 @@ class NumericTest extends AbstractScalarTypeTest
 
     public function nodesToParseLiteral(): iterable
     {
-        yield 'int node' => [new IntValueNode(['value' => 1]), 1];
-        yield 'float value' => [new FloatValueNode(['value' => 2.0]), 2.0];
+        yield 'int node' => [new IntValueNode([
+            'value' => 1,
+        ]), 1];
+        yield 'float value' => [new FloatValueNode([
+            'value' => 2.0,
+        ]), 2.0];
     }
 
     public function invalidValuesToSerialize(): iterable
@@ -66,8 +70,17 @@ class NumericTest extends AbstractScalarTypeTest
 
     public function invalidNodesToParseLiteral(): iterable
     {
-        yield 'boolean node' => [new  BooleanValueNode(['value' => true])];
-        yield 'string node' => [new  StringValueNode(['value' => 'abc'])];
-        yield 'list node' => [new  ListValueNode(['values' => []])];
+        yield 'boolean node' => [
+            new  BooleanValueNode([
+                'value' => true,
+            ]), ];
+        yield 'string node' => [
+            new  StringValueNode([
+                'value' => 'abc',
+            ]), ];
+        yield 'list node' => [
+            new  ListValueNode([
+                'values' => [],
+            ]), ];
     }
 }

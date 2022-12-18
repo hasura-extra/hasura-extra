@@ -21,12 +21,30 @@ abstract class AbstractDateTimeTest extends AbstractScalarTypeTest
 {
     public function invalidNodesToParseLiteral(): iterable
     {
-        yield 'invalid value node' => [new StringValueNode(['value' => ''])];
-        yield 'boolean node' => [new BooleanValueNode(['value' => true])];
-        yield 'list node' => [new ListValueNode(['values' => []])];
-        yield 'object node' => [new ObjectValueNode(['fields' => []])];
-        yield 'int node' => [new IntValueNode(['value' => 1])];
-        yield 'float node' => [new FloatValueNode(['value' => 1.0])];
+        yield 'invalid value node' => [
+            new StringValueNode([
+                'value' => '',
+            ]), ];
+        yield 'boolean node' => [
+            new BooleanValueNode([
+                'value' => true,
+            ]), ];
+        yield 'list node' => [
+            new ListValueNode([
+                'values' => [],
+            ]), ];
+        yield 'object node' => [
+            new ObjectValueNode([
+                'fields' => [],
+            ]), ];
+        yield 'int node' => [
+            new IntValueNode([
+                'value' => 1,
+            ]), ];
+        yield 'float node' => [
+            new FloatValueNode([
+                'value' => 1.0,
+            ]), ];
     }
 
     public function invalidValuesToSerialize(): iterable

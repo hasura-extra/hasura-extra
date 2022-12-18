@@ -30,19 +30,19 @@ class TimetzTest extends AbstractDateTimeTest
     {
         yield 'date' => [
             new \DateTimeImmutable('2022-02-02'),
-            '00:00:00+00:00'
+            '00:00:00+00:00',
         ];
         yield 'datetime' => [
             new \DateTimeImmutable('2022-02-02T02:02:02'),
-            '02:02:02+00:00'
+            '02:02:02+00:00',
         ];
         yield 'time' => [
             new \DateTimeImmutable('01:01:01'),
-            '01:01:01+00:00'
+            '01:01:01+00:00',
         ];
         yield 'time with timezone' => [
             new \DateTimeImmutable('02:02:02+02:02'),
-            '02:02:02+02:02'
+            '02:02:02+02:02',
         ];
     }
 
@@ -65,11 +65,15 @@ class TimetzTest extends AbstractDateTimeTest
     public function nodesToParseLiteral(): iterable
     {
         yield '01:01:01+01:01' => [
-            new StringValueNode(['value' => '01:01:01+01:01']),
+            new StringValueNode([
+                'value' => '01:01:01+01:01',
+            ]),
             \DateTimeImmutable::createFromFormat('H:i:sP|', '01:01:01+01:01'),
         ];
         yield '02:02:02+02:02' => [
-            new StringValueNode(['value' => '02:02:02+02:02']),
+            new StringValueNode([
+                'value' => '02:02:02+02:02',
+            ]),
             \DateTimeImmutable::createFromFormat('H:i:sP|', '02:02:02+02:02'),
         ];
     }

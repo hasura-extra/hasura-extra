@@ -57,7 +57,9 @@ final class DateTest extends AbstractDateTimeTest
     public function nodesToParseLiteral(): iterable
     {
         yield 'date' => [
-            new StringValueNode(['value' => '2022-02-02']),
+            new StringValueNode([
+                'value' => '2022-02-02',
+            ]),
             \DateTimeImmutable::createFromFormat('Y-m-d|', '2022-02-02'),
         ];
     }
@@ -72,7 +74,13 @@ final class DateTest extends AbstractDateTimeTest
     public function invalidNodesToParseLiteral(): iterable
     {
         yield from parent::invalidNodesToParseLiteral();
-        yield 'date time' => [new StringValueNode(['value' => '2022-02-02T02:02:02'])];
-        yield 'date time with timezone' => [new StringValueNode(['value' => '2022-02-02T02:02:02+02:02'])];
+        yield 'date time' => [
+            new StringValueNode([
+                'value' => '2022-02-02T02:02:02',
+            ]), ];
+        yield 'date time with timezone' => [
+            new StringValueNode([
+                'value' => '2022-02-02T02:02:02+02:02',
+            ]), ];
     }
 }
