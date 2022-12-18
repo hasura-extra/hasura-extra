@@ -44,9 +44,15 @@ class CharacterTest extends AbstractScalarTypeTest
 
     public function nodesToParseLiteral(): iterable
     {
-        yield 'a' => [new StringValueNode(['value' => 'a']), 'a'];
-        yield 'b' => [new StringValueNode(['value' => 'b']), 'b'];
-        yield 'c' => [new StringValueNode(['value' => 'c']), 'c'];
+        yield 'a' => [new StringValueNode([
+            'value' => 'a',
+        ]), 'a'];
+        yield 'b' => [new StringValueNode([
+            'value' => 'b',
+        ]), 'b'];
+        yield 'c' => [new StringValueNode([
+            'value' => 'c',
+        ]), 'c'];
     }
 
     public function invalidValuesToSerialize(): iterable
@@ -65,8 +71,17 @@ class CharacterTest extends AbstractScalarTypeTest
 
     public function invalidNodesToParseLiteral(): iterable
     {
-        yield 'long string node' => [new StringValueNode(['value' => 'abc'])];
-        yield 'int node' => [new IntValueNode(['value' => 1])];
-        yield 'float node' => [new FloatValueNode(['value' => 1.0])];
+        yield 'long string node' => [
+            new StringValueNode([
+                'value' => 'abc',
+            ]), ];
+        yield 'int node' => [
+            new IntValueNode([
+                'value' => 1,
+            ]), ];
+        yield 'float node' => [
+            new FloatValueNode([
+                'value' => 1.0,
+            ]), ];
     }
 }

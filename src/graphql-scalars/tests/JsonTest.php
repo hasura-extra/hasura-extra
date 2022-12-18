@@ -38,22 +38,30 @@ class JsonTest extends AbstractScalarTypeTest
     public function valuesToSerialize(): iterable
     {
         yield 'array list' => [[1, 2, 3], [1, 2, 3]];
-        yield 'array assoc' => [['a' => 'b'], ['a' => 'b']];
+        yield 'array assoc' => [[
+            'a' => 'b',
+        ], [
+            'a' => 'b',
+        ]];
         yield 'json serialize instance' => [
-            new class implements \JsonSerializable {
+            new class() implements \JsonSerializable {
                 public function jsonSerialize(): array
                 {
                     return [1, 2, 3];
                 }
             },
-            [1, 2, 3]
+            [1, 2, 3],
         ];
     }
 
     public function valuesToParse(): iterable
     {
         yield 'array list' => [[1, 2, 3], [1, 2, 3]];
-        yield 'array assoc' => [['a' => 'b'], ['a' => 'b']];
+        yield 'array assoc' => [[
+            'a' => 'b',
+        ], [
+            'a' => 'b',
+        ]];
     }
 
     public function nodesToParseLiteral(): iterable
@@ -61,27 +69,51 @@ class JsonTest extends AbstractScalarTypeTest
         yield 'list node' => [
             new ListValueNode([
                 'values' => new NodeList([
-                    new IntValueNode(['value' => 1]),
-                    new IntValueNode(['value' => 2]),
-                    new IntValueNode(['value' => 3]),
-                ])
+                    new IntValueNode([
+                        'value' => 1,
+                    ]),
+                    new IntValueNode([
+                        'value' => 2,
+                    ]),
+                    new IntValueNode(
+                        [
+                            'value' =>
+                            3,
+                        ]
+                    ),
+                ]),
             ]),
-            [1, 2, 3]
+            [1, 2, 3],
         ];
         yield 'object value node' => [
             new ObjectValueNode([
                 'fields' => new NodeList([
                     new ObjectFieldNode([
-                        'name' => new NameNode(['value' => 'a']),
-                        'value' => new StringValueNode(['value' => 'b'])
+                        'name' => new NameNode([
+                            'value' => 'a',
+                        ]),
+                        'value' => new StringValueNode([
+                            'value' => 'b',
+                            
+                        ]),
                     ]),
                     new ObjectFieldNode([
-                        'name' => new NameNode(['value' => 'c']),
-                        'value' => new StringValueNode(['value' => 'd'])
+                        'name' => new NameNode([
+                            'value' => 'c',
+                        ]),
+                        'value' => new StringValueNode([
+                            'value' =>
+                            'd',
+                            
+                        ]),
                     ]),
-                ])
+                ]),
             ]),
-            ['a' => 'b', 'c' => 'd']
+            [
+                'a' =>
+                 'b',
+                'c' => 'd',
+            ],
         ];
     }
 
@@ -99,6 +131,9 @@ class JsonTest extends AbstractScalarTypeTest
 
     public function invalidNodesToParseLiteral(): iterable
     {
-        yield 'invalid scalar' => [new FloatValueNode(['value' => 1])];
+        yield 'invalid scalar' => [
+            new FloatValueNode([
+                'value' => 1,
+            ]), ];
     }
 }
