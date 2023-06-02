@@ -1,6 +1,6 @@
 # Hasura Chart for Kubernetes
 
-![Version: 2.10.0](https://img.shields.io/badge/Version-2.10.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v2.16.0-ce](https://img.shields.io/badge/AppVersion-v2.16.0--ce-informational?style=flat-square)
+![Version: 2.11.0](https://img.shields.io/badge/Version-2.10.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v2.16.0-ce](https://img.shields.io/badge/AppVersion-v2.16.0--ce-informational?style=flat-square)
 
 A Helm chart to install Hasura graphql engine in a Kubernetes cluster.
 
