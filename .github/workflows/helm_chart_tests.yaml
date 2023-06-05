@@ -49,9 +49,9 @@ jobs:
         run: |
           helm repo add bitnami https://charts.bitnami.com/bitnami
           helm install postgresql bitnami/postgresql \
-            --version ^10.0 \
-            --set postgresqlDatabase=hasura \
-            --set postgresqlPassword=hasura \
+            --version ^12.0 \
+            --set auth.database=hasura \
+            --set auth.postgresPassword=hasura \
             --wait \
             --wait-for-jobs
 
