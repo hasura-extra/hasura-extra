@@ -62,14 +62,14 @@
         }
     },
     "replace": {
-        "hasura-extra/api-client": "3.4.0",
-        "hasura-extra/auth-hook": "3.4.0",
-        "hasura-extra/bundle": "3.4.0",
-        "hasura-extra/event-dispatcher": "3.4.0",
-        "hasura-extra/graphql-scalars": "3.4.0",
-        "hasura-extra/graphqlite-bridge": "3.4.0",
-        "hasura-extra/metadata": "3.4.0",
-        "hasura-extra/sailor-bridge": "3.4.0"
+        "hasura-extra/api-client": "3.4.1",
+        "hasura-extra/auth-hook": "3.4.1",
+        "hasura-extra/bundle": "3.4.1",
+        "hasura-extra/event-dispatcher": "3.4.1",
+        "hasura-extra/graphql-scalars": "3.4.1",
+        "hasura-extra/graphqlite-bridge": "3.4.1",
+        "hasura-extra/metadata": "3.4.1",
+        "hasura-extra/sailor-bridge": "3.4.1"
     },
     "config": {
         "allow-plugins": {

@@ -14,8 +14,8 @@
     },
     "require": {
         "php": ">=8.0",
-        "hasura-extra/api-client": "^3.5",
-        "hasura-extra/metadata": "^3.5",
+        "hasura-extra/api-client": "^3.4.1",
+        "hasura-extra/metadata": "^3.4.1",
         "thecodingmachine/graphqlite": "^5.0",
         "symfony/uid": "^6.0"
     },
@@ -23,12 +23,12 @@
         "phpunit/phpunit": "^9.5"
     },
     "conflict": {
-        "hasura-extra/sailor-bridge": "<3.4.0",
-        "hasura-extra/auth-hook": "<3.4.0",
-        "hasura-extra/event-dispatcher": "<3.4.0",
-        "hasura-extra/bundle": "<3.4.0",
+        "hasura-extra/sailor-bridge": "<3.4.1",
+        "hasura-extra/auth-hook": "<3.4.1",
+        "hasura-extra/event-dispatcher": "<3.4.1",
+        "hasura-extra/bundle": "<3.4.1",
         "hasura-extra/laravel": "<2.5.0",
-        "hasura-extra/graphql-scalars": "<3.4.0"
+        "hasura-extra/graphql-scalars": "<3.4.1"
     },
     "extra": {
         "branch-alias": {

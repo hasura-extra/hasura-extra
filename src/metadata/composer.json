@@ -17,13 +17,13 @@
     ],
     "conflict": {
         "hasura-extra/hasura-bundle": "*",
-        "hasura-extra/sailor-bridge": "<3.4.0",
-        "hasura-extra/auth-hook": "<3.4.0",
-        "hasura-extra/event-dispatcher": "<3.4.0",
-        "hasura-extra/bundle": "<3.4.0",
-        "hasura-extra/graphqlite-bridge": "<3.4.0",
+        "hasura-extra/sailor-bridge": "<3.4.1",
+        "hasura-extra/auth-hook": "<3.4.1",
+        "hasura-extra/event-dispatcher": "<3.4.1",
+        "hasura-extra/bundle": "<3.4.1",
+        "hasura-extra/graphqlite-bridge": "<3.4.1",
         "hasura-extra/laravel": "<2.5.0",
-        "hasura-extra/graphql-scalars": "<3.4.0"
+        "hasura-extra/graphql-scalars": "<3.4.1"
     },
     "require": {
         "php": ">=8.0",
@@ -31,7 +31,7 @@
         "symfony/filesystem": "^6.0",
         "symfony/string": "^6.0",
         "symfony/yaml": "^6.0",
-        "hasura-extra/api-client": "^3.5"
+        "hasura-extra/api-client": "^3.4.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5"
