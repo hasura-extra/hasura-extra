@@ -31,7 +31,7 @@
         "symfony/filesystem": "^6.0",
         "symfony/string": "^6.0",
         "symfony/yaml": "^6.0",
-        "hasura-extra/api-client": "^3.4.1"
+        "hasura-extra/api-client": "^3.5"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5"

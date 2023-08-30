@@ -14,8 +14,8 @@
     },
     "require": {
         "php": ">=8.0",
-        "hasura-extra/api-client": "^3.4.1",
-        "hasura-extra/metadata": "^3.4.1",
+        "hasura-extra/api-client": "^3.5",
+        "hasura-extra/metadata": "^3.5",
         "thecodingmachine/graphqlite": "^5.0",
         "symfony/uid": "^6.0"
     },
