@@ -33,7 +33,7 @@
         "symfony/security-bundle": "^6.0",
         "symfony/test-pack": "^1.0",
         "symplify/easy-coding-standard": "^9.4",
-        "symplify/monorepo-builder": "^11.1"
+        "symplify/monorepo-builder": "11.1.1"
     },
     "autoload": {
         "psr-4": {
@@ -72,5 +72,10 @@
         "hasura-extra/sailor-bridge": "3.3.0"
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": false
+        }
+    }
 }

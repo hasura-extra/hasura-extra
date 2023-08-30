@@ -16,6 +16,8 @@ use Hasura\SailorBridge\Type\JsonTypeConfig;
 use Hasura\SailorBridge\Type\UuidTypeConfig;
 use Spawnia\Sailor\Client as SailorClientInterface;
 use Spawnia\Sailor\EndpointConfig as AbstractEndpointConfig;
+use Spawnia\Sailor\Type\FloatTypeConfig;
+use Spawnia\Sailor\Type\IntTypeConfig;
 use Spawnia\Sailor\Type\TypeConfig as TypeConfigInterface;
 
 final class EndpointConfig extends AbstractEndpointConfig
@@ -69,6 +71,11 @@ final class EndpointConfig extends AbstractEndpointConfig
                 'timestamp' => new DateTimeTypeConfig('timestamp'),
                 'timestamptz' => new DateTimeTypeConfig('timestamptz'),
                 'uuid' => new UuidTypeConfig(),
+                'bigint' => new IntTypeConfig(),
+                'smallint' => new IntTypeConfig(),
+                'int2' => new IntTypeConfig(),
+                'float4' => new FloatTypeConfig(),
+                'float8' => new FloatTypeConfig(),
             ],
             $this->typeConfigs
         );
