@@ -14,6 +14,7 @@ use GraphQL\Language\AST\BooleanValueNode;
 use GraphQL\Language\AST\FloatValueNode;
 use GraphQL\Language\AST\IntValueNode;
 use GraphQL\Language\AST\ListValueNode;
+use GraphQL\Language\AST\NodeList;
 use GraphQL\Language\AST\ObjectValueNode;
 use GraphQL\Language\AST\StringValueNode;
 
@@ -31,19 +32,19 @@ abstract class AbstractDateTimeTest extends AbstractScalarTypeTest
             ]), ];
         yield 'list node' => [
             new ListValueNode([
-                'values' => [],
+                'values' => new NodeList([]),
             ]), ];
         yield 'object node' => [
             new ObjectValueNode([
-                'fields' => [],
+                'fields' => new NodeList([]),
             ]), ];
         yield 'int node' => [
             new IntValueNode([
-                'value' => 1,
+                'value' => '1',
             ]), ];
         yield 'float node' => [
             new FloatValueNode([
-                'value' => 1.0,
+                'value' => '1.0',
             ]), ];
     }
 

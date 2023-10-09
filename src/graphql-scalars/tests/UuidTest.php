@@ -12,6 +12,7 @@ namespace Hasura\GraphQLScalars\Tests;
 
 use GraphQL\Language\AST\BooleanValueNode;
 use GraphQL\Language\AST\ListValueNode;
+use GraphQL\Language\AST\NodeList;
 use GraphQL\Language\AST\StringValueNode;
 use GraphQL\Type\Definition\ScalarType;
 use Hasura\GraphQLScalars\Uuid;
@@ -109,7 +110,7 @@ class UuidTest extends AbstractScalarTypeTest
             ]), ];
         yield 'list' => [
             new ListValueNode([
-                'values' => [],
+                'values' => new NodeList([]),
             ]), ];
     }
 }

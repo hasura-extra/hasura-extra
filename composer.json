@@ -17,7 +17,7 @@
         "symfony/string": "^6.0",
         "symfony/uid": "^6.0",
         "symfony/yaml": "^6.0",
-        "webonyx/graphql-php": "^14.10"
+        "webonyx/graphql-php": "^15.7"
     },
     "require-dev": {
         "nyholm/psr7": "^1.0",

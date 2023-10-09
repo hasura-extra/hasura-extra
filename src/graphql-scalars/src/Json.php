@@ -12,5 +12,5 @@ namespace Hasura\GraphQLScalars;
 
 final class Json extends AbstractJson
 {
-    public $name = 'json';
+    public string $name = 'json';
 }

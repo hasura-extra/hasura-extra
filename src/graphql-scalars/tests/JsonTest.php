@@ -70,15 +70,15 @@ class JsonTest extends AbstractScalarTypeTest
             new ListValueNode([
                 'values' => new NodeList([
                     new IntValueNode([
-                        'value' => 1,
+                        'value' => '1',
                     ]),
                     new IntValueNode([
-                        'value' => 2,
+                        'value' => '2',
                     ]),
                     new IntValueNode(
                         [
                             'value' =>
-                            3,
+                            '3',
                         ]
                     ),
                 ]),
@@ -133,7 +133,7 @@ class JsonTest extends AbstractScalarTypeTest
     {
         yield 'invalid scalar' => [
             new FloatValueNode([
-                'value' => 1,
+                'value' => '1',
             ]), ];
     }
 }

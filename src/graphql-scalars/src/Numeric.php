@@ -20,7 +20,7 @@ use GraphQL\Utils\Utils;
 
 class Numeric extends ScalarType
 {
-    public $name = 'numeric';
+    public string $name = 'numeric';
 
     public function serialize($value): float|int
     {

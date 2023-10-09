@@ -12,7 +12,7 @@ namespace Hasura\GraphQLScalars;
 
 final class Timetz extends AbstractDateTime
 {
-    public $name = 'timetz';
+    public string $name = 'timetz';
 
     protected function getParseFormat(): string
     {
