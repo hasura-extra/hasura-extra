@@ -40,13 +40,6 @@ final class ConfigurationTest extends TestCase
                     'anonymous_role' => 'ROLE_ANONYMOUS',
                     'default_role' => 'ROLE_USER',
                 ],
-                'sailor' => [
-                    'executor_namespace' => 'App\GraphQLExecutor',
-                    'executor_path' => '%kernel.project_dir%/src/GraphQLExecutor',
-                    'query_spec_path' => '%kernel.project_dir%/hasura/graphql',
-                    'schema_path' => '%kernel.project_dir%/hasura/schema.graphql',
-                    'type_configs' => [],
-                ],
             ],
             $config
         );
@@ -72,20 +65,6 @@ final class ConfigurationTest extends TestCase
                         ],
                     ],
                 ],
-                [
-                    'sailor' => [
-                        'type_configs' => [
-                            [
-                                'name' => 'a',
-                                'service' => '@b',
-                            ],
-                            [
-                                'name' => 'c',
-                                'service' => '@d',
-                            ],
-                        ],
-                    ],
-                ],
             ]
         );
 
@@ -101,22 +80,6 @@ final class ConfigurationTest extends TestCase
                         'enabled_inherited_roles' => false,
                     ],
                     'path' => '%kernel.project_dir%/hasura/metadata',
-                ],
-                'sailor' => [
-                    'type_configs' => [
-                        [
-                            'name' => 'a',
-                            'service' => '@b',
-                        ],
-                        [
-                            'name' => 'c',
-                            'service' => '@d',
-                        ],
-                    ],
-                    'executor_namespace' => 'App\GraphQLExecutor',
-                    'executor_path' => '%kernel.project_dir%/src/GraphQLExecutor',
-                    'query_spec_path' => '%kernel.project_dir%/hasura/graphql',
-                    'schema_path' => '%kernel.project_dir%/hasura/schema.graphql',
                 ],
                 'auth' => [
                     'anonymous_role' => 'ROLE_ANONYMOUS',

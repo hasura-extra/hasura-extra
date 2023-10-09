@@ -70,14 +70,6 @@ jobs:
           retry-delay: 5s
           retry-all: true
 
-      - uses: jtalk/url-health-check-action@v2
-        name: Health check Hasura Sailor bridge
-        with:
-          url: http://localhost:8086/healthz
-          max-attempts: 5
-          retry-delay: 5s
-          retry-all: true
-
       - run: make apply-metadata
 
       - run: make test-all

@@ -17,8 +17,6 @@ use Hasura\Metadata\Command\ExportMetadata;
 use Hasura\Metadata\Command\GetInconsistentMetadata;
 use Hasura\Metadata\Command\PersistState;
 use Hasura\Metadata\Command\ReloadMetadata;
-use Hasura\SailorBridge\Command\Codegen;
-use Hasura\SailorBridge\Command\Introspect;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 
 final class LoadCommandTest extends KernelTestCase
