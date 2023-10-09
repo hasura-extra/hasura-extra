@@ -23,7 +23,6 @@ final class TestKernel extends Kernel implements CompilerPassInterface
 
     public function process(ContainerBuilder $container)
     {
-        $container->getDefinition('doctrine.debug_data_holder')->setPublic(true);
         $container->getDefinition('hasura.api_client.client')->setPublic(true);
     }
 

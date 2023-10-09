@@ -31,7 +31,6 @@ final class HasuraExtensionTest extends TestCase
         );
 
         $this->assertTrue($container->has('hasura.metadata.remote_schema'));
-        $this->assertTrue($container->has('hasura.graphql.remote_schema_permission_state_processor'));
     }
 
     public function testLoad(): void
@@ -42,13 +41,10 @@ final class HasuraExtensionTest extends TestCase
         $extension->load([], $container);
 
         $this->assertTrue($container->hasParameter('hasura.base_uri'));
-        $this->assertTrue($container->hasParameter('hasura.maker.decorate_make_entity'));
         $this->assertTrue($container->hasParameter('hasura.metadata.path'));
         $this->assertTrue($container->hasParameter('hasura.metadata.state_processors.enabled_inherited_roles'));
-        $this->assertTrue($container->hasParameter('hasura.metadata.state_processors.enabled_remote_schema_permissions'));
 
         $this->assertFalse($container->has('hasura.metadata.remote_schema'));
-        $this->assertFalse($container->has('hasura.graphql.remote_schema_permission_state_processor'));
 
         $this->assertTrue($container->has('hasura.auth_hook.controller'));
         $this->assertTrue($container->has('hasura.auth_hook.request_handler'));
@@ -59,25 +55,6 @@ final class HasuraExtensionTest extends TestCase
 
         $this->assertTrue($container->has('hasura.event_dispatcher.table_event_request_handler'));
         $this->assertTrue($container->has('hasura.event_dispatcher.table_event_request_handler_controller'));
-
-        $this->assertTrue($container->has('hasura.graphql.aggregate_query_provider_factory'));
-        $this->assertTrue($container->has('hasura.graphql.object_assertion.executor'));
-        $this->assertTrue($container->has('hasura.graphql.parameter.assertion_middleware'));
-        $this->assertTrue($container->has('hasura.graphql.parameter.arg_entity_middleware'));
-        $this->assertTrue($container->has('hasura.graphql.parameter.arg_naming_middleware'));
-        $this->assertTrue($container->has('hasura.graphql.parameter.avoid_explicit_default_null_middleware'));
-        $this->assertTrue($container->has('hasura.graphql.parameter.object_assertion_middleware'));
-        $this->assertTrue($container->has('hasura.graphql.field.transactional_middleware'));
-        $this->assertTrue($container->has('hasura.graphql.field.authorization_middleware'));
-        $this->assertTrue($container->has('hasura.graphql.field.annotation_tracker'));
-        $this->assertTrue($container->has('hasura.graphql.field.annotation_tracking_middleware'));
-        $this->assertTrue($container->has('hasura.graphql.field.arg_naming_middleware'));
-        $this->assertTrue($container->has('hasura.graphql.field.object_assertion_middleware'));
-        $this->assertTrue($container->has('hasura.graphql.root_type_mapper_factory'));
-        $this->assertTrue($container->has('hasura.graphql.authorization_service'));
-        $this->assertTrue($container->has('hasura.graphql.controller.dummy_query'));
-
-        $this->assertTrue($container->has('hasura.maker.make_entity'));
 
         $this->assertTrue($container->has('hasura.metadata.manager'));
         $this->assertTrue($container->has('hasura.metadata.yaml_operator'));
@@ -97,18 +74,6 @@ final class HasuraExtensionTest extends TestCase
         $this->assertTrue($container->has('hasura.psr_http_message.psr15_request_handler_controller'));
     }
 
-    public function testDisableDecorateMakeEntity(): void
-    {
-        $container = new ContainerBuilder();
-        $extension = new HasuraExtension();
-
-        $extension->load([[
-            'decorate_make_entity' => false,
-        ]], $container);
-
-        $this->assertFalse($container->getParameter('hasura.maker.decorate_make_entity'));
-    }
-
     public function testDisableMetadataStateProcessors(): void
     {
         $container = new ContainerBuilder();
@@ -119,7 +84,6 @@ final class HasuraExtensionTest extends TestCase
                 [
                     'metadata' => [
                         'state_processors' => [
-                            'enabled_remote_schema_permissions' => false,
                             'enabled_inherited_roles' => false,
                         ],
                     ],

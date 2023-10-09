@@ -1,5 +1,2 @@
 hasura:
   resource: '@HasuraBundle/Resources/config/routing/routes.php'
-
-graphql:
-  resource: '@GraphQLiteBundle/Resources/config/routes.xml'

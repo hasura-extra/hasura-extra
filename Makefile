@@ -10,13 +10,6 @@ apply-metadata-metadata:
 	HASURA_METADATA_PATH="$(PWD)/src/metadata/metadata" \
 	php ./src/metadata/bin/hasura-metadata apply;
 
-.PHONY: apply-metadata-graphqlite-bridge
-apply-metadata-graphqlite-bridge:
-	HASURA_BASE_URI="http://localhost:8083" \
-	HASURA_ADMIN_SECRET="test" \
-	HASURA_METADATA_PATH="$(PWD)/src/graphqlite-bridge/metadata" \
-	php ./src/metadata/bin/hasura-metadata apply;
-
 .PHONY: apply-metadata-bundle
 apply-metadata-bundle:
 	HASURA_BASE_URI="http://localhost:8085" \
@@ -28,7 +21,6 @@ apply-metadata-bundle:
 apply-metadata:
 	set -e; \
 	make apply-metadata-metadata; \
-	make apply-metadata-graphqlite-bridge; \
 	make apply-metadata-bundle;
 
 .PHONY: check-cs
@@ -55,17 +47,9 @@ test-metadata:
 test-event-dispatcher:
 	./vendor/bin/phpunit src/event-dispatcher
 
-.PHONY: test-sailor-bridge
-test-sailor-bridge:
-	./vendor/bin/phpunit src/sailor-bridge
-
 .PHONY: test-auth-hook
 test-auth-hook:
 	./vendor/bin/phpunit src/auth-hook
-
-.PHONY: test-graphqlite-bridge
-test-graphqlite-bridge:
-	./vendor/bin/phpunit src/graphqlite-bridge
 
 .PHONY: test-bundle
 test-bundle:
@@ -86,29 +70,11 @@ export-metadata:
 	HASURA_METADATA_PATH="$(PWD)/src/metadata/metadata" \
 	php ./src/metadata/bin/hasura-metadata export --force;
 
-	HASURA_BASE_URI="http://localhost:8083" \
-	HASURA_ADMIN_SECRET="test" \
-	HASURA_METADATA_PATH="$(PWD)/src/graphqlite-bridge/metadata" \
-	php ./src/metadata/bin/hasura-metadata export --force; \
-
 	HASURA_BASE_URI="http://localhost:8085" \
 	HASURA_ADMIN_SECRET="test" \
 	HASURA_METADATA_PATH="$(PWD)/src/bundle/metadata" \
 	php ./src/metadata/bin/hasura-metadata export --force; \
 
-	HASURA_BASE_URI="http://localhost:8086" \
-	HASURA_ADMIN_SECRET="test" \
-	HASURA_METADATA_PATH="$(PWD)/src/sailor-bridge/metadata" \
-	php ./src/metadata/bin/hasura-metadata export --force; \
-
-	HASURA_BASE_URI="http://localhost:8086" \
-	HASURA_ADMIN_SECRET="test" \
-	HASURA_METADATA_PATH="$(PWD)/src/sailor-bridge/metadata" \
-	SAILOR_QUERY_SPEC_PATH="$(PWD)/src/sailor-bridge/metadata" \
-	SAILOR_SCHEMA_PATH="$(PWD)/src/sailor-bridge/metadata/schema.graphql" \
-	SAILOR_EXECUTOR_PATH="$(PWD)/src/sailor-bridge/metadata" \
-	SAILOR_EXECUTOR_NAMESPACE="App\\GraphqlExecutor" \
-	php ./src/sailor-bridge/bin/hasura-sailor introspect;
 
 .PHONY: binary-test
 binary-test:

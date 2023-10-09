@@ -25,9 +25,7 @@
         "hasura-extra/event-dispatcher": "<3.4.1",
         "hasura-extra/api-client": "<3.4.1",
         "hasura-extra/bundle": "<3.4.1",
-        "hasura-extra/graphqlite-bridge": "<3.4.1",
         "hasura-extra/metadata": "<3.4.1",
-        "hasura-extra/laravel": "<2.5.0",
         "hasura-extra/graphql-scalars": "<3.4.1"
     },
     "extra": {

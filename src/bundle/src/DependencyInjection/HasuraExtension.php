@@ -10,15 +10,12 @@ declare(strict_types=1);
 
 namespace Hasura\Bundle\DependencyInjection;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
 use Hasura\AuthHook\SessionVariableEnhancerInterface;
 use Hasura\Metadata\StateProcessorInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
-use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
-use Symfony\Component\DependencyInjection\Reference;
 
 final class HasuraExtension extends Extension
 {
@@ -30,13 +27,11 @@ final class HasuraExtension extends Extension
 
         $loader->load('psr_http_message.php');
         $loader->load('event_dispatcher.php');
-        $loader->load('graphqlite.php');
 
         $container->setParameter('hasura.base_uri', $config['base_uri']);
 
         $this->registerApiClient($container, $config, $loader);
         $this->registerAuth($container, $config['auth'], $loader);
-        $this->registerMaker($container, $config, $loader);
         $this->registerMetadata($container, $config['metadata'], $loader);
 
         $this->configRemoteSchema($container, $config);
@@ -62,30 +57,16 @@ final class HasuraExtension extends Extension
             ->addTag('hasura.auth_hook.session_variable_enhancer');
     }
 
-    private function registerMaker(ContainerBuilder $container, array $config, PhpFileLoader $loader): void
-    {
-        $container->setParameter('hasura.maker.decorate_make_entity', $config['decorate_make_entity']);
-
-        $loader->load('maker.php');
-    }
-
     private function registerMetadata(ContainerBuilder $container, array $config, PhpFileLoader $loader): void
     {
         $container->setParameter('hasura.metadata.path', $config['path']);
-        $container->setParameter(
-            'hasura.metadata.state_processors.enabled_remote_schema_permissions',
-            $config['state_processors']['enabled_remote_schema_permissions']
-        );
+
         $container->setParameter(
             'hasura.metadata.state_processors.enabled_inherited_roles',
             $config['state_processors']['enabled_inherited_roles']
         );
 
         $loader->load('metadata.php');
-
-        if (false === $config['state_processors']['enabled_remote_schema_permissions']) {
-            $container->removeDefinition('hasura.graphql.remote_schema_permission_state_processor');
-        }
 
         if (false === $config['state_processors']['enabled_inherited_roles']) {
             $container->removeDefinition('hasura.metadata.inherited_roles_state_processor');
@@ -100,13 +81,6 @@ final class HasuraExtension extends Extension
     {
         if (null === $config['remote_schema_name']) {
             $container->removeDefinition('hasura.metadata.remote_schema');
-
-            if ($container->hasDefinition('hasura.graphql.remote_schema_permission_state_processor')) {
-                $container->removeDefinition('hasura.graphql.remote_schema_permission_state_processor');
-            }
-
-            $container->setParameter('hasura.metadata.state_processors.enabled_remote_schema_permissions', false);
-
             return;
         }
 
