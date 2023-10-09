@@ -72,7 +72,7 @@ services:
     ports:
       - protocol: tcp
         target: 8080
-        published: 8085
+        published: 8083
     depends_on:
       - apache
       - postgres

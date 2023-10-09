@@ -72,9 +72,7 @@ jobs:
             [ \
               'api-client' => 8081, \
               'metadata' => 8082, \
-              'graphqlite-bridge' => 8083, \
-              'bundle' => 8085, \
-              'sailor-bridge' => 8086 \
+              'bundle' => 8083, \
             ]['${{ matrix.package }}'] ?? ''; \
           ";
 
