@@ -12,7 +12,7 @@ namespace Hasura\GraphQLScalars;
 
 final class Time extends AbstractDateTime
 {
-    public $name = 'time';
+    public string $name = 'time';
 
     protected function getParseFormat(): string
     {

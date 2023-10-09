@@ -19,7 +19,7 @@ use Symfony\Component\Uid\Uuid as SymfonyUuid;
 
 final class Uuid extends ScalarType
 {
-    public $name = 'uuid';
+    public string $name = 'uuid';
 
     public function serialize($value): string
     {

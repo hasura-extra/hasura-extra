@@ -77,11 +77,11 @@ class CharacterTest extends AbstractScalarTypeTest
             ]), ];
         yield 'int node' => [
             new IntValueNode([
-                'value' => 1,
+                'value' => '1',
             ]), ];
         yield 'float node' => [
             new FloatValueNode([
-                'value' => 1.0,
+                'value' => '1.0',
             ]), ];
     }
 }

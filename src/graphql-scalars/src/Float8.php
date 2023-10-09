@@ -14,7 +14,7 @@ use GraphQL\Language\AST\Node;
 
 final class Float8 extends Numeric
 {
-    public $name = 'float8';
+    public string $name = 'float8';
 
     public function serialize($value): float
     {

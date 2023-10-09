@@ -19,7 +19,7 @@ use GraphQL\Utils\Utils;
 
 final class Character extends ScalarType
 {
-    public $name = 'character';
+    public string $name = 'character';
 
     public function serialize($value)
     {

@@ -14,6 +14,7 @@ use GraphQL\Language\AST\BooleanValueNode;
 use GraphQL\Language\AST\FloatValueNode;
 use GraphQL\Language\AST\IntValueNode;
 use GraphQL\Language\AST\ListValueNode;
+use GraphQL\Language\AST\NodeList;
 use GraphQL\Language\AST\StringValueNode;
 use GraphQL\Type\Definition\ScalarType;
 use Hasura\GraphQLScalars\Numeric;
@@ -45,10 +46,10 @@ class NumericTest extends AbstractScalarTypeTest
     public function nodesToParseLiteral(): iterable
     {
         yield 'int node' => [new IntValueNode([
-            'value' => 1,
+            'value' => '1',
         ]), 1];
         yield 'float value' => [new FloatValueNode([
-            'value' => 2.0,
+            'value' => '2.0',
         ]), 2.0];
     }
 
@@ -80,7 +81,7 @@ class NumericTest extends AbstractScalarTypeTest
             ]), ];
         yield 'list node' => [
             new  ListValueNode([
-                'values' => [],
+                'values' => new NodeList([]),
             ]), ];
     }
 }

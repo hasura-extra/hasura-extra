@@ -35,6 +35,6 @@ new class {
             ]
         );
 
-        $standardServer->handleRequest(exitWhenDone: true);
+        $standardServer->handleRequest();
     }
 };

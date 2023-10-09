@@ -31,10 +31,10 @@ class Float8Test extends NumericTest
     public function testParseLiteralResultIsFloat(): void
     {
         $this->assertIsFloat($this->makeInstance()->parseLiteral(new IntValueNode([
-            'value' => 2,
+            'value' => '2',
         ])));
         $this->assertIsFloat($this->makeInstance()->parseLiteral(new FloatValueNode([
-            'value' => 2.0,
+            'value' => '2.0',
         ])));
     }
 
