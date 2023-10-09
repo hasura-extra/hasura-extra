@@ -14,20 +14,11 @@ use Hasura\Bundle\DependencyInjection\CompilerPass\DecorateMakeEntityPass;
 use Hasura\Bundle\DependencyInjection\CompilerPass\GraphQLitePass;
 use Hasura\Bundle\DependencyInjection\CompilerPass\MetadataPass;
 use Hasura\Bundle\HasuraBundle;
-use Hasura\SailorBridge\EndpointConfig;
-use Spawnia\Sailor\Configuration;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 final class HasuraBundleTest extends KernelTestCase
 {
-    public function testBoot()
-    {
-        self::bootKernel();
-
-        $this->assertInstanceOf(EndpointConfig::class, Configuration::endpoint('hasura'));
-    }
-
     public function testBuild()
     {
         $container = new ContainerBuilder();

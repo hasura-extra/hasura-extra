@@ -46,10 +46,6 @@ final class HasuraExtensionTest extends TestCase
         $this->assertTrue($container->hasParameter('hasura.metadata.path'));
         $this->assertTrue($container->hasParameter('hasura.metadata.state_processors.enabled_inherited_roles'));
         $this->assertTrue($container->hasParameter('hasura.metadata.state_processors.enabled_remote_schema_permissions'));
-        $this->assertTrue($container->hasParameter('hasura.sailor.executor_namespace'));
-        $this->assertTrue($container->hasParameter('hasura.sailor.query_spec_path'));
-        $this->assertTrue($container->hasParameter('hasura.sailor.executor_path'));
-        $this->assertTrue($container->hasParameter('hasura.sailor.schema_path'));
 
         $this->assertFalse($container->has('hasura.metadata.remote_schema'));
         $this->assertFalse($container->has('hasura.graphql.remote_schema_permission_state_processor'));
@@ -99,11 +95,6 @@ final class HasuraExtensionTest extends TestCase
         $this->assertTrue($container->has('hasura.psr_http_message.psr_http_factory'));
         $this->assertTrue($container->has('hasura.psr_http_message.http_foundation_factory'));
         $this->assertTrue($container->has('hasura.psr_http_message.psr15_request_handler_controller'));
-
-        $this->assertTrue($container->has('hasura.sailor.client'));
-        $this->assertTrue($container->has('hasura.sailor.codegen_command'));
-        $this->assertTrue($container->has('hasura.sailor.endpoint_config'));
-        $this->assertTrue($container->has('hasura.sailor.introspect_command'));
     }
 
     public function testPrependConfiguration(): void

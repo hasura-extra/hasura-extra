@@ -68,17 +68,5 @@ final class LoadCommandTest extends KernelTestCase
             PersistState::class,
             $app->get('hasura:metadata:persist-state')->getCommand()
         );
-
-        $this->assertTrue($app->has('hasura:sailor:introspect'));
-        $this->assertInstanceOf(
-            Introspect::class,
-            $app->get('hasura:sailor:introspect')->getCommand()
-        );
-
-        $this->assertTrue($app->has('hasura:sailor:codegen'));
-        $this->assertInstanceOf(
-            Codegen::class,
-            $app->get('hasura:sailor:codegen')->getCommand()
-        );
     }
 }

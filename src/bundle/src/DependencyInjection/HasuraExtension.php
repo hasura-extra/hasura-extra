@@ -48,7 +48,6 @@ final class HasuraExtension extends Extension implements PrependExtensionInterfa
         $this->registerAuth($container, $config['auth'], $loader);
         $this->registerMaker($container, $config, $loader);
         $this->registerMetadata($container, $config['metadata'], $loader);
-        $this->registerSailor($container, $config['sailor'], $loader);
 
         $this->configRemoteSchema($container, $config);
     }
@@ -105,28 +104,6 @@ final class HasuraExtension extends Extension implements PrependExtensionInterfa
         $container
             ->registerForAutoconfiguration(StateProcessorInterface::class)
             ->addTag('hasura.metadata.state_processor');
-    }
-
-    private function registerSailor(ContainerBuilder $containerBuilder, array $config, PhpFileLoader $loader): void
-    {
-        $containerBuilder->setParameter('hasura.sailor.executor_path', $config['executor_path']);
-        $containerBuilder->setParameter('hasura.sailor.executor_namespace', $config['executor_namespace']);
-        $containerBuilder->setParameter('hasura.sailor.query_spec_path', $config['query_spec_path']);
-        $containerBuilder->setParameter('hasura.sailor.schema_path', $config['schema_path']);
-
-        $loader->load('sailor.php');
-
-        $endpointConfigDef = $containerBuilder->getDefinition('hasura.sailor.endpoint_config');
-
-        foreach ($config['type_configs'] as $item) {
-            $endpointConfigDef->addMethodCall(
-                'addTypeConfig',
-                [
-                    $item['name'],
-                    new Reference($item['service']),
-                ]
-            );
-        }
     }
 
     private function configRemoteSchema(ContainerBuilder $container, array $config): void

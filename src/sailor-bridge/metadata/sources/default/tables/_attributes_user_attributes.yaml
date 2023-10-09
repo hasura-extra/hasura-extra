@@ -1,8 +1,0 @@
-table:
-    name: user_attributes
-    schema: _attributes
-object_relationships:
-    -
-        name: user
-        using:
-            foreign_key_constraint_on: sender_id
