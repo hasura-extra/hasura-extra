@@ -37,8 +37,8 @@ data:
   HASURA_GRAPHQL_ENABLE_TRIGGERS_ERROR_LOG_LEVEL: {{ .Values.enableTriggersErrorLogLevel | quote }}
   HASURA_GRAPHQL_CLOSE_WEBSOCKETS_ON_METADATA_CHANGE: {{ .Values.closeWebsocketsOnMetadataChange | quote }}
   HASURA_GRAPHQL_ENABLE_APOLLO_FEDERATION: {{ .Values.enableApolloFederation | quote }}
-  HASURA_GRAPHQL_MAX_TOTAL_HEADER_LENGTH: {{ .Values.maxTotalHeaderLength | quote }}
-  HASURA_GRAPHQL_STREAMING_QUERIES_MULTIPLEXED_REFETCH_INTERVAL: {{ .Values.streamingQueriesMultiplexedRefetchInterval | quote }}
+  HASURA_GRAPHQL_MAX_TOTAL_HEADER_LENGTH: {{ .Values.maxTotalHeaderLength }}
+  HASURA_GRAPHQL_STREAMING_QUERIES_MULTIPLEXED_REFETCH_INTERVAL: {{ .Values.streamingQueriesMultiplexedRefetchInterval }}
 {{- if .Values.eventsFetchInterval }}
   HASURA_GRAPHQL_EVENTS_FETCH_INTERVAL: {{ .Values.eventsFetchInterval | quote }}
 {{- end }}
