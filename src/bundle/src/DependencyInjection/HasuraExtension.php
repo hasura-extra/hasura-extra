@@ -20,18 +20,8 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 
-final class HasuraExtension extends Extension implements PrependExtensionInterface
+final class HasuraExtension extends Extension
 {
-    public function prepend(ContainerBuilder $container): void
-    {
-        $container->prependExtensionConfig(
-            'security',
-            [
-                'enable_authenticator_manager' => true,
-            ]
-        );
-    }
-
     public function load(array $configs, ContainerBuilder $container)
     {
         $configuration = $this->getConfiguration($configs, $container);

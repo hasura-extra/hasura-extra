@@ -10,15 +10,14 @@ declare(strict_types=1);
 
 namespace Hasura\Metadata\Command;
 
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'reload', description: 'Reload state with Hasura.')]
 final class ReloadMetadata extends BaseCommand
 {
-    protected static $defaultName = 'reload';
-    protected static $defaultDescription = 'Reload Hasura metadata';
-
     protected function configure()
     {
         parent::configure();

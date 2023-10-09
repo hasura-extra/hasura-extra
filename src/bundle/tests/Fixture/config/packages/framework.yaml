@@ -2,3 +2,4 @@ framework:
   test: true
   router:
     utf8: true
+  http_method_override: true

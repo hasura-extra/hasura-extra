@@ -97,23 +97,6 @@ final class HasuraExtensionTest extends TestCase
         $this->assertTrue($container->has('hasura.psr_http_message.psr15_request_handler_controller'));
     }
 
-    public function testPrependConfiguration(): void
-    {
-        $container = new ContainerBuilder();
-        $extension = new HasuraExtension();
-
-        $extension->prepend($container);
-
-        $this->assertSame(
-            [
-                [
-                    'enable_authenticator_manager' => true,
-                ],
-            ],
-            $container->getExtensionConfig('security')
-        );
-    }
-
     public function testDisableDecorateMakeEntity(): void
     {
         $container = new ContainerBuilder();
