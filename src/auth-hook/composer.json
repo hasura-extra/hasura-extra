@@ -22,11 +22,11 @@
         "nyholm/psr7": "^1.0"
     },
     "conflict": {
-        "hasura-extra/event-dispatcher": "<3.4.1",
-        "hasura-extra/api-client": "<3.4.1",
-        "hasura-extra/bundle": "<3.4.1",
-        "hasura-extra/metadata": "<3.4.1",
-        "hasura-extra/graphql-scalars": "<3.4.1"
+        "hasura-extra/event-dispatcher": "<4.0.0",
+        "hasura-extra/api-client": "<4.0.0",
+        "hasura-extra/bundle": "<4.0.0",
+        "hasura-extra/metadata": "<4.0.0",
+        "hasura-extra/graphql-scalars": "<4.0.0"
     },
     "extra": {
         "branch-alias": {
