@@ -12,7 +12,7 @@ apply-metadata-metadata:
 
 .PHONY: apply-metadata-bundle
 apply-metadata-bundle:
-	HASURA_BASE_URI="http://localhost:8085" \
+	HASURA_BASE_URI="http://localhost:8083" \
 	HASURA_ADMIN_SECRET="test" \
 	HASURA_METADATA_PATH="$(PWD)/src/bundle/metadata" \
 	php ./src/metadata/bin/hasura-metadata apply;
@@ -70,7 +70,7 @@ export-metadata:
 	HASURA_METADATA_PATH="$(PWD)/src/metadata/metadata" \
 	php ./src/metadata/bin/hasura-metadata export --force;
 
-	HASURA_BASE_URI="http://localhost:8085" \
+	HASURA_BASE_URI="http://localhost:8083" \
 	HASURA_ADMIN_SECRET="test" \
 	HASURA_METADATA_PATH="$(PWD)/src/bundle/metadata" \
 	php ./src/metadata/bin/hasura-metadata export --force; \
