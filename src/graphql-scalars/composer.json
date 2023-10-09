@@ -14,7 +14,7 @@
         }
     },
     "require": {
-        "php": ">=8.0",
+        "php": ">=8.1",
         "webonyx/graphql-php": "^14.10",
         "symfony/uid": "^6.0"
     },

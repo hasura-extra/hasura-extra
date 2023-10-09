@@ -14,7 +14,7 @@
         }
     },
     "require": {
-        "php": ">=8.0",
+        "php": ">=8.1",
         "hasura-extra/auth-hook": "^3.5",
         "hasura-extra/api-client": "^3.5",
         "hasura-extra/metadata": "^3.5",
