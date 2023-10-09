@@ -17,8 +17,6 @@ use Hasura\Metadata\Command\ExportMetadata;
 use Hasura\Metadata\Command\GetInconsistentMetadata;
 use Hasura\Metadata\Command\PersistState;
 use Hasura\Metadata\Command\ReloadMetadata;
-use Hasura\SailorBridge\Command\Codegen;
-use Hasura\SailorBridge\Command\Introspect;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 
 final class LoadCommandTest extends KernelTestCase
@@ -67,18 +65,6 @@ final class LoadCommandTest extends KernelTestCase
         $this->assertInstanceOf(
             PersistState::class,
             $app->get('hasura:metadata:persist-state')->getCommand()
-        );
-
-        $this->assertTrue($app->has('hasura:sailor:introspect'));
-        $this->assertInstanceOf(
-            Introspect::class,
-            $app->get('hasura:sailor:introspect')->getCommand()
-        );
-
-        $this->assertTrue($app->has('hasura:sailor:codegen'));
-        $this->assertInstanceOf(
-            Codegen::class,
-            $app->get('hasura:sailor:codegen')->getCommand()
         );
     }
 }

@@ -24,20 +24,12 @@ apply-metadata-bundle:
 	HASURA_METADATA_PATH="$(PWD)/src/bundle/metadata" \
 	php ./src/metadata/bin/hasura-metadata apply;
 
-.PHONY: apply-metadata-sailor-bridge
-apply-metadata-sailor-bridge:
-	HASURA_BASE_URI="http://localhost:8086" \
-	HASURA_ADMIN_SECRET="test" \
-	HASURA_METADATA_PATH="$(PWD)/src/sailor-bridge/metadata" \
-	php ./src/metadata/bin/hasura-metadata apply;
-
 .PHONY: apply-metadata
 apply-metadata:
 	set -e; \
 	make apply-metadata-metadata; \
 	make apply-metadata-graphqlite-bridge; \
-	make apply-metadata-bundle; \
-	make apply-metadata-sailor-bridge;
+	make apply-metadata-bundle;
 
 .PHONY: check-cs
 check-cs:
@@ -124,12 +116,3 @@ binary-test:
 	HASURA_ADMIN_SECRET= \
 	HASURA_METADATA_PATH= \
 	php ./src/metadata/bin/hasura-metadata;
-
-	HASURA_BASE_URI= \
-	HASURA_ADMIN_SECRET= \
-	HASURA_METADATA_PATH= \
-	SAILOR_QUERY_SPEC_PATH= \
-	SAILOR_SCHEMA_PATH= \
-	SAILOR_EXECUTOR_PATH= \
-	SAILOR_EXECUTOR_NAMESPACE= \
-	php ./src/sailor-bridge/bin/hasura-sailor;

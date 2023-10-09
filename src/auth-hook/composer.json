@@ -22,7 +22,6 @@
         "nyholm/psr7": "^1.0"
     },
     "conflict": {
-        "hasura-extra/sailor-bridge": "<3.4.1",
         "hasura-extra/event-dispatcher": "<3.4.1",
         "hasura-extra/api-client": "<3.4.1",
         "hasura-extra/bundle": "<3.4.1",

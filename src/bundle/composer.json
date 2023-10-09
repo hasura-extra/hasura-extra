@@ -20,7 +20,6 @@
         "hasura-extra/metadata": "^3.5",
         "hasura-extra/event-dispatcher": "^3.5",
         "hasura-extra/graphqlite-bridge": "^3.5",
-        "hasura-extra/sailor-bridge": "^3.5",
         "thecodingmachine/graphqlite-bundle": "^5.4",
         "symfony/http-kernel": "^6.0",
         "symfony/dependency-injection": "^6.0",

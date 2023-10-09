@@ -17,7 +17,6 @@
     ],
     "conflict": {
         "hasura-extra/hasura-bundle": "*",
-        "hasura-extra/sailor-bridge": "<3.4.1",
         "hasura-extra/auth-hook": "<3.4.1",
         "hasura-extra/event-dispatcher": "<3.4.1",
         "hasura-extra/bundle": "<3.4.1",

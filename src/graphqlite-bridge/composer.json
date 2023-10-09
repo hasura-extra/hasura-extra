@@ -23,7 +23,6 @@
         "phpunit/phpunit": "^9.5"
     },
     "conflict": {
-        "hasura-extra/sailor-bridge": "<3.4.1",
         "hasura-extra/auth-hook": "<3.4.1",
         "hasura-extra/event-dispatcher": "<3.4.1",
         "hasura-extra/bundle": "<3.4.1",

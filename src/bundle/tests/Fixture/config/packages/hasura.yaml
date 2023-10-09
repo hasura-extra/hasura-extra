@@ -4,8 +4,3 @@ hasura:
   admin_secret: test
   metadata:
     path: '%kernel.project_dir%/hasura/metadata'
-  sailor:
-    executor_namespace: Hasura\Bundle\Tests\Fixture\App\GraphQLExecutor
-    executor_path: '%kernel.project_dir%/src/GraphQLExecutor'
-    query_spec_path: '%kernel.project_dir%/hasura/graphql'
-    schema_path: '%kernel.project_dir%/hasura/schema.graphql'
