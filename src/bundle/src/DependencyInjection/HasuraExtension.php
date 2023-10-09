@@ -61,20 +61,7 @@ final class HasuraExtension extends Extension
     {
         $container->setParameter('hasura.metadata.path', $config['path']);
 
-        $container->setParameter(
-            'hasura.metadata.state_processors.enabled_inherited_roles',
-            $config['state_processors']['enabled_inherited_roles']
-        );
-
         $loader->load('metadata.php');
-
-        if (false === $config['state_processors']['enabled_inherited_roles']) {
-            $container->removeDefinition('hasura.metadata.inherited_roles_state_processor');
-        }
-
-        $container
-            ->registerForAutoconfiguration(StateProcessorInterface::class)
-            ->addTag('hasura.metadata.state_processor');
     }
 
     private function configRemoteSchema(ContainerBuilder $container, array $config): void
