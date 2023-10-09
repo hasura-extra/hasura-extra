@@ -15,7 +15,6 @@ use Hasura\Metadata\Command\ClearMetadata;
 use Hasura\Metadata\Command\DropInconsistentMetadata;
 use Hasura\Metadata\Command\ExportMetadata;
 use Hasura\Metadata\Command\GetInconsistentMetadata;
-use Hasura\Metadata\Command\PersistState;
 use Hasura\Metadata\Command\ReloadMetadata;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 
@@ -59,12 +58,6 @@ final class LoadCommandTest extends KernelTestCase
         $this->assertInstanceOf(
             ReloadMetadata::class,
             $app->get('hasura:metadata:reload')->getCommand()
-        );
-
-        $this->assertTrue($app->has('hasura:metadata:persist-state'));
-        $this->assertInstanceOf(
-            PersistState::class,
-            $app->get('hasura:metadata:persist-state')->getCommand()
         );
     }
 }

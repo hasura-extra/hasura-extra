@@ -10,14 +10,8 @@ declare(strict_types=1);
 
 namespace Hasura\Bundle;
 
-use Hasura\Bundle\DependencyInjection\CompilerPass\MetadataPass;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 final class HasuraBundle extends Bundle
 {
-    public function build(ContainerBuilder $container): void
-    {
-        $container->addCompilerPass(new MetadataPass());
-    }
 }

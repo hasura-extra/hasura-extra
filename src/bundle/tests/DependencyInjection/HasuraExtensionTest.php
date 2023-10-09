@@ -42,7 +42,6 @@ final class HasuraExtensionTest extends TestCase
 
         $this->assertTrue($container->hasParameter('hasura.base_uri'));
         $this->assertTrue($container->hasParameter('hasura.metadata.path'));
-        $this->assertTrue($container->hasParameter('hasura.metadata.state_processors.enabled_inherited_roles'));
 
         $this->assertFalse($container->has('hasura.metadata.remote_schema'));
 
@@ -63,36 +62,10 @@ final class HasuraExtensionTest extends TestCase
         $this->assertTrue($container->has('hasura.metadata.drop_inconsistent_command'));
         $this->assertTrue($container->has('hasura.metadata.get_inconsistent_command'));
         $this->assertTrue($container->has('hasura.metadata.reload_command'));
-        $this->assertTrue($container->has('hasura.metadata.persist_state_command'));
-        $this->assertTrue($container->has('hasura.metadata.state_processor'));
-        $this->assertTrue($container->has('hasura.metadata.reload_state_processor'));
-        $this->assertTrue($container->has('hasura.metadata.inherited_roles_state_processor'));
 
         $this->assertTrue($container->has('hasura.psr_http_message.psr17_factory'));
         $this->assertTrue($container->has('hasura.psr_http_message.psr_http_factory'));
         $this->assertTrue($container->has('hasura.psr_http_message.http_foundation_factory'));
         $this->assertTrue($container->has('hasura.psr_http_message.psr15_request_handler_controller'));
-    }
-
-    public function testDisableMetadataStateProcessors(): void
-    {
-        $container = new ContainerBuilder();
-        $extension = new HasuraExtension();
-
-        $extension->load(
-            [
-                [
-                    'metadata' => [
-                        'state_processors' => [
-                            'enabled_inherited_roles' => false,
-                        ],
-                    ],
-                ],
-            ],
-            $container
-        );
-
-        $this->assertFalse($container->has('hasura.metadata.inherited_roles_state_processor'));
-        $this->assertFalse($container->has('hasura.graphql.remote_schema_permission_state_processor'));
     }
 }
