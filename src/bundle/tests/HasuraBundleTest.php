@@ -10,8 +10,6 @@ declare(strict_types=1);
 
 namespace Hasura\Bundle\Tests;
 
-use Hasura\Bundle\DependencyInjection\CompilerPass\DecorateMakeEntityPass;
-use Hasura\Bundle\DependencyInjection\CompilerPass\GraphQLitePass;
 use Hasura\Bundle\DependencyInjection\CompilerPass\MetadataPass;
 use Hasura\Bundle\HasuraBundle;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -29,8 +27,6 @@ final class HasuraBundleTest extends KernelTestCase
         $passConfig = $container->getCompilerPassConfig();
         $passClasses = array_map(fn (CompilerPassInterface $pass) => $pass::class, $passConfig->getPasses());
 
-        $this->assertContains(DecorateMakeEntityPass::class, $passClasses);
         $this->assertContains(MetadataPass::class, $passClasses);
-        $this->assertContains(GraphQLitePass::class, $passClasses);
     }
 }

@@ -22,7 +22,7 @@ final class ClearCommandTest extends ConsoleTestCase
     {
         $data = $this->client->metadata()->query('export_metadata', [], 2);
 
-        $this->assertArrayHasKey('remote_schemas', $data['metadata']);
+        $this->assertNotEmpty($data['metadata']['sources'][0]['tables']);
 
         $command = $this->getCommand('hasura:metadata:clear');
         $tester = new CommandTester($command);
@@ -31,7 +31,7 @@ final class ClearCommandTest extends ConsoleTestCase
 
         $data = $this->client->metadata()->query('export_metadata', [], 2);
 
-        $this->assertArrayNotHasKey('remote_schemas', $data['metadata']);
+        $this->assertEmpty($data['metadata']['sources'][0]['tables']);
 
         $this->assertStringContainsString('[OK] Clear Hasura metadata successfully!', $tester->getDisplay());
     }

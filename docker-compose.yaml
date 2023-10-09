@@ -60,23 +60,6 @@ services:
       - apache
       - postgres
 
-  hasura-graphqlite-bridge:
-    image: hasura/graphql-engine:v2.16.0-ce
-    restart: on-failure
-    environment:
-      HASURA_GRAPHQL_ADMIN_SECRET: 'test'
-      HASURA_GRAPHQL_ENABLE_REMOTE_SCHEMA_PERMISSIONS: 'true'
-      HASURA_GRAPHQL_DATABASE_URL: postgres://hasura:hasura@postgres/graphqlite_bridge
-      HASURA_GRAPHQL_DEV_MODE: 'true'
-      HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
-    ports:
-      - protocol: tcp
-        target: 8080
-        published: 8083
-    depends_on:
-      - apache
-      - postgres
-
   hasura-bundle:
     image: hasura/graphql-engine:v2.16.0-ce
     restart: on-failure
@@ -89,7 +72,7 @@ services:
     ports:
       - protocol: tcp
         target: 8080
-        published: 8085
+        published: 8083
     depends_on:
       - apache
       - postgres
