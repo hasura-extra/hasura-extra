@@ -3,7 +3,7 @@
     "license": "MIT",
     "description": "Handle Hasura metadata & business logic in minutes.",
     "require": {
-        "php": ">=8.0",
+        "php": ">=8.1",
         "psr/event-dispatcher": "^1.0",
         "psr/http-factory": "^1.0",
         "psr/http-server-handler": "^1.0",
