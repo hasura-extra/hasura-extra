@@ -11,16 +11,15 @@ declare(strict_types=1);
 namespace Hasura\Metadata\Command;
 
 use Hasura\Metadata\EmptyMetadataException;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'apply', description: 'Apply Hasura metadata')]
 final class ApplyMetadata extends BaseCommand
 {
-    protected static $defaultName = 'apply';
-    protected static $defaultDescription = 'Apply Hasura metadata';
-
-    protected function configure()
+    protected function configure(): void
     {
         parent::configure();
 

@@ -12,15 +12,14 @@ namespace Hasura\Metadata\Command;
 
 use Hasura\Metadata\ManagerInterface;
 use Hasura\Metadata\StateProcessorInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'persist-state', description: 'Persist application state with Hasura.')]
 final class PersistState extends BaseCommand
 {
-    protected static $defaultName = 'persist-state';
-    protected static $defaultDescription = 'Persist application state with Hasura.';
-
     public function __construct(ManagerInterface $manager, private StateProcessorInterface $processor)
     {
         parent::__construct($manager);

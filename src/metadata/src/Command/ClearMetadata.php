@@ -10,14 +10,13 @@ declare(strict_types=1);
 
 namespace Hasura\Metadata\Command;
 
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'clear', description: 'Clear Hasura metadata')]
 final class ClearMetadata extends BaseCommand
 {
-    protected static $defaultName = 'clear';
-    protected static $defaultDescription = 'Clear Hasura metadata';
-
     protected function doExecute(InputInterface $input, OutputInterface $output): int
     {
         $this->io->section('Clearing...');
