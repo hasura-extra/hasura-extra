@@ -18,9 +18,9 @@ use GraphQL\Language\AST\NodeList;
 use GraphQL\Language\AST\ObjectValueNode;
 use GraphQL\Language\AST\StringValueNode;
 
-abstract class AbstractDateTimeTest extends AbstractScalarTypeTest
+abstract class AbstractDateTimeTestCase extends AbstractScalarTypeTestCase
 {
-    public function invalidNodesToParseLiteral(): iterable
+    public static function invalidNodesToParseLiteral(): iterable
     {
         yield 'invalid value node' => [
             new StringValueNode([
@@ -48,7 +48,7 @@ abstract class AbstractDateTimeTest extends AbstractScalarTypeTest
             ]), ];
     }
 
-    public function invalidValuesToSerialize(): iterable
+    public static function invalidValuesToSerialize(): iterable
     {
         yield 'invalid value' => [''];
         yield 'mutate datetime' => [new \DateTime()];
@@ -57,7 +57,7 @@ abstract class AbstractDateTimeTest extends AbstractScalarTypeTest
         yield 'object' => [new \stdClass()];
     }
 
-    public function invalidValuesToParse(): iterable
+    public static function invalidValuesToParse(): iterable
     {
         yield 'invalid value' => [''];
         yield 'mutate datetime' => [new \DateTime()];

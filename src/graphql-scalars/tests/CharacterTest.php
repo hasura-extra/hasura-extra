@@ -16,7 +16,7 @@ use GraphQL\Language\AST\StringValueNode;
 use GraphQL\Type\Definition\ScalarType;
 use Hasura\GraphQLScalars\Character;
 
-class CharacterTest extends AbstractScalarTypeTest
+class CharacterTest extends AbstractScalarTypeTestCase
 {
     public function testName()
     {
@@ -28,21 +28,21 @@ class CharacterTest extends AbstractScalarTypeTest
         return new Character();
     }
 
-    public function valuesToSerialize(): iterable
+    public static function valuesToSerialize(): iterable
     {
         yield 'a' => ['a', 'a'];
         yield 'b' => ['b', 'b'];
         yield 'c' => ['c', 'c'];
     }
 
-    public function valuesToParse(): iterable
+    public static function valuesToParse(): iterable
     {
         yield 'a' => ['a', 'a'];
         yield 'b' => ['b', 'b'];
         yield 'c' => ['c', 'c'];
     }
 
-    public function nodesToParseLiteral(): iterable
+    public static function nodesToParseLiteral(): iterable
     {
         yield 'a' => [new StringValueNode([
             'value' => 'a',
@@ -55,21 +55,21 @@ class CharacterTest extends AbstractScalarTypeTest
         ]), 'c'];
     }
 
-    public function invalidValuesToSerialize(): iterable
+    public static function invalidValuesToSerialize(): iterable
     {
         yield 'long string' => ['abc'];
         yield 'boolean type' => [false];
         yield 'array type' => [[]];
     }
 
-    public function invalidValuesToParse(): iterable
+    public static function invalidValuesToParse(): iterable
     {
         yield 'long string' => ['abc'];
         yield 'boolean type' => [false];
         yield 'array type' => [[]];
     }
 
-    public function invalidNodesToParseLiteral(): iterable
+    public static function invalidNodesToParseLiteral(): iterable
     {
         yield 'long string node' => [
             new StringValueNode([

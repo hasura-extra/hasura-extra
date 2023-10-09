@@ -15,7 +15,7 @@ use GraphQL\Language\AST\Node;
 use GraphQL\Type\Definition\ScalarType;
 use PHPUnit\Framework\TestCase;
 
-abstract class AbstractScalarTypeTest extends TestCase
+abstract class AbstractScalarTypeTestCase extends TestCase
 {
     /**
      * @dataProvider valuesToSerialize
@@ -73,15 +73,15 @@ abstract class AbstractScalarTypeTest extends TestCase
 
     abstract protected function makeInstance(): ScalarType;
 
-    abstract public function valuesToSerialize(): iterable;
+    abstract public static function valuesToSerialize(): iterable;
 
-    abstract public function valuesToParse(): iterable;
+    abstract public static function valuesToParse(): iterable;
 
-    abstract public function nodesToParseLiteral(): iterable;
+    abstract public static function nodesToParseLiteral(): iterable;
 
-    abstract public function invalidValuesToSerialize(): iterable;
+    abstract public static function invalidValuesToSerialize(): iterable;
 
-    abstract public function invalidValuesToParse(): iterable;
+    abstract public static function invalidValuesToParse(): iterable;
 
-    abstract public function invalidNodesToParseLiteral(): iterable;
+    abstract public static function invalidNodesToParseLiteral(): iterable;
 }

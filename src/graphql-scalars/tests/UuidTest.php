@@ -18,14 +18,14 @@ use GraphQL\Type\Definition\ScalarType;
 use Hasura\GraphQLScalars\Uuid;
 use Symfony\Component\Uid\Uuid as SymfonyUuid;
 
-class UuidTest extends AbstractScalarTypeTest
+class UuidTest extends AbstractScalarTypeTestCase
 {
     protected function makeInstance(): ScalarType
     {
         return new Uuid();
     }
 
-    public function valuesToSerialize(): iterable
+    public static function valuesToSerialize(): iterable
     {
         yield 'v1' => [
             $v1 = SymfonyUuid::v1(),
@@ -49,7 +49,7 @@ class UuidTest extends AbstractScalarTypeTest
         ];
     }
 
-    public function valuesToParse(): iterable
+    public static function valuesToParse(): iterable
     {
         yield 'max' => [
             'ffffffff-ffff-ffff-ffff-ffffffffffff',
@@ -61,7 +61,7 @@ class UuidTest extends AbstractScalarTypeTest
         ];
     }
 
-    public function nodesToParseLiteral(): iterable
+    public static function nodesToParseLiteral(): iterable
     {
         yield 'max' => [
             new StringValueNode([
@@ -77,7 +77,7 @@ class UuidTest extends AbstractScalarTypeTest
         ];
     }
 
-    public function invalidValuesToSerialize(): iterable
+    public static function invalidValuesToSerialize(): iterable
     {
         yield 'empty string' => [''];
         yield 'invalid uuid' => ['ffffffff'];
@@ -86,7 +86,7 @@ class UuidTest extends AbstractScalarTypeTest
         yield 'array' => [range(0, 99)];
     }
 
-    public function invalidValuesToParse(): iterable
+    public static function invalidValuesToParse(): iterable
     {
         yield 'empty string' => [''];
         yield 'invalid uuid' => ['ffffffff'];
@@ -94,7 +94,7 @@ class UuidTest extends AbstractScalarTypeTest
         yield 'array' => [range(0, 99)];
     }
 
-    public function invalidNodesToParseLiteral(): iterable
+    public static function invalidNodesToParseLiteral(): iterable
     {
         yield 'empty string' => [
             new StringValueNode([

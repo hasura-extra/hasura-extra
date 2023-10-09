@@ -19,7 +19,7 @@ use GraphQL\Language\AST\StringValueNode;
 use GraphQL\Type\Definition\ScalarType;
 use Hasura\GraphQLScalars\Numeric;
 
-class NumericTest extends AbstractScalarTypeTest
+class NumericTest extends AbstractScalarTypeTestCase
 {
     public function testName(): void
     {
@@ -31,19 +31,19 @@ class NumericTest extends AbstractScalarTypeTest
         return new Numeric();
     }
 
-    public function valuesToSerialize(): iterable
+    public static function valuesToSerialize(): iterable
     {
         yield 'int value' => [1, 1];
         yield 'float value' => [2.0, 2.0];
     }
 
-    public function valuesToParse(): iterable
+    public static function valuesToParse(): iterable
     {
         yield 'int value' => [1, 1];
         yield 'float value' => [2.0, 2.0];
     }
 
-    public function nodesToParseLiteral(): iterable
+    public static function nodesToParseLiteral(): iterable
     {
         yield 'int node' => [new IntValueNode([
             'value' => '1',
@@ -53,7 +53,7 @@ class NumericTest extends AbstractScalarTypeTest
         ]), 2.0];
     }
 
-    public function invalidValuesToSerialize(): iterable
+    public static function invalidValuesToSerialize(): iterable
     {
         yield 'boolean value' => [true];
         yield 'array value' => [[]];
@@ -61,7 +61,7 @@ class NumericTest extends AbstractScalarTypeTest
         yield 'string value' => ['abc'];
     }
 
-    public function invalidValuesToParse(): iterable
+    public static function invalidValuesToParse(): iterable
     {
         yield 'boolean' => [true];
         yield 'array' => [[]];
@@ -69,7 +69,7 @@ class NumericTest extends AbstractScalarTypeTest
         yield 'string value' => ['abc'];
     }
 
-    public function invalidNodesToParseLiteral(): iterable
+    public static function invalidNodesToParseLiteral(): iterable
     {
         yield 'boolean node' => [
             new  BooleanValueNode([

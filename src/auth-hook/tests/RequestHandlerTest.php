@@ -85,7 +85,7 @@ final class RequestHandlerTest extends TestCase
         return $mock;
     }
 
-    public function mockDataProvider(): array
+    public static function mockDataProvider(): array
     {
         return [
             [

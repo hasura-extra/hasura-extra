@@ -14,7 +14,7 @@ use GraphQL\Language\AST\StringValueNode;
 use GraphQL\Type\Definition\ScalarType;
 use Hasura\GraphQLScalars\Timetz;
 
-class TimetzTest extends AbstractDateTimeTest
+class TimetzTest extends AbstractDateTimeTestCase
 {
     public function testName(): void
     {
@@ -26,7 +26,7 @@ class TimetzTest extends AbstractDateTimeTest
         return new Timetz();
     }
 
-    public function valuesToSerialize(): iterable
+    public static function valuesToSerialize(): iterable
     {
         yield 'date' => [
             new \DateTimeImmutable('2022-02-02'),
@@ -46,7 +46,7 @@ class TimetzTest extends AbstractDateTimeTest
         ];
     }
 
-    public function valuesToParse(): iterable
+    public static function valuesToParse(): iterable
     {
         yield 'immutable instance' => [
             \DateTimeImmutable::createFromFormat('H:i:sP', '01:01:01+00:00'),
@@ -62,7 +62,7 @@ class TimetzTest extends AbstractDateTimeTest
         ];
     }
 
-    public function nodesToParseLiteral(): iterable
+    public static function nodesToParseLiteral(): iterable
     {
         yield '01:01:01+01:01' => [
             new StringValueNode([
@@ -78,7 +78,7 @@ class TimetzTest extends AbstractDateTimeTest
         ];
     }
 
-    public function invalidValuesToParse(): iterable
+    public static function invalidValuesToParse(): iterable
     {
         yield from parent::invalidValuesToParse();
         yield 'datetime' => ['2022-02-02T02:02:02'];
