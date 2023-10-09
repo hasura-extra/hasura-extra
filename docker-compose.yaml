@@ -27,7 +27,7 @@ services:
       POSTGRES_PASSWORD: hasura
 
   hasura-api-client:
-    image: hasura/graphql-engine:v2.16.0-ce
+    image: hasura/graphql-engine:v2.34.0-ce
     restart: on-failure
     environment:
       HASURA_GRAPHQL_ADMIN_SECRET: 'test'
@@ -44,7 +44,7 @@ services:
       - postgres
 
   hasura-metadata:
-    image: hasura/graphql-engine:v2.16.0-ce
+    image: hasura/graphql-engine:v2.34.0-ce
     restart: on-failure
     environment:
       HASURA_GRAPHQL_ADMIN_SECRET: 'test'
@@ -61,7 +61,7 @@ services:
       - postgres
 
   hasura-bundle:
-    image: hasura/graphql-engine:v2.16.0-ce
+    image: hasura/graphql-engine:v2.34.0-ce
     restart: on-failure
     environment:
       HASURA_GRAPHQL_ADMIN_SECRET: 'test'

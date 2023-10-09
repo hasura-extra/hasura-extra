@@ -149,7 +149,7 @@ enableConsole: 'true'
 enableRemoteSchemaPermission: 'true'
 
 # -- Enable anonymous telemetry.
-enableTelemetry: 'true'
+enableTelemetry: 'false'
 
 # -- Set the logging level. Options: debug, info, warn, error.
 logLevel: 'info'
@@ -256,3 +256,21 @@ enableMetadataQueryLogging: 'false'
 
 # -- Evaluate null values in where input object to True instead of error.
 v1BooleanNullCollapse: ~
+
+# -- Whether or not to send the request body (graphql request/variables) to the auth hook in POST mode.
+authHookSendRequestBody: 'true'
+
+# -- When metadata changes, close all WebSocket connections (with error code 1012). This is useful when you want to ensure that all clients reconnect to the latest metadata.
+closeWebsocketsOnMetadataChange: 'true'
+
+# -- Enables the Apollo Federation feature. This allows Hasura to be connected as a subgraph in an Apollo supergraph.
+enableApolloFederation: 'false'
+
+# -- Sets the maximum cumulative length of all headers in bytes.
+maxTotalHeaderLength: 1048576
+
+# -- Sets the log-level as error for Trigger type error logs (Event Triggers, Scheduled Triggers, Cron Triggers).
+enableTriggersErrorLogLevel: 'true'
+
+# -- For streaming queries which can be multiplexed, updated results - if any - will be sent, at most, once during this interval.
+streamingQueriesMultiplexedRefetchInterval: 1000

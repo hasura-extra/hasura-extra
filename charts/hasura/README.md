@@ -1,6 +1,6 @@
 # Hasura Chart for Kubernetes
 
-![Version: 2.11.1](https://img.shields.io/badge/Version-2.11.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v2.16.0-ce](https://img.shields.io/badge/AppVersion-v2.16.0--ce-informational?style=flat-square)
+![Version: 3.0.0](https://img.shields.io/badge/Version-3.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v2.34.0-ce](https://img.shields.io/badge/AppVersion-v2.34.0--ce-informational?style=flat-square)
 
 A Helm chart to install Hasura graphql engine in a Kubernetes cluster.
 
@@ -23,7 +23,9 @@ To install the chart with the release name `my-release`, run the following comma
 | asyncActionsFetchInterval | string | `nil` | Interval in milliseconds to sleep before trying to fetch async actions again after a fetch returned no async actions from metadata storage. Value 0 implies completely disable fetching async actions from the storage. |
 | authHook | string | `nil` | URL of the authorization webhook required to authorize requests. See [auth webhooks docs](https://hasura.io/docs/latest/graphql/core/auth/authentication/webhook.html). |
 | authHookMode | string | `"GET"` | HTTP method to use for the authorization webhook. |
+| authHookSendRequestBody | string | `"true"` | Whether or not to send the request body (graphql request/variables) to the auth hook in POST mode. |
 | autoscaling | object | Disabled by default. | Autoscaling by resources |
+| closeWebsocketsOnMetadataChange | string | `"true"` | When metadata changes, close all WebSocket connections (with error code 1012). This is useful when you want to ensure that all clients reconnect to the latest metadata. |
 | connectionCompression | string | `"false"` | Enable WebSocket permessage-deflate compression. |
 | consoleAssetsDir | string | `nil` | Set the value to /srv/console-assets for the console to load assets from the server itself instead of CDN. |
 | corsDomain | string | `nil` | CSV of list of domains, incuding scheme (http/https) and port, to allow for CORS. Wildcard domains are allowed. |
@@ -32,12 +34,14 @@ To install the chart with the release name `my-release`, run the following comma
 | devMode | string | `"false"` | Set dev mode for GraphQL requests; include the internal key in the errors extensions of the response (if required). |
 | enableAllowlist | string | `"false"` | Restrict queries allowed to be executed by the GraphQL engine to those that are part of the configured allow-list. |
 | enableApis | string | `"graphql,metadata"` | Comma separated list of APIs (options: metadata, graphql, pgdump, config) to be enabled. |
+| enableApolloFederation | string | `"false"` | Enables the Apollo Federation feature. This allows Hasura to be connected as a subgraph in an Apollo supergraph. |
 | enableConsole | string | `"true"` | Enable the Hasura Console (served by the server on / and /console). |
 | enableLogCompression | string | `"false"` | Enable sending compressed logs to metrics server. |
 | enableMaintainceMode | string | `"false"` | Disable updating of metadata on the server. |
 | enableMetadataQueryLogging | string | `"false"` | Enables the query field in http-logs for metadata queries. |
 | enableRemoteSchemaPermission | string | `"true"` | Enable remote schema permissions. |
-| enableTelemetry | string | `"true"` | Enable anonymous telemetry. |
+| enableTelemetry | string | `"false"` | Enable anonymous telemetry. |
+| enableTriggersErrorLogLevel | string | `"true"` | Sets the log-level as error for Trigger type error logs (Event Triggers, Scheduled Triggers, Cron Triggers). |
 | enabledLogsType | string | `"http-log, webhook-log, websocket-log, query-log"` | Set the enabled log types. This is a comma-separated list of log-types to enable. |
 | eventsFetchBatchSize | int | `100` | Maximum number of events to be fetched from the DB in a single batch. |
 | eventsFetchInterval | string | `nil` | Interval in milliseconds to sleep before trying to fetch events again after a fetch returned no events from postgres |
@@ -61,6 +65,7 @@ To install the chart with the release name `my-release`, run the following comma
 | liveQueriesMultiplexedBatchSize | int | `100` | Multiplexed live queries are split into batches of the specified size. |
 | liveQueriesMultiplexedRefetchInterval | int | `1000` | Updated results (if any) will be sent at most once in this interval (in milliseconds) for live queries which can be multiplexed. |
 | logLevel | string | `"info"` | Set the logging level. Options: debug, info, warn, error. |
+| maxTotalHeaderLength | int | `1048576` | Sets the maximum cumulative length of all headers in bytes. |
 | metadataDatabaseExtensionsSchema | string | `"public"` | The schema in which Hasura can install extensions in the metadata database. Default: public. |
 | nameOverride | string | `""` | A name in place of the chart name for `app:` labels. |
 | nodeSelector | object | `{}` | [Node selector](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector) configuration. |
@@ -81,6 +86,7 @@ To install the chart with the release name `my-release`, run the following comma
 | serviceAccount.annotations | object | `{}` | Annotations to add to the service account. |
 | serviceAccount.create | bool | `true` | Specifies whether a service account should be created. |
 | serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template. |
+| streamingQueriesMultiplexedRefetchInterval | int | `1000` | For streaming queries which can be multiplexed, updated results - if any - will be sent, at most, once during this interval. |
 | stringifyNumericTypes | string | `"false"` | Stringify certain Postgres numeric types, specifically bigint, numeric, decimal and double precision as they don’t fit into the IEEE-754 spec for JSON encoding-decoding. |
 | tolerations | list | `[]` | [Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) for node taints. See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#scheduling) for details. |
 | unauthorizedRole | string | `"anonymous"` | Unauthorized role, used when access-key is not sent in access-key only mode or the Authorization header is absent in JWT mode. Example: anonymous. Now whenever the “authorization” header is absent, the request’s role will default to anonymous. |
