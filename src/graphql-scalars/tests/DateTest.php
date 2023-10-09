@@ -14,7 +14,7 @@ use GraphQL\Language\AST\StringValueNode;
 use GraphQL\Type\Definition\ScalarType;
 use Hasura\GraphQLScalars\Date;
 
-final class DateTest extends AbstractDateTimeTest
+final class DateTest extends AbstractDateTimeTestCase
 {
     public function testName()
     {
@@ -26,7 +26,7 @@ final class DateTest extends AbstractDateTimeTest
         return new Date();
     }
 
-    public function valuesToSerialize(): iterable
+    public static function valuesToSerialize(): iterable
     {
         yield 'date' => [
             new \DateTimeImmutable('2022-02-02'),
@@ -42,7 +42,7 @@ final class DateTest extends AbstractDateTimeTest
         ];
     }
 
-    public function valuesToParse(): iterable
+    public static function valuesToParse(): iterable
     {
         yield 'date string' => [
             '2022-02-02',
@@ -54,7 +54,7 @@ final class DateTest extends AbstractDateTimeTest
         ];
     }
 
-    public function nodesToParseLiteral(): iterable
+    public static function nodesToParseLiteral(): iterable
     {
         yield 'date' => [
             new StringValueNode([
@@ -64,14 +64,14 @@ final class DateTest extends AbstractDateTimeTest
         ];
     }
 
-    public function invalidValuesToParse(): iterable
+    public static function invalidValuesToParse(): iterable
     {
         yield from parent::invalidValuesToParse();
         yield 'date time' => ['2022-02-02T02:02:02'];
         yield 'date time with timezone' => ['2022-02-02T02:02:02+02:02'];
     }
 
-    public function invalidNodesToParseLiteral(): iterable
+    public static function invalidNodesToParseLiteral(): iterable
     {
         yield from parent::invalidNodesToParseLiteral();
         yield 'date time' => [

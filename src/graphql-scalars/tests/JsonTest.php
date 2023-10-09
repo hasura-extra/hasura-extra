@@ -23,7 +23,7 @@ use Hasura\GraphQLScalars\Json;
 use Hasura\GraphQLScalars\Jsonb;
 use JetBrains\PhpStorm\Internal\TentativeType;
 
-class JsonTest extends AbstractScalarTypeTest
+class JsonTest extends AbstractScalarTypeTestCase
 {
     public function testName()
     {
@@ -35,7 +35,7 @@ class JsonTest extends AbstractScalarTypeTest
         return new Json();
     }
 
-    public function valuesToSerialize(): iterable
+    public static function valuesToSerialize(): iterable
     {
         yield 'array list' => [[1, 2, 3], [1, 2, 3]];
         yield 'array assoc' => [[
@@ -54,7 +54,7 @@ class JsonTest extends AbstractScalarTypeTest
         ];
     }
 
-    public function valuesToParse(): iterable
+    public static function valuesToParse(): iterable
     {
         yield 'array list' => [[1, 2, 3], [1, 2, 3]];
         yield 'array assoc' => [[
@@ -64,7 +64,7 @@ class JsonTest extends AbstractScalarTypeTest
         ]];
     }
 
-    public function nodesToParseLiteral(): iterable
+    public static function nodesToParseLiteral(): iterable
     {
         yield 'list node' => [
             new ListValueNode([
@@ -117,19 +117,19 @@ class JsonTest extends AbstractScalarTypeTest
         ];
     }
 
-    public function invalidValuesToSerialize(): iterable
+    public static function invalidValuesToSerialize(): iterable
     {
         yield 'invalid scalar' => [1];
         yield 'invalid object' => [new \stdClass()];
     }
 
-    public function invalidValuesToParse(): iterable
+    public static function invalidValuesToParse(): iterable
     {
         yield 'invalid scalar' => [1];
         yield 'invalid object' => [new \stdClass()];
     }
 
-    public function invalidNodesToParseLiteral(): iterable
+    public static function invalidNodesToParseLiteral(): iterable
     {
         yield 'invalid scalar' => [
             new FloatValueNode([

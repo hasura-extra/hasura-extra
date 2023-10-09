@@ -36,7 +36,7 @@ return static function (MBConfig $mbConfig): void {
     $mbConfig->dataToAppend(
         [
             ComposerJsonSection::REQUIRE_DEV => [
-                'phpunit/phpunit' => '^9.5',
+                'phpunit/phpunit' => '^10.4',
             ],
         ]
     );

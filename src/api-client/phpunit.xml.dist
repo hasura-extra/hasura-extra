@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd" backupGlobals="false" bootstrap="vendor/autoload.php" colors="true">
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.4/phpunit.xsd" backupGlobals="false" bootstrap="vendor/autoload.php" colors="true">
     <php>
         <env name="SHELL_VERBOSITY" value="-1" />
         <ini name="error_reporting" value="-1" />
     </php>
 
-    <testsuites>
-        <testsuite name="api-client">
-            <directory>tests</directory>
-        </testsuite>
-    </testsuites>
+    <testsuite name="tests">
+        <directory>tests</directory>
+    </testsuite>
 </phpunit>

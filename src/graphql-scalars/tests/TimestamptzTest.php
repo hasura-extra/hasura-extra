@@ -14,7 +14,7 @@ use GraphQL\Language\AST\StringValueNode;
 use GraphQL\Type\Definition\ScalarType;
 use Hasura\GraphQLScalars\Timestamptz;
 
-class TimestamptzTest extends AbstractDateTimeTest
+class TimestamptzTest extends AbstractDateTimeTestCase
 {
     public function testName(): void
     {
@@ -26,7 +26,7 @@ class TimestamptzTest extends AbstractDateTimeTest
         return new Timestamptz();
     }
 
-    public function valuesToSerialize(): iterable
+    public static function valuesToSerialize(): iterable
     {
         yield 'date' => [
             new \DateTimeImmutable('2022-02-02'),
@@ -42,7 +42,7 @@ class TimestamptzTest extends AbstractDateTimeTest
         ];
     }
 
-    public function valuesToParse(): iterable
+    public static function valuesToParse(): iterable
     {
         yield '2022-01-01T01:01:01+00:00' => [
             '2022-01-01T01:01:01+00:00',
@@ -54,7 +54,7 @@ class TimestamptzTest extends AbstractDateTimeTest
         ];
     }
 
-    public function nodesToParseLiteral(): iterable
+    public static function nodesToParseLiteral(): iterable
     {
         yield '2022-01-01T01:01:01+00:00' => [
             new StringValueNode([
@@ -70,7 +70,7 @@ class TimestamptzTest extends AbstractDateTimeTest
         ];
     }
 
-    public function invalidValuesToParse(): iterable
+    public static function invalidValuesToParse(): iterable
     {
         yield from parent::invalidValuesToParse();
         yield 'date' => ['2022-02-02'];
@@ -79,7 +79,7 @@ class TimestamptzTest extends AbstractDateTimeTest
         yield 'time with timezone' => ['02:02:02+02:02'];
     }
 
-    public function invalidNodesToParseLiteral(): iterable
+    public static function invalidNodesToParseLiteral(): iterable
     {
         yield from parent::invalidNodesToParseLiteral();
         yield 'date' => [

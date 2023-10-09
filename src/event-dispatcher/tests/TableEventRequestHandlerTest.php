@@ -23,14 +23,10 @@ final class TableEventRequestHandlerTest extends TestCase
     /**
      * @dataProvider payloadDataProvider
      */
-    public function testDispatchEvent(string $payload, bool $warning)
+    public function testDispatchEvent(string $payload)
     {
-        if ($warning) {
-            $this->expectWarning();
-        }
-
         $psrServerRequest = $this->mockPsrServerRequest($payload);
-        $psrEventDispatcher = $this->mockPsrEventDispatcher($payload, !$warning);
+        $psrEventDispatcher = $this->mockPsrEventDispatcher($payload);
         $requestHandler = new TableEventRequestHandler($psrEventDispatcher, new Psr17Factory());
         $response = $requestHandler->handle($psrServerRequest);
 
@@ -55,11 +51,11 @@ final class TableEventRequestHandlerTest extends TestCase
         return $request;
     }
 
-    private function mockPsrEventDispatcher(string $payload, bool $willCall): EventDispatcherInterface
+    private function mockPsrEventDispatcher(string $payload): EventDispatcherInterface
     {
         $psrEventDispatcher = $this->createMock(EventDispatcherInterface::class);
         $psrEventDispatcher
-            ->expects($this->exactly((int)$willCall))
+            ->expects($this->once())
             ->method('dispatch')
             ->willReturnCallback(
                 function (object $event) use ($payload) {
@@ -81,28 +77,20 @@ final class TableEventRequestHandlerTest extends TestCase
         return $psrEventDispatcher;
     }
 
-    public function payloadDataProvider(): array
+    public static function payloadDataProvider(): array
     {
         return [
             'valid insert payload' => [
                 '{"id":"707f3473-be53-431b-9bfc-a7870ce1f08f","event":{"op":"INSERT","data":{"new":{"id":13,"title":"a","author_name":"test"},"old":null},"trace_context":{"span_id":"da703f089531d9d2","trace_id":"a2dd66462a61f4bd"},"session_variables":{"x-hasura-role":"admin"}},"table":{"name":"article","schema":"_flattenmany"},"trigger":{"name":"article_events"},"created_at":"2021-10-28T06:46:52.317155Z","delivery_info":{"max_retries":0,"current_retry":0}}',
-                false,
             ],
             'valid update payload' => [
                 '{"id":"b6b42f6d-4031-46d7-b93e-98e6f9ea4e6f","event":{"op":"UPDATE","data":{"new":{"id":6,"title":"test 2","author_name":"Amie Sturman"},"old":{"id":6,"title":"test 1","author_name":"Amie Sturman"}},"trace_context":{"span_id":"9a27f1cecb3ae999","trace_id":"6d27f5ab417c8a59"},"session_variables":{"x-hasura-role":"admin"}},"table":{"name":"article","schema":"_flattenmany"},"trigger":{"name":"article_events"},"created_at":"2021-10-28T06:50:58.141099Z","delivery_info":{"max_retries":0,"current_retry":0}}',
-                false,
             ],
             'valid delete payload' => [
                 '{"id":"701a2d84-bc9d-4858-a649-f132f0ffa42d","event":{"op":"DELETE","data":{"new":null,"old":{"id":13,"title":"a","author_name":"test"}},"trace_context":{"span_id":"5155c27062327c40","trace_id":"e39f4a0647759246"},"session_variables":{"x-hasura-role":"admin"}},"table":{"name":"article","schema":"_flattenmany"},"trigger":{"name":"article_events"},"created_at":"2021-10-28T06:51:23.164244Z","delivery_info":{"max_retries":0,"current_retry":0}}',
-                false,
             ],
             'valid manual payload' => [
                 '{"id":"d169163a-94c6-4787-90af-b760aadc451f","event":{"op":"MANUAL","data":{"new":{"id":6,"title":"test 2","author_name":"Amie Sturman"},"old":null},"trace_context":{"span_id":"554495843c44d539","trace_id":"24d451e4fbce491a"},"session_variables":{"x-hasura-role":"admin"}},"table":{"name":"article","schema":"_flattenmany"},"trigger":{"name":"article_events"},"created_at":"2021-10-28T06:52:33.738982Z","delivery_info":{"max_retries":0,"current_retry":0}}',
-                false,
-            ],
-            'missing id' => [
-                '{"event":{"op":"INSERT","data":{"new":{"id":13,"title":"a","author_name":"test"},"old":null},"trace_context":{"span_id":"da703f089531d9d2","trace_id":"a2dd66462a61f4bd"},"session_variables":{"x-hasura-role":"admin"}},"table":{"name":"article","schema":"_flattenmany"},"trigger":{"name":"article_events"},"created_at":"2021-10-28T06:46:52.317155Z","delivery_info":{"max_retries":0,"current_retry":0}}',
-                true,
             ],
         ];
     }

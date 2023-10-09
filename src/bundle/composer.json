@@ -26,7 +26,7 @@
     },
     "require-dev": {
         "nyholm/psr7": "^1.0",
-        "phpunit/phpunit": "^9.5",
+        "phpunit/phpunit": "^10.4",
         "symfony/test-pack": "^1.0",
         "symfony/uid": "^6.0",
         "symfony/filesystem": "^6.0",
