@@ -266,9 +266,6 @@ closeWebsocketsOnMetadataChange: 'true'
 # -- Enables the Apollo Federation feature. This allows Hasura to be connected as a subgraph in an Apollo supergraph.
 enableApolloFederation: 'false'
 
-# -- Sets the maximum cumulative length of all headers in bytes.
-maxTotalHeaderLength: 1048576
-
 # -- Sets the log-level as error for Trigger type error logs (Event Triggers, Scheduled Triggers, Cron Triggers).
 enableTriggersErrorLogLevel: 'true'
 

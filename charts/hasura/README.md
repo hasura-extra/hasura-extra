@@ -65,7 +65,6 @@ To install the chart with the release name `my-release`, run the following comma
 | liveQueriesMultiplexedBatchSize | int | `100` | Multiplexed live queries are split into batches of the specified size. |
 | liveQueriesMultiplexedRefetchInterval | int | `1000` | Updated results (if any) will be sent at most once in this interval (in milliseconds) for live queries which can be multiplexed. |
 | logLevel | string | `"info"` | Set the logging level. Options: debug, info, warn, error. |
-| maxTotalHeaderLength | int | `1048576` | Sets the maximum cumulative length of all headers in bytes. |
 | metadataDatabaseExtensionsSchema | string | `"public"` | The schema in which Hasura can install extensions in the metadata database. Default: public. |
 | nameOverride | string | `""` | A name in place of the chart name for `app:` labels. |
 | nodeSelector | object | `{}` | [Node selector](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector) configuration. |
