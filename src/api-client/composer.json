@@ -15,12 +15,12 @@
     },
     "conflict": {
         "hasura-extra/hasura-bundle": "*",
-        "hasura-extra/auth-hook": "<4.0.0",
-        "hasura-extra/event-dispatcher": "<4.0.0",
-        "hasura-extra/bundle": "<4.0.0",
-        "hasura-extra/metadata": "<4.0.0",
+        "hasura-extra/auth-hook": "<5.0.0",
+        "hasura-extra/event-dispatcher": "<5.0.0",
+        "hasura-extra/bundle": "<5.0.0",
+        "hasura-extra/metadata": "<5.0.0",
         "hasura-extra/laravel": "<2.5.0",
-        "hasura-extra/graphql-scalars": "<4.0.0"
+        "hasura-extra/graphql-scalars": "<5.0.0"
     },
     "require": {
         "php": ">=8.2",
