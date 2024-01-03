@@ -15,10 +15,10 @@
     },
     "require": {
         "php": ">=8.2",
-        "hasura-extra/auth-hook": "^5.0",
-        "hasura-extra/api-client": "^5.0",
-        "hasura-extra/metadata": "^5.0",
-        "hasura-extra/event-dispatcher": "^5.0",
+        "hasura-extra/auth-hook": "^5.1",
+        "hasura-extra/api-client": "^5.1",
+        "hasura-extra/metadata": "^5.1",
+        "hasura-extra/event-dispatcher": "^5.1",
         "symfony/http-kernel": "^7.0",
         "symfony/dependency-injection": "^7.0",
         "symfony/framework-bundle": "^7.0",
@@ -40,7 +40,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "4.1-dev"
+            "dev-main": "5.1-dev"
         }
     },
     "minimum-stability": "dev",
