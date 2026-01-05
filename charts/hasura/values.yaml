@@ -91,6 +91,26 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
+# -- Liveness probe configuration
+# @default -- See [values.yaml](values.yaml).
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: http
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  timeoutSeconds: 5
+
+# -- Readiness probe configuration
+# @default -- See [values.yaml](values.yaml).
+readinessProbe:
+  httpGet:
+    path: /healthz
+    port: http
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  timeoutSeconds: 5
+
 # -- Autoscaling by resources
 # @default -- Disabled by default.
 autoscaling:
