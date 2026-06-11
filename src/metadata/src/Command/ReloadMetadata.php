@@ -18,7 +18,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 #[AsCommand(name: 'reload', description: 'Reload state with Hasura.')]
 final class ReloadMetadata extends BaseCommand
 {
-    protected function configure()
+    protected function configure(): void
     {
         parent::configure();
 

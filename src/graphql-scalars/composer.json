@@ -14,24 +14,24 @@
         }
     },
     "require": {
-        "php": ">=8.2",
+        "php": ">=8.4",
         "webonyx/graphql-php": "^15.7",
-        "symfony/uid": "^7.0"
+        "symfony/uid": "^8.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^10.4"
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "5.1-dev"
+            "dev-main": "6.0-dev"
         }
     },
     "conflict": {
-        "hasura-extra/event-dispatcher": "<5.0.0",
-        "hasura-extra/api-client": "<5.0.0",
-        "hasura-extra/auth-hook": "<5.0.0",
-        "hasura-extra/metadata": "<5.0.0",
-        "hasura-extra/bundle": "<5.0.0"
+        "hasura-extra/event-dispatcher": "<6.0.0",
+        "hasura-extra/api-client": "<6.0.0",
+        "hasura-extra/auth-hook": "<6.0.0",
+        "hasura-extra/metadata": "<6.0.0",
+        "hasura-extra/bundle": "<6.0.0"
     },
     "minimum-stability": "dev",
     "prefer-stable": true

@@ -18,10 +18,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 #[AsCommand(name: 'export', description: 'Export Hasura metadata')]
 final class ExportMetadata extends BaseCommand
 {
-    protected static $defaultName = 'export';
-    protected static $defaultDescription = 'Export Hasura metadata';
-
-    protected function configure()
+    protected function configure(): void
     {
         parent::configure();
 
