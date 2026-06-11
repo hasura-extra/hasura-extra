@@ -3,7 +3,7 @@
     definition:
         url: 'https://countries.trevorblades.com/graphql'
         timeout_seconds: 60
-        customization: {  }
+        customization: {}
     comment: ''
     remote_relationships: !include remote_schemas/countries/remote_relationships.yaml
     permissions: !include remote_schemas/countries/permissions.yaml

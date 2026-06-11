@@ -13,7 +13,7 @@
         }
     },
     "require": {
-        "php": ">=8.2",
+        "php": ">=8.4",
         "psr/event-dispatcher": "^1.0",
         "psr/http-server-handler": "^1.0"
     },
@@ -22,16 +22,16 @@
         "nyholm/psr7": "^1.0"
     },
     "conflict": {
-        "hasura-extra/auth-hook": "<5.0.0",
-        "hasura-extra/api-client": "<5.0.0",
-        "hasura-extra/bundle": "<5.0.0",
-        "hasura-extra/metadata": "<5.0.0",
+        "hasura-extra/auth-hook": "<6.0.0",
+        "hasura-extra/api-client": "<6.0.0",
+        "hasura-extra/bundle": "<6.0.0",
+        "hasura-extra/metadata": "<6.0.0",
         "hasura-extra/laravel": "<2.5.0",
-        "hasura-extra/graphql-scalars": "<5.0.0"
+        "hasura-extra/graphql-scalars": "<6.0.0"
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "5.1-dev"
+            "dev-main": "6.0-dev"
         }
     },
     "minimum-stability": "dev",

@@ -15,23 +15,23 @@
     },
     "conflict": {
         "hasura-extra/hasura-bundle": "*",
-        "hasura-extra/auth-hook": "<5.0.0",
-        "hasura-extra/event-dispatcher": "<5.0.0",
-        "hasura-extra/bundle": "<5.0.0",
-        "hasura-extra/metadata": "<5.0.0",
+        "hasura-extra/auth-hook": "<6.0.0",
+        "hasura-extra/event-dispatcher": "<6.0.0",
+        "hasura-extra/bundle": "<6.0.0",
+        "hasura-extra/metadata": "<6.0.0",
         "hasura-extra/laravel": "<2.5.0",
-        "hasura-extra/graphql-scalars": "<5.0.0"
+        "hasura-extra/graphql-scalars": "<6.0.0"
     },
     "require": {
-        "php": ">=8.2",
-        "symfony/http-client": "^7.0"
+        "php": ">=8.4",
+        "symfony/http-client": "^8.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^10.4"
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "5.1-dev"
+            "dev-main": "6.0-dev"
         }
     },
     "minimum-stability": "dev",
